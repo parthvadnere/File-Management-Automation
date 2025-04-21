@@ -1,0 +1,1517 @@
+2025-04-18 16:27:58,668 - core.api_client - INFO - Created download directory: pharmpix_downloads
+2025-04-18 16:27:58,669 - core.api_client - INFO - Logging in as it@transparentrx.com...
+2025-04-18 16:28:00,886 - core.api_client - INFO - Login successful!
+2025-04-18 16:28:00,887 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ALLIED ==========
+2025-04-18 16:28:00,887 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Claims ===
+2025-04-18 16:28:00,888 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/
+2025-04-18 16:28:03,711 - core.api_client - INFO - Found 748 files matching criteria
+2025-04-18 16:28:03,713 - core.file_processor - INFO - Found 748 .txt files in ALLIED/Claims
+2025-04-18 16:28:03,713 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 71421 bytes - 2025-04-18 06:44:00
+2025-04-18 16:28:03,713 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:28:03,715 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:28:05,630 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Claims\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:28:05,630 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Eligibility ===
+2025-04-18 16:28:05,630 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-18 16:28:07,873 - core.api_client - INFO - Found 216 files matching criteria
+2025-04-18 16:28:07,874 - core.file_processor - INFO - Found 216 .results files in ALLIED/Eligibility
+2025-04-18 16:28:07,875 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250414_001.TXT_2025-15-04--07-56-37.results - 276761 bytes - 2025-04-15 07:56:00
+2025-04-18 16:28:07,875 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250414_001.TXT_2025-15-04--07-56-37.results
+2025-04-18 16:28:07,875 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250414_001.TXT_2025-15-04--07-56-37.results
+2025-04-18 16:28:10,346 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Eligibility\RESULTS\20250415_SAPP_PPX_ELIGIBILITY_20250414_001.TXT_2025-15-04--07-56-37.results
+2025-04-18 16:28:10,347 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-18 16:28:12,815 - core.api_client - INFO - Found 216 files matching criteria
+2025-04-18 16:28:12,816 - core.file_processor - INFO - Found 216 .xlsx files in ALLIED/Eligibility
+2025-04-18 16:28:12,816 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250414_001.TXT_Eligibility Process Report_2025-15-04--07-56-37.xlsx - 16585 bytes - 2025-04-15 07:56:00
+2025-04-18 16:28:12,816 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250414_001.TXT_Eligibility Process Report_2025-15-04--07-56-37.xlsx
+2025-04-18 16:28:12,817 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250414_001.TXT_Eligibility Process Report_2025-15-04--07-56-37.xlsx
+2025-04-18 16:28:14,266 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Eligibility\XLSX\20250415_SAPP_PPX_ELIGIBILITY_20250414_001.TXT_Eligibility Process Report_2025-15-04--07-56-37.xlsx
+2025-04-18 16:28:14,267 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ASR ==========
+2025-04-18 16:28:14,267 - core.file_processor - INFO - 
+=== PROCESSING ASR/Claims ===
+2025-04-18 16:28:14,267 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/
+2025-04-18 16:28:16,794 - core.api_client - INFO - Found 456 files matching criteria
+2025-04-18 16:28:16,796 - core.file_processor - INFO - Found 456 .txt files in ASR/Claims
+2025-04-18 16:28:16,796 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt - 25060 bytes - 2025-04-18 06:35:00
+2025-04-18 16:28:16,797 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:28:16,799 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:28:18,228 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Claims\TXT\20250418_TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:28:18,229 - core.file_processor - INFO - 
+=== PROCESSING ASR/Eligibility ===
+2025-04-18 16:28:18,230 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-18 16:28:20,775 - core.api_client - INFO - Found 446 files matching criteria
+2025-04-18 16:28:20,776 - core.file_processor - INFO - Found 446 .results files in ASR/Eligibility
+2025-04-18 16:28:20,776 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250417_001.txt_2025-17-04--08-10-13.results - 85925 bytes - 2025-04-17 08:10:00
+2025-04-18 16:28:20,777 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250417_001.txt_2025-17-04--08-10-13.results
+2025-04-18 16:28:20,778 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250417_001.txt_2025-17-04--08-10-13.results
+2025-04-18 16:28:22,630 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Eligibility\RESULTS\20250417_TRXALBION_PPX_ELIG_20250417_001.txt_2025-17-04--08-10-13.results
+2025-04-18 16:28:22,630 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-18 16:28:25,163 - core.api_client - INFO - Found 445 files matching criteria
+2025-04-18 16:28:25,164 - core.file_processor - INFO - Found 445 .xlsx files in ASR/Eligibility
+2025-04-18 16:28:25,165 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250417_001.txt_Eligibility Process Report no TBA_2025-17-04--08-10-14.xlsx - 14364 bytes - 2025-04-17 08:10:00
+2025-04-18 16:28:25,165 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250417_001.txt_Eligibility Process Report no TBA_2025-17-04--08-10-14.xlsx
+2025-04-18 16:28:25,166 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250417_001.txt_Eligibility Process Report no TBA_2025-17-04--08-10-14.xlsx
+2025-04-18 16:28:26,527 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Eligibility\XLSX\20250417_TRXALBION_PPX_ELIG_20250417_001.txt_Eligibility Process Report no TBA_2025-17-04--08-10-14.xlsx
+2025-04-18 16:28:26,528 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: BML ==========
+2025-04-18 16:28:26,529 - core.file_processor - INFO - 
+=== PROCESSING BML/Claims ===
+2025-04-18 16:28:26,530 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/
+2025-04-18 16:28:33,392 - core.api_client - INFO - Found 1933 files matching criteria
+2025-04-18 16:28:33,396 - core.file_processor - INFO - Found 1933 .txt files in BML/Claims
+2025-04-18 16:28:33,396 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 0 bytes - 2025-04-18 06:22:00
+2025-04-18 16:28:33,396 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:28:33,399 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:28:34,465 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\BML\Claims\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:28:34,467 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: UMR ==========
+2025-04-18 16:28:34,468 - core.file_processor - INFO - 
+=== PROCESSING UMR ===
+2025-04-18 16:28:34,468 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/
+2025-04-18 16:28:38,233 - core.api_client - INFO - Found 1726 files matching criteria
+2025-04-18 16:28:38,235 - core.file_processor - INFO - Found 1726 .txt files in UMR
+2025-04-18 16:28:38,236 - core.file_processor - INFO - 1. UMR_ACCUM_20250418.txt - 47188 bytes - 2025-04-18 03:30:00
+2025-04-18 16:28:38,236 - core.file_processor - INFO - Downloading file 1/1: UMR_ACCUM_20250418.txt
+2025-04-18 16:28:38,240 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_ACCUM_20250418.txt
+2025-04-18 16:28:39,839 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\TXT\20250418_UMR_ACCUM_20250418.txt
+2025-04-18 16:28:39,839 - core.file_processor - INFO - 
+=== PROCESSING UMR/Empire ===
+2025-04-18 16:28:39,840 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-18 16:28:44,843 - core.api_client - INFO - Found 1507 files matching criteria
+2025-04-18 16:28:44,846 - core.file_processor - INFO - Found 1507 .txt files in UMR/Empire
+2025-04-18 16:28:44,846 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 161637 bytes - 2025-04-18 06:43:00
+2025-04-18 16:28:44,846 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:28:44,847 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:28:47,070 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\Empire\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:28:47,071 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-18 16:29:02,145 - core.api_client - INFO - Found 0 files matching criteria
+2025-04-18 16:29:02,147 - core.file_processor - INFO - Found 0 .xls files in UMR/Empire
+2025-04-18 16:29:02,147 - core.file_processor - INFO - 
+=== PROCESSING UMR/UMR_Exc_OOP ===
+2025-04-18 16:29:02,147 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/
+2025-04-18 16:29:16,139 - core.api_client - INFO - Found 5088 files matching criteria
+2025-04-18 16:29:16,148 - core.file_processor - INFO - Found 5088 .txt files in UMR/UMR_Exc_OOP
+2025-04-18 16:29:16,149 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt - 12530 bytes - 2025-04-18 06:50:00
+2025-04-18 16:29:16,149 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 16:29:16,150 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 16:29:17,495 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\UMR_Exc_OOP\TXT\20250418_TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 16:29:17,495 - core.file_processor - INFO - 
+=== PROCESSING UMR/IOA/Eligibility ===
+2025-04-18 16:29:17,496 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-18 16:29:22,332 - core.api_client - INFO - Found 526 files matching criteria
+2025-04-18 16:29:22,335 - core.file_processor - INFO - Found 526 .results files in UMR/IOA/Eligibility
+2025-04-18 16:29:22,335 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250417_0001.TXT_2025-17-04--08-12-13.results - 625296 bytes - 2025-04-17 08:12:00
+2025-04-18 16:29:22,336 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250417_0001.TXT_2025-17-04--08-12-13.results
+2025-04-18 16:29:22,339 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250417_0001.TXT_2025-17-04--08-12-13.results
+2025-04-18 16:29:31,627 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\IOA\Eligibility\RESULTS\20250417_MEM_TRX_UMR_20250417_0001.TXT_2025-17-04--08-12-13.results
+2025-04-18 16:29:31,627 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-18 16:29:43,605 - core.api_client - INFO - Found 1333 files matching criteria
+2025-04-18 16:29:43,606 - core.file_processor - INFO - Found 1333 .xlsx files in UMR/IOA/Eligibility
+2025-04-18 16:29:43,607 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250417_0001.TXT_Eligibility Process Report_2025-17-04--08-12-14.xlsx - 16727 bytes - 2025-04-17 08:12:00
+2025-04-18 16:29:43,607 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250417_0001.TXT_Eligibility Process Report_2025-17-04--08-12-14.xlsx
+2025-04-18 16:29:43,608 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250417_0001.TXT_Eligibility Process Report_2025-17-04--08-12-14.xlsx
+2025-04-18 16:29:45,046 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\IOA\Eligibility\XLSX\20250417_MEM_TRX_UMR_20250417_0001.TXT_Eligibility Process Report_2025-17-04--08-12-14.xlsx
+2025-04-18 16:29:45,047 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: Lucent Health ==========
+2025-04-18 16:29:45,048 - core.file_processor - INFO - 
+=== PROCESSING Lucent Health/Claims ===
+2025-04-18 16:29:45,048 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/
+2025-04-18 16:29:58,517 - core.api_client - INFO - Found 184 files matching criteria
+2025-04-18 16:29:58,517 - core.file_processor - INFO - Found 184 .txt files in Lucent Health/Claims
+2025-04-18 16:29:58,518 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 70168 bytes - 2025-04-18 06:22:00
+2025-04-18 16:29:58,519 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:29:58,523 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/Lucent
+2025-04-18 16:30:01,976 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\Lucent Health\Claims\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:30:01,976 - core.file_processor - INFO - 
+
+=== DOWNLOAD SUMMARY ===
+2025-04-18 16:30:01,976 - core.file_processor - INFO - 
+Client: ALLIED
+2025-04-18 16:30:01,977 - core.file_processor - INFO - Total files: 3
+2025-04-18 16:30:01,977 - core.file_processor - INFO -   - ALLIED_Claims.txt: 1 files
+2025-04-18 16:30:01,977 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:30:01,977 - core.file_processor - INFO -   - ALLIED_Eligibility.results: 1 files
+2025-04-18 16:30:01,977 - core.file_processor - INFO -     * 20250415_SAPP_PPX_ELIGIBILITY_20250414_001.TXT_2025-15-04--07-56-37.results
+2025-04-18 16:30:01,978 - core.file_processor - INFO -   - ALLIED_Eligibility.xlsx: 1 files
+2025-04-18 16:30:01,978 - core.file_processor - INFO -     * 20250415_SAPP_PPX_ELIGIBILITY_20250414_001.TXT_Eligibility Process Report_2025-15-04--07-56-37.xlsx
+2025-04-18 16:30:01,978 - core.file_processor - INFO - 
+Client: ASR
+2025-04-18 16:30:01,979 - core.file_processor - INFO - Total files: 3
+2025-04-18 16:30:01,979 - core.file_processor - INFO -   - ASR_Claims.txt: 1 files
+2025-04-18 16:30:01,979 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:30:01,979 - core.file_processor - INFO -   - ASR_Eligibility.results: 1 files
+2025-04-18 16:30:01,979 - core.file_processor - INFO -     * 20250417_TRXALBION_PPX_ELIG_20250417_001.txt_2025-17-04--08-10-13.results
+2025-04-18 16:30:01,980 - core.file_processor - INFO -   - ASR_Eligibility.xlsx: 1 files
+2025-04-18 16:30:01,980 - core.file_processor - INFO -     * 20250417_TRXALBION_PPX_ELIG_20250417_001.txt_Eligibility Process Report no TBA_2025-17-04--08-10-14.xlsx
+2025-04-18 16:30:01,981 - core.file_processor - INFO - 
+Client: BML
+2025-04-18 16:30:01,981 - core.file_processor - INFO - Total files: 1
+2025-04-18 16:30:01,981 - core.file_processor - INFO -   - BML_Claims.txt: 1 files
+2025-04-18 16:30:01,981 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:30:01,981 - core.file_processor - INFO - 
+Client: UMR
+2025-04-18 16:30:01,982 - core.file_processor - INFO - Total files: 5
+2025-04-18 16:30:01,982 - core.file_processor - INFO -   - UMR.txt: 1 files
+2025-04-18 16:30:01,982 - core.file_processor - INFO -     * 20250418_UMR_ACCUM_20250418.txt
+2025-04-18 16:30:01,982 - core.file_processor - INFO -   - UMR_Empire.txt: 1 files
+2025-04-18 16:30:01,982 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 16:30:01,983 - core.file_processor - INFO -   - UMR_UMR_Exc_OOP.txt: 1 files
+2025-04-18 16:30:01,983 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 16:30:01,983 - core.file_processor - INFO -   - UMR_IOA_Eligibility.results: 1 files
+2025-04-18 16:30:01,983 - core.file_processor - INFO -     * 20250417_MEM_TRX_UMR_20250417_0001.TXT_2025-17-04--08-12-13.results
+2025-04-18 16:30:01,983 - core.file_processor - INFO -   - UMR_IOA_Eligibility.xlsx: 1 files
+2025-04-18 16:30:01,984 - core.file_processor - INFO -     * 20250417_MEM_TRX_UMR_20250417_0001.TXT_Eligibility Process Report_2025-17-04--08-12-14.xlsx
+2025-04-18 16:30:01,984 - core.file_processor - INFO - 
+Client: Lucent Health
+2025-04-18 16:30:01,984 - core.file_processor - INFO - Total files: 1
+2025-04-18 16:30:01,984 - core.file_processor - INFO -   - Lucent Health_Claims.txt: 1 files
+2025-04-18 16:30:01,984 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:33:59,361 - core.api_client - INFO - Logging in as it@transparentrx.com...
+2025-04-18 17:34:01,960 - core.api_client - INFO - Login successful!
+2025-04-18 17:34:01,960 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ALLIED ==========
+2025-04-18 17:34:54,592 - core.api_client - INFO - Logging in as it@transparentrx.com...
+2025-04-18 17:34:56,893 - core.api_client - INFO - Login successful!
+2025-04-18 17:34:56,894 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ALLIED ==========
+2025-04-18 17:34:56,894 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Claims ===
+2025-04-18 17:34:56,894 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/
+2025-04-18 17:35:00,126 - core.api_client - INFO - Found 748 files matching criteria
+2025-04-18 17:35:00,128 - core.file_processor - INFO - Found 748 .txt files in ALLIED/Claims
+2025-04-18 17:35:00,129 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 71421 bytes - 2025-04-18 06:44:00
+2025-04-18 17:35:00,129 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:35:00,130 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:35:02,073 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Claims\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:35:02,074 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Eligibility ===
+2025-04-18 17:35:02,074 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-18 17:35:04,367 - core.api_client - INFO - Found 216 files matching criteria
+2025-04-18 17:35:04,369 - core.file_processor - INFO - Found 216 .results files in ALLIED/Eligibility
+2025-04-18 17:35:04,369 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250414_001.TXT_2025-15-04--07-56-37.results - 276761 bytes - 2025-04-15 07:56:00
+2025-04-18 17:35:04,369 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250414_001.TXT_2025-15-04--07-56-37.results
+2025-04-18 17:35:04,370 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250414_001.TXT_2025-15-04--07-56-37.results
+2025-04-18 17:35:06,828 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Eligibility\RESULTS\20250415_SAPP_PPX_ELIGIBILITY_20250414_001.TXT_2025-15-04--07-56-37.results
+2025-04-18 17:35:06,829 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-18 17:35:14,858 - core.api_client - INFO - Found 216 files matching criteria
+2025-04-18 17:35:14,859 - core.file_processor - INFO - Found 216 .xlsx files in ALLIED/Eligibility
+2025-04-18 17:35:14,859 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250414_001.TXT_Eligibility Process Report_2025-15-04--07-56-37.xlsx - 16585 bytes - 2025-04-15 07:56:00
+2025-04-18 17:35:14,860 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250414_001.TXT_Eligibility Process Report_2025-15-04--07-56-37.xlsx
+2025-04-18 17:35:14,861 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250414_001.TXT_Eligibility Process Report_2025-15-04--07-56-37.xlsx
+2025-04-18 17:35:16,258 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Eligibility\XLSX\20250415_SAPP_PPX_ELIGIBILITY_20250414_001.TXT_Eligibility Process Report_2025-15-04--07-56-37.xlsx
+2025-04-18 17:35:16,259 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ASR ==========
+2025-04-18 17:35:16,260 - core.file_processor - INFO - 
+=== PROCESSING ASR/Claims ===
+2025-04-18 17:35:16,261 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/
+2025-04-18 17:35:18,598 - core.api_client - INFO - Found 456 files matching criteria
+2025-04-18 17:35:18,599 - core.file_processor - INFO - Found 456 .txt files in ASR/Claims
+2025-04-18 17:35:18,600 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt - 25060 bytes - 2025-04-18 06:35:00
+2025-04-18 17:35:18,601 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:35:18,602 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:35:20,105 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Claims\TXT\20250418_TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:35:20,106 - core.file_processor - INFO - 
+=== PROCESSING ASR/Eligibility ===
+2025-04-18 17:35:20,106 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-18 17:35:22,899 - core.api_client - INFO - Found 446 files matching criteria
+2025-04-18 17:35:22,900 - core.file_processor - INFO - Found 446 .results files in ASR/Eligibility
+2025-04-18 17:35:22,901 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250417_001.txt_2025-17-04--08-10-13.results - 85925 bytes - 2025-04-17 08:10:00
+2025-04-18 17:35:22,901 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250417_001.txt_2025-17-04--08-10-13.results
+2025-04-18 17:35:22,903 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250417_001.txt_2025-17-04--08-10-13.results
+2025-04-18 17:35:24,767 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Eligibility\RESULTS\20250417_TRXALBION_PPX_ELIG_20250417_001.txt_2025-17-04--08-10-13.results
+2025-04-18 17:35:24,768 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-18 17:35:27,569 - core.api_client - INFO - Found 445 files matching criteria
+2025-04-18 17:35:27,570 - core.file_processor - INFO - Found 445 .xlsx files in ASR/Eligibility
+2025-04-18 17:35:27,571 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250417_001.txt_Eligibility Process Report no TBA_2025-17-04--08-10-14.xlsx - 14364 bytes - 2025-04-17 08:10:00
+2025-04-18 17:35:27,571 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250417_001.txt_Eligibility Process Report no TBA_2025-17-04--08-10-14.xlsx
+2025-04-18 17:35:27,572 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250417_001.txt_Eligibility Process Report no TBA_2025-17-04--08-10-14.xlsx
+2025-04-18 17:35:28,917 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Eligibility\XLSX\20250417_TRXALBION_PPX_ELIG_20250417_001.txt_Eligibility Process Report no TBA_2025-17-04--08-10-14.xlsx
+2025-04-18 17:35:28,918 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: BML ==========
+2025-04-18 17:35:28,919 - core.file_processor - INFO - 
+=== PROCESSING BML/Claims ===
+2025-04-18 17:35:28,920 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/
+2025-04-18 17:35:33,245 - core.api_client - INFO - Found 1933 files matching criteria
+2025-04-18 17:35:33,247 - core.file_processor - INFO - Found 1933 .txt files in BML/Claims
+2025-04-18 17:35:33,248 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 0 bytes - 2025-04-18 06:22:00
+2025-04-18 17:35:33,249 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:35:33,251 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:35:34,331 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\BML\Claims\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:35:34,333 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: UMR ==========
+2025-04-18 17:35:34,334 - core.file_processor - INFO - 
+=== PROCESSING UMR ===
+2025-04-18 17:35:34,335 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/
+2025-04-18 17:35:38,408 - core.api_client - INFO - Found 1726 files matching criteria
+2025-04-18 17:35:38,411 - core.file_processor - INFO - Found 1726 .txt files in UMR
+2025-04-18 17:35:38,412 - core.file_processor - INFO - 1. UMR_ACCUM_20250418.txt - 47188 bytes - 2025-04-18 03:30:00
+2025-04-18 17:35:38,412 - core.file_processor - INFO - Downloading file 1/1: UMR_ACCUM_20250418.txt
+2025-04-18 17:35:38,413 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_ACCUM_20250418.txt
+2025-04-18 17:35:40,379 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\TXT\20250418_UMR_ACCUM_20250418.txt
+2025-04-18 17:35:40,380 - core.file_processor - INFO - 
+=== PROCESSING UMR/Empire ===
+2025-04-18 17:35:40,380 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-18 17:35:47,392 - core.api_client - INFO - Found 1507 files matching criteria
+2025-04-18 17:35:47,395 - core.file_processor - INFO - Found 1507 .txt files in UMR/Empire
+2025-04-18 17:35:47,396 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 161637 bytes - 2025-04-18 06:43:00
+2025-04-18 17:35:47,396 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:35:47,396 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:35:49,828 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\Empire\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:35:49,829 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-18 17:35:53,601 - core.api_client - INFO - Found 0 files matching criteria
+2025-04-18 17:35:53,603 - core.file_processor - INFO - Found 0 .xls files in UMR/Empire
+2025-04-18 17:35:53,604 - core.file_processor - INFO - 
+=== PROCESSING UMR/UMR_Exc_OOP ===
+2025-04-18 17:35:53,604 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/
+2025-04-18 17:36:06,232 - core.api_client - INFO - Found 5088 files matching criteria
+2025-04-18 17:36:06,243 - core.file_processor - INFO - Found 5088 .txt files in UMR/UMR_Exc_OOP
+2025-04-18 17:36:06,244 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt - 12530 bytes - 2025-04-18 06:50:00
+2025-04-18 17:36:06,244 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 17:36:06,245 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 17:36:07,624 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\UMR_Exc_OOP\TXT\20250418_TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 17:36:07,624 - core.file_processor - INFO - 
+=== PROCESSING UMR/IOA/Eligibility ===
+2025-04-18 17:36:07,625 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-18 17:36:11,240 - core.api_client - INFO - Found 526 files matching criteria
+2025-04-18 17:36:11,243 - core.file_processor - INFO - Found 526 .results files in UMR/IOA/Eligibility
+2025-04-18 17:36:11,243 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250417_0001.TXT_2025-17-04--08-12-13.results - 625296 bytes - 2025-04-17 08:12:00
+2025-04-18 17:36:11,244 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250417_0001.TXT_2025-17-04--08-12-13.results
+2025-04-18 17:36:11,245 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250417_0001.TXT_2025-17-04--08-12-13.results
+2025-04-18 17:36:14,805 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\IOA\Eligibility\RESULTS\20250417_MEM_TRX_UMR_20250417_0001.TXT_2025-17-04--08-12-13.results
+2025-04-18 17:36:14,806 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-18 17:36:18,443 - core.api_client - INFO - Found 1333 files matching criteria
+2025-04-18 17:36:18,445 - core.file_processor - INFO - Found 1333 .xlsx files in UMR/IOA/Eligibility
+2025-04-18 17:36:18,446 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250417_0001.TXT_Eligibility Process Report_2025-17-04--08-12-14.xlsx - 16727 bytes - 2025-04-17 08:12:00
+2025-04-18 17:36:18,446 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250417_0001.TXT_Eligibility Process Report_2025-17-04--08-12-14.xlsx
+2025-04-18 17:36:18,447 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250417_0001.TXT_Eligibility Process Report_2025-17-04--08-12-14.xlsx
+2025-04-18 17:36:19,829 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\IOA\Eligibility\XLSX\20250417_MEM_TRX_UMR_20250417_0001.TXT_Eligibility Process Report_2025-17-04--08-12-14.xlsx
+2025-04-18 17:36:19,831 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: Lucent Health ==========
+2025-04-18 17:36:19,832 - core.file_processor - INFO - 
+=== PROCESSING Lucent Health/Claims ===
+2025-04-18 17:36:19,833 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/
+2025-04-18 17:36:21,837 - core.api_client - INFO - Found 184 files matching criteria
+2025-04-18 17:36:21,838 - core.file_processor - INFO - Found 184 .txt files in Lucent Health/Claims
+2025-04-18 17:36:21,839 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 70168 bytes - 2025-04-18 06:22:00
+2025-04-18 17:36:21,839 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:36:21,840 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/Lucent
+2025-04-18 17:36:23,264 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\Lucent Health\Claims\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:36:23,265 - core.file_processor - INFO - 
+
+=== DOWNLOAD SUMMARY ===
+2025-04-18 17:36:23,265 - core.file_processor - INFO - 
+Client: ALLIED
+2025-04-18 17:36:23,266 - core.file_processor - INFO - Total files: 3
+2025-04-18 17:36:23,266 - core.file_processor - INFO -   - ALLIED_Claims.txt: 1 files
+2025-04-18 17:36:23,267 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:36:23,268 - core.file_processor - INFO -   - ALLIED_Eligibility.results: 1 files
+2025-04-18 17:36:23,268 - core.file_processor - INFO -     * 20250415_SAPP_PPX_ELIGIBILITY_20250414_001.TXT_2025-15-04--07-56-37.results
+2025-04-18 17:36:23,269 - core.file_processor - INFO -   - ALLIED_Eligibility.xlsx: 1 files
+2025-04-18 17:36:23,269 - core.file_processor - INFO -     * 20250415_SAPP_PPX_ELIGIBILITY_20250414_001.TXT_Eligibility Process Report_2025-15-04--07-56-37.xlsx
+2025-04-18 17:36:23,270 - core.file_processor - INFO - 
+Client: ASR
+2025-04-18 17:36:23,271 - core.file_processor - INFO - Total files: 3
+2025-04-18 17:36:23,271 - core.file_processor - INFO -   - ASR_Claims.txt: 1 files
+2025-04-18 17:36:23,272 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:36:23,272 - core.file_processor - INFO -   - ASR_Eligibility.results: 1 files
+2025-04-18 17:36:23,273 - core.file_processor - INFO -     * 20250417_TRXALBION_PPX_ELIG_20250417_001.txt_2025-17-04--08-10-13.results
+2025-04-18 17:36:23,273 - core.file_processor - INFO -   - ASR_Eligibility.xlsx: 1 files
+2025-04-18 17:36:23,274 - core.file_processor - INFO -     * 20250417_TRXALBION_PPX_ELIG_20250417_001.txt_Eligibility Process Report no TBA_2025-17-04--08-10-14.xlsx
+2025-04-18 17:36:23,274 - core.file_processor - INFO - 
+Client: BML
+2025-04-18 17:36:23,274 - core.file_processor - INFO - Total files: 1
+2025-04-18 17:36:23,275 - core.file_processor - INFO -   - BML_Claims.txt: 1 files
+2025-04-18 17:36:23,275 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:36:23,275 - core.file_processor - INFO - 
+Client: UMR
+2025-04-18 17:36:23,276 - core.file_processor - INFO - Total files: 5
+2025-04-18 17:36:23,276 - core.file_processor - INFO -   - UMR.txt: 1 files
+2025-04-18 17:36:23,276 - core.file_processor - INFO -     * 20250418_UMR_ACCUM_20250418.txt
+2025-04-18 17:36:23,277 - core.file_processor - INFO -   - UMR_Empire.txt: 1 files
+2025-04-18 17:36:23,277 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:36:23,277 - core.file_processor - INFO -   - UMR_UMR_Exc_OOP.txt: 1 files
+2025-04-18 17:36:23,278 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 17:36:23,278 - core.file_processor - INFO -   - UMR_IOA_Eligibility.results: 1 files
+2025-04-18 17:36:23,278 - core.file_processor - INFO -     * 20250417_MEM_TRX_UMR_20250417_0001.TXT_2025-17-04--08-12-13.results
+2025-04-18 17:36:23,279 - core.file_processor - INFO -   - UMR_IOA_Eligibility.xlsx: 1 files
+2025-04-18 17:36:23,279 - core.file_processor - INFO -     * 20250417_MEM_TRX_UMR_20250417_0001.TXT_Eligibility Process Report_2025-17-04--08-12-14.xlsx
+2025-04-18 17:36:23,279 - core.file_processor - INFO - 
+Client: Lucent Health
+2025-04-18 17:36:23,280 - core.file_processor - INFO - Total files: 1
+2025-04-18 17:36:23,280 - core.file_processor - INFO -   - Lucent Health_Claims.txt: 1 files
+2025-04-18 17:36:23,280 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:44:28,481 - core.api_client - INFO - Created download directory: pharmpix_downloads
+2025-04-18 17:44:28,482 - core.api_client - INFO - Logging in as it@transparentrx.com...
+2025-04-18 17:44:30,714 - core.api_client - INFO - Login successful!
+2025-04-18 17:44:30,715 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ALLIED ==========
+2025-04-18 17:44:30,715 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Claims ===
+2025-04-18 17:44:30,715 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/
+2025-04-18 17:44:33,879 - core.api_client - INFO - Found 748 files matching criteria
+2025-04-18 17:44:33,883 - core.file_processor - INFO - Found 748 .txt files in ALLIED/Claims
+2025-04-18 17:44:33,884 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 71421 bytes - 2025-04-18 06:44:00
+2025-04-18 17:44:33,885 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:44:33,888 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:44:35,786 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Claims\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:44:35,787 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Eligibility ===
+2025-04-18 17:44:35,787 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-18 17:44:38,085 - core.api_client - INFO - Found 217 files matching criteria
+2025-04-18 17:44:38,087 - core.file_processor - INFO - Found 217 .results files in ALLIED/Eligibility
+2025-04-18 17:44:38,088 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results - 276761 bytes - 2025-04-18 08:08:00
+2025-04-18 17:44:38,088 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-18 17:44:38,091 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-18 17:44:40,837 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Eligibility\RESULTS\20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-18 17:44:40,838 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-18 17:44:43,364 - core.api_client - INFO - Found 217 files matching criteria
+2025-04-18 17:44:43,365 - core.file_processor - INFO - Found 217 .xlsx files in ALLIED/Eligibility
+2025-04-18 17:44:43,366 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx - 14411 bytes - 2025-04-18 08:08:00
+2025-04-18 17:44:43,366 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-18 17:44:43,367 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-18 17:44:44,754 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Eligibility\XLSX\20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-18 17:44:44,756 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ASR ==========
+2025-04-18 17:44:44,756 - core.file_processor - INFO - 
+=== PROCESSING ASR/Claims ===
+2025-04-18 17:44:44,757 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/
+2025-04-18 17:44:47,344 - core.api_client - INFO - Found 456 files matching criteria
+2025-04-18 17:44:47,351 - core.file_processor - INFO - Found 456 .txt files in ASR/Claims
+2025-04-18 17:44:47,351 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt - 25060 bytes - 2025-04-18 06:35:00
+2025-04-18 17:44:47,352 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:44:47,354 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:44:49,046 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Claims\TXT\20250418_TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:44:49,047 - core.file_processor - INFO - 
+=== PROCESSING ASR/Eligibility ===
+2025-04-18 17:44:49,047 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-18 17:44:51,585 - core.api_client - INFO - Found 447 files matching criteria
+2025-04-18 17:44:51,586 - core.file_processor - INFO - Found 447 .results files in ASR/Eligibility
+2025-04-18 17:44:51,587 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250418_001.txt_2025-18-04--08-09-15.results - 85925 bytes - 2025-04-18 08:09:00
+2025-04-18 17:44:51,587 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250418_001.txt_2025-18-04--08-09-15.results
+2025-04-18 17:44:51,592 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250418_001.txt_2025-18-04--08-09-15.results
+2025-04-18 17:44:53,533 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Eligibility\RESULTS\20250418_TRXALBION_PPX_ELIG_20250418_001.txt_2025-18-04--08-09-15.results
+2025-04-18 17:44:53,534 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-18 17:44:56,060 - core.api_client - INFO - Found 446 files matching criteria
+2025-04-18 17:44:56,061 - core.file_processor - INFO - Found 446 .xlsx files in ASR/Eligibility
+2025-04-18 17:44:56,062 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250418_001.txt_Eligibility Process Report no TBA_2025-18-04--08-09-15.xlsx - 14353 bytes - 2025-04-18 08:09:00
+2025-04-18 17:44:56,062 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250418_001.txt_Eligibility Process Report no TBA_2025-18-04--08-09-15.xlsx
+2025-04-18 17:44:56,063 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250418_001.txt_Eligibility Process Report no TBA_2025-18-04--08-09-15.xlsx
+2025-04-18 17:44:57,404 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Eligibility\XLSX\20250418_TRXALBION_PPX_ELIG_20250418_001.txt_Eligibility Process Report no TBA_2025-18-04--08-09-15.xlsx
+2025-04-18 17:44:57,407 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: BML ==========
+2025-04-18 17:44:57,407 - core.file_processor - INFO - 
+=== PROCESSING BML/Claims ===
+2025-04-18 17:44:57,408 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/
+2025-04-18 17:45:03,445 - core.api_client - INFO - Found 1933 files matching criteria
+2025-04-18 17:45:03,447 - core.file_processor - INFO - Found 1933 .txt files in BML/Claims
+2025-04-18 17:45:03,449 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 0 bytes - 2025-04-18 06:22:00
+2025-04-18 17:45:03,449 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:45:03,450 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:45:04,560 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\BML\Claims\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:45:04,562 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: UMR ==========
+2025-04-18 17:45:04,562 - core.file_processor - INFO - 
+=== PROCESSING UMR ===
+2025-04-18 17:45:04,562 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/
+2025-04-18 17:45:09,609 - core.api_client - INFO - Found 1726 files matching criteria
+2025-04-18 17:45:09,611 - core.file_processor - INFO - Found 1726 .txt files in UMR
+2025-04-18 17:45:09,611 - core.file_processor - INFO - 1. UMR_ACCUM_20250418.txt - 47188 bytes - 2025-04-18 03:30:00
+2025-04-18 17:45:09,612 - core.file_processor - INFO - Downloading file 1/1: UMR_ACCUM_20250418.txt
+2025-04-18 17:45:09,613 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_ACCUM_20250418.txt
+2025-04-18 17:45:11,252 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\TXT\20250418_UMR_ACCUM_20250418.txt
+2025-04-18 17:45:11,253 - core.file_processor - INFO - 
+=== PROCESSING UMR/Empire ===
+2025-04-18 17:45:11,254 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-18 17:45:15,163 - core.api_client - INFO - Found 1507 files matching criteria
+2025-04-18 17:45:15,167 - core.file_processor - INFO - Found 1507 .txt files in UMR/Empire
+2025-04-18 17:45:15,168 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 161637 bytes - 2025-04-18 06:43:00
+2025-04-18 17:45:15,169 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:45:15,171 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:45:17,388 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\Empire\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:45:17,389 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-18 17:45:24,407 - core.api_client - INFO - Found 0 files matching criteria
+2025-04-18 17:45:24,408 - core.file_processor - INFO - Found 0 .xls files in UMR/Empire
+2025-04-18 17:45:24,409 - core.file_processor - INFO - 
+=== PROCESSING UMR/UMR_Exc_OOP ===
+2025-04-18 17:45:24,410 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/
+2025-04-18 17:45:37,367 - core.api_client - INFO - Found 5088 files matching criteria
+2025-04-18 17:45:37,383 - core.file_processor - INFO - Found 5088 .txt files in UMR/UMR_Exc_OOP
+2025-04-18 17:45:37,385 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt - 12530 bytes - 2025-04-18 06:50:00
+2025-04-18 17:45:37,386 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 17:45:37,390 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 17:45:39,039 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\UMR_Exc_OOP\TXT\20250418_TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 17:45:39,039 - core.file_processor - INFO - 
+=== PROCESSING UMR/IOA/Eligibility ===
+2025-04-18 17:45:39,040 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-18 17:45:42,644 - core.api_client - INFO - Found 527 files matching criteria
+2025-04-18 17:45:42,646 - core.file_processor - INFO - Found 527 .results files in UMR/IOA/Eligibility
+2025-04-18 17:45:42,647 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250418_0001.TXT_2025-18-04--08-10-13.results - 626522 bytes - 2025-04-18 08:10:00
+2025-04-18 17:45:42,647 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250418_0001.TXT_2025-18-04--08-10-13.results
+2025-04-18 17:45:42,649 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250418_0001.TXT_2025-18-04--08-10-13.results
+2025-04-18 17:45:46,000 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\IOA\Eligibility\RESULTS\20250418_MEM_TRX_UMR_20250418_0001.TXT_2025-18-04--08-10-13.results
+2025-04-18 17:45:46,001 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-18 17:45:49,761 - core.api_client - INFO - Found 1334 files matching criteria
+2025-04-18 17:45:49,763 - core.file_processor - INFO - Found 1334 .xlsx files in UMR/IOA/Eligibility
+2025-04-18 17:45:49,763 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250418_0001.TXT_Eligibility Process Report_2025-18-04--08-10-14.xlsx - 15578 bytes - 2025-04-18 08:10:00
+2025-04-18 17:45:49,763 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250418_0001.TXT_Eligibility Process Report_2025-18-04--08-10-14.xlsx
+2025-04-18 17:45:49,764 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250418_0001.TXT_Eligibility Process Report_2025-18-04--08-10-14.xlsx
+2025-04-18 17:45:51,193 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\IOA\Eligibility\XLSX\20250418_MEM_TRX_UMR_20250418_0001.TXT_Eligibility Process Report_2025-18-04--08-10-14.xlsx
+2025-04-18 17:45:51,194 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: Lucent Health ==========
+2025-04-18 17:45:51,194 - core.file_processor - INFO - 
+=== PROCESSING Lucent Health/Claims ===
+2025-04-18 17:45:51,195 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/
+2025-04-18 17:45:53,126 - core.api_client - INFO - Found 184 files matching criteria
+2025-04-18 17:45:53,127 - core.file_processor - INFO - Found 184 .txt files in Lucent Health/Claims
+2025-04-18 17:45:53,127 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 70168 bytes - 2025-04-18 06:22:00
+2025-04-18 17:45:53,128 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:45:53,129 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/Lucent
+2025-04-18 17:45:54,498 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\Lucent Health\Claims\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:45:54,499 - core.file_processor - INFO - 
+
+=== DOWNLOAD SUMMARY ===
+2025-04-18 17:45:54,499 - core.file_processor - INFO - 
+Client: ALLIED
+2025-04-18 17:45:54,500 - core.file_processor - INFO - Total files: 3
+2025-04-18 17:45:54,500 - core.file_processor - INFO -   - ALLIED_Claims.txt: 1 files
+2025-04-18 17:45:54,500 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:45:54,501 - core.file_processor - INFO -   - ALLIED_Eligibility.results: 1 files
+2025-04-18 17:45:54,501 - core.file_processor - INFO -     * 20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-18 17:45:54,501 - core.file_processor - INFO -   - ALLIED_Eligibility.xlsx: 1 files
+2025-04-18 17:45:54,502 - core.file_processor - INFO -     * 20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-18 17:45:54,502 - core.file_processor - INFO - 
+Client: ASR
+2025-04-18 17:45:54,502 - core.file_processor - INFO - Total files: 3
+2025-04-18 17:45:54,503 - core.file_processor - INFO -   - ASR_Claims.txt: 1 files
+2025-04-18 17:45:54,503 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:45:54,503 - core.file_processor - INFO -   - ASR_Eligibility.results: 1 files
+2025-04-18 17:45:54,504 - core.file_processor - INFO -     * 20250418_TRXALBION_PPX_ELIG_20250418_001.txt_2025-18-04--08-09-15.results
+2025-04-18 17:45:54,504 - core.file_processor - INFO -   - ASR_Eligibility.xlsx: 1 files
+2025-04-18 17:45:54,507 - core.file_processor - INFO -     * 20250418_TRXALBION_PPX_ELIG_20250418_001.txt_Eligibility Process Report no TBA_2025-18-04--08-09-15.xlsx
+2025-04-18 17:45:54,507 - core.file_processor - INFO - 
+Client: BML
+2025-04-18 17:45:54,507 - core.file_processor - INFO - Total files: 1
+2025-04-18 17:45:54,508 - core.file_processor - INFO -   - BML_Claims.txt: 1 files
+2025-04-18 17:45:54,508 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:45:54,508 - core.file_processor - INFO - 
+Client: UMR
+2025-04-18 17:45:54,509 - core.file_processor - INFO - Total files: 5
+2025-04-18 17:45:54,509 - core.file_processor - INFO -   - UMR.txt: 1 files
+2025-04-18 17:45:54,509 - core.file_processor - INFO -     * 20250418_UMR_ACCUM_20250418.txt
+2025-04-18 17:45:54,509 - core.file_processor - INFO -   - UMR_Empire.txt: 1 files
+2025-04-18 17:45:54,510 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:45:54,510 - core.file_processor - INFO -   - UMR_UMR_Exc_OOP.txt: 1 files
+2025-04-18 17:45:54,511 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 17:45:54,511 - core.file_processor - INFO -   - UMR_IOA_Eligibility.results: 1 files
+2025-04-18 17:45:54,511 - core.file_processor - INFO -     * 20250418_MEM_TRX_UMR_20250418_0001.TXT_2025-18-04--08-10-13.results
+2025-04-18 17:45:54,512 - core.file_processor - INFO -   - UMR_IOA_Eligibility.xlsx: 1 files
+2025-04-18 17:45:54,512 - core.file_processor - INFO -     * 20250418_MEM_TRX_UMR_20250418_0001.TXT_Eligibility Process Report_2025-18-04--08-10-14.xlsx
+2025-04-18 17:45:54,512 - core.file_processor - INFO - 
+Client: Lucent Health
+2025-04-18 17:45:54,513 - core.file_processor - INFO - Total files: 1
+2025-04-18 17:45:54,513 - core.file_processor - INFO -   - Lucent Health_Claims.txt: 1 files
+2025-04-18 17:45:54,514 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:48:26,393 - core.api_client - INFO - Created download directory: pharmpix_downloads
+2025-04-18 17:48:26,394 - core.api_client - INFO - Logging in as it@transparentrx.com...
+2025-04-18 17:48:28,609 - core.api_client - INFO - Login successful!
+2025-04-18 17:48:28,609 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ALLIED ==========
+2025-04-18 17:48:28,609 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Claims ===
+2025-04-18 17:48:28,609 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/
+2025-04-18 17:48:31,576 - core.api_client - INFO - Found 748 files matching criteria
+2025-04-18 17:48:31,582 - core.file_processor - INFO - Found 748 .txt files in ALLIED/Claims
+2025-04-18 17:48:31,583 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 71421 bytes - 2025-04-18 06:44:00
+2025-04-18 17:48:31,583 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:48:31,588 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:48:33,557 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Claims\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:48:33,559 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Eligibility ===
+2025-04-18 17:48:33,560 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-18 17:48:36,197 - core.api_client - INFO - Found 217 files matching criteria
+2025-04-18 17:48:36,199 - core.file_processor - INFO - Found 217 .results files in ALLIED/Eligibility
+2025-04-18 17:48:36,201 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results - 276761 bytes - 2025-04-18 08:08:00
+2025-04-18 17:48:36,202 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-18 17:48:36,204 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-18 17:48:38,791 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Eligibility\RESULTS\20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-18 17:48:38,793 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-18 17:48:41,139 - core.api_client - INFO - Found 217 files matching criteria
+2025-04-18 17:48:41,408 - core.file_processor - INFO - Found 217 .xlsx files in ALLIED/Eligibility
+2025-04-18 17:48:42,079 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx - 14411 bytes - 2025-04-18 08:08:00
+2025-04-18 17:48:42,144 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-18 17:48:42,159 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-18 17:48:43,725 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Eligibility\XLSX\20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-18 17:48:43,784 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ASR ==========
+2025-04-18 17:48:43,841 - core.file_processor - INFO - 
+=== PROCESSING ASR/Claims ===
+2025-04-18 17:48:43,855 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/
+2025-04-18 17:48:46,546 - core.api_client - INFO - Found 456 files matching criteria
+2025-04-18 17:48:46,549 - core.file_processor - INFO - Found 456 .txt files in ASR/Claims
+2025-04-18 17:48:46,550 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt - 25060 bytes - 2025-04-18 06:35:00
+2025-04-18 17:48:46,553 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:48:46,559 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:48:47,973 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Claims\TXT\20250418_TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:48:48,024 - core.file_processor - INFO - 
+=== PROCESSING ASR/Eligibility ===
+2025-04-18 17:48:48,031 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-18 17:48:51,534 - core.api_client - INFO - Found 447 files matching criteria
+2025-04-18 17:48:51,964 - core.file_processor - INFO - Found 447 .results files in ASR/Eligibility
+2025-04-18 17:48:52,058 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250418_001.txt_2025-18-04--08-09-15.results - 85925 bytes - 2025-04-18 08:09:00
+2025-04-18 17:48:52,096 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250418_001.txt_2025-18-04--08-09-15.results
+2025-04-18 17:48:52,141 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250418_001.txt_2025-18-04--08-09-15.results
+2025-04-18 17:48:54,468 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Eligibility\RESULTS\20250418_TRXALBION_PPX_ELIG_20250418_001.txt_2025-18-04--08-09-15.results
+2025-04-18 17:48:54,469 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-18 17:48:57,241 - core.api_client - INFO - Found 446 files matching criteria
+2025-04-18 17:48:57,246 - core.file_processor - INFO - Found 446 .xlsx files in ASR/Eligibility
+2025-04-18 17:48:57,247 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250418_001.txt_Eligibility Process Report no TBA_2025-18-04--08-09-15.xlsx - 14353 bytes - 2025-04-18 08:09:00
+2025-04-18 17:48:57,248 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250418_001.txt_Eligibility Process Report no TBA_2025-18-04--08-09-15.xlsx
+2025-04-18 17:48:57,251 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250418_001.txt_Eligibility Process Report no TBA_2025-18-04--08-09-15.xlsx
+2025-04-18 17:48:58,917 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Eligibility\XLSX\20250418_TRXALBION_PPX_ELIG_20250418_001.txt_Eligibility Process Report no TBA_2025-18-04--08-09-15.xlsx
+2025-04-18 17:48:58,917 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: BML ==========
+2025-04-18 17:48:58,918 - core.file_processor - INFO - 
+=== PROCESSING BML/Claims ===
+2025-04-18 17:48:58,919 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/
+2025-04-18 17:49:03,381 - core.api_client - INFO - Found 1933 files matching criteria
+2025-04-18 17:49:03,386 - core.file_processor - INFO - Found 1933 .txt files in BML/Claims
+2025-04-18 17:49:03,387 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 0 bytes - 2025-04-18 06:22:00
+2025-04-18 17:49:03,388 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:49:03,390 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:49:04,474 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\BML\Claims\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:49:04,477 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: UMR ==========
+2025-04-18 17:49:04,477 - core.file_processor - INFO - 
+=== PROCESSING UMR ===
+2025-04-18 17:49:04,478 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/
+2025-04-18 17:49:08,033 - core.api_client - INFO - Found 1726 files matching criteria
+2025-04-18 17:49:08,037 - core.file_processor - INFO - Found 1726 .txt files in UMR
+2025-04-18 17:49:08,038 - core.file_processor - INFO - 1. UMR_ACCUM_20250418.txt - 47188 bytes - 2025-04-18 03:30:00
+2025-04-18 17:49:08,039 - core.file_processor - INFO - Downloading file 1/1: UMR_ACCUM_20250418.txt
+2025-04-18 17:49:08,042 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_ACCUM_20250418.txt
+2025-04-18 17:49:09,625 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\TXT\20250418_UMR_ACCUM_20250418.txt
+2025-04-18 17:49:09,626 - core.file_processor - INFO - 
+=== PROCESSING UMR/Empire ===
+2025-04-18 17:49:09,626 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-18 17:49:13,439 - core.api_client - INFO - Found 1507 files matching criteria
+2025-04-18 17:49:13,444 - core.file_processor - INFO - Found 1507 .txt files in UMR/Empire
+2025-04-18 17:49:13,444 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 161637 bytes - 2025-04-18 06:43:00
+2025-04-18 17:49:13,445 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:49:13,447 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:49:15,628 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\Empire\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:49:15,630 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-18 17:49:19,565 - core.api_client - INFO - Found 0 files matching criteria
+2025-04-18 17:49:19,568 - core.file_processor - INFO - Found 0 .xls files in UMR/Empire
+2025-04-18 17:49:19,568 - core.file_processor - INFO - 
+=== PROCESSING UMR/UMR_Exc_OOP ===
+2025-04-18 17:49:19,569 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/
+2025-04-18 17:49:32,739 - core.api_client - INFO - Found 5088 files matching criteria
+2025-04-18 17:49:32,770 - core.file_processor - INFO - Found 5088 .txt files in UMR/UMR_Exc_OOP
+2025-04-18 17:49:32,770 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt - 12530 bytes - 2025-04-18 06:50:00
+2025-04-18 17:49:32,771 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 17:49:32,774 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 17:49:34,110 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\UMR_Exc_OOP\TXT\20250418_TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 17:49:34,111 - core.file_processor - INFO - 
+=== PROCESSING UMR/IOA/Eligibility ===
+2025-04-18 17:49:34,111 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-18 17:49:37,901 - core.api_client - INFO - Found 527 files matching criteria
+2025-04-18 17:49:37,905 - core.file_processor - INFO - Found 527 .results files in UMR/IOA/Eligibility
+2025-04-18 17:49:37,905 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250418_0001.TXT_2025-18-04--08-10-13.results - 626522 bytes - 2025-04-18 08:10:00
+2025-04-18 17:49:37,906 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250418_0001.TXT_2025-18-04--08-10-13.results
+2025-04-18 17:49:37,908 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250418_0001.TXT_2025-18-04--08-10-13.results
+2025-04-18 17:49:41,363 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\IOA\Eligibility\RESULTS\20250418_MEM_TRX_UMR_20250418_0001.TXT_2025-18-04--08-10-13.results
+2025-04-18 17:49:41,364 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-18 17:49:45,294 - core.api_client - INFO - Found 1334 files matching criteria
+2025-04-18 17:49:45,298 - core.file_processor - INFO - Found 1334 .xlsx files in UMR/IOA/Eligibility
+2025-04-18 17:49:45,299 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250418_0001.TXT_Eligibility Process Report_2025-18-04--08-10-14.xlsx - 15578 bytes - 2025-04-18 08:10:00
+2025-04-18 17:49:45,299 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250418_0001.TXT_Eligibility Process Report_2025-18-04--08-10-14.xlsx
+2025-04-18 17:49:45,300 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250418_0001.TXT_Eligibility Process Report_2025-18-04--08-10-14.xlsx
+2025-04-18 17:49:46,683 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\IOA\Eligibility\XLSX\20250418_MEM_TRX_UMR_20250418_0001.TXT_Eligibility Process Report_2025-18-04--08-10-14.xlsx
+2025-04-18 17:49:46,684 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: Lucent Health ==========
+2025-04-18 17:49:46,685 - core.file_processor - INFO - 
+=== PROCESSING Lucent Health/Claims ===
+2025-04-18 17:49:46,692 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/
+2025-04-18 17:49:48,674 - core.api_client - INFO - Found 184 files matching criteria
+2025-04-18 17:49:48,675 - core.file_processor - INFO - Found 184 .txt files in Lucent Health/Claims
+2025-04-18 17:49:48,675 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt - 70168 bytes - 2025-04-18 06:22:00
+2025-04-18 17:49:48,676 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:49:48,678 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/Lucent
+2025-04-18 17:49:50,117 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\Lucent Health\Claims\TXT\20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:49:50,117 - core.file_processor - INFO - 
+
+=== DOWNLOAD SUMMARY ===
+2025-04-18 17:49:50,118 - core.file_processor - INFO - 
+Client: ALLIED
+2025-04-18 17:49:50,119 - core.file_processor - INFO - Total files: 3
+2025-04-18 17:49:50,119 - core.file_processor - INFO -   - ALLIED_Claims.txt: 1 files
+2025-04-18 17:49:50,119 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:49:50,120 - core.file_processor - INFO -   - ALLIED_Eligibility.results: 1 files
+2025-04-18 17:49:50,120 - core.file_processor - INFO -     * 20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-18 17:49:50,120 - core.file_processor - INFO -   - ALLIED_Eligibility.xlsx: 1 files
+2025-04-18 17:49:50,120 - core.file_processor - INFO -     * 20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-18 17:49:50,121 - core.file_processor - INFO - 
+Client: ASR
+2025-04-18 17:49:50,121 - core.file_processor - INFO - Total files: 3
+2025-04-18 17:49:50,121 - core.file_processor - INFO -   - ASR_Claims.txt: 1 files
+2025-04-18 17:49:50,121 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_ASR_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:49:50,121 - core.file_processor - INFO -   - ASR_Eligibility.results: 1 files
+2025-04-18 17:49:50,121 - core.file_processor - INFO -     * 20250418_TRXALBION_PPX_ELIG_20250418_001.txt_2025-18-04--08-09-15.results
+2025-04-18 17:49:50,122 - core.file_processor - INFO -   - ASR_Eligibility.xlsx: 1 files
+2025-04-18 17:49:50,122 - core.file_processor - INFO -     * 20250418_TRXALBION_PPX_ELIG_20250418_001.txt_Eligibility Process Report no TBA_2025-18-04--08-09-15.xlsx
+2025-04-18 17:49:50,123 - core.file_processor - INFO - 
+Client: BML
+2025-04-18 17:49:50,123 - core.file_processor - INFO - Total files: 1
+2025-04-18 17:49:50,123 - core.file_processor - INFO -   - BML_Claims.txt: 1 files
+2025-04-18 17:49:50,123 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:49:50,123 - core.file_processor - INFO - 
+Client: UMR
+2025-04-18 17:49:50,124 - core.file_processor - INFO - Total files: 5
+2025-04-18 17:49:50,124 - core.file_processor - INFO -   - UMR.txt: 1 files
+2025-04-18 17:49:50,124 - core.file_processor - INFO -     * 20250418_UMR_ACCUM_20250418.txt
+2025-04-18 17:49:50,124 - core.file_processor - INFO -   - UMR_Empire.txt: 1 files
+2025-04-18 17:49:50,124 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-18 17:49:50,124 - core.file_processor - INFO -   - UMR_UMR_Exc_OOP.txt: 1 files
+2025-04-18 17:49:50,124 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_CL_20250418_0000_0559_002.txt
+2025-04-18 17:49:50,125 - core.file_processor - INFO -   - UMR_IOA_Eligibility.results: 1 files
+2025-04-18 17:49:50,125 - core.file_processor - INFO -     * 20250418_MEM_TRX_UMR_20250418_0001.TXT_2025-18-04--08-10-13.results
+2025-04-18 17:49:50,125 - core.file_processor - INFO -   - UMR_IOA_Eligibility.xlsx: 1 files
+2025-04-18 17:49:50,125 - core.file_processor - INFO -     * 20250418_MEM_TRX_UMR_20250418_0001.TXT_Eligibility Process Report_2025-18-04--08-10-14.xlsx
+2025-04-18 17:49:50,125 - core.file_processor - INFO - 
+Client: Lucent Health
+2025-04-18 17:49:50,126 - core.file_processor - INFO - Total files: 1
+2025-04-18 17:49:50,126 - core.file_processor - INFO -   - Lucent Health_Claims.txt: 1 files
+2025-04-18 17:49:50,126 - core.file_processor - INFO -     * 20250418_TRX_TRANSPARENTRX_DAILY_CL_20250417_20250417_001.txt
+2025-04-21 11:22:59,769 - core.api_client - INFO - Created download directory: pharmpix_downloads
+2025-04-21 11:22:59,771 - core.api_client - INFO - Logging in as it@transparentrx.com...
+2025-04-21 11:23:03,154 - core.api_client - INFO - Login successful!
+2025-04-21 11:23:03,154 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ALLIED ==========
+2025-04-21 11:23:03,154 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Claims ===
+2025-04-21 11:23:03,157 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/
+2025-04-21 11:23:19,856 - core.api_client - INFO - Found 750 files matching criteria
+2025-04-21 11:23:19,898 - core.file_processor - INFO - Found 750 .txt files in ALLIED/Claims
+2025-04-21 11:23:19,906 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 48867 bytes - 2025-04-20 06:44:00
+2025-04-21 11:23:19,908 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:23:19,919 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:23:27,227 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Claims\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:23:27,228 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Eligibility ===
+2025-04-21 11:23:27,229 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-21 11:23:33,745 - core.api_client - INFO - Found 217 files matching criteria
+2025-04-21 11:23:33,746 - core.file_processor - INFO - Found 217 .results files in ALLIED/Eligibility
+2025-04-21 11:23:33,746 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results - 276761 bytes - 2025-04-18 08:08:00
+2025-04-21 11:23:33,746 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-21 11:23:33,747 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-21 11:23:56,035 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Eligibility\RESULTS\20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-21 11:23:56,037 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-21 11:24:02,670 - core.api_client - INFO - Found 217 files matching criteria
+2025-04-21 11:24:02,671 - core.file_processor - INFO - Found 217 .xlsx files in ALLIED/Eligibility
+2025-04-21 11:24:02,672 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx - 14411 bytes - 2025-04-18 08:08:00
+2025-04-21 11:24:02,673 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-21 11:24:02,674 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-21 11:24:05,867 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Eligibility\XLSX\20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-21 11:24:05,868 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ASR ==========
+2025-04-21 11:24:05,869 - core.file_processor - INFO - 
+=== PROCESSING ASR/Claims ===
+2025-04-21 11:24:05,870 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/
+2025-04-21 11:24:24,774 - core.api_client - INFO - Found 458 files matching criteria
+2025-04-21 11:24:24,776 - core.file_processor - INFO - Found 458 .txt files in ASR/Claims
+2025-04-21 11:24:24,776 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt - 7518 bytes - 2025-04-20 06:35:00
+2025-04-21 11:24:24,777 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:24:25,047 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:24:26,163 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Claims\TXT\20250420_TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:24:26,164 - core.file_processor - INFO - 
+=== PROCESSING ASR/Eligibility ===
+2025-04-21 11:24:26,165 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-21 11:24:34,311 - core.api_client - INFO - Found 449 files matching criteria
+2025-04-21 11:24:34,312 - core.file_processor - INFO - Found 449 .results files in ASR/Eligibility
+2025-04-21 11:24:34,312 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results - 85925 bytes - 2025-04-20 08:06:00
+2025-04-21 11:24:34,313 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results
+2025-04-21 11:24:34,314 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results
+2025-04-21 11:24:46,374 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Eligibility\RESULTS\20250420_TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results
+2025-04-21 11:24:46,375 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-21 11:25:01,945 - core.api_client - INFO - Found 448 files matching criteria
+2025-04-21 11:25:01,946 - core.file_processor - INFO - Found 448 .xlsx files in ASR/Eligibility
+2025-04-21 11:25:01,946 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx - 14365 bytes - 2025-04-20 08:06:00
+2025-04-21 11:25:01,947 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx
+2025-04-21 11:25:01,948 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx
+2025-04-21 11:25:03,395 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Eligibility\XLSX\20250420_TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx
+2025-04-21 11:25:03,397 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: BML ==========
+2025-04-21 11:25:03,398 - core.file_processor - INFO - 
+=== PROCESSING BML/Claims ===
+2025-04-21 11:25:03,399 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/
+2025-04-21 11:25:25,060 - core.api_client - INFO - Found 1935 files matching criteria
+2025-04-21 11:25:25,062 - core.file_processor - INFO - Found 1935 .txt files in BML/Claims
+2025-04-21 11:25:25,062 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 0 bytes - 2025-04-20 06:22:00
+2025-04-21 11:25:25,062 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:25:25,064 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:25:26,240 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\BML\Claims\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:25:26,242 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: UMR ==========
+2025-04-21 11:25:26,243 - core.file_processor - INFO - 
+=== PROCESSING UMR ===
+2025-04-21 11:25:26,244 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/
+2025-04-21 11:25:38,462 - core.api_client - INFO - Found 1729 files matching criteria
+2025-04-21 11:25:38,465 - core.file_processor - INFO - Found 1729 .txt files in UMR
+2025-04-21 11:25:38,465 - core.file_processor - INFO - 1. UMR_ACCUM_20250420.txt - 29116 bytes - 2025-04-20 03:30:00
+2025-04-21 11:25:38,465 - core.file_processor - INFO - Downloading file 1/1: UMR_ACCUM_20250420.txt
+2025-04-21 11:25:38,469 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_ACCUM_20250420.txt
+2025-04-21 11:25:40,340 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\TXT\20250420_UMR_ACCUM_20250420.txt
+2025-04-21 11:25:40,341 - core.file_processor - INFO - 
+=== PROCESSING UMR/Empire ===
+2025-04-21 11:25:40,341 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-21 11:25:51,908 - core.api_client - INFO - Found 1509 files matching criteria
+2025-04-21 11:25:51,912 - core.file_processor - INFO - Found 1509 .txt files in UMR/Empire
+2025-04-21 11:25:51,913 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 95228 bytes - 2025-04-20 06:43:00
+2025-04-21 11:25:51,913 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:25:51,916 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:25:53,980 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\Empire\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:25:53,981 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-21 11:26:04,562 - core.api_client - INFO - Found 0 files matching criteria
+2025-04-21 11:26:04,564 - core.file_processor - INFO - Found 0 .xls files in UMR/Empire
+2025-04-21 11:26:04,565 - core.file_processor - INFO - 
+=== PROCESSING UMR/UMR_Exc_OOP ===
+2025-04-21 11:26:04,566 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/
+2025-04-21 11:26:29,243 - core.api_client - INFO - Found 5096 files matching criteria
+2025-04-21 11:26:29,263 - core.file_processor - INFO - Found 5096 .txt files in UMR/UMR_Exc_OOP
+2025-04-21 11:26:29,263 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_CL_20250420_0000_0559_002.txt - 8771 bytes - 2025-04-20 06:50:00
+2025-04-21 11:26:29,263 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_CL_20250420_0000_0559_002.txt
+2025-04-21 11:26:29,265 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/TRX_TRANSPARENTRX_CL_20250420_0000_0559_002.txt
+2025-04-21 11:26:30,470 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\UMR_Exc_OOP\TXT\20250420_TRX_TRANSPARENTRX_CL_20250420_0000_0559_002.txt
+2025-04-21 11:26:30,470 - core.file_processor - INFO - 
+=== PROCESSING UMR/IOA/Eligibility ===
+2025-04-21 11:26:30,471 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-21 11:26:44,494 - core.api_client - INFO - Found 528 files matching criteria
+2025-04-21 11:26:44,497 - core.file_processor - INFO - Found 528 .results files in UMR/IOA/Eligibility
+2025-04-21 11:26:44,498 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results - 626522 bytes - 2025-04-19 08:00:00
+2025-04-21 11:26:44,498 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results
+2025-04-21 11:26:44,500 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results
+2025-04-21 11:26:54,353 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\IOA\Eligibility\RESULTS\20250419_MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results
+2025-04-21 11:26:54,355 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-21 11:27:01,338 - core.api_client - INFO - Found 1335 files matching criteria
+2025-04-21 11:27:01,341 - core.file_processor - INFO - Found 1335 .xlsx files in UMR/IOA/Eligibility
+2025-04-21 11:27:01,341 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx - 14642 bytes - 2025-04-19 08:00:00
+2025-04-21 11:27:01,342 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx
+2025-04-21 11:27:01,344 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx
+2025-04-21 11:27:02,813 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\IOA\Eligibility\XLSX\20250419_MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx
+2025-04-21 11:27:02,815 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: Lucent Health ==========
+2025-04-21 11:27:02,816 - core.file_processor - INFO - 
+=== PROCESSING Lucent Health/Claims ===
+2025-04-21 11:27:02,819 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/
+2025-04-21 11:27:04,928 - core.api_client - INFO - Found 186 files matching criteria
+2025-04-21 11:27:04,929 - core.file_processor - INFO - Found 186 .txt files in Lucent Health/Claims
+2025-04-21 11:27:04,929 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 20048 bytes - 2025-04-20 06:22:00
+2025-04-21 11:27:04,930 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:27:04,936 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/Lucent
+2025-04-21 11:27:06,379 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\Lucent Health\Claims\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:27:06,380 - core.file_processor - INFO - 
+
+=== DOWNLOAD SUMMARY ===
+2025-04-21 11:27:06,381 - core.file_processor - INFO - 
+Client: ALLIED
+2025-04-21 11:27:06,382 - core.file_processor - INFO - Total files: 3
+2025-04-21 11:27:06,382 - core.file_processor - INFO -   - ALLIED_Claims.txt: 1 files
+2025-04-21 11:27:06,383 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:27:06,383 - core.file_processor - INFO -   - ALLIED_Eligibility.results: 1 files
+2025-04-21 11:27:06,384 - core.file_processor - INFO -     * 20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-21 11:27:06,385 - core.file_processor - INFO -   - ALLIED_Eligibility.xlsx: 1 files
+2025-04-21 11:27:06,386 - core.file_processor - INFO -     * 20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-21 11:27:06,386 - core.file_processor - INFO - 
+Client: ASR
+2025-04-21 11:27:06,387 - core.file_processor - INFO - Total files: 3
+2025-04-21 11:27:06,389 - core.file_processor - INFO -   - ASR_Claims.txt: 1 files
+2025-04-21 11:27:06,389 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:27:06,390 - core.file_processor - INFO -   - ASR_Eligibility.results: 1 files
+2025-04-21 11:27:06,390 - core.file_processor - INFO -     * 20250420_TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results
+2025-04-21 11:27:06,391 - core.file_processor - INFO -   - ASR_Eligibility.xlsx: 1 files
+2025-04-21 11:27:06,391 - core.file_processor - INFO -     * 20250420_TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx
+2025-04-21 11:27:06,392 - core.file_processor - INFO - 
+Client: BML
+2025-04-21 11:27:06,392 - core.file_processor - INFO - Total files: 1
+2025-04-21 11:27:06,392 - core.file_processor - INFO -   - BML_Claims.txt: 1 files
+2025-04-21 11:27:06,393 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:27:06,393 - core.file_processor - INFO - 
+Client: UMR
+2025-04-21 11:27:06,393 - core.file_processor - INFO - Total files: 5
+2025-04-21 11:27:06,394 - core.file_processor - INFO -   - UMR.txt: 1 files
+2025-04-21 11:27:06,394 - core.file_processor - INFO -     * 20250420_UMR_ACCUM_20250420.txt
+2025-04-21 11:27:06,394 - core.file_processor - INFO -   - UMR_Empire.txt: 1 files
+2025-04-21 11:27:06,395 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:27:06,395 - core.file_processor - INFO -   - UMR_UMR_Exc_OOP.txt: 1 files
+2025-04-21 11:27:06,396 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_CL_20250420_0000_0559_002.txt
+2025-04-21 11:27:06,396 - core.file_processor - INFO -   - UMR_IOA_Eligibility.results: 1 files
+2025-04-21 11:27:06,396 - core.file_processor - INFO -     * 20250419_MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results
+2025-04-21 11:27:06,397 - core.file_processor - INFO -   - UMR_IOA_Eligibility.xlsx: 1 files
+2025-04-21 11:27:06,397 - core.file_processor - INFO -     * 20250419_MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx
+2025-04-21 11:27:06,398 - core.file_processor - INFO - 
+Client: Lucent Health
+2025-04-21 11:27:06,398 - core.file_processor - INFO - Total files: 1
+2025-04-21 11:27:06,399 - core.file_processor - INFO -   - Lucent Health_Claims.txt: 1 files
+2025-04-21 11:27:06,400 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:47:30,097 - core.api_client - INFO - Created download directory: pharmpix_downloads
+2025-04-21 11:47:30,107 - core.api_client - INFO - Logging in as it@transparentrx.com...
+2025-04-21 11:47:33,575 - core.api_client - INFO - Login successful!
+2025-04-21 11:47:33,576 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ALLIED ==========
+2025-04-21 11:47:33,576 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Claims ===
+2025-04-21 11:47:33,577 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/
+2025-04-21 11:47:52,507 - core.api_client - INFO - Found 750 files matching criteria
+2025-04-21 11:47:52,509 - core.file_processor - INFO - Found 750 .txt files in ALLIED/Claims
+2025-04-21 11:47:52,509 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 48867 bytes - 2025-04-20 06:44:00
+2025-04-21 11:47:52,509 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:47:52,511 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:47:54,247 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Claims\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:47:54,248 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Eligibility ===
+2025-04-21 11:47:54,250 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-21 11:47:59,805 - core.api_client - INFO - Found 217 files matching criteria
+2025-04-21 11:47:59,806 - core.file_processor - INFO - Found 217 .results files in ALLIED/Eligibility
+2025-04-21 11:47:59,806 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results - 276761 bytes - 2025-04-18 08:08:00
+2025-04-21 11:47:59,807 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-21 11:47:59,808 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-21 11:48:04,859 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Eligibility\RESULTS\20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-21 11:48:04,860 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-21 11:48:13,595 - core.api_client - INFO - Found 217 files matching criteria
+2025-04-21 11:48:13,596 - core.file_processor - INFO - Found 217 .xlsx files in ALLIED/Eligibility
+2025-04-21 11:48:13,596 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx - 14411 bytes - 2025-04-18 08:08:00
+2025-04-21 11:48:13,597 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-21 11:48:13,599 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-21 11:48:15,291 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Eligibility\XLSX\20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-21 11:48:15,292 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ASR ==========
+2025-04-21 11:48:15,293 - core.file_processor - INFO - 
+=== PROCESSING ASR/Claims ===
+2025-04-21 11:48:15,293 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/
+2025-04-21 11:48:17,986 - core.api_client - INFO - Found 458 files matching criteria
+2025-04-21 11:48:17,987 - core.file_processor - INFO - Found 458 .txt files in ASR/Claims
+2025-04-21 11:48:17,987 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt - 7518 bytes - 2025-04-20 06:35:00
+2025-04-21 11:48:17,988 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:48:17,989 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:48:19,198 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Claims\TXT\20250420_TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:48:19,199 - core.file_processor - INFO - 
+=== PROCESSING ASR/Eligibility ===
+2025-04-21 11:48:19,200 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-21 11:48:22,424 - core.api_client - INFO - Found 449 files matching criteria
+2025-04-21 11:48:22,426 - core.file_processor - INFO - Found 449 .results files in ASR/Eligibility
+2025-04-21 11:48:22,427 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results - 85925 bytes - 2025-04-20 08:06:00
+2025-04-21 11:48:22,427 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results
+2025-04-21 11:48:22,428 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results
+2025-04-21 11:48:24,570 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Eligibility\RESULTS\20250420_TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results
+2025-04-21 11:48:24,571 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-21 11:48:28,742 - core.api_client - INFO - Found 448 files matching criteria
+2025-04-21 11:48:28,743 - core.file_processor - INFO - Found 448 .xlsx files in ASR/Eligibility
+2025-04-21 11:48:28,744 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx - 14365 bytes - 2025-04-20 08:06:00
+2025-04-21 11:48:28,744 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx
+2025-04-21 11:48:28,747 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx
+2025-04-21 11:48:30,155 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Eligibility\XLSX\20250420_TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx
+2025-04-21 11:48:30,156 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: BML ==========
+2025-04-21 11:48:30,157 - core.file_processor - INFO - 
+=== PROCESSING BML/Claims ===
+2025-04-21 11:48:30,158 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/
+2025-04-21 11:48:36,624 - core.api_client - INFO - Found 1935 files matching criteria
+2025-04-21 11:48:36,626 - core.file_processor - INFO - Found 1935 .txt files in BML/Claims
+2025-04-21 11:48:36,626 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 0 bytes - 2025-04-20 06:22:00
+2025-04-21 11:48:36,627 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:48:36,630 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:48:37,816 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\BML\Claims\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:48:37,818 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: UMR ==========
+2025-04-21 11:48:37,819 - core.file_processor - INFO - 
+=== PROCESSING UMR ===
+2025-04-21 11:48:37,820 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/
+2025-04-21 11:48:43,302 - core.api_client - INFO - Found 1729 files matching criteria
+2025-04-21 11:48:43,306 - core.file_processor - INFO - Found 1729 .txt files in UMR
+2025-04-21 11:48:43,306 - core.file_processor - INFO - 1. UMR_ACCUM_20250420.txt - 29116 bytes - 2025-04-20 03:30:00
+2025-04-21 11:48:43,307 - core.file_processor - INFO - Downloading file 1/1: UMR_ACCUM_20250420.txt
+2025-04-21 11:48:43,308 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_ACCUM_20250420.txt
+2025-04-21 11:48:45,066 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\TXT\20250420_UMR_ACCUM_20250420.txt
+2025-04-21 11:48:45,067 - core.file_processor - INFO - 
+=== PROCESSING UMR/Empire ===
+2025-04-21 11:48:45,067 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-21 11:48:56,678 - core.api_client - INFO - Found 1509 files matching criteria
+2025-04-21 11:48:56,682 - core.file_processor - INFO - Found 1509 .txt files in UMR/Empire
+2025-04-21 11:48:56,682 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 95228 bytes - 2025-04-20 06:43:00
+2025-04-21 11:48:56,682 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:48:56,684 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:48:58,632 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\Empire\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:48:58,633 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-21 11:49:12,861 - core.api_client - INFO - Found 0 files matching criteria
+2025-04-21 11:49:12,864 - core.file_processor - INFO - Found 0 .xls files in UMR/Empire
+2025-04-21 11:49:12,865 - core.file_processor - INFO - 
+=== PROCESSING UMR/IOA/Eligibility ===
+2025-04-21 11:49:12,866 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-21 11:49:19,145 - core.api_client - INFO - Found 528 files matching criteria
+2025-04-21 11:49:19,146 - core.file_processor - INFO - Found 528 .results files in UMR/IOA/Eligibility
+2025-04-21 11:49:19,147 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results - 626522 bytes - 2025-04-19 08:00:00
+2025-04-21 11:49:19,147 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results
+2025-04-21 11:49:19,148 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results
+2025-04-21 11:49:25,969 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\IOA\Eligibility\RESULTS\20250419_MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results
+2025-04-21 11:49:25,971 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-21 11:49:37,284 - core.api_client - INFO - Found 1335 files matching criteria
+2025-04-21 11:49:37,287 - core.file_processor - INFO - Found 1335 .xlsx files in UMR/IOA/Eligibility
+2025-04-21 11:49:37,288 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx - 14642 bytes - 2025-04-19 08:00:00
+2025-04-21 11:49:37,289 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx
+2025-04-21 11:49:37,293 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx
+2025-04-21 11:49:38,728 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\IOA\Eligibility\XLSX\20250419_MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx
+2025-04-21 11:49:38,729 - core.file_processor - INFO - 
+=== PROCESSING UMR/UMR_Exc_OOP ===
+2025-04-21 11:49:38,731 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/
+2025-04-21 11:49:58,272 - core.api_client - INFO - Found 5096 files matching criteria
+2025-04-21 11:49:58,280 - core.api_client - INFO - Filtered files by pattern 'trx_UMR_RxEOB__\d{8}\.txt': found 1276 matches
+2025-04-21 11:49:58,284 - core.file_processor - INFO - Found 1276 .txt files matching pattern 'trx_UMR_RxEOB__\d{8}\.txt' in UMR/UMR_Exc_OOP
+2025-04-21 11:49:58,285 - core.file_processor - INFO - 1. trx_UMR_RxEOB__20250419.txt - 83436 bytes - 2025-04-20 04:44:00
+2025-04-21 11:49:58,285 - core.file_processor - INFO - Downloading file 1/1: trx_UMR_RxEOB__20250419.txt
+2025-04-21 11:49:58,286 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/trx_UMR_RxEOB__20250419.txt
+2025-04-21 11:50:00,333 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\UMR_Exc_OOP\TXT\20250420_trx_UMR_RxEOB__20250419.txt
+2025-04-21 11:50:00,334 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: Lucent Health ==========
+2025-04-21 11:50:00,334 - core.file_processor - INFO - 
+=== PROCESSING Lucent Health/Claims ===
+2025-04-21 11:50:00,335 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/
+2025-04-21 11:50:02,446 - core.api_client - INFO - Found 186 files matching criteria
+2025-04-21 11:50:02,447 - core.file_processor - INFO - Found 186 .txt files in Lucent Health/Claims
+2025-04-21 11:50:02,447 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 20048 bytes - 2025-04-20 06:22:00
+2025-04-21 11:50:02,448 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:50:02,450 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/Lucent
+2025-04-21 11:50:03,859 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\Lucent Health\Claims\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:50:03,860 - core.file_processor - INFO - 
+
+=== DOWNLOAD SUMMARY ===
+2025-04-21 11:50:03,861 - core.file_processor - INFO - 
+Client: ALLIED
+2025-04-21 11:50:03,863 - core.file_processor - INFO - Total files: 3
+2025-04-21 11:50:03,863 - core.file_processor - INFO -   - ALLIED_Claims.txt: 1 files
+2025-04-21 11:50:03,863 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:50:03,865 - core.file_processor - INFO -   - ALLIED_Eligibility.results: 1 files
+2025-04-21 11:50:03,865 - core.file_processor - INFO -     * 20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-21 11:50:03,865 - core.file_processor - INFO -   - ALLIED_Eligibility.xlsx: 1 files
+2025-04-21 11:50:03,866 - core.file_processor - INFO -     * 20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-21 11:50:03,866 - core.file_processor - INFO - 
+Client: ASR
+2025-04-21 11:50:03,867 - core.file_processor - INFO - Total files: 3
+2025-04-21 11:50:03,868 - core.file_processor - INFO -   - ASR_Claims.txt: 1 files
+2025-04-21 11:50:03,869 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:50:03,870 - core.file_processor - INFO -   - ASR_Eligibility.results: 1 files
+2025-04-21 11:50:03,872 - core.file_processor - INFO -     * 20250420_TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results
+2025-04-21 11:50:03,873 - core.file_processor - INFO -   - ASR_Eligibility.xlsx: 1 files
+2025-04-21 11:50:03,873 - core.file_processor - INFO -     * 20250420_TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx
+2025-04-21 11:50:03,873 - core.file_processor - INFO - 
+Client: BML
+2025-04-21 11:50:03,874 - core.file_processor - INFO - Total files: 1
+2025-04-21 11:50:03,874 - core.file_processor - INFO -   - BML_Claims.txt: 1 files
+2025-04-21 11:50:03,875 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:50:03,875 - core.file_processor - INFO - 
+Client: UMR
+2025-04-21 11:50:03,875 - core.file_processor - INFO - Total files: 5
+2025-04-21 11:50:03,875 - core.file_processor - INFO -   - UMR.txt: 1 files
+2025-04-21 11:50:03,876 - core.file_processor - INFO -     * 20250420_UMR_ACCUM_20250420.txt
+2025-04-21 11:50:03,876 - core.file_processor - INFO -   - UMR_Empire.txt: 1 files
+2025-04-21 11:50:03,876 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 11:50:03,877 - core.file_processor - INFO -   - UMR_IOA_Eligibility.results: 1 files
+2025-04-21 11:50:03,877 - core.file_processor - INFO -     * 20250419_MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results
+2025-04-21 11:50:03,877 - core.file_processor - INFO -   - UMR_IOA_Eligibility.xlsx: 1 files
+2025-04-21 11:50:03,878 - core.file_processor - INFO -     * 20250419_MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx
+2025-04-21 11:50:03,878 - core.file_processor - INFO -   - UMR_UMR_Exc_OOP.txt: 1 files
+2025-04-21 11:50:03,878 - core.file_processor - INFO -     * 20250420_trx_UMR_RxEOB__20250419.txt
+2025-04-21 11:50:03,879 - core.file_processor - INFO - 
+Client: Lucent Health
+2025-04-21 11:50:03,879 - core.file_processor - INFO - Total files: 1
+2025-04-21 11:50:03,879 - core.file_processor - INFO -   - Lucent Health_Claims.txt: 1 files
+2025-04-21 11:50:03,880 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:06:18,322 - core.api_client - INFO - Created download directory: pharmpix_downloads
+2025-04-21 12:06:18,324 - core.api_client - INFO - Logging in as it@transparentrx.com...
+2025-04-21 12:06:20,696 - core.api_client - INFO - Login successful!
+2025-04-21 12:06:20,696 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ALLIED ==========
+2025-04-21 12:06:20,697 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Claims ===
+2025-04-21 12:06:20,697 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/
+2025-04-21 12:06:50,590 - core.api_client - INFO - Created download directory: pharmpix_downloads
+2025-04-21 12:06:50,591 - core.api_client - INFO - Logging in as it@transparentrx.com...
+2025-04-21 12:06:52,931 - core.api_client - INFO - Login successful!
+2025-04-21 12:06:52,931 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: Lucent Health ==========
+2025-04-21 12:06:52,932 - core.file_processor - INFO - 
+=== PROCESSING Lucent Health/Claims ===
+2025-04-21 12:06:52,933 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/
+2025-04-21 12:06:55,294 - core.api_client - INFO - Found 186 files matching criteria
+2025-04-21 12:06:55,295 - core.file_processor - INFO - Found 186 .txt files in Lucent Health/Claims
+2025-04-21 12:06:55,295 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 20048 bytes - 2025-04-20 06:22:00
+2025-04-21 12:06:55,296 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:06:55,297 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/Lucent
+2025-04-21 12:06:56,731 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\Lucent Health\Claims\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:06:56,732 - core.file_processor - INFO - 
+
+=== DOWNLOAD SUMMARY ===
+2025-04-21 12:06:56,732 - core.file_processor - INFO - 
+Client: Lucent Health
+2025-04-21 12:06:56,733 - core.file_processor - INFO - Total files: 1
+2025-04-21 12:06:56,733 - core.file_processor - INFO -   - Lucent Health_Claims.txt: 1 files
+2025-04-21 12:06:56,733 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:12:30,079 - core.api_client - INFO - Logging in as it@transparentrx.com...
+2025-04-21 12:12:32,452 - core.api_client - INFO - Login successful!
+2025-04-21 12:12:32,453 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: Lucent Health ==========
+2025-04-21 12:12:32,454 - core.file_processor - INFO - 
+=== PROCESSING Lucent Health/Claims ===
+2025-04-21 12:12:32,458 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/
+2025-04-21 12:12:34,557 - core.api_client - INFO - Found 186 files matching criteria
+2025-04-21 12:12:34,557 - core.file_processor - INFO - Found 186 .txt files in Lucent Health/Claims
+2025-04-21 12:12:34,558 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 20048 bytes - 2025-04-20 06:22:00
+2025-04-21 12:12:34,558 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:12:34,559 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/Lucent
+2025-04-21 12:12:35,970 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\Lucent Health\Claims\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:12:35,970 - core.file_processor - INFO - 
+
+=== DOWNLOAD SUMMARY ===
+2025-04-21 12:12:35,971 - core.file_processor - INFO - 
+Client: Lucent Health
+2025-04-21 12:12:35,971 - core.file_processor - INFO - Total files: 1
+2025-04-21 12:12:35,971 - core.file_processor - INFO -   - Lucent Health_Claims.txt: 1 files
+2025-04-21 12:12:35,972 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:15:17,868 - core.api_client - INFO - Created download directory: pharmpix_downloads
+2025-04-21 12:15:17,871 - core.api_client - INFO - Logging in as it@transparentrx.com...
+2025-04-21 12:15:20,154 - core.api_client - INFO - Login successful!
+2025-04-21 12:15:20,155 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: Lucent Health ==========
+2025-04-21 12:15:20,155 - core.file_processor - INFO - 
+=== PROCESSING Lucent Health/Claims ===
+2025-04-21 12:15:20,155 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/
+2025-04-21 12:15:22,247 - core.api_client - INFO - Found 186 files matching criteria
+2025-04-21 12:15:22,248 - core.file_processor - INFO - Found 186 .txt files in Lucent Health/Claims
+2025-04-21 12:15:22,248 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 20048 bytes - 2025-04-20 06:22:00
+2025-04-21 12:15:22,249 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:15:22,252 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/Lucent
+2025-04-21 12:15:23,670 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\Lucent Health\Claims\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:15:23,671 - core.file_processor - INFO - 
+
+=== DOWNLOAD SUMMARY ===
+2025-04-21 12:15:23,672 - core.file_processor - INFO - 
+Client: Lucent Health
+2025-04-21 12:15:23,672 - core.file_processor - INFO - Total files: 1
+2025-04-21 12:15:23,672 - core.file_processor - INFO -   - Lucent Health_Claims.txt: 1 files
+2025-04-21 12:15:23,673 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:16:18,506 - core.api_client - INFO - Created download directory: pharmpix_downloads
+2025-04-21 12:16:18,507 - core.api_client - INFO - Logging in as it@transparentrx.com...
+2025-04-21 12:16:20,858 - core.api_client - INFO - Login successful!
+2025-04-21 12:16:20,858 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: Lucent Health ==========
+2025-04-21 12:16:20,859 - core.file_processor - INFO - 
+=== PROCESSING Lucent Health/Claims ===
+2025-04-21 12:16:20,859 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/
+2025-04-21 12:16:23,128 - core.api_client - INFO - Found 186 files matching criteria
+2025-04-21 12:16:23,128 - core.file_processor - INFO - Found 186 .txt files in Lucent Health/Claims
+2025-04-21 12:16:23,129 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 20048 bytes - 2025-04-20 06:22:00
+2025-04-21 12:16:23,129 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:16:23,134 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:16:24,974 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\Lucent Health\Claims\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:16:24,975 - core.file_processor - INFO - 
+
+=== DOWNLOAD SUMMARY ===
+2025-04-21 12:16:24,975 - core.file_processor - INFO - 
+Client: Lucent Health
+2025-04-21 12:16:24,976 - core.file_processor - INFO - Total files: 1
+2025-04-21 12:16:24,976 - core.file_processor - INFO -   - Lucent Health_Claims.txt: 1 files
+2025-04-21 12:16:24,976 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:19:02,944 - core.api_client - INFO - Created download directory: pharmpix_downloads
+2025-04-21 12:19:02,944 - core.api_client - INFO - Logging in as it@transparentrx.com...
+2025-04-21 12:19:05,228 - core.api_client - INFO - Login successful!
+2025-04-21 12:19:05,229 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ALLIED ==========
+2025-04-21 12:19:05,229 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Claims ===
+2025-04-21 12:19:05,230 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/
+2025-04-21 12:19:10,919 - core.api_client - INFO - Found 750 files matching criteria
+2025-04-21 12:19:10,921 - core.file_processor - INFO - Found 750 .txt files in ALLIED/Claims
+2025-04-21 12:19:10,921 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 48867 bytes - 2025-04-20 06:44:00
+2025-04-21 12:19:10,922 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:19:10,925 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:19:12,597 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Claims\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:19:12,598 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Eligibility ===
+2025-04-21 12:19:12,598 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-21 12:19:14,951 - core.api_client - INFO - Found 217 files matching criteria
+2025-04-21 12:19:14,952 - core.file_processor - INFO - Found 217 .results files in ALLIED/Eligibility
+2025-04-21 12:19:14,953 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results - 276761 bytes - 2025-04-18 08:08:00
+2025-04-21 12:19:14,953 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-21 12:19:14,954 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-21 12:19:17,816 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Eligibility\RESULTS\20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-21 12:19:17,818 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-21 12:19:20,197 - core.api_client - INFO - Found 217 files matching criteria
+2025-04-21 12:19:20,198 - core.file_processor - INFO - Found 217 .xlsx files in ALLIED/Eligibility
+2025-04-21 12:19:20,199 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx - 14411 bytes - 2025-04-18 08:08:00
+2025-04-21 12:19:20,199 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-21 12:19:20,201 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-21 12:19:21,647 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ALLIED\Eligibility\XLSX\20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-21 12:19:21,647 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ASR ==========
+2025-04-21 12:19:21,648 - core.file_processor - INFO - 
+=== PROCESSING ASR/Claims ===
+2025-04-21 12:19:21,648 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/
+2025-04-21 12:19:24,816 - core.api_client - INFO - Found 458 files matching criteria
+2025-04-21 12:19:24,817 - core.file_processor - INFO - Found 458 .txt files in ASR/Claims
+2025-04-21 12:19:24,818 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt - 7518 bytes - 2025-04-20 06:35:00
+2025-04-21 12:19:24,818 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:19:24,822 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:19:25,976 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Claims\TXT\20250420_TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:19:25,976 - core.file_processor - INFO - 
+=== PROCESSING ASR/Eligibility ===
+2025-04-21 12:19:25,977 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-21 12:19:29,588 - core.api_client - INFO - Found 449 files matching criteria
+2025-04-21 12:19:29,589 - core.file_processor - INFO - Found 449 .results files in ASR/Eligibility
+2025-04-21 12:19:29,589 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results - 85925 bytes - 2025-04-20 08:06:00
+2025-04-21 12:19:29,589 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results
+2025-04-21 12:19:29,590 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results
+2025-04-21 12:19:32,073 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Eligibility\RESULTS\20250420_TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results
+2025-04-21 12:19:32,074 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-21 12:19:34,995 - core.api_client - INFO - Found 448 files matching criteria
+2025-04-21 12:19:34,997 - core.file_processor - INFO - Found 448 .xlsx files in ASR/Eligibility
+2025-04-21 12:19:34,998 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx - 14365 bytes - 2025-04-20 08:06:00
+2025-04-21 12:19:34,998 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx
+2025-04-21 12:19:34,999 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx
+2025-04-21 12:19:36,418 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\ASR\Eligibility\XLSX\20250420_TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx
+2025-04-21 12:19:36,419 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: BML ==========
+2025-04-21 12:19:36,420 - core.file_processor - INFO - 
+=== PROCESSING BML/Claims ===
+2025-04-21 12:19:36,420 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/
+2025-04-21 12:19:47,579 - core.api_client - INFO - Found 1935 files matching criteria
+2025-04-21 12:19:47,581 - core.file_processor - INFO - Found 1935 .txt files in BML/Claims
+2025-04-21 12:19:47,582 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 0 bytes - 2025-04-20 06:22:00
+2025-04-21 12:19:47,582 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:19:47,588 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:19:51,792 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\BML\Claims\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:19:51,793 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: UMR ==========
+2025-04-21 12:19:51,794 - core.file_processor - INFO - 
+=== PROCESSING UMR ===
+2025-04-21 12:19:51,795 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/
+2025-04-21 12:19:59,503 - core.api_client - INFO - Found 1729 files matching criteria
+2025-04-21 12:19:59,506 - core.file_processor - INFO - Found 1729 .txt files in UMR
+2025-04-21 12:19:59,507 - core.file_processor - INFO - 1. UMR_ACCUM_20250420.txt - 29116 bytes - 2025-04-20 03:30:00
+2025-04-21 12:19:59,507 - core.file_processor - INFO - Downloading file 1/1: UMR_ACCUM_20250420.txt
+2025-04-21 12:19:59,508 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_ACCUM_20250420.txt
+2025-04-21 12:20:01,319 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\TXT\20250420_UMR_ACCUM_20250420.txt
+2025-04-21 12:20:01,321 - core.file_processor - INFO - 
+=== PROCESSING UMR/Empire ===
+2025-04-21 12:20:01,324 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-21 12:20:14,381 - core.api_client - INFO - Found 1509 files matching criteria
+2025-04-21 12:20:14,384 - core.file_processor - INFO - Found 1509 .txt files in UMR/Empire
+2025-04-21 12:20:14,384 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 95228 bytes - 2025-04-20 06:43:00
+2025-04-21 12:20:14,385 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:20:14,389 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:20:16,675 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\Empire\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:20:16,675 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-21 12:20:22,719 - core.api_client - INFO - Found 0 files matching criteria
+2025-04-21 12:20:22,721 - core.file_processor - INFO - Found 0 .xls files in UMR/Empire
+2025-04-21 12:20:22,722 - core.file_processor - INFO - 
+=== PROCESSING UMR/IOA/Eligibility ===
+2025-04-21 12:20:22,722 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-21 12:20:33,143 - core.api_client - INFO - Found 528 files matching criteria
+2025-04-21 12:20:33,145 - core.file_processor - INFO - Found 528 .results files in UMR/IOA/Eligibility
+2025-04-21 12:20:33,145 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results - 626522 bytes - 2025-04-19 08:00:00
+2025-04-21 12:20:33,146 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results
+2025-04-21 12:20:33,151 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results
+2025-04-21 12:20:40,051 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\IOA\Eligibility\RESULTS\20250419_MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results
+2025-04-21 12:20:40,053 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-21 12:20:51,054 - core.api_client - INFO - Found 1335 files matching criteria
+2025-04-21 12:20:51,062 - core.file_processor - INFO - Found 1335 .xlsx files in UMR/IOA/Eligibility
+2025-04-21 12:20:51,063 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx - 14642 bytes - 2025-04-19 08:00:00
+2025-04-21 12:20:51,064 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx
+2025-04-21 12:20:51,067 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx
+2025-04-21 12:20:52,532 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\IOA\Eligibility\XLSX\20250419_MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx
+2025-04-21 12:20:52,534 - core.file_processor - INFO - 
+=== PROCESSING UMR/UMR_Exc_OOP ===
+2025-04-21 12:20:52,535 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/
+2025-04-21 12:21:10,381 - core.api_client - INFO - Found 5096 files matching criteria
+2025-04-21 12:21:10,386 - core.api_client - INFO - Filtered files by pattern 'trx_UMR_RxEOB__\d{8}\.txt': found 1276 matches
+2025-04-21 12:21:10,389 - core.file_processor - INFO - Found 1276 .txt files matching pattern 'trx_UMR_RxEOB__\d{8}\.txt' in UMR/UMR_Exc_OOP
+2025-04-21 12:21:10,389 - core.file_processor - INFO - 1. trx_UMR_RxEOB__20250419.txt - 83436 bytes - 2025-04-20 04:44:00
+2025-04-21 12:21:10,389 - core.file_processor - INFO - Downloading file 1/1: trx_UMR_RxEOB__20250419.txt
+2025-04-21 12:21:10,392 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/trx_UMR_RxEOB__20250419.txt
+2025-04-21 12:21:12,462 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\UMR\UMR_Exc_OOP\TXT\20250420_trx_UMR_RxEOB__20250419.txt
+2025-04-21 12:21:12,463 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: Lucent Health ==========
+2025-04-21 12:21:12,464 - core.file_processor - INFO - 
+=== PROCESSING Lucent Health/Claims ===
+2025-04-21 12:21:12,464 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/
+2025-04-21 12:21:14,897 - core.api_client - INFO - Found 186 files matching criteria
+2025-04-21 12:21:14,898 - core.file_processor - INFO - Found 186 .txt files in Lucent Health/Claims
+2025-04-21 12:21:14,899 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 20048 bytes - 2025-04-20 06:22:00
+2025-04-21 12:21:14,899 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:21:14,902 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:21:16,389 - core.api_client - INFO - File downloaded successfully to: pharmpix_downloads\Lucent Health\Claims\TXT\20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:21:16,389 - core.file_processor - INFO - 
+
+=== DOWNLOAD SUMMARY ===
+2025-04-21 12:21:16,391 - core.file_processor - INFO - 
+Client: ALLIED
+2025-04-21 12:21:16,391 - core.file_processor - INFO - Total files: 3
+2025-04-21 12:21:16,391 - core.file_processor - INFO -   - ALLIED_Claims.txt: 1 files
+2025-04-21 12:21:16,391 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:21:16,391 - core.file_processor - INFO -   - ALLIED_Eligibility.results: 1 files
+2025-04-21 12:21:16,392 - core.file_processor - INFO -     * 20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-21 12:21:16,392 - core.file_processor - INFO -   - ALLIED_Eligibility.xlsx: 1 files
+2025-04-21 12:21:16,392 - core.file_processor - INFO -     * 20250418_SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-21 12:21:16,393 - core.file_processor - INFO - 
+Client: ASR
+2025-04-21 12:21:16,393 - core.file_processor - INFO - Total files: 3
+2025-04-21 12:21:16,393 - core.file_processor - INFO -   - ASR_Claims.txt: 1 files
+2025-04-21 12:21:16,393 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:21:16,394 - core.file_processor - INFO -   - ASR_Eligibility.results: 1 files
+2025-04-21 12:21:16,394 - core.file_processor - INFO -     * 20250420_TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results
+2025-04-21 12:21:16,394 - core.file_processor - INFO -   - ASR_Eligibility.xlsx: 1 files
+2025-04-21 12:21:16,394 - core.file_processor - INFO -     * 20250420_TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx
+2025-04-21 12:21:16,394 - core.file_processor - INFO - 
+Client: BML
+2025-04-21 12:21:16,394 - core.file_processor - INFO - Total files: 1
+2025-04-21 12:21:16,395 - core.file_processor - INFO -   - BML_Claims.txt: 1 files
+2025-04-21 12:21:16,395 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:21:16,395 - core.file_processor - INFO - 
+Client: UMR
+2025-04-21 12:21:16,395 - core.file_processor - INFO - Total files: 5
+2025-04-21 12:21:16,396 - core.file_processor - INFO -   - UMR.txt: 1 files
+2025-04-21 12:21:16,396 - core.file_processor - INFO -     * 20250420_UMR_ACCUM_20250420.txt
+2025-04-21 12:21:16,396 - core.file_processor - INFO -   - UMR_Empire.txt: 1 files
+2025-04-21 12:21:16,396 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 12:21:16,397 - core.file_processor - INFO -   - UMR_IOA_Eligibility.results: 1 files
+2025-04-21 12:21:16,397 - core.file_processor - INFO -     * 20250419_MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results
+2025-04-21 12:21:16,397 - core.file_processor - INFO -   - UMR_IOA_Eligibility.xlsx: 1 files
+2025-04-21 12:21:16,397 - core.file_processor - INFO -     * 20250419_MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx
+2025-04-21 12:21:16,397 - core.file_processor - INFO -   - UMR_UMR_Exc_OOP.txt: 1 files
+2025-04-21 12:21:16,398 - core.file_processor - INFO -     * 20250420_trx_UMR_RxEOB__20250419.txt
+2025-04-21 12:21:16,398 - core.file_processor - INFO - 
+Client: Lucent Health
+2025-04-21 12:21:16,398 - core.file_processor - INFO - Total files: 1
+2025-04-21 12:21:16,398 - core.file_processor - INFO -   - Lucent Health_Claims.txt: 1 files
+2025-04-21 12:21:16,399 - core.file_processor - INFO -     * 20250420_TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 14:36:35,248 - core.api_client - INFO - Created download directory: 5PM-Work
+2025-04-21 14:36:35,250 - core.api_client - INFO - Logging in as it@transparentrx.com...
+2025-04-21 14:36:37,856 - core.api_client - INFO - Login successful!
+2025-04-21 14:36:37,857 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ALLIED ==========
+2025-04-21 14:36:37,857 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Claims ===
+2025-04-21 14:36:37,859 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/
+2025-04-21 14:36:41,139 - core.api_client - INFO - Found 750 files matching criteria
+2025-04-21 14:36:41,141 - core.file_processor - INFO - Found 750 .txt files in ALLIED/Claims
+2025-04-21 14:36:41,141 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 48867 bytes - 2025-04-20 06:44:00
+2025-04-21 14:36:41,142 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 14:36:41,142 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 14:36:42,852 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\Allied\Claims\Trans_RxClaims_04202025.txt
+2025-04-21 14:36:42,856 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\RxEOB\Claims\Sapp\Sapp_Claims_20250420_0004.txt
+2025-04-21 14:36:42,856 - core.file_processor - INFO - 
+=== PROCESSING ALLIED/Eligibility ===
+2025-04-21 14:36:42,857 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-21 14:36:45,512 - core.api_client - INFO - Found 217 files matching criteria
+2025-04-21 14:36:45,513 - core.file_processor - INFO - Found 217 .results files in ALLIED/Eligibility
+2025-04-21 14:36:45,513 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results - 276761 bytes - 2025-04-18 08:08:00
+2025-04-21 14:36:45,513 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-21 14:36:45,517 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250417_001.TXT_2025-18-04--08-08-51.results
+2025-04-21 14:36:53,059 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\RxEOB\Eligibility\Sapp_MEM_TRX_20250418_0001.txt
+2025-04-21 14:36:53,060 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/
+2025-04-21 14:36:55,362 - core.api_client - INFO - Found 217 files matching criteria
+2025-04-21 14:36:55,363 - core.file_processor - INFO - Found 217 .xlsx files in ALLIED/Eligibility
+2025-04-21 14:36:55,364 - core.file_processor - INFO - 1. SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx - 14411 bytes - 2025-04-18 08:08:00
+2025-04-21 14:36:55,364 - core.file_processor - INFO - Downloading file 1/1: SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-21 14:36:55,366 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ALLIED/Eligibility/SAPP_PPX_ELIGIBILITY_20250417_001.TXT_Eligibility Process Report_2025-18-04--08-08-51.xlsx
+2025-04-21 14:36:56,798 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\Allied\Eligibility\Trans_Elig_04182025.xlsx
+2025-04-21 14:36:56,798 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: ASR ==========
+2025-04-21 14:36:56,799 - core.file_processor - INFO - 
+=== PROCESSING ASR/Claims ===
+2025-04-21 14:36:56,801 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/
+2025-04-21 14:36:59,985 - core.api_client - INFO - Found 458 files matching criteria
+2025-04-21 14:36:59,987 - core.file_processor - INFO - Found 458 .txt files in ASR/Claims
+2025-04-21 14:36:59,987 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt - 7518 bytes - 2025-04-20 06:35:00
+2025-04-21 14:36:59,987 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 14:36:59,988 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Claims/TRX_TRANSPARENTRX_ASR_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 14:37:01,142 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\ASR\TRX_CLAIMS_20250420.txt
+2025-04-21 14:37:01,144 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\RxEOB\Claims\ASR\ASR_Claims_20250420_0001.txt
+2025-04-21 14:37:01,145 - core.file_processor - INFO - 
+=== PROCESSING ASR/Eligibility ===
+2025-04-21 14:37:01,146 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-21 14:37:04,400 - core.api_client - INFO - Found 449 files matching criteria
+2025-04-21 14:37:04,402 - core.file_processor - INFO - Found 449 .results files in ASR/Eligibility
+2025-04-21 14:37:04,403 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results - 85925 bytes - 2025-04-20 08:06:00
+2025-04-21 14:37:04,403 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results
+2025-04-21 14:37:04,405 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250420_001.txt_2025-20-04--08-06-10.results
+2025-04-21 14:37:06,374 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\RxEOB\Eligibility\TRXALBION_PPX_ELIG_20250420_001.txt
+2025-04-21 14:37:06,376 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/
+2025-04-21 14:37:09,876 - core.api_client - INFO - Found 448 files matching criteria
+2025-04-21 14:37:09,876 - core.file_processor - INFO - Found 448 .xlsx files in ASR/Eligibility
+2025-04-21 14:37:09,876 - core.file_processor - INFO - 1. TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx - 14365 bytes - 2025-04-20 08:06:00
+2025-04-21 14:37:09,877 - core.file_processor - INFO - Downloading file 1/1: TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx
+2025-04-21 14:37:09,878 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/ASR/Eligibility/TRXALBION_PPX_ELIG_20250420_001.txt_Eligibility Process Report no TBA_2025-20-04--08-06-11.xlsx
+2025-04-21 14:37:11,674 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\ASR\TRXALBION_PPX_ELIG_20250420_001.xlsx
+2025-04-21 14:37:11,675 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: BML ==========
+2025-04-21 14:37:11,676 - core.file_processor - INFO - 
+=== PROCESSING BML/Claims ===
+2025-04-21 14:37:11,676 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/
+2025-04-21 14:37:21,341 - core.api_client - INFO - Found 1935 files matching criteria
+2025-04-21 14:37:21,344 - core.file_processor - INFO - Found 1935 .txt files in BML/Claims
+2025-04-21 14:37:21,345 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 0 bytes - 2025-04-20 06:22:00
+2025-04-21 14:37:21,345 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 14:37:21,346 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/BML/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 14:37:22,574 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\RxEOB\Claims\BML\BML_Claims_20250420_0002.txt
+2025-04-21 14:37:22,575 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: UMR ==========
+2025-04-21 14:37:22,575 - core.file_processor - INFO - 
+=== PROCESSING UMR ===
+2025-04-21 14:37:22,576 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/
+2025-04-21 14:37:28,348 - core.api_client - INFO - Found 1730 files matching criteria
+2025-04-21 14:37:28,351 - core.file_processor - INFO - Found 1730 .txt files in UMR
+2025-04-21 14:37:28,351 - core.file_processor - INFO - 1. UMR_ACCUM_20250421.txt - 16566 bytes - 2025-04-21 03:30:00
+2025-04-21 14:37:28,352 - core.file_processor - INFO - Downloading file 1/1: UMR_ACCUM_20250421.txt
+2025-04-21 14:37:28,352 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_ACCUM_20250421.txt
+2025-04-21 14:37:29,821 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\UMR-Accum-EFTP-to-SFTP\PBLXV426_P_TransparentRx_20250421.txt
+2025-04-21 14:37:29,822 - core.file_processor - INFO - 
+=== PROCESSING UMR/Empire ===
+2025-04-21 14:37:29,823 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-21 14:37:35,150 - core.api_client - INFO - Found 1509 files matching criteria
+2025-04-21 14:37:35,152 - core.file_processor - INFO - Found 1509 .txt files in UMR/Empire
+2025-04-21 14:37:35,153 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 95228 bytes - 2025-04-20 06:43:00
+2025-04-21 14:37:35,153 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 14:37:35,155 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 14:37:37,209 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\RxEOB\Claims\EMP\EMP_Claims_20250420_0003.txt
+2025-04-21 14:37:37,210 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/Empire/
+2025-04-21 14:37:46,845 - core.api_client - INFO - Found 0 files matching criteria
+2025-04-21 14:37:46,846 - core.file_processor - INFO - Found 0 .xls files in UMR/Empire
+2025-04-21 14:37:46,847 - core.file_processor - INFO - 
+=== PROCESSING UMR/IOA/Eligibility ===
+2025-04-21 14:37:46,848 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-21 14:37:53,310 - core.api_client - INFO - Found 528 files matching criteria
+2025-04-21 14:37:53,311 - core.file_processor - INFO - Found 528 .results files in UMR/IOA/Eligibility
+2025-04-21 14:37:53,311 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results - 626522 bytes - 2025-04-19 08:00:00
+2025-04-21 14:37:53,312 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results
+2025-04-21 14:37:53,313 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250419_0001.TXT_2025-19-04--08-00-27.results
+2025-04-21 14:38:02,259 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\RxEOB\Eligibility\MEM_TRX_UMR_20250419_0001.txt
+2025-04-21 14:38:02,260 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/
+2025-04-21 14:38:09,019 - core.api_client - INFO - Found 1335 files matching criteria
+2025-04-21 14:38:09,022 - core.file_processor - INFO - Found 1335 .xlsx files in UMR/IOA/Eligibility
+2025-04-21 14:38:09,022 - core.file_processor - INFO - 1. MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx - 14642 bytes - 2025-04-19 08:00:00
+2025-04-21 14:38:09,022 - core.file_processor - INFO - Downloading file 1/1: MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx
+2025-04-21 14:38:09,023 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/IOA/Eligibility/MEM_TRX_UMR_20250419_0001.TXT_Eligibility Process Report_2025-19-04--08-00-28.xlsx
+2025-04-21 14:38:10,454 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\UMR\Eligibility\ErrRpt_P_TransparentRx_IOA_20250419.xlsx
+2025-04-21 14:38:10,454 - core.file_processor - INFO - 
+=== PROCESSING UMR/UMR_Exc_OOP ===
+2025-04-21 14:38:10,455 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/
+2025-04-21 14:38:21,603 - core.api_client - INFO - Found 5098 files matching criteria
+2025-04-21 14:38:21,607 - core.api_client - INFO - Filtered files by pattern 'trx_UMR_RxEOB__\d{8}\.txt': found 1277 matches
+2025-04-21 14:38:21,610 - core.file_processor - INFO - Found 1277 .txt files matching pattern 'trx_UMR_RxEOB__\d{8}\.txt' in UMR/UMR_Exc_OOP
+2025-04-21 14:38:21,610 - core.file_processor - INFO - 1. trx_UMR_RxEOB__20250420.txt - 83436 bytes - 2025-04-21 04:44:00
+2025-04-21 14:38:21,611 - core.file_processor - INFO - Downloading file 1/1: trx_UMR_RxEOB__20250420.txt
+2025-04-21 14:38:21,612 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/UMR/UMR_Exc_OOP/trx_UMR_RxEOB__20250420.txt
+2025-04-21 14:38:23,962 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\RxEOB\Accum\EMP_Accum_20250421_0001.txt
+2025-04-21 14:38:23,964 - core.file_processor - INFO - 
+
+========== PROCESSING CLIENT: Lucent Health ==========
+2025-04-21 14:38:23,964 - core.file_processor - INFO - 
+=== PROCESSING Lucent Health/Claims ===
+2025-04-21 14:38:23,966 - core.api_client - INFO - Fetching data from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/
+2025-04-21 14:38:26,090 - core.api_client - INFO - Found 186 files matching criteria
+2025-04-21 14:38:26,091 - core.file_processor - INFO - Found 186 .txt files in Lucent Health/Claims
+2025-04-21 14:38:26,092 - core.file_processor - INFO - 1. TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt - 20048 bytes - 2025-04-20 06:22:00
+2025-04-21 14:38:26,092 - core.file_processor - INFO - Downloading file 1/1: TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 14:38:26,094 - core.api_client - INFO - Downloading file from: https://eft.pharmpix.com/To_TransparentRX/Lucent%20Health/Claims/TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt
+2025-04-21 14:38:27,519 - core.api_client - INFO - File downloaded successfully to: 5PM-Work\Lucent_health\TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt.txt
+2025-04-21 14:38:27,520 - core.file_processor - INFO - 
+
+=== DOWNLOAD SUMMARY ===
+2025-04-21 14:38:27,521 - core.file_processor - INFO - 
+Client: ALLIED
+2025-04-21 14:38:27,521 - core.file_processor - INFO - Total files: 3
+2025-04-21 14:38:27,521 - core.file_processor - INFO -   - ALLIED_Claims.txt: 1 files
+2025-04-21 14:38:27,522 - core.file_processor - INFO -     * Trans_RxClaims_04202025.txt
+2025-04-21 14:38:27,522 - core.file_processor - INFO -   - ALLIED_Eligibility.results: 1 files
+2025-04-21 14:38:27,523 - core.file_processor - INFO -     * Sapp_MEM_TRX_20250418_0001.txt
+2025-04-21 14:38:27,523 - core.file_processor - INFO -   - ALLIED_Eligibility.xlsx: 1 files
+2025-04-21 14:38:27,524 - core.file_processor - INFO -     * Trans_Elig_04182025.xlsx
+2025-04-21 14:38:27,524 - core.file_processor - INFO - 
+Client: ASR
+2025-04-21 14:38:27,524 - core.file_processor - INFO - Total files: 3
+2025-04-21 14:38:27,525 - core.file_processor - INFO -   - ASR_Claims.txt: 1 files
+2025-04-21 14:38:27,525 - core.file_processor - INFO -     * TRX_CLAIMS_20250420.txt
+2025-04-21 14:38:27,525 - core.file_processor - INFO -   - ASR_Eligibility.results: 1 files
+2025-04-21 14:38:27,526 - core.file_processor - INFO -     * TRXALBION_PPX_ELIG_20250420_001.txt
+2025-04-21 14:38:27,526 - core.file_processor - INFO -   - ASR_Eligibility.xlsx: 1 files
+2025-04-21 14:38:27,527 - core.file_processor - INFO -     * TRXALBION_PPX_ELIG_20250420_001.xlsx
+2025-04-21 14:38:27,527 - core.file_processor - INFO - 
+Client: BML
+2025-04-21 14:38:27,527 - core.file_processor - INFO - Total files: 1
+2025-04-21 14:38:27,528 - core.file_processor - INFO -   - BML_Claims.txt: 1 files
+2025-04-21 14:38:27,528 - core.file_processor - INFO -     * BML_Claims_20250420_0002.txt
+2025-04-21 14:38:27,528 - core.file_processor - INFO - 
+Client: UMR
+2025-04-21 14:38:27,528 - core.file_processor - INFO - Total files: 5
+2025-04-21 14:38:27,529 - core.file_processor - INFO -   - UMR.txt: 1 files
+2025-04-21 14:38:27,529 - core.file_processor - INFO -     * PBLXV426_P_TransparentRx_20250421.txt
+2025-04-21 14:38:27,529 - core.file_processor - INFO -   - UMR_Empire.txt: 1 files
+2025-04-21 14:38:27,529 - core.file_processor - INFO -     * EMP_Claims_20250420_0003.txt
+2025-04-21 14:38:27,529 - core.file_processor - INFO -   - UMR_IOA_Eligibility.results: 1 files
+2025-04-21 14:38:27,530 - core.file_processor - INFO -     * MEM_TRX_UMR_20250419_0001.txt
+2025-04-21 14:38:27,530 - core.file_processor - INFO -   - UMR_IOA_Eligibility.xlsx: 1 files
+2025-04-21 14:38:27,530 - core.file_processor - INFO -     * ErrRpt_P_TransparentRx_IOA_20250419.xlsx
+2025-04-21 14:38:27,530 - core.file_processor - INFO -   - UMR_UMR_Exc_OOP.txt: 1 files
+2025-04-21 14:38:27,530 - core.file_processor - INFO -     * EMP_Accum_20250421_0001.txt
+2025-04-21 14:38:27,530 - core.file_processor - INFO - 
+Client: Lucent Health
+2025-04-21 14:38:27,531 - core.file_processor - INFO - Total files: 1
+2025-04-21 14:38:27,531 - core.file_processor - INFO -   - Lucent Health_Claims.txt: 1 files
+2025-04-21 14:38:27,531 - core.file_processor - INFO -     * TRX_TRANSPARENTRX_DAILY_CL_20250419_20250419_001.txt.txt
