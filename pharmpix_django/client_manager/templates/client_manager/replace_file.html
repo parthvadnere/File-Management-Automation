@@ -1,0 +1,19 @@
+<!-- client_manager/templates/client_manager/replace_file.html -->
+{% extends 'client_manager/base.html' %}
+
+{% block content %}
+    <h2>Replace File: {{ downloaded_file.original_filename }}</h2>
+    <div class="form-container">
+        <form method="POST" class="client-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>
+                <label for="id_file">Upload New File:</label>
+                <input type="file" name="file" id="id_file" required>
+            </p>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success"><i class="fas fa-upload"></i> Replace</button>
+                <a href="{% url 'client_details' downloaded_file.client.id %}" class="btn btn-secondary"><i class="fas fa-times"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

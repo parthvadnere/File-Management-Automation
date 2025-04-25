@@ -1,0 +1,45 @@
+<!-- client_manager/templates/client_manager/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmpix File Downloader</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Pharmpix File Downloader</h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="{% url 'dashboard' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="{% url 'client_list' %}" class="{% if request.resolver_match.url_name == 'client_list' %}active{% endif %}"><i class="fas fa-download"></i> Download Files</a></li>
+                    <li><a href="{% url 'manage_clients' %}" class="{% if request.resolver_match.url_name == 'manage_clients' %}active{% endif %}"><i class="fas fa-users"></i> Manage Clients</a></li>
+                    {% if 'client_details' in request.resolver_match.url_name %}
+                        <li><a href="{% url 'client_details' client.id %}" class="active"><i class="fas fa-user"></i> Client Details</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'manage_tasks' %}" class="{% if request.resolver_match.url_name == 'manage_tasks' %}active{% endif %}"><i class="fas fa-tasks"></i> Manage Tasks</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="message {% if message.tags == 'success' %}message-success{% elif message.tags == 'error' %}message-error{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

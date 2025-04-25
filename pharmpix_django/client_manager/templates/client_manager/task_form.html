@@ -1,0 +1,16 @@
+<!-- client_manager/templates/client_manager/task_form.html -->
+{% extends 'client_manager/base.html' %}
+
+{% block content %}
+    <h2>{{ action }} Task</h2>
+    <div class="form-container">
+        <form method="POST" class="client-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Save</button>
+                <a href="{% url 'manage_tasks' %}" class="btn btn-secondary"><i class="fas fa-times"></i> Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+<!-- client_manager/templates/client_manager/download_status.html -->
+{% extends 'client_manager/base.html' %}
+
+{% block content %}
+    <h2>Download Status for {{ client.name }}</h2>
+    {% if error %}
+        <div class="status-box status-error">
+            <p>{{ error }}</p>
+        </div>
+    {% else %}
+        <div id="status-message" class="status-box">
+            <p>Starting download...</p>
+        </div>
+    {% endif %}
+    <div class="form-actions">
+        <a href="{% url 'client_list' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Client List</a>
+    </div>
+
+    {% if task_id %}
+    <script>
+        $(document).ready(function() {
+            const taskId = "{{ task_id }}";
+            const statusUrl = "{% url 'get_task_status' %}?task_id=" + taskId;
+
+            function checkStatus() {
+                $.get(statusUrl, function(data) {
+                    $("#status-message").html("<p>" + data.message + "</p>");
+                    console.log("Task status:", data.status);
+                    if (data.status === "In Progress") {
+                        setTimeout(checkStatus, 2000);
+                    } else {
+                        if (data.status === "Completed") {
+                            $("#status-message").addClass("status-success");
+                        } else {
+                            $("#status-message").addClass("status-error");
+                        }
+                    }
+                }).fail(function() {
+                    $("#status-message").html("<p>Error checking status. Please try again.</p>");
+                    $("#status-message").addClass("status-error");
+                });
+            }
+
+            checkStatus();
+        });
+    </script>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+<!-- client_manager/templates/client_manager/confirm_delete.html -->
+{% extends 'client_manager/base.html' %}
+
+{% block content %}
+    <h2>Confirm Delete</h2>
+    <div class="status-box status-error">
+        <p>Are you sure you want to delete this {{ type }}: <strong>{{ object }}</strong>?</p>
+        <p>This action cannot be undone.</p>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Yes, Delete</button>
+            {% if client %}
+                <a href="{% url 'client_details' client.id %}" class="btn btn-secondary"><i class="fas fa-times"></i> Cancel</a>
+            {% else %}
+                <a href="{% url 'manage_'|add:type|lower|add:'s' %}" class="btn btn-secondary"><i class="fas fa-times"></i> Cancel</a>
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}

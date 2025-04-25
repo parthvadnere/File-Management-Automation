@@ -1,0 +1,38 @@
+<!-- client_manager/templates/client_manager/manage_paths.html -->
+{% extends 'client_manager/base.html' %}
+
+{% block content %}
+    <h2>Manage Paths</h2>
+    <a href="{% url 'add_path' %}" class="btn btn-add">Add New Path</a>
+    <table class="client-table">
+        <thead>
+            <tr>
+                <th>Client</th>
+                <th>Path</th>
+                <th>File Types</th>
+                <th>Max Files</th>
+                <th>File Pattern</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for path in paths %}
+                <tr>
+                    <td>{{ path.client.name }}</td>
+                    <td>{{ path.path }}</td>
+                    <td>{{ path.file_types }}</td>
+                    <td>{{ path.max_files }}</td>
+                    <td>{{ path.file_pattern|default:"-" }}</td>
+                    <td>
+                        <a href="{% url 'edit_path' path.id %}" class="btn btn-edit">Edit</a>
+                        <a href="{% url 'delete_path' path.id %}" class="btn btn-delete">Delete</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6">No paths found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

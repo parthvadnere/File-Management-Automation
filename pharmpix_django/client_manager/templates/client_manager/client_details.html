@@ -1,0 +1,138 @@
+<!-- client_manager/templates/client_manager/client_details.html -->
+{% extends 'client_manager/base.html' %}
+
+{% block content %}
+    <h2>Client Details: {{ client.name }}</h2>
+    <div class="details-card">
+        <h3>Client Information</h3>
+        <p><strong>Name:</strong> {{ client.name }}</p>
+        <p><strong>Description:</strong> {{ client.description|default:"-" }}</p>
+        <p><strong>SFTP Host:</strong> {{ client.sftp_host|default:"-" }}</p>
+        <p><strong>SFTP Username:</strong> {{ client.sftp_username|default:"-" }}</p>
+        <p><strong>SFTP Port:</strong> {{ client.sftp_port|default:"-" }}</p>
+        <div class="action-buttons">
+            <a href="{% url 'edit_client' client.id %}" class="btn btn-warning"><i class="fas fa-edit"></i> Edit Client</a>
+            <a href="{% url 'delete_client' client.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Delete Client</a>
+            <a href="{% url 'manage_clients' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Clients</a>
+        </div>
+    </div>
+
+    <div class="details-section">
+        <h3>Paths</h3>
+        <a href="{% url 'add_path' client.id %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Path</a>
+        <div class="table-container">
+            <table class="client-table">
+                <thead>
+                    <tr>
+                        <th>Path</th>
+                        <th>File Types</th>
+                        <th>Max Files</th>
+                        <th>File Pattern</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for path in paths %}
+                        <tr>
+                            <td>{{ path.path }}</td>
+                            <td>{{ path.file_types }}</td>
+                            <td>{{ path.max_files }}</td>
+                            <td>{{ path.file_pattern|default:"-" }}</td>
+                            <td>
+                                <a href="{% url 'edit_path' client.id path.id %}" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
+                                <a href="{% url 'delete_path' client.id path.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5">No paths found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="details-section">
+        <h3>Output Configurations</h3>
+        <a href="{% url 'add_output_config' client.id %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Output Config</a>
+        <div class="table-container">
+            <table class="client-table">
+                <thead>
+                    <tr>
+                        <th>Path</th>
+                        <th>Task</th>
+                        <th>File Type</th>
+                        <th>Output Dir</th>
+                        <th>Filename Template</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for config in output_configs %}
+                        <tr>
+                            <td>{{ config.path.path }}</td>
+                            <td>{{ config.task.name }}</td>
+                            <td>{{ config.file_type }}</td>
+                            <td>{{ config.output_dir }}</td>
+                            <td>{{ config.filename_template }}</td>
+                            <td>
+                                <a href="{% url 'edit_output_config' client.id config.id %}" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
+                                <a href="{% url 'delete_output_config' client.id config.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="6">No output configurations found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="details-section">
+        <h3>Downloaded Files</h3>
+        <div class="table-container">
+            <table class="client-table">
+                <thead>
+                    <tr>
+                        <th>Filename</th>
+                        <th>File Type</th>
+                        <th>Path</th>
+                        <th>Downloaded At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file in downloaded_files %}
+                        <tr>
+                            <td>{{ file.original_filename }}</td>
+                            <td>{{ file.file_type }}</td>
+                            <td>{{ file.path }}</td>
+                            <td>{{ file.downloaded_at|date:"Y-m-d H:i:s" }}</td>
+                            <td>
+                                <button class="btn btn-info view-file-btn" data-file-id="{{ file.id }}" data-file-url="{% url 'view_file' file.id %}"><i class="fas fa-eye"></i> View</button>
+                                <a href="{% url 'replace_file' file.id %}" class="btn btn-warning"><i class="fas fa-upload"></i> Replace</a>
+                                <a href="{% url 'delete_file' file.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5">No downloaded files found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal for Viewing Files -->
+    <div id="fileModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h3>File Viewer</h3>
+            <iframe id="fileFrame" src="" style="width: 100%; height: 400px; border: none;"></iframe>
+        </div>
+    </div>
+{% endblock %}

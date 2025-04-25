@@ -1,0 +1,27 @@
+<!-- client_manager/templates/client_manager/client_list.html -->
+{% extends 'client_manager/base.html' %}
+
+{% block content %}
+    <h2>Download Files</h2>
+    <div class="table-container">
+        <table class="client-table">
+            <thead>
+                <tr>
+                    <th>Client Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client in clients %}
+                    <tr>
+                        <td>{{ client.name }}</td>
+                        <td>
+                            <a href="{% url 'download_files' client.id %}" class="btn btn-primary"><i class="fas fa-download"></i> Download Files</a>
+                            <a href="{% url 'client_details' client.id %}" class="btn btn-info"><i class="fas fa-info-circle"></i> Details</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

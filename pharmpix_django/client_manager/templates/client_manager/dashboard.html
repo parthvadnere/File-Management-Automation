@@ -1,0 +1,32 @@
+<!-- client_manager/templates/client_manager/dashboard.html -->
+{% extends 'client_manager/base.html' %}
+
+{% block content %}
+    <h2>Dashboard</h2>
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <i class="fas fa-users"></i>
+            <h3>Clients</h3>
+            <p>{{ clients_count }}</p>
+            <a href="{% url 'manage_clients' %}" class="btn btn-primary">Manage Clients</a>
+        </div>
+        <div class="dashboard-card">
+            <i class="fas fa-tasks"></i>
+            <h3>Tasks</h3>
+            <p>{{ tasks_count }}</p>
+            <a href="{% url 'manage_tasks' %}" class="btn btn-primary">Manage Tasks</a>
+        </div>
+        <div class="dashboard-card">
+            <i class="fas fa-folder"></i>
+            <h3>Paths</h3>
+            <p>{{ paths_count }}</p>
+            <a href="{% url 'manage_clients' %}" class="btn btn-primary">View in Clients</a>
+        </div>
+        <div class="dashboard-card">
+            <i class="fas fa-cog"></i>
+            <h3>Output Configs</h3>
+            <p>{{ configs_count }}</p>
+            <a href="{% url 'manage_clients' %}" class="btn btn-primary">View in Clients</a>
+        </div>
+    </div>
+{% endblock %}

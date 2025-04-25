@@ -1,0 +1,40 @@
+<!-- client_manager/templates/client_manager/manage_output_configs.html -->
+{% extends 'client_manager/base.html' %}
+
+{% block content %}
+    <h2>Manage Output Configurations</h2>
+    <a href="{% url 'add_output_config' %}" class="btn btn-add">Add New Output Config</a>
+    <table class="client-table">
+        <thead>
+            <tr>
+                <th>Client</th>
+                <th>Path</th>
+                <th>Task</th>
+                <th>File Type</th>
+                <th>Output Dir</th>
+                <th>Filename Template</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for config in configs %}
+                <tr>
+                    <td>{{ config.client.name }}</td>
+                    <td>{{ config.path.path }}</td>
+                    <td>{{ config.task.name }}</td>
+                    <td>{{ config.file_type }}</td>
+                    <td>{{ config.output_dir }}</td>
+                    <td>{{ config.filename_template }}</td>
+                    <td>
+                        <a href="{% url 'edit_output_config' config.id %}" class="btn btn-edit">Edit</a>
+                        <a href="{% url 'delete_output_config' config.id %}" class="btn btn-delete">Delete</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7">No output configurations found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
