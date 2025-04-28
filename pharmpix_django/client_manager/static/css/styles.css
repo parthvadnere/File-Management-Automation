@@ -474,5 +474,12 @@ input[type="file"] {
     font-size: 14px;
 }
 
+/* static/css/styles.css */
+#fileFrame {
+    white-space: pre-wrap; /* Preserve whitespace and wrap text */
+    font-family: monospace; /* Better for text files */
+    line-height: 1.5;
+}
+
 /* end css */
 

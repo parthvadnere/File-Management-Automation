@@ -97,10 +97,10 @@
             <table class="client-table">
                 <thead>
                     <tr>
-                        <th>Filename</th>
-                        <th>File Type</th>
-                        <th>Path</th>
-                        <th>Downloaded At</th>
+                        <th><a href="?sort=filename">Filename</a></th>
+                        <th><a href="?sort=file_type">File Type</a></th>
+                        <th><a href="?sort=path">Path</a></th>
+                        <th><a href="?sort=downloaded_at">Downloaded At</a></th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -113,13 +113,14 @@
                             <td>{{ file.downloaded_at|date:"Y-m-d H:i:s" }}</td>
                             <td>
                                 <button class="btn btn-info view-file-btn" data-file-id="{{ file.id }}" data-file-url="{% url 'view_file' file.id %}"><i class="fas fa-eye"></i> View</button>
+                                <a href="{% url 'view_file' file.id %}" class="btn btn-secondary" download><i class="fas fa-download"></i> Download</a>
                                 <a href="{% url 'replace_file' file.id %}" class="btn btn-warning"><i class="fas fa-upload"></i> Replace</a>
                                 <a href="{% url 'delete_file' file.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Delete</a>
                             </td>
                         </tr>
                     {% empty %}
                         <tr>
-                            <td colspan="5">No downloaded files found.</td>
+                            <td colspan="5">No downloaded files found. <a href="{% url 'download_files' client.id %}" class="btn btn-primary btn-sm">Download Now</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -132,7 +133,9 @@
         <div class="modal-content">
             <span class="close">×</span>
             <h3>File Viewer</h3>
-            <iframe id="fileFrame" src="" style="width: 100%; height: 400px; border: none;"></iframe>
+            <div id="fileFrame" style="width: 100%; height: 500px; border: none; overflow: auto; background: #fff; padding: 10px;">
+                <!-- Content will be injected here for text files or messages -->
+            </div>
         </div>
     </div>
 {% endblock %}

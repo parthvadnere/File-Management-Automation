@@ -56,27 +56,39 @@ def download_files_task(client_id, username="it@transparentrx.com", password="_4
 
         # Save downloaded files to the database
         saved_files = []
-        for path_key, file_paths in results.items():
-            for file_path in file_paths:  # Iterate over the list of file paths
-                logger.info(f"Processing file: {file_path}")
-                if os.path.exists(file_path):
-                    file_name = os.path.basename(file_path)
-                    file_type = os.path.splitext(file_name)[1].lstrip('.')
-                    path = path_key.replace(file_type, '').replace('_', '/')
+        for path_key, file_path_lists in results.items():
+            for file_paths in file_path_lists:  # Iterate over the outer list
+                for file_path in file_paths:  # Iterate over the inner list of file paths
+                    logger.info(f"Processing file: {file_path}")
+                    file_path = file_path.replace('\\', '/')  # Normalize path
+                    logger.info(f"Normalized file path: {file_path}")
+                    if os.path.exists(file_path):
+                        file_name = os.path.basename(file_path)
+                        logger.info(f"File found: {file_name}")
+                        file_type = os.path.splitext(file_name)[1].lstrip('.')
+                        logger.info(f"File type: {file_type}")
+                        path = path_key.replace(file_type, '').replace('_', '/')
 
-                    with open(file_path, 'rb') as f:
+                        # Read the file content as binary
+                        with open(file_path, 'rb') as f:
+                            file_content = f.read()
+                        logger.info(f"client: {client_name}, file_content: {file_content[:50]}..., original_filename: {file_name}, file_type: {file_type}, path: {path}")
+                        # Save to database
                         downloaded_file = DownloadedFile(
                             client=client,
+                            file_content=file_content,
                             original_filename=file_name,
                             file_type=file_type,
                             path=path
                         )
-                        downloaded_file.file.save(file_name, File(f), save=True)
                         downloaded_file.save()
                         saved_files.append(downloaded_file.original_filename)
                         logger.info(f"Saved file to database: {file_name}")
-                else:
-                    logger.warning(f"File not found: {file_path}")
+
+                        # Clean up local file
+                        os.remove(file_path)
+                    else:
+                        logger.warning(f"File not found: {file_path}")
 
         return {"status": "Completed", "message": f"Files for {client_name} downloaded successfully."}
     except Exception as e:

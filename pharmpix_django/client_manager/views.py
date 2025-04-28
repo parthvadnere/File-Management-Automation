@@ -1,6 +1,6 @@
 # client_manager/views.py
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import JsonResponse, HttpResponseRedirect, FileResponse
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, FileResponse
 from django.urls import reverse
 from django.contrib import messages
 from client_manager.models import Client, Path, Task, OutputConfig, DownloadedFile
@@ -9,6 +9,8 @@ from client_manager.tasks import download_files_task
 from celery.result import AsyncResult
 import logging
 import os
+import mimetypes
+from io import BytesIO
 
 logger = logging.getLogger(__name__)
 
@@ -126,6 +128,19 @@ def client_details(request, client_id):
     paths = Path.objects.filter(client=client)
     output_configs = OutputConfig.objects.filter(client=client)
     downloaded_files = DownloadedFile.objects.filter(client=client)
+
+    # Handle sorting
+    sort_by = request.GET.get('sort')
+    if sort_by:
+        if sort_by == 'filename':
+            downloaded_files = downloaded_files.order_by('original_filename')
+        elif sort_by == 'file_type':
+            downloaded_files = downloaded_files.order_by('file_type')
+        elif sort_by == 'path':
+            downloaded_files = downloaded_files.order_by('path')
+        elif sort_by == 'downloaded_at':
+            downloaded_files = downloaded_files.order_by('downloaded_at')
+
     return render(request, 'client_manager/client_details.html', {
         'client': client,
         'paths': paths,
@@ -137,6 +152,7 @@ def client_details(request, client_id):
 def manage_paths(request, client_id):
     client = get_object_or_404(Client, id=client_id)
     paths = Path.objects.filter(client=client)
+    logger.info(f"manage_paths - client_id: {client_id}, client: {client.name}, paths: {paths}")
     return render(request, 'client_manager/manage_paths.html', {'client': client, 'paths': paths})
 
 def add_path(request, client_id):
@@ -144,9 +160,11 @@ def add_path(request, client_id):
     if request.method == 'POST':
         form = PathForm(request.POST)
         if form.is_valid():
+            print("Form is valid")
             path = form.save(commit=False)
             path.client = client
             path.save()
+            logger.info(f"Path added: {path.path} for client: {client.name}")
             messages.success(request, "Path added successfully.")
             return redirect('manage_paths', client_id=client_id)
         else:
@@ -233,6 +251,7 @@ def add_output_config(request, client_id):
             config = form.save(commit=False)
             config.client = client
             config.save()
+            print("Output Config added successfully")
             messages.success(request, "Output Config added successfully.")
             return redirect('manage_output_configs', client_id=client_id)
         else:
@@ -265,17 +284,68 @@ def delete_output_config(request, client_id, config_id):
         return redirect('manage_output_configs', client_id=client_id)
     return render(request, 'client_manager/confirm_delete.html', {'object': config, 'type': 'Output Config', 'client': client})
 
+# def view_file(request, file_id):
+#     downloaded_file = get_object_or_404(DownloadedFile, id=file_id)
+#     logger.info(f"view_file - file_id: {file_id}, filename: {downloaded_file.original_filename}")
+#     content_type, _ = mimetypes.guess_type(downloaded_file.original_filename)
+#     logger.info(f"Guessed content type: {content_type}")
+#     if not content_type:
+#         content_type = 'application/octet-stream'
+
+#     # Check if the file type is renderable in an iframe
+#     renderable_types = ('text/plain', 'application/pdf', 'image/jpeg', 'image/png', 'image/gif')
+#     if content_type not in renderable_types:
+#         response = HttpResponse("This file type cannot be viewed in the browser. Please download it.")
+#         response['Content-Disposition'] = f'attachment; filename="{downloaded_file.original_filename}"'
+#         response.write(downloaded_file.file_content)
+#         return response
+
+#     # Create a file-like object from the binary content
+#     file_content = BytesIO(downloaded_file.file_content)
+    
+#     response = FileResponse(file_content, content_type=content_type)
+#     response['Content-Disposition'] = f'inline; filename="{downloaded_file.original_filename}"'
+#     return response
+
 def view_file(request, file_id):
     downloaded_file = get_object_or_404(DownloadedFile, id=file_id)
-    return FileResponse(downloaded_file.file, as_attachment=False, filename=downloaded_file.original_filename)
+    content_type, _ = mimetypes.guess_type(downloaded_file.original_filename)
+    print(f"view_file - file_id: {file_id}, filename: {downloaded_file.original_filename}, content_type: {content_type}")
+    if not content_type:
+        content_type = 'application/octet-stream'
+    
+    logger.info(f"Guessed Content-Type for {downloaded_file.original_filename}: {content_type}")
+    if downloaded_file.file_type.lower() == 'txt' and content_type != 'text/plain':
+        logger.warning(f"Mismatch: file_type is 'txt' but Content-Type is {content_type}. Forcing text/plain.")
+        content_type = 'text/plain'
+
+    logger.info(f"Viewing file {downloaded_file.original_filename} with Content-Type: {content_type}")
+
+    # Handle different file types
+    if content_type == 'text/plain':
+        # Serve text files inline for viewing
+        file_content = BytesIO(downloaded_file.file_content)
+        response = FileResponse(file_content, content_type=content_type)
+        response['Content-Disposition'] = f'inline; filename="{downloaded_file.original_filename}"'
+        return response
+    elif content_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+        # Serve Excel files as attachment for download
+        response = HttpResponse(downloaded_file.file_content, content_type=content_type)
+        response['Content-Disposition'] = f'attachment; filename="{downloaded_file.original_filename}"'
+        return response
+    else:
+        # Default to attachment for other types
+        response = HttpResponse(downloaded_file.file_content, content_type=content_type)
+        response['Content-Disposition'] = f'attachment; filename="{downloaded_file.original_filename}"'
+        return response
 
 def replace_file(request, file_id):
     downloaded_file = get_object_or_404(DownloadedFile, id=file_id)
     if request.method == 'POST':
         if 'file' in request.FILES:
             new_file = request.FILES['file']
-            downloaded_file.file.delete()  # Delete the old file
-            downloaded_file.file.save(new_file.name, new_file, save=True)
+            file_content = new_file.read()
+            downloaded_file.file_content = file_content
             downloaded_file.original_filename = new_file.name
             downloaded_file.file_type = os.path.splitext(new_file.name)[1].lstrip('.')
             downloaded_file.save()
@@ -289,8 +359,7 @@ def delete_file(request, file_id):
     downloaded_file = get_object_or_404(DownloadedFile, id=file_id)
     client_id = downloaded_file.client.id
     if request.method == 'POST':
-        downloaded_file.file.delete()  # Delete the file from storage
-        downloaded_file.delete()  # Delete the database record
+        downloaded_file.delete()
         messages.success(request, "File deleted successfully.")
         return redirect('client_details', client_id=client_id)
     return render(request, 'client_manager/confirm_delete.html', {

@@ -42,7 +42,7 @@ class OutputConfig(models.Model):
 
 class DownloadedFile(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='downloaded_files')
-    file = models.FileField(upload_to='downloads/%Y/%m/%d/')
+    file_content = models.BinaryField(null=True, default=b'')  # Allow NULL and set empty bytes as default
     original_filename = models.CharField(max_length=255)
     file_type = models.CharField(max_length=10)
     downloaded_at = models.DateTimeField(auto_now_add=True)
