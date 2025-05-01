@@ -7,6 +7,8 @@ from config.client_config import get_client_config
 from core.file_processor import process_client
 import os
 from django.core.files import File
+import paramiko
+from client_manager.utils import validate_txt_file
 
 logger = logging.getLogger(__name__)
 
@@ -57,10 +59,10 @@ def download_files_task(client_id, username="it@transparentrx.com", password="_4
         # Save downloaded files to the database
         saved_files = []
         for path_key, file_path_lists in results.items():
-            for file_paths in file_path_lists:  # Iterate over the outer list
-                for file_path in file_paths:  # Iterate over the inner list of file paths
+            for file_paths in file_path_lists:
+                for file_path in file_paths:
                     logger.info(f"Processing file: {file_path}")
-                    file_path = file_path.replace('\\', '/')  # Normalize path
+                    file_path = file_path.replace('\\', '/')
                     logger.info(f"Normalized file path: {file_path}")
                     if os.path.exists(file_path):
                         file_name = os.path.basename(file_path)
@@ -73,17 +75,55 @@ def download_files_task(client_id, username="it@transparentrx.com", password="_4
                         with open(file_path, 'rb') as f:
                             file_content = f.read()
                         logger.info(f"client: {client_name}, file_content: {file_content[:50]}..., original_filename: {file_name}, file_type: {file_type}, path: {path}")
+
+                        # Validate .txt files
+                        validation_result = {"is_valid": True, "errors": []}
+                        if file_type.lower() == 'txt':
+                            validation_result = validate_txt_file(file_content, client_name)
+                            logger.info(f"Validation result for {file_name}: {validation_result}")
+
                         # Save to database
                         downloaded_file = DownloadedFile(
                             client=client,
                             file_content=file_content,
                             original_filename=file_name,
                             file_type=file_type,
-                            path=path
+                            path=path,
+                            is_validated=validation_result["is_valid"],
+                            validation_errors="\n".join(validation_result["errors"]) if validation_result["errors"] else None
                         )
                         downloaded_file.save()
                         saved_files.append(downloaded_file.original_filename)
                         logger.info(f"Saved file to database: {file_name}")
+
+                        # If file is valid and SFTP credentials are available, send to SFTP
+                        if validation_result["is_valid"]:
+                            if client.sftp_host and client.sftp_username and client.sftp_password:
+                                try:
+                                    # Establish SFTP connection
+                                    transport = paramiko.Transport((client.sftp_host, client.sftp_port or 22))
+                                    transport.connect(username=client.sftp_username, password=client.sftp_password)
+                                    sftp = paramiko.SFTPClient.from_transport(transport)
+
+                                    # Upload the file
+                                    remote_path = f"/{client_name}/{file_name}"  # Adjust path as needed
+                                    with open(file_path, 'rb') as local_file:
+                                        sftp.putfo(local_file, remote_path)
+                                    logger.info(f"File {file_name} sent to SFTP server at {remote_path}")
+
+                                    # Mark as sent
+                                    downloaded_file.sent_to_sftp = True
+                                    downloaded_file.save()
+
+                                    # Close SFTP connection
+                                    sftp.close()
+                                    transport.close()
+                                except Exception as e:
+                                    logger.error(f"Failed to send {file_name} to SFTP for client {client_name}: {str(e)}")
+                                    downloaded_file.validation_errors = f"SFTP transfer failed: {str(e)}"
+                                    downloaded_file.save()
+                            else:
+                                logger.warning(f"No SFTP credentials for client {client_name}. File not sent.")
 
                         # Clean up local file
                         os.remove(file_path)

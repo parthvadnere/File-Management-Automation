@@ -41,4 +41,7 @@ urlpatterns = [
     path('files/view/<int:file_id>/', views.view_file, name='view_file'),
     path('files/replace/<int:file_id>/', views.replace_file, name='replace_file'),
     path('files/delete/<int:file_id>/', views.delete_file, name='delete_file'),
+
+    #SFTP Management
+    path('files/send-to-sftp/', views.send_to_sftp, name='send_to_sftp'),
 ]

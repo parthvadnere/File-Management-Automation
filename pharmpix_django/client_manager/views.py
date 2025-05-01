@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, FileResponse
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from client_manager.models import Client, Path, Task, OutputConfig, DownloadedFile
 from client_manager.forms import ClientForm, PathForm, TaskForm, OutputConfigForm
@@ -10,6 +11,7 @@ from celery.result import AsyncResult
 import logging
 import os
 import mimetypes
+import paramiko
 from io import BytesIO
 
 logger = logging.getLogger(__name__)
@@ -367,3 +369,61 @@ def delete_file(request, file_id):
         'type': 'Downloaded File',
         'client': downloaded_file.client
     })
+
+
+@csrf_exempt
+def send_to_sftp(request):
+    if request.method != 'POST':
+        return JsonResponse({"status": "error", "message": "Invalid request method."}, status=400)
+
+    file_id = request.POST.get('file_id')
+    client_id = request.POST.get('client_id')
+
+    try:
+        downloaded_file = DownloadedFile.objects.get(id=file_id)
+        client = Client.objects.get(id=client_id)
+
+        if not downloaded_file.is_validated:
+            return JsonResponse({"status": "error", "message": "File has validation errors and cannot be sent."}, status=400)
+
+        if downloaded_file.sent_to_sftp:
+            return JsonResponse({"status": "error", "message": "File has already been sent to SFTP."}, status=400)
+
+        if not (client.sftp_host and client.sftp_username and client.sftp_password):
+            return JsonResponse({"status": "error", "message": "SFTP credentials are missing for this client."}, status=400)
+
+        # Write the file content to a temporary file
+        temp_file_path = f"/tmp/{downloaded_file.original_filename}"
+        with open(temp_file_path, 'wb') as f:
+            f.write(downloaded_file.file_content)
+
+        # Establish SFTP connection
+        transport = paramiko.Transport((client.sftp_host, client.sftp_port or 22))
+        transport.connect(username=client.sftp_username, password=client.sftp_password)
+        sftp = paramiko.SFTPClient.from_transport(transport)
+
+        # Upload the file
+        remote_path = f"/{client.name}/{downloaded_file.original_filename}"
+        with open(temp_file_path, 'rb') as local_file:
+            sftp.putfo(local_file, remote_path)
+        logger.info(f"File {downloaded_file.original_filename} sent to SFTP server at {remote_path}")
+
+        # Mark as sent
+        downloaded_file.sent_to_sftp = True
+        downloaded_file.save()
+
+        # Clean up
+        sftp.close()
+        transport.close()
+        os.remove(temp_file_path)
+
+        return JsonResponse({"status": "success", "message": "File sent to SFTP successfully."})
+    except Exception as e:
+        logger.error(f"Error sending file {file_id} to SFTP: {str(e)}", exc_info=True)
+        # Store the SFTP error in validation_errors if it fails
+        try:
+            downloaded_file.validation_errors = f"SFTP transfer failed: {str(e)}"
+            downloaded_file.save()
+        except:
+            pass
+        return JsonResponse({"status": "error", "message": f"Error: {str(e)}"}, status=500)

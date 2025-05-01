@@ -106,18 +106,25 @@
                 </thead>
                 <tbody>
                     {% for file in downloaded_files %}
-                        <tr>
-                            <td>{{ file.original_filename }}</td>
-                            <td>{{ file.file_type }}</td>
-                            <td>{{ file.path }}</td>
-                            <td>{{ file.downloaded_at|date:"Y-m-d H:i:s" }}</td>
-                            <td>
-                                <button class="btn btn-info view-file-btn" data-file-id="{{ file.id }}" data-file-url="{% url 'view_file' file.id %}"><i class="fas fa-eye"></i> View</button>
-                                <a href="{% url 'view_file' file.id %}" class="btn btn-secondary" download><i class="fas fa-download"></i> Download</a>
-                                <a href="{% url 'replace_file' file.id %}" class="btn btn-warning"><i class="fas fa-upload"></i> Replace</a>
-                                <a href="{% url 'delete_file' file.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Delete</a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{ file.original_filename }}</td>
+                        <td>{{ file.file_type }}</td>
+                        <td>{{ file.path }}</td>
+                        <td>{{ file.downloaded_at|date:"Y-m-d H:i:s" }}</td>
+                        <td>
+                            <button class="btn btn-info action-btn view-file-btn" data-file-id="{{ file.id }}" data-file-url="{% url 'view_file' file.id %}" data-errors="{{ file.validation_errors|default:''|escape }}" data-validated="{{ file.is_validated|yesno:'true,false' }}" data-sent="{{ file.sent_to_sftp|yesno:'true,false' }}" data-client-id="{{ client.id }}"><i class="fas fa-eye"></i></button>
+                            <a href="{% url 'view_file' file.id %}" class="btn btn-secondary action-btn" download><i class="fas fa-download"></i></a>
+                            <a href="{% url 'replace_file' file.id %}" class="btn btn-warning action-btn"><i class="fas fa-upload"></i></a>
+                            <a href="{% url 'delete_file' file.id %}" class="btn btn-danger action-btn delete-btn"><i class="fas fa-trash"></i></a>
+                            {% if file.sent_to_sftp %}
+                                <span class="btn btn-success action-btn disabled"><i class="fas fa-check"></i></span>
+                            {% elif file.is_validated %}
+                                <button class="btn btn-primary action-btn send-sftp-btn" data-file-id="{{ file.id }}" data-client-id="{{ client.id }}"><i class="fas fa-upload"></i></button>
+                            {% else %}
+                                <button class="btn btn-danger action-btn view-errors-btn" data-errors="{{ file.validation_errors|escape }}"><i class="fas fa-exclamation-circle"></i><i class="fas fa-exclamation-circle error-icon"></i></button>
+                            {% endif %}
+                        </td>
+                    </tr>
                     {% empty %}
                         <tr>
                             <td colspan="5">No downloaded files found. <a href="{% url 'download_files' client.id %}" class="btn btn-primary btn-sm">Download Now</a></td>
@@ -133,9 +140,28 @@
         <div class="modal-content">
             <span class="close">×</span>
             <h3>File Viewer</h3>
-            <div id="fileFrame" style="width: 100%; height: 500px; border: none; overflow: auto; background: #fff; padding: 10px;">
-                <!-- Content will be injected here for text files or messages -->
+            <div id="fileFrame"></div>
+            <div id="errorSection" class="hidden">
+                <h4>Validation Errors for {{ downloaded_files.0.original_filename|default:'File' }}</h4>
+                <pre id="errorContent"></pre>
+            </div>
+            <div class="modal-actions">
+                <button id="modalSendSftpBtn" class="btn btn-primary" style="display: none;"><i class="fas fa-upload"></i></button>
+                <a id="modalReplaceBtn" href="#" class="btn btn-warning" style="display: none;"><i class="fas fa-upload"></i></a>
             </div>
         </div>
     </div>
+    
+    <!-- Modal for Viewing Validation Errors (standalone) -->
+    <div id="errorModal" class="error-modal">
+        <div class="error-modal-content">
+            <span class="close-error">×</span>
+            <h3>Validation Errors</h3>
+            <pre id="standaloneErrorContent"></pre>
+            <p>Please replace or edit the file to correct these issues.</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        window.replaceUrlBase = "{% url 'replace_file' 0 %}";
+    </script>
 {% endblock %}

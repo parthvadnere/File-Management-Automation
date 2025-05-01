@@ -42,11 +42,14 @@ class OutputConfig(models.Model):
 
 class DownloadedFile(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='downloaded_files')
-    file_content = models.BinaryField(null=True, default=b'')  # Allow NULL and set empty bytes as default
+    file_content = models.BinaryField(null=True, default=b'')
     original_filename = models.CharField(max_length=255)
     file_type = models.CharField(max_length=10)
     downloaded_at = models.DateTimeField(auto_now_add=True)
-    path = models.CharField(max_length=255)  # The Pharmpix path (e.g., ALLIED/Claims)
+    path = models.CharField(max_length=255)
+    is_validated = models.BooleanField(default=False)
+    validation_errors = models.TextField(blank=True, null=True)  # Store errors as a string
+    sent_to_sftp = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.original_filename} - {self.client.name}"
