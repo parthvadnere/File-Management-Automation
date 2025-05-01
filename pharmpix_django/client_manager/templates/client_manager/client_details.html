@@ -39,8 +39,8 @@
                             <td>{{ path.max_files }}</td>
                             <td>{{ path.file_pattern|default:"-" }}</td>
                             <td>
-                                <a href="{% url 'edit_path' client.id path.id %}" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="{% url 'delete_path' client.id path.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Delete</a>
+                                <a href="{% url 'edit_path' client.id path.id %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                <a href="{% url 'delete_path' client.id path.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     {% empty %}
@@ -77,8 +77,8 @@
                             <td>{{ config.output_dir }}</td>
                             <td>{{ config.filename_template }}</td>
                             <td>
-                                <a href="{% url 'edit_output_config' client.id config.id %}" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="{% url 'delete_output_config' client.id config.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Delete</a>
+                                <a href="{% url 'edit_output_config' client.id config.id %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                <a href="{% url 'delete_output_config' client.id config.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                     {% empty %}
@@ -121,7 +121,7 @@
                             {% elif file.is_validated %}
                                 <button class="btn btn-primary action-btn send-sftp-btn" data-file-id="{{ file.id }}" data-client-id="{{ client.id }}"><i class="fas fa-upload"></i></button>
                             {% else %}
-                                <button class="btn btn-danger action-btn view-errors-btn" data-errors="{{ file.validation_errors|escape }}"><i class="fas fa-exclamation-circle"></i><i class="fas fa-exclamation-circle error-icon"></i></button>
+                                <button class="btn btn-danger action-btn view-errors-btn" data-errors="{{ file.validation_errors|escape }}"><i class="fas fa-exclamation-circle"></i></button>
                             {% endif %}
                         </td>
                     </tr>
