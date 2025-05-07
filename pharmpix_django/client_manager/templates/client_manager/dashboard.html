@@ -29,4 +29,20 @@
             <a href="{% url 'manage_clients' %}" class="btn btn-primary">View in Clients</a>
         </div>
     </div>
+    <div class="date-filter" style="margin-bottom: 20px;">
+        <label for="dateFilter">Select Date to Download:</label>
+        <input type="date" id="dateFilter" name="dateFilter" max="{% now 'Y-m-d' %}">
+    </div>
+    <div class="client-list">
+        {% for client in clients %}
+            <div class="client-card">
+                <h3>{{ client.name }}</h3>
+                <p>{{ client.description|default:"No description" }}</p>
+                <a href="{% url 'download_files' client.id %}" class="btn btn-primary download-btn" data-client-id="{{ client.id }}"><i class="fas fa-download"></i> Download Files</a>
+                <a href="{% url 'client_details' client.id %}" class="btn btn-info"><i class="fas fa-info-circle"></i> Details</a>
+            </div>
+        {% empty %}
+            <p>No clients found.</p>
+        {% endfor %}
+    </div>
 {% endblock %}

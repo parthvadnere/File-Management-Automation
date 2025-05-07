@@ -2,11 +2,12 @@
 import logging
 import time
 from utils.helpers import extract_file_info
+from datetime import datetime
 import os
 
 logger = logging.getLogger(__name__)
 
-def process_client(client_name, client_config, client_obj, download_files=True):
+def process_client(client_name, client_config, client_obj, download_files=True, selected_date=None):
     """
     Process a specific client according to its configuration
     
@@ -15,6 +16,7 @@ def process_client(client_name, client_config, client_obj, download_files=True):
         client_config (dict): Configuration for the client
         client_obj: Initialized API client object
         download_files (bool): Whether to download files or just list them
+        selected_date (date, optional): Date to filter files (YYYY-MM-DD)
         
     Returns:
         dict: Results of processing, including downloaded files
@@ -30,18 +32,35 @@ def process_client(client_name, client_config, client_obj, download_files=True):
         logger.info(f"\n=== PROCESSING {path} ===")
         
         for file_type in file_types:
-            # Get files for this path and file type, with optional pattern
             response = client_obj.get_files(path, file_type=file_type, file_pattern=file_pattern)
             
             if response and isinstance(response, dict) and 'rows' in response:
-                # Extract file information
                 files = extract_file_info(response)
-                files = sorted(files, key=lambda x: x['Date'], reverse=True)  # Sort by date, newest first
+                files = sorted(files, key=lambda x: x['Date'], reverse=True)
                 
                 if file_pattern:
                     logger.info(f"Found {len(files)} {file_type} files matching pattern '{file_pattern}' in {path}")
                 else:
                     logger.info(f"Found {len(files)} {file_type} files in {path}")
+                
+                # Filter files by selected date
+                if selected_date:
+                    filtered_files = []
+                    for file_info in files:
+                        file_date_str = file_info['Date'].split()[0]  # e.g., "2025-04-29"
+                        try:
+                            file_date = datetime.strptime(file_date_str, '%Y-%m-%d').date()
+                            if file_date == selected_date:
+                                filtered_files.append(file_info)
+                        except ValueError:
+                            logger.warning(f"Invalid date format for file {file_info['Filename']}: {file_date_str}")
+                            continue
+                    files = filtered_files
+                    logger.info(f"After date filter ({selected_date}), {len(files)} {file_type} files remain")
+                
+                if not files:
+                    logger.info(f"No files match the selected date for {path} with file type {file_type}")
+                    continue
                 
                 # Print the first few files
                 for i, file_info in enumerate(files[:max_files], 1):
@@ -51,19 +70,31 @@ def process_client(client_name, client_config, client_obj, download_files=True):
                 if download_files and files:
                     downloaded = []
                     for i, file_info in enumerate(files[:max_files]):
-                        logger.info(f"Downloading file {i+1}/{max_files}: {file_info['Filename']}")
+                        logger.info(f"Downloading file {i+1}/{min(max_files, len(files))}: {file_info['Filename']}")
                         
-                        # Add a small delay between downloads to avoid server throttling
                         if i > 0:
                             time.sleep(1)
                             
                         file_path = client_obj.download_file(path, file_info, file_type=file_type)
                         if file_path:
-                            downloaded.append(file_path)
+                            if isinstance(file_path, list):
+                                # Ensure each item in the list is a string
+                                for fp in file_path:
+                                    if not isinstance(fp, str):
+                                        logger.error(f"Expected file path to be a string, got {type(fp)}: {fp}")
+                                        continue
+                                    downloaded.append(fp)
+                            else:
+                                if not isinstance(file_path, str):
+                                    logger.error(f"Expected file path to be a string, got {type(file_path)}: {file_path}")
+                                    continue
+                                downloaded.append(file_path)
+                            logger.info(f"Downloaded file(s): {downloaded}")
                     
                     # Store results
                     path_key = path.replace('/', '_') + file_type
                     results[path_key] = downloaded
+                    logger.info(f"Stored results for {path_key}: {downloaded}")
             else:
                 if file_pattern:
                     logger.warning(f"No data returned for {path} with file type {file_type} and pattern '{file_pattern}'")
@@ -72,8 +103,7 @@ def process_client(client_name, client_config, client_obj, download_files=True):
     
     return results
 
-
-def process_all_clients(client_obj, username, password, client_configs, clients=None, download_files=True):
+def process_all_clients(client_obj, username, password, client_configs, clients=None, download_files=True, selected_date=None):
     """
     Process all or selected clients
     
@@ -84,16 +114,15 @@ def process_all_clients(client_obj, username, password, client_configs, clients=
         client_configs (dict): Client configurations
         clients (list, optional): List of client names to process. If None, process all.
         download_files (bool, optional): Whether to download files.
+        selected_date (date, optional): Date to filter files
         
     Returns:
         dict: Results of processing
     """
-    # Login with credentials
     if not client_obj.login(username, password):
         logger.error("Login failed. Cannot continue.")
         return {}
     
-    # Determine which clients to process
     if clients:
         clients_to_process = {k: v for k, v in client_configs.items() if k in clients}
     else:
@@ -105,14 +134,12 @@ def process_all_clients(client_obj, username, password, client_configs, clients=
         
     all_results = {}
     
-    # Process each client
     for client_name, config in clients_to_process.items():
         logger.info(f"\n\n========== PROCESSING CLIENT: {client_name} ==========")
-        results = process_client(client_name, config, client_obj, download_files)
+        results = process_client(client_name, config, client_obj, download_files, selected_date=selected_date)
         all_results[client_name] = results
     
     return all_results
-
 
 def print_summary(results, list_only=False):
     """

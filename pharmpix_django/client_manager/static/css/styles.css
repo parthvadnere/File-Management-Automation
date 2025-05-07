@@ -661,4 +661,12 @@ cursor: pointer;
     color: #d32f2f;
     margin-left: 5px;
 }
+
+.date-filter {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 /* end of the css */

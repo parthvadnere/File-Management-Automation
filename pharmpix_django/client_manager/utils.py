@@ -1,4 +1,5 @@
 # client_manager/utils.py
+# gpi, pack_size, quantity_dispensed these column we have changed for type from N to A/N so need to change and do it in the code
 FILE_LAYOUT = [
     {"field_name": "claim_number", "type": "N", "length": 20, "from": 1, "to": 20, "comments": "TRx Claim Number"},
     {"field_name": "claim_status", "type": "A/N", "length": 1, "from": 21, "to": 21, "comments": "Claims Status Values: P=paid X=reversal R=reject"},
@@ -22,12 +23,12 @@ FILE_LAYOUT = [
     {"field_name": "authorization_code", "type": "N", "length": 11, "from": 219, "to": 229, "comments": "Prior Auth Code when claim has an override"},
     {"field_name": "member_reimbursement", "type": "A/N", "length": 1, "from": 230, "to": 230, "comments": "Y or N; Y= Member submitted claim or N= submitted by pharmacy"},
     {"field_name": "ndc", "type": "N", "length": 11, "from": 231, "to": 241, "comments": "Drug Identifier"},
-    {"field_name": "gpi", "type": "N", "length": 14, "from": 242, "to": 255, "comments": "Drug GPI Number"},
+    {"field_name": "gpi", "type": "A/N", "length": 14, "from": 242, "to": 255, "comments": "Drug GPI Number"},
     {"field_name": "drug_name", "type": "A/N", "length": 30, "from": 256, "to": 285, "comments": "Full Drug Label Name"},
     {"field_name": "manufacturer", "type": "A/N", "length": 10, "from": 286, "to": 295, "comments": "Drug manufacturer"},
-    {"field_name": "pack_size", "type": "N", "length": 11, "from": 296, "to": 306, "comments": "Drug package"},
+    {"field_name": "pack_size", "type": "A/N", "length": 11, "from": 296, "to": 306, "comments": "Drug package"},
     {"field_name": "drug_strength", "type": "A/N", "length": 10, "from": 307, "to": 316, "comments": "Drug strength"},
-    {"field_name": "quantity_dispensed", "type": "N", "length": 12, "from": 317, "to": 328, "comments": "Drug Quantity Dispensed"},
+    {"field_name": "quantity_dispensed", "type": "A/N", "length": 12, "from": 317, "to": 328, "comments": "Drug Quantity Dispensed"},
     {"field_name": "days_supply", "type": "N", "length": 4, "from": 329, "to": 332, "comments": "Days of Supply for Rx"},
     {"field_name": "daw", "type": "N", "length": 1, "from": 333, "to": 333, "comments": "Dispense as Written"},
     {"field_name": "pharmacy_nabp", "type": "A/N", "length": 12, "from": 334, "to": 345, "comments": "Pharmacy NABP Number"},

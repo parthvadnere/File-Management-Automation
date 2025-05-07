@@ -8,6 +8,7 @@ from client_manager.models import Client, Path, Task, OutputConfig, DownloadedFi
 from client_manager.forms import ClientForm, PathForm, TaskForm, OutputConfigForm
 from client_manager.tasks import download_files_task
 from celery.result import AsyncResult
+from datetime import datetime
 import logging
 import os
 import mimetypes
@@ -34,15 +35,18 @@ def client_list(request):
     clients = Client.objects.all()
     return render(request, 'client_manager/client_list.html', {'clients': clients})
 
-def download_files(request, client_id):
-    client = get_object_or_404(Client, id=client_id)
-    logger.info(f"download_files - client_id: {client_id}, client: {client.name}")
-    
-    task = download_files_task.delay(client_id)
-    logger.info(f"Task started with ID: {task.id}")
-    
-    request.session['task_id'] = task.id
-    return redirect('download_status', client_id=client_id)
+def download_files(request, client_id, date_filter=None):
+    if date_filter:
+        try:
+            selected_date = datetime.strptime(date_filter, '%Y-%m-%d').date()
+        except ValueError:
+            selected_date = None
+    else:
+        selected_date = None
+
+    # Trigger the Celery task with the selected date
+    task = download_files_task.delay(client_id, selected_date=selected_date)
+    return redirect(reverse('download_status', args=[client_id]) + f'?task_id={task.id}')
 
 def download_status(request, client_id):
     client = get_object_or_404(Client, id=client_id)
@@ -129,26 +133,23 @@ def client_details(request, client_id):
     client = get_object_or_404(Client, id=client_id)
     paths = Path.objects.filter(client=client)
     output_configs = OutputConfig.objects.filter(client=client)
-    downloaded_files = DownloadedFile.objects.filter(client=client)
+    downloaded_files = DownloadedFile.objects.filter(client=client).order_by('-downloaded_at')
+    selected_date = None
+    if downloaded_files.exists():
+        selected_date = downloaded_files.first().downloaded_at.date()
 
-    # Handle sorting
-    sort_by = request.GET.get('sort')
+    sort_by = request.GET.get('sort', 'downloaded_at')
     if sort_by:
-        if sort_by == 'filename':
-            downloaded_files = downloaded_files.order_by('original_filename')
-        elif sort_by == 'file_type':
-            downloaded_files = downloaded_files.order_by('file_type')
-        elif sort_by == 'path':
-            downloaded_files = downloaded_files.order_by('path')
-        elif sort_by == 'downloaded_at':
-            downloaded_files = downloaded_files.order_by('downloaded_at')
+        downloaded_files = downloaded_files.order_by(sort_by)
 
-    return render(request, 'client_manager/client_details.html', {
+    context = {
         'client': client,
         'paths': paths,
         'output_configs': output_configs,
         'downloaded_files': downloaded_files,
-    })
+        'selected_date': selected_date,
+    }
+    return render(request, 'client_manager/client_details.html', context)
 
 # Path CRUD Views (Updated for Nested Structure)
 def manage_paths(request, client_id):

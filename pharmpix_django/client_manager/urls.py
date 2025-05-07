@@ -9,6 +9,8 @@ urlpatterns = [
     # Download Files (Existing)
     path('clients/', views.client_list, name='client_list'),
     path('clients/download/<int:client_id>/', views.download_files, name='download_files'),
+    path('clients/download/<int:client_id>/<str:date_filter>/', views.download_files, name='download_files_with_date'),
+    # path('manage/clients/<int:client_id>/details/', views.client_details, name='client_details'),
     path('clients/download/status/<int:client_id>/', views.download_status, name='download_status'),
     path('get-task-status/', views.get_task_status, name='get_task_status'),
 

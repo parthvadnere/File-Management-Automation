@@ -93,6 +93,11 @@
 
     <div class="details-section">
         <h3>Downloaded Files</h3>
+        <div class="date-filter">
+            <label for="dateFilter">Select Date to Download:</label>
+            <input type="date" id="dateFilter" name="dateFilter" value="{{ selected_date|date:'Y-m-d' }}">
+            <button id="downloadFilesBtn" class="btn btn-primary" data-client-id="{{ client.id }}">Download Files</button>
+        </div>
         <div class="table-container">
             <table class="client-table">
                 <thead>
@@ -163,5 +168,7 @@
     </div>
     <script type="text/javascript">
         window.replaceUrlBase = "{% url 'replace_file' 0 %}";
+        // Define the base URL template for download_files_with_date
+        window.downloadUrlBase = "{% url 'download_files_with_date' client.id 'placeholder' %}";
     </script>
 {% endblock %}
