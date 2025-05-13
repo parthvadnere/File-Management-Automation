@@ -4,9 +4,10 @@ from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, FileRe
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-from client_manager.models import Client, Path, Task, OutputConfig, DownloadedFile
-from client_manager.forms import ClientForm, PathForm, TaskForm, OutputConfigForm
-from client_manager.tasks import download_files_task
+from django.contrib.auth.decorators import login_required
+from client_manager.models import Client, Path, Task, OutputConfig, DownloadedFile, FileConfig
+from client_manager.forms import ClientForm, PathForm, TaskForm, OutputConfigForm, DownloadForm, FileConfigForm
+from client_manager.tasks import download_files_task, download_10pm_files_task
 from celery.result import AsyncResult
 from datetime import datetime
 import logging
@@ -286,6 +287,101 @@ def delete_output_config(request, client_id, config_id):
         messages.success(request, "Output Config deleted successfully.")
         return redirect('manage_output_configs', client_id=client_id)
     return render(request, 'client_manager/confirm_delete.html', {'object': config, 'type': 'Output Config', 'client': client})
+
+def client_create(request):
+    if request.method == 'POST':
+        form = ClientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Client created successfully.')
+            return redirect('client_list')
+    else:
+        form = ClientForm()
+    return render(request, 'client_manager/client_form.html', {'form': form, 'title': 'Create Client'})
+
+def client_update(request, pk):
+    client = get_object_or_404(Client, pk=pk)
+    if request.method == 'POST':
+        form = ClientForm(request.POST, instance=client)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Client updated successfully.')
+            return redirect('client_list')
+    else:
+        form = ClientForm(instance=client)
+    return render(request, 'client_manager/client_form.html', {'form': form, 'title': 'Update Client'})
+
+
+def client_delete(request, pk):
+    client = get_object_or_404(Client, pk=pk)
+    if request.method == 'POST':
+        client.delete()
+        messages.success(request, 'Client deleted successfully.')
+        return redirect('client_list')
+    return render(request, 'client_manager/client_confirm_delete.html', {'client': client})
+
+
+def file_config_list(request, client_id):
+    client = get_object_or_404(Client, pk=client_id)
+    file_configs = FileConfig.objects.filter(client=client)
+    return render(request, 'client_manager/file_config_list.html', {'client': client, 'file_configs': file_configs})
+
+
+def file_config_create(request, client_id):
+    client = get_object_or_404(Client, pk=client_id)
+    if request.method == 'POST':
+        form = FileConfigForm(request.POST)
+        if form.is_valid():
+            file_config = form.save(commit=False)
+            file_config.client = client
+            file_config.save()
+            messages.success(request, 'File configuration created successfully.')
+            return redirect('file_config_list', client_id=client.id)
+    else:
+        form = FileConfigForm()
+    return render(request, 'client_manager/file_config_form.html', {'form': form, 'client': client, 'title': 'Create File Configuration'})
+
+
+def file_config_update(request, pk):
+    file_config = get_object_or_404(FileConfig, pk=pk)
+    if request.method == 'POST':
+        form = FileConfigForm(request.POST, instance=file_config)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'File configuration updated successfully.')
+            return redirect('file_config_list', client_id=file_config.client.id)
+    else:
+        form = FileConfigForm(instance=file_config)
+    return render(request, 'client_manager/file_config_form.html', {'form': form, 'client': file_config.client, 'title': 'Update File Configuration'})
+
+
+def file_config_delete(request, pk):
+    file_config = get_object_or_404(FileConfig, pk=pk)
+    if request.method == 'POST':
+        client_id = file_config.client.id
+        file_config.delete()
+        messages.success(request, 'File configuration deleted successfully.')
+        return redirect('file_config_list', client_id=client_id)
+    return render(request, 'client_manager/file_config_confirm_delete.html', {'file_config': file_config})
+
+
+def download_10pm_files(request):
+    if request.method == 'POST':
+        form = DownloadForm(request.POST)
+        if form.is_valid():
+            selected_date = form.cleaned_data['selected_date']
+            selected_date_str = selected_date.strftime('%Y-%m-%d') if selected_date else None
+            # Trigger the Celery task
+            download_10pm_files_task.delay(selected_date=selected_date_str)
+            messages.success(request, '10PM file download task has been triggered.')
+            return redirect('downloaded_files')
+    else:
+        form = DownloadForm()
+    return render(request, 'client_manager/download_10pm.html', {'form': form})
+
+def downloaded_files(request):
+    downloaded_files = DownloadedFile.objects.all().order_by('-downloaded_at')
+    return render(request, 'client_manager/downloaded_files.html', {'downloaded_files': downloaded_files})
 
 # def view_file(request, file_id):
 #     downloaded_file = get_object_or_404(DownloadedFile, id=file_id)

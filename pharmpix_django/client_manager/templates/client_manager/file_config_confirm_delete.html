@@ -1,0 +1,12 @@
+<!-- client_manager/templates/client_manager/file_config_confirm_delete.html -->
+{% extends 'client_manager/base.html' %}
+
+{% block content %}
+<h1>Delete File Configuration</h1>
+<p>Are you sure you want to delete the file configuration for "{{ file_config.file_type }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="{% url 'file_config_list' client_id=file_config.client.id %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

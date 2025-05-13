@@ -1,13 +1,12 @@
 # client_manager/forms.py
 from django import forms
-from .models import Client, Path, Task, OutputConfig
+from .models import Client, Path, Task, OutputConfig, FileConfig
 
 class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
-        fields = ['name', 'description', 'sftp_host', 'sftp_username', 'sftp_password', 'sftp_port']
+        fields = ['name', 'sftp_host', 'sftp_username', 'sftp_password', 'sftp_port', 'is_active']
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 3}),
             'sftp_password': forms.PasswordInput(),
         }
 
@@ -18,6 +17,18 @@ class PathForm(forms.ModelForm):
         widgets = {
             'file_types': forms.TextInput(attrs={'placeholder': 'e.g., [".txt", ".xlsx"]'}),
         }
+
+class FileConfigForm(forms.ModelForm):
+    class Meta:
+        model = FileConfig
+        fields = ['file_type', 'remote_path', 'file_pattern', 'local_path', 'renamed_pattern', 'is_active']
+
+class DownloadForm(forms.Form):
+    selected_date = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=False,
+        help_text="Select a date for downloading files (defaults to today if not specified)."
+    )
 
 class TaskForm(forms.ModelForm):
     class Meta:
@@ -31,3 +42,10 @@ class OutputConfigForm(forms.ModelForm):
     class Meta:
         model = OutputConfig
         fields = ['client', 'path', 'task', 'file_type', 'output_dir', 'filename_template']
+
+class DownloadForm(forms.Form):
+    selected_date = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=False,
+        help_text="Select a date for downloading files (defaults to today if not specified)."
+    )

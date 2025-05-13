@@ -1,0 +1,37 @@
+<!-- client_manager/templates/client_manager/downloaded_files.html -->
+{% extends 'client_manager/base.html' %}
+
+{% block content %}
+<h1>Downloaded Files</h1>
+<a href="{% url 'client_list' %}" class="btn btn-secondary">Back to Clients</a>
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th>Client</th>
+            <th>Original Filename</th>
+            <th>File Type</th>
+            <th>Path</th>
+            <th>Validated</th>
+            <th>Errors</th>
+            <th>Downloaded At</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for file in downloaded_files %}
+        <tr>
+            <td>{{ file.client.name }}</td>
+            <td>{{ file.original_filename }}</td>
+            <td>{{ file.file_type }}</td>
+            <td>{{ file.path }}</td>
+            <td>{{ file.is_validated|yesno:"Yes,No" }}</td>
+            <td>{{ file.validation_errors|default:"None" }}</td>
+            <td>{{ file.downloaded_at }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">No downloaded files found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

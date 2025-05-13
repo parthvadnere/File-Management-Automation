@@ -1,0 +1,12 @@
+<!-- client_manager/templates/client_manager/download_10pm.html -->
+{% extends 'client_manager/base.html' %}
+
+{% block content %}
+<h1>Trigger 10PM File Download</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Trigger Download</button>
+    <a href="{% url 'client_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

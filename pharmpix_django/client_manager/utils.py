@@ -86,6 +86,7 @@ CLIENT_ACCOUNT_CODE_RULES = {
 # client_manager/utils.py (continued)
 import logging
 import re
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -153,3 +154,22 @@ def validate_txt_file(file_content, client_name):
     except Exception as e:
         logger.error(f"Error validating file for client {client_name}: {str(e)}", exc_info=True)
         return {"is_valid": False, "errors": [f"Error validating file: {str(e)}"]}
+
+
+def validate_file(file_path):
+    """
+    Validate a file: check if it exists and is not empty.
+    Returns a dict with validation result and errors (if any).
+    """
+    validation_result = {"is_valid": True, "errors": []}
+
+    if not os.path.exists(file_path):
+        validation_result["is_valid"] = False
+        validation_result["errors"].append(f"File does not exist: {file_path}")
+        return validation_result
+
+    if os.path.getsize(file_path) == 0:
+        validation_result["is_valid"] = False
+        validation_result["errors"].append(f"File is empty: {file_path}")
+
+    return validation_result

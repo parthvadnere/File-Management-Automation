@@ -139,5 +139,6 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
 CELERY_IGNORE_RESULT = False  # Ensure results are stored
 CELERY_TRACK_STARTED = True  # Track task state

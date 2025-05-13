@@ -1,0 +1,12 @@
+<!-- client_manager/templates/client_manager/file_config_form.html -->
+{% extends 'client_manager/base.html' %}
+
+{% block content %}
+<h1>{{ title }} for {{ client.name }}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{% url 'file_config_list' client_id=client.id %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

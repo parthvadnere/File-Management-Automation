@@ -2,26 +2,38 @@
 {% extends 'client_manager/base.html' %}
 
 {% block content %}
-    <h2>Download Files</h2>
-    <div class="table-container">
-        <table class="client-table">
-            <thead>
-                <tr>
-                    <th>Client Name</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for client in clients %}
-                    <tr>
-                        <td>{{ client.name }}</td>
-                        <td>
-                            <a href="{% url 'download_files' client.id %}" class="btn btn-primary"><i class="fas fa-download"></i> Download Files</a>
-                            <a href="{% url 'client_details' client.id %}" class="btn btn-info"><i class="fas fa-info-circle"></i> Details</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+<h1>Clients</h1>
+<a href="{% url 'client_create' %}" class="btn btn-primary">Add Client</a>
+<a href="{% url 'download_10pm_files' %}" class="btn btn-success">Trigger 10PM Task</a>
+<a href="{% url 'downloaded_files' %}" class="btn btn-info">View Downloaded Files</a>
+<div class="table-container">
+<table class="table mt-3 client-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>SFTP Host</th>
+            <th>Active</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in clients %}
+        <tr>
+            <td>{{ client.name }}</td>
+            <td>{{ client.sftp_host }}</td>
+            <td>{{ client.is_active|yesno:"Yes,No" }}</td>
+            <td>
+                <a href="{% url 'file_config_list' client_id=client.id %}" class="btn btn-sm btn-info">File Configs</a>
+                <a href="{% url 'client_update' pk=client.id %}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{% url 'client_delete' pk=client.id %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No clients found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
 {% endblock %}

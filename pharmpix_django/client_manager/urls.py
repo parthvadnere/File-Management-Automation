@@ -46,4 +46,16 @@ urlpatterns = [
 
     #SFTP Management
     path('files/send-to-sftp/', views.send_to_sftp, name='send_to_sftp'),
+
+
+    # start work for 10PM task
+    path('clients/create/', views.client_create, name='client_create'),
+    path('clients/<int:pk>/update/', views.client_update, name='client_update'),
+    path('clients/<int:pk>/delete/', views.client_delete, name='client_delete'),
+    path('clients/<int:client_id>/file-configs/', views.file_config_list, name='file_config_list'),
+    path('clients/<int:client_id>/file-configs/create/', views.file_config_create, name='file_config_create'),
+    path('file-configs/<int:pk>/update/', views.file_config_update, name='file_config_update'),
+    path('file-configs/<int:pk>/delete/', views.file_config_delete, name='file_config_delete'),
+    path('download-10pm/', views.download_10pm_files, name='download_10pm_files'),
+    path('downloaded-files/', views.downloaded_files, name='downloaded_files'),
 ]
