@@ -43,7 +43,13 @@ class SFTPClient:
         """
         try:
             # Replace date placeholders in file pattern
-            file_name = file_pattern.replace('YYYYMMDD', date_str)
+            # file_name = file_pattern.replace('YYYYMMDD', date_str)
+            if "YYYYMMDD" in file_pattern:
+                file_name = file_pattern.replace("YYYYMMDD", date_str)
+            elif "MMDDYYYY" in file_pattern:
+                file_name = file_pattern.replace("MMDDYYYY", date_str)
+            else:
+                file_name = file_pattern
             file_name = file_name.replace('HHMMSS', datetime.now().strftime('%H%M%S'))
             remote_file_path = f"{remote_path}/{file_name}"
 

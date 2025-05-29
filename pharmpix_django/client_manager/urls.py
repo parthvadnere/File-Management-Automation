@@ -39,6 +39,11 @@ urlpatterns = [
     path('manage/clients/<int:client_id>/output-configs/edit/<int:config_id>/', views.edit_output_config, name='edit_output_config'),
     path('manage/clients/<int:client_id>/output-configs/delete/<int:config_id>/', views.delete_output_config, name='delete_output_config'),
 
+    # FileConfig Management (Nested under Client)
+    path('<int:client_id>/file-configs/add/', views.add_file_config, name='add_file_config'),
+    path('file-configs/edit/<int:config_id>/', views.edit_file_config, name='edit_file_config'),
+    path('file-configs/delete/<int:config_id>/', views.delete_file_config, name='delete_file_config'),
+
     # File Management
     path('files/view/<int:file_id>/', views.view_file, name='view_file'),
     path('files/replace/<int:file_id>/', views.replace_file, name='replace_file'),
@@ -49,13 +54,13 @@ urlpatterns = [
 
 
     # start work for 10PM task
-    path('clients/create/', views.client_create, name='client_create'),
-    path('clients/<int:pk>/update/', views.client_update, name='client_update'),
-    path('clients/<int:pk>/delete/', views.client_delete, name='client_delete'),
-    path('clients/<int:client_id>/file-configs/', views.file_config_list, name='file_config_list'),
-    path('clients/<int:client_id>/file-configs/create/', views.file_config_create, name='file_config_create'),
-    path('file-configs/<int:pk>/update/', views.file_config_update, name='file_config_update'),
-    path('file-configs/<int:pk>/delete/', views.file_config_delete, name='file_config_delete'),
-    path('download-10pm/', views.download_10pm_files, name='download_10pm_files'),
-    path('downloaded-files/', views.downloaded_files, name='downloaded_files'),
+    # path('clients/create/', views.client_create, name='client_create'),
+    # path('clients/<int:pk>/update/', views.client_update, name='client_update'),
+    # path('clients/<int:pk>/delete/', views.client_delete, name='client_delete'),
+    # path('clients/<int:client_id>/file-configs/', views.file_config_list, name='file_config_list'),
+    # path('clients/<int:client_id>/file-configs/create/', views.file_config_create, name='file_config_create'),
+    # path('file-configs/<int:pk>/update/', views.file_config_update, name='file_config_update'),
+    # path('file-configs/<int:pk>/delete/', views.file_config_delete, name='file_config_delete'),
+    # path('download-10pm/', views.download_10pm_files, name='download_10pm_files'),
+    # path('downloaded-files/', views.downloaded_files, name='downloaded_files'),
 ]

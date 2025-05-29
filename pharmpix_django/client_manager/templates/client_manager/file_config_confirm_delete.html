@@ -7,6 +7,6 @@
 <form method="post">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger">Yes, Delete</button>
-    <a href="{% url 'file_config_list' client_id=file_config.client.id %}" class="btn btn-secondary">Cancel</a>
+    <a href="{% url 'client_details' file_config.client.id %}" class="btn btn-secondary">Cancel</a>
 </form>
 {% endblock %}

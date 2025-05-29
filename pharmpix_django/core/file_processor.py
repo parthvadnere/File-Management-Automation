@@ -37,7 +37,6 @@ def process_client(client_name, client_config, client_obj, download_files=True, 
             if response and isinstance(response, dict) and 'rows' in response:
                 files = extract_file_info(response)
                 files = sorted(files, key=lambda x: x['Date'], reverse=True)
-                
                 if file_pattern:
                     logger.info(f"Found {len(files)} {file_type} files matching pattern '{file_pattern}' in {path}")
                 else:
@@ -46,17 +45,24 @@ def process_client(client_name, client_config, client_obj, download_files=True, 
                 # Filter files by selected date
                 if selected_date:
                     filtered_files = []
-                    for file_info in files:
-                        file_date_str = file_info['Date'].split()[0]  # e.g., "2025-04-29"
-                        try:
-                            file_date = datetime.strptime(file_date_str, '%Y-%m-%d').date()
-                            if file_date == selected_date:
-                                filtered_files.append(file_info)
-                        except ValueError:
-                            logger.warning(f"Invalid date format for file {file_info['Filename']}: {file_date_str}")
-                            continue
-                    files = filtered_files
-                    logger.info(f"After date filter ({selected_date}), {len(files)} {file_type} files remain")
+                    try:
+                        selected_date_obj = datetime.strptime(selected_date, '%Y-%m-%d').date()
+                    except ValueError:
+                        logger.error(f"Invalid format for selected_date: {selected_date}")
+                        selected_date_obj = None
+
+                    if selected_date_obj:
+                        for file_info in files:
+                            file_date_str = file_info['Date'].split()[0]  # e.g., "2025-04-29"
+                            try:
+                                file_date = datetime.strptime(file_date_str, '%Y-%m-%d').date()
+                                if file_date == selected_date_obj:
+                                    filtered_files.append(file_info)
+                            except ValueError:
+                                logger.warning(f"Invalid date format for file {file_info['Filename']}: {file_date_str}")
+                                continue
+                        files = filtered_files
+                        logger.info(f"After date filter ({selected_date}), {len(files)} {file_type} files remain")
                 
                 if not files:
                     logger.info(f"No files match the selected date for {path} with file type {file_type}")

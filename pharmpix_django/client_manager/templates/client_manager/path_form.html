@@ -2,7 +2,7 @@
 {% extends 'client_manager/base.html' %}
 
 {% block content %}
-    <h2>{{ action }} Path for {{ client.name }}</h2>
+    <h2>{{ title }} for {{ client.name }}</h2>
     <div class="form-container">
         <form method="POST" class="client-form">
             {% csrf_token %}

@@ -49,3 +49,4 @@ class DownloadForm(forms.Form):
         required=False,
         help_text="Select a date for downloading files (defaults to today if not specified)."
     )
+    task_type = forms.ChoiceField(choices=[('5PM', '5PM'), ('10PM', '10PM')], required=True)

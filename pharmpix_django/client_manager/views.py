@@ -100,57 +100,112 @@ def add_client(request):
         form = ClientForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Client added successfully.")
+            messages.success(request, 'Client created successfully.')
             return redirect('manage_clients')
-        else:
-            messages.error(request, "Please correct the errors below.")
     else:
         form = ClientForm()
-    return render(request, 'client_manager/client_form.html', {'form': form, 'action': 'Add'})
+    return render(request, 'client_manager/client_form.html', {'form': form, 'title': 'Add Client'})
 
 def edit_client(request, client_id):
-    client = get_object_or_404(Client, id=client_id)
+    client = get_object_or_404(Client, pk=client_id)
     if request.method == 'POST':
         form = ClientForm(request.POST, instance=client)
         if form.is_valid():
             form.save()
-            messages.success(request, "Client updated successfully.")
-            return redirect('manage_clients')
-        else:
-            messages.error(request, "Please correct the errors below.")
+            messages.success(request, 'Client updated successfully.')
+            return redirect('client_details', client_id=client.id)
     else:
         form = ClientForm(instance=client)
-    return render(request, 'client_manager/client_form.html', {'form': form, 'action': 'Edit'})
+    return render(request, 'client_manager/client_form.html', {'form': form, 'title': 'Edit Client'})
 
 def delete_client(request, client_id):
-    client = get_object_or_404(Client, id=client_id)
+    client = get_object_or_404(Client, pk=client_id)
     if request.method == 'POST':
         client.delete()
-        messages.success(request, "Client deleted successfully.")
+        messages.success(request, 'Client deleted successfully.')
         return redirect('manage_clients')
-    return render(request, 'client_manager/confirm_delete.html', {'object': client, 'type': 'Client'})
+    return render(request, 'client_manager/client_confirm_delete.html', {'client': client})
+
 
 def client_details(request, client_id):
-    client = get_object_or_404(Client, id=client_id)
-    paths = Path.objects.filter(client=client)
-    output_configs = OutputConfig.objects.filter(client=client)
+    client = get_object_or_404(Client, pk=client_id)
+    paths = Path.objects.filter(client=client)  # 5PM paths
+    output_configs = OutputConfig.objects.filter(client=client)  # 5PM output configs
+    file_configs = FileConfig.objects.filter(client=client)  # 10PM file configs
     downloaded_files = DownloadedFile.objects.filter(client=client).order_by('-downloaded_at')
-    selected_date = None
-    if downloaded_files.exists():
-        selected_date = downloaded_files.first().downloaded_at.date()
 
-    sort_by = request.GET.get('sort', 'downloaded_at')
-    if sort_by:
-        downloaded_files = downloaded_files.order_by(sort_by)
+    # Handle 5PM download
+    if request.method == 'POST' and 'download_5pm' in request.POST:
+        form_5pm = DownloadForm(request.POST, prefix='5pm')
+        if form_5pm.is_valid():
+            selected_date = form_5pm.cleaned_data['selected_date']
+            selected_date_str = selected_date.strftime('%Y-%m-%d') if selected_date else None
+            download_files_task.delay(client_id=client.id, selected_date=selected_date_str)
+            messages.success(request, '5PM file download task has been triggered.')
+            return redirect('client_details', client_id=client.id)
+    else:
+        form_5pm = DownloadForm(prefix='5pm')
 
-    context = {
+    # Handle 10PM download
+    if request.method == 'POST' and 'download_10pm' in request.POST:
+        logger.info(f"10PM download request received for client_id: {client_id}, POST data: {request.POST}")
+        form_10pm = DownloadForm(request.POST, prefix='10pm')
+        if form_10pm.is_valid():
+            logger.info(f"10PM form is valid, selected_date: {form_10pm.cleaned_data['selected_date']}")
+            selected_date = form_10pm.cleaned_data['selected_date']
+            selected_date_str = selected_date.strftime('%Y-%m-%d') if selected_date else None
+            download_10pm_files_task.delay(selected_date=selected_date_str)
+            messages.success(request, '10PM file download task has been triggered.')
+            return redirect('client_details', client_id=client.id)
+        else:
+            logger.error(f"10PM form validation failed: {form_10pm.errors}")
+    else:
+        form_10pm = DownloadForm(prefix='10pm')
+
+    return render(request, 'client_manager/client_details.html', {
         'client': client,
         'paths': paths,
         'output_configs': output_configs,
+        'file_configs': file_configs,
         'downloaded_files': downloaded_files,
-        'selected_date': selected_date,
-    }
-    return render(request, 'client_manager/client_details.html', context)
+        'form_5pm': form_5pm,
+        'form_10pm': form_10pm,
+    })
+
+def add_file_config(request, client_id):
+    client = get_object_or_404(Client, pk=client_id)
+    if request.method == 'POST':
+        form = FileConfigForm(request.POST)
+        if form.is_valid():
+            file_config = form.save(commit=False)
+            file_config.client = client
+            file_config.save()
+            messages.success(request, 'File configuration added successfully.')
+            return redirect('client_details', client_id=client.id)
+    else:
+        form = FileConfigForm()
+    return render(request, 'client_manager/file_config_form.html', {'form': form, 'client': client, 'title': 'Add File Configuration'})
+
+def edit_file_config(request, config_id):
+    file_config = get_object_or_404(FileConfig, pk=config_id)
+    if request.method == 'POST':
+        form = FileConfigForm(request.POST, instance=file_config)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'File configuration updated successfully.')
+            return redirect('client_details', client_id=file_config.client.id)
+    else:
+        form = FileConfigForm(instance=file_config)
+    return render(request, 'client_manager/file_config_form.html', {'form': form, 'client': file_config.client, 'title': 'Edit File Configuration'})
+
+def delete_file_config(request, config_id):
+    file_config = get_object_or_404(FileConfig, pk=config_id)
+    if request.method == 'POST':
+        client_id = file_config.client.id
+        file_config.delete()
+        messages.success(request, 'File configuration deleted successfully.')
+        return redirect('client_details', client_id=client_id)
+    return render(request, 'client_manager/file_config_confirm_delete.html', {'file_config': file_config})
 
 # Path CRUD Views (Updated for Nested Structure)
 def manage_paths(request, client_id):
@@ -160,46 +215,38 @@ def manage_paths(request, client_id):
     return render(request, 'client_manager/manage_paths.html', {'client': client, 'paths': paths})
 
 def add_path(request, client_id):
-    client = get_object_or_404(Client, id=client_id)
+    client = get_object_or_404(Client, pk=client_id)
     if request.method == 'POST':
         form = PathForm(request.POST)
         if form.is_valid():
-            print("Form is valid")
             path = form.save(commit=False)
             path.client = client
             path.save()
-            logger.info(f"Path added: {path.path} for client: {client.name}")
-            messages.success(request, "Path added successfully.")
-            return redirect('manage_paths', client_id=client_id)
-        else:
-            messages.error(request, "Please correct the errors below.")
+            messages.success(request, 'Path added successfully.')
+            return redirect('client_details', client_id=client.id)
     else:
-        form = PathForm(initial={'client': client})
-    return render(request, 'client_manager/path_form.html', {'form': form, 'action': 'Add', 'client': client})
+        form = PathForm()
+    return render(request, 'client_manager/path_form.html', {'form': form, 'client': client, 'title': 'Add Path'})
 
 def edit_path(request, client_id, path_id):
-    client = get_object_or_404(Client, id=client_id)
-    path = get_object_or_404(Path, id=path_id, client=client)
+    path = get_object_or_404(Path, pk=path_id, client_id=client_id)
     if request.method == 'POST':
         form = PathForm(request.POST, instance=path)
         if form.is_valid():
             form.save()
-            messages.success(request, "Path updated successfully.")
-            return redirect('manage_paths', client_id=client_id)
-        else:
-            messages.error(request, "Please correct the errors below.")
+            messages.success(request, 'Path updated successfully.')
+            return redirect('client_details', client_id=client_id)
     else:
         form = PathForm(instance=path)
-    return render(request, 'client_manager/path_form.html', {'form': form, 'action': 'Edit', 'client': client})
+    return render(request, 'client_manager/path_form.html', {'form': form, 'client': path.client, 'title': 'Edit Path'})
 
 def delete_path(request, client_id, path_id):
-    client = get_object_or_404(Client, id=client_id)
-    path = get_object_or_404(Path, id=path_id, client=client)
+    path = get_object_or_404(Path, pk=path_id, client_id=client_id)
     if request.method == 'POST':
         path.delete()
-        messages.success(request, "Path deleted successfully.")
-        return redirect('manage_paths', client_id=client_id)
-    return render(request, 'client_manager/confirm_delete.html', {'object': path, 'type': 'Path', 'client': client})
+        messages.success(request, 'Path deleted successfully.')
+        return redirect('client_details', client_id=client_id)
+    return render(request, 'client_manager/path_confirm_delete.html', {'path': path})
 
 # Task CRUD Views
 def manage_tasks(request):
@@ -248,45 +295,38 @@ def manage_output_configs(request, client_id):
     return render(request, 'client_manager/manage_output_configs.html', {'client': client, 'configs': configs})
 
 def add_output_config(request, client_id):
-    client = get_object_or_404(Client, id=client_id)
+    client = get_object_or_404(Client, pk=client_id)
     if request.method == 'POST':
         form = OutputConfigForm(request.POST)
         if form.is_valid():
             config = form.save(commit=False)
             config.client = client
             config.save()
-            print("Output Config added successfully")
-            messages.success(request, "Output Config added successfully.")
-            return redirect('manage_output_configs', client_id=client_id)
-        else:
-            messages.error(request, "Please correct the errors below.")
+            messages.success(request, 'Output configuration added successfully.')
+            return redirect('client_details', client_id=client.id)
     else:
-        form = OutputConfigForm(initial={'client': client})
-    return render(request, 'client_manager/output_config_form.html', {'form': form, 'action': 'Add', 'client': client})
+        form = OutputConfigForm()
+    return render(request, 'client_manager/output_config_form.html', {'form': form, 'client': client, 'title': 'Add Output Config'})
 
 def edit_output_config(request, client_id, config_id):
-    client = get_object_or_404(Client, id=client_id)
-    config = get_object_or_404(OutputConfig, id=config_id, client=client)
+    config = get_object_or_404(OutputConfig, pk=config_id, client_id=client_id)
     if request.method == 'POST':
         form = OutputConfigForm(request.POST, instance=config)
         if form.is_valid():
             form.save()
-            messages.success(request, "Output Config updated successfully.")
-            return redirect('manage_output_configs', client_id=client_id)
-        else:
-            messages.error(request, "Please correct the errors below.")
+            messages.success(request, 'Output configuration updated successfully.')
+            return redirect('client_details', client_id=client_id)
     else:
         form = OutputConfigForm(instance=config)
-    return render(request, 'client_manager/output_config_form.html', {'form': form, 'action': 'Edit', 'client': client})
+    return render(request, 'client_manager/output_config_form.html', {'form': form, 'client': config.client, 'title': 'Edit Output Config'})
 
 def delete_output_config(request, client_id, config_id):
-    client = get_object_or_404(Client, id=client_id)
-    config = get_object_or_404(OutputConfig, id=config_id, client=client)
+    config = get_object_or_404(OutputConfig, pk=config_id, client_id=client_id)
     if request.method == 'POST':
         config.delete()
-        messages.success(request, "Output Config deleted successfully.")
-        return redirect('manage_output_configs', client_id=client_id)
-    return render(request, 'client_manager/confirm_delete.html', {'object': config, 'type': 'Output Config', 'client': client})
+        messages.success(request, 'Output configuration deleted successfully.')
+        return redirect('client_details', client_id=client_id)
+    return render(request, 'client_manager/output_config_confirm_delete.html', {'config': config})
 
 def client_create(request):
     if request.method == 'POST':

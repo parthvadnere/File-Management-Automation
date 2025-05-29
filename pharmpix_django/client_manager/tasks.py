@@ -170,7 +170,9 @@ def download_10pm_files_task(selected_date=None):
 
         for client in clients:
             logger.info(f"\n========== PROCESSING CLIENT: {client.name} ==========")
-            
+            if client.name == "Allied":
+                date_str = date_obj.strftime('%m%d%Y')
+            logger.info(f"date_str::{date_str}")
             # Check if the client has SFTP credentials
             if not (client.sftp_host and client.sftp_username and client.sftp_password):
                 logger.warning(f"SFTP credentials missing for client {client.name}. Skipping.")

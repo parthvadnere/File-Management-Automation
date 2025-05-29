@@ -400,7 +400,6 @@ class PharmpixApiClient:
             path__path=path,
             file_type=file_type
         )
-
         for config in configs:
             # Replace date placeholders in the filename template
             output_filename = config.filename_template.replace('{yyyymmdd}', yyyymmdd).replace('{mmddyyyy}', mmddyyyy)

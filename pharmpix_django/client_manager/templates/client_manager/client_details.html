@@ -17,8 +17,9 @@
         </div>
     </div>
 
+    <!-- 5PM Paths -->
     <div class="details-section">
-        <h3>Paths</h3>
+        <h3>5PM Paths</h3>
         <a href="{% url 'add_path' client.id %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Path</a>
         <div class="table-container">
             <table class="client-table">
@@ -53,8 +54,9 @@
         </div>
     </div>
 
+    <!-- 5PM Output Configurations -->
     <div class="details-section">
-        <h3>Output Configurations</h3>
+        <h3>5PM Output Configurations</h3>
         <a href="{% url 'add_output_config' client.id %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Output Config</a>
         <div class="table-container">
             <table class="client-table">
@@ -91,12 +93,64 @@
         </div>
     </div>
 
+    <!-- 10PM File Configurations -->
+    <div class="details-section">
+        <h3>10PM File Configurations</h3>
+        <a href="{% url 'add_file_config' client.id %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add File Config</a>
+        <div class="table-container">
+            <table class="client-table">
+                <thead>
+                    <tr>
+                        <th>File Type</th>
+                        <th>Remote Path</th>
+                        <th>File Pattern</th>
+                        <th>Local Path</th>
+                        <th>Renamed Pattern</th>
+                        <th>Active</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for config in file_configs %}
+                    <tr>
+                        <td>{{ config.get_file_type_display }}</td>
+                        <td>{{ config.remote_path }}</td>
+                        <td>{{ config.file_pattern }}</td>
+                        <td>{{ config.local_path }}</td>
+                        <td>{{ config.renamed_pattern }}</td>
+                        <td>{{ config.is_active|yesno:"Yes,No" }}</td>
+                        <td>
+                            <a href="{% url 'edit_file_config' config.id %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                            <a href="{% url 'delete_file_config' config.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7">No file configurations found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <div class="details-section">
         <h3>Downloaded Files</h3>
-        <div class="date-filter">
-            <label for="dateFilter">Select Date to Download:</label>
-            <input type="date" id="dateFilter" name="dateFilter" value="{{ selected_date|date:'Y-m-d' }}">
-            <button id="downloadFilesBtn" class="btn btn-primary" data-client-id="{{ client.id }}">Download Files</button>
+        <div class="download-buttons">
+            <!-- 5PM Download -->
+            <form method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="download_5pm" value="1">
+                {{ form_5pm.as_p }}
+                <button type="submit" class="btn btn-primary">Download 5PM Files</button>
+            </form>
+            <!-- 10PM Download -->
+            <form method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="download_10pm" value="1">
+                {{ form_10pm.as_p }}
+                <button type="submit" class="btn btn-primary">Download 10PM Files</button>
+            </form>
         </div>
         <div class="table-container">
             <table class="client-table">

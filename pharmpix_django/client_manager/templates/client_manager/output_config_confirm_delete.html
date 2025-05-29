@@ -1,0 +1,12 @@
+<!-- client_manager/templates/client_manager/output_config_confirm_delete.html -->
+{% extends 'client_manager/base.html' %}
+
+{% block content %}
+    <h2>Delete Output Configuration</h2>
+    <p>Are you sure you want to delete this output configuration for client "{{ config.client.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'client_details' config.client.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

@@ -26,9 +26,9 @@ FILE_LAYOUT = [
     {"field_name": "gpi", "type": "A/N", "length": 14, "from": 242, "to": 255, "comments": "Drug GPI Number"},
     {"field_name": "drug_name", "type": "A/N", "length": 30, "from": 256, "to": 285, "comments": "Full Drug Label Name"},
     {"field_name": "manufacturer", "type": "A/N", "length": 10, "from": 286, "to": 295, "comments": "Drug manufacturer"},
-    {"field_name": "pack_size", "type": "A/N", "length": 11, "from": 296, "to": 306, "comments": "Drug package"},
+    {"field_name": "pack_size", "type": "N", "length": 11, "from": 296, "to": 306, "comments": "Drug package"},
     {"field_name": "drug_strength", "type": "A/N", "length": 10, "from": 307, "to": 316, "comments": "Drug strength"},
-    {"field_name": "quantity_dispensed", "type": "A/N", "length": 12, "from": 317, "to": 328, "comments": "Drug Quantity Dispensed"},
+    {"field_name": "quantity_dispensed", "type": "N", "length": 12, "from": 317, "to": 328, "comments": "Drug Quantity Dispensed"},
     {"field_name": "days_supply", "type": "N", "length": 4, "from": 329, "to": 332, "comments": "Days of Supply for Rx"},
     {"field_name": "daw", "type": "N", "length": 1, "from": 333, "to": 333, "comments": "Dispense as Written"},
     {"field_name": "pharmacy_nabp", "type": "A/N", "length": 12, "from": 334, "to": 345, "comments": "Pharmacy NABP Number"},
@@ -109,9 +109,9 @@ def validate_txt_file(file_content, client_name):
 
         # Validate each line
         for line_num, line in enumerate(lines, start=1):
-            if len(line) < 1251:  # Total length as per layout
-                errors.append(f"Line {line_num}: Line length is {len(line)}, expected 1251.")
-                continue
+            # if len(line) < 1251:  # Total length as per layout
+            #     errors.append(f"Line {line_num}: Line length is {len(line)}, expected 1251.")
+            #     continue
 
             # Validate each field based on the layout
             for field in FILE_LAYOUT:
