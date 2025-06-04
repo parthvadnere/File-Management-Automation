@@ -8,7 +8,7 @@ from core.file_processor import process_client
 import os
 from django.core.files import File
 import paramiko
-from client_manager.utils import validate_txt_file, validate_file
+from client_manager.utils import validate_txt_file, validate_file, validate_umr_accumulator_file, validate_PBLXV_file_with_auto_date, validate_and_correct_RxEOB_umr_accumulator_file, validate_eligibility_file
 from datetime import datetime
 from core.sftp_client import SFTPClient
 
@@ -93,10 +93,43 @@ def download_files_task(client_id, username="it@transparentrx.com", password="_4
                 logger.info(f"client: {client_name}, file_content: {file_content[:50]}..., original_filename: {file_name}, file_type: {file_type}, path: {path}")
 
                 validation_result = {"is_valid": True, "errors": []}
+                logger.info(f"file_type.lower(): {file_type.lower()}")
                 if file_type.lower() == 'txt':
-                    validation_result = validate_txt_file(file_content, client_name)
-                    logger.info(f"Validation result for {file_name}: {validation_result}")
-
+                    if "RxEOB" in file_path and "Accum" in file_path or "ACCUM" in file_path:
+                        # UMR Accumulator file validation
+                        logger.info("Validating UMR Accumulator file")
+                        validation_result = validate_and_correct_RxEOB_umr_accumulator_file(
+                            file_content=file_content,
+                            client_name=client_name,  # Replace with actual client name if known
+                            output_file_path="corrected_EMP_Accum_20250529_001.txt"
+                        )
+                    elif "UMR-Accum-EFTP-to-SFTP" in file_path and "PBLXV426_P_" in file_path:
+                        # PBLXV426_P_ claims files validation logic (using existing layout)
+                        logger.info("Validating PBLXV426_P_ claims file")
+                        validation_result = validate_umr_accumulator_file(file_content, client_name)
+                        # validation_result = validate_PBLXV_file_with_auto_date(
+                        #     file_content=file_content,
+                        #     client_name=client_name,
+                        #     filename=file_name,
+                        #     selected_date=selected_date
+                        # )
+                    elif "Eligibility" in file_path:
+                        # RxEOB claims files validation logic (using existing layout)
+                        logger.info("Validating RxEOB Eligibility txt file")
+                        validation_result = validate_eligibility_file(file_content, client_name)
+                    else:
+                        # Regular claims files validation logic
+                        logger.info("Validating claims file")
+                        validation_result = validate_txt_file(file_content, client_name)
+                elif file_type.lower() == 'xlsx':
+                    # Add xlsx file validation logic if needed
+                    logger.info("XLSX file validation not implemented yet")
+                    validation_result = {"is_valid": True, "errors": []}
+                else:
+                    validation_result = {"is_valid": False, "errors": [f"Unsupported file type: {file_type}"]}
+                # if file_type.lower() == 'xlsx':
+                #     # add xlsx file validation logic if needed
+                #     pass
                 downloaded_file = DownloadedFile(
                     client=client,
                     file_content=file_content,
