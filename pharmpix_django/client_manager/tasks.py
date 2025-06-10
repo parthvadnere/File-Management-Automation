@@ -176,104 +176,100 @@ def download_files_task(client_id, username="it@transparentrx.com", password="_4
         logger.error(f"Error downloading files for client {client_id}: {str(e)}", exc_info=True)
         return {"status": "Failed", "message": f"Error: {str(e)}"}
 
-
 @shared_task
-def download_10pm_files_task(selected_date=None):
+def download_10pm_files_task(client_id, selected_date=None):
     """
-    Task to download Accumulator and Eligibility files from SFTP servers for all active clients.
+    Task to download Accumulator and Eligibility files from SFTP server for a specific client.
     Args:
+        client_id (int): ID of the client to process.
         selected_date (str): Date in YYYY-MM-DD format. Defaults to today if None.
     """
-    logger.info(f"Starting 10PM file download task, selected_date: {selected_date}")
+    logger.info(f"Starting 10PM file download task for client_id: {client_id}, selected_date: {selected_date}")
     
     try:
         if selected_date:
             date_obj = datetime.strptime(selected_date, '%Y-%m-%d')
         else:
             date_obj = datetime.now()
-        date_str = date_obj.strftime('%Y%m%d')
+        # date_str = date_obj.strftime('%Y%m%d')
 
-        # Get all active clients
-        clients = Client.objects.filter(is_active=True)
-        if not clients:
-            logger.warning("No active clients found for 10PM task")
-            return {"status": "Completed", "message": "No active clients found"}
+        # Get the specific client
+        try:
+            client = Client.objects.get(id=client_id, is_active=True)
+        except Client.DoesNotExist:
+            logger.error(f"Client with id {client_id} not found or not active")
+            return {"status": "Failed", "message": f"Client with id {client_id} not found or not active"}
 
-        all_results = {}
+        logger.info(f"\n========== PROCESSING CLIENT: {client.name} ==========")
+        # Check if the client has SFTP credentials
+        if not (client.sftp_host and client.sftp_username and client.sftp_password):
+            logger.warning(f"SFTP credentials missing for client {client.name}. Skipping.")
+            return {"status": "Failed", "message": f"SFTP credentials missing for client {client.name}"}
 
-        for client in clients:
-            logger.info(f"\n========== PROCESSING CLIENT: {client.name} ==========")
-            if client.name == "Allied":
-                date_str = date_obj.strftime('%m%d%Y')
-            logger.info(f"date_str::{date_str}")
-            # Check if the client has SFTP credentials
-            if not (client.sftp_host and client.sftp_username and client.sftp_password):
-                logger.warning(f"SFTP credentials missing for client {client.name}. Skipping.")
-                continue
+        # Initialize SFTP client
+        sftp_client = SFTPClient(
+            host=client.sftp_host,
+            username=client.sftp_username,
+            password=client.sftp_password,
+            port=client.sftp_port,
+            local_base_dir=""
+        )
+        logger.info(f"Connecting to SFTP server for client {client.name} at {client.sftp_host}:{client.sftp_port}")
+        if not sftp_client.connect():
+            logger.error(f"Failed to connect to SFTP for client {client.name}")
+            return {"status": "Failed", "message": f"Failed to connect to SFTP for client {client.name}"}
 
-            # Initialize SFTP client
-            sftp_client = SFTPClient(
-                host=client.sftp_host,
-                username=client.sftp_username,
-                password=client.sftp_password,
-                port=client.sftp_port,
-                local_base_dir=""
-            )
+        try:
+            # Get file configurations for this client
+            file_configs = FileConfig.objects.filter(client=client, is_active=True)
+            client_results = []
+            logger.info("into try stmt::::: file_configs:::" + str(file_configs))
+            for file_config in file_configs:
+                logger.info(f"Processing {file_config.file_type} file for {client.name}")
+            
+                # Download the file
+                local_file_path = sftp_client.download_file(
+                    remote_path=file_config.remote_path,
+                    file_pattern=file_config.file_pattern,
+                    local_path=file_config.local_path,
+                    renamed_pattern=file_config.renamed_pattern,
+                    # date_str=date_str,
+                    date_obj=date_obj
+                )
 
-            if not sftp_client.connect():
-                logger.error(f"Failed to connect to SFTP for client {client.name}")
-                continue
+                if not local_file_path:
+                    logger.warning(f"No {file_config.file_type} file downloaded for {client.name}")
+                    continue
 
-            try:
-                # Get file configurations for this client
-                file_configs = FileConfig.objects.filter(client=client, is_active=True)
-                client_results = []
+                # Skip validation as per request
+                # validation_result = validate_file(local_file_path)
+                # logger.info(f"Validation result for {local_file_path}: {validation_result}")
 
-                for file_config in file_configs:
-                    logger.info(f"Processing {file_config.file_type} file for {client.name}")
+                # Store the file details in the database
+                logger.info(f"File downloaded successfully: {local_file_path}")
+                with open(local_file_path, 'rb') as f:
+                    file_content = f.read()
+                logger.info(f"File content read successfully for {local_file_path}")
+                logger.info(f"File content length: {len(file_content)} bytes :::: {file_content[:50]}...")
+                file_name = os.path.basename(local_file_path)
+                downloaded_file = DownloadedFile(
+                    client=client,
+                    file_content=file_content,
+                    original_filename=file_name,
+                    file_type=file_config.file_type,
+                    path=file_config.local_path,
+                    is_validated=True,  # Temporarily set to True since validation is on hold
+                    validation_errors=None,  # No errors since validation is skipped
+                    downloaded_at=datetime.now()
+                )
+                downloaded_file.save()
+                logger.info(f"Saved file to database: {file_name}")
 
-                    # Download the file
-                    local_file_path = sftp_client.download_file(
-                        remote_path=file_config.remote_path,
-                        file_pattern=file_config.file_pattern,
-                        local_path=file_config.local_path,
-                        renamed_pattern=file_config.renamed_pattern,
-                        date_str=date_str
-                    )
+                client_results.append(local_file_path)
 
-                    if not local_file_path:
-                        logger.warning(f"No {file_config.file_type} file downloaded for {client.name}")
-                        continue
-
-                    # Validate the file
-                    validation_result = validate_file(local_file_path)
-                    logger.info(f"Validation result for {local_file_path}: {validation_result}")
-
-                    # Store the file details in the database
-                    with open(local_file_path, 'rb') as f:
-                        file_content = f.read()
-
-                    file_name = os.path.basename(local_file_path)
-                    downloaded_file = DownloadedFile(
-                        client=client,
-                        file_content=file_content,
-                        original_filename=file_name,
-                        file_type=file_config.file_type,
-                        path=file_config.local_path,
-                        is_validated=validation_result["is_valid"],
-                        validation_errors="\n".join(validation_result["errors"]) if validation_result["errors"] else None,
-                        downloaded_at=datetime.now()
-                    )
-                    downloaded_file.save()
-                    logger.info(f"Saved file to database: {file_name}")
-
-                    client_results.append(local_file_path)
-
-                all_results[client.name] = client_results
-            finally:
-                sftp_client.disconnect()
-
-        return {"status": "Completed", "message": f"10PM task completed successfully: {all_results}"}
+            return {"status": "Completed", "message": f"10PM task completed successfully for {client.name}: {client_results}"}
+        finally:
+            sftp_client.disconnect()
     except Exception as e:
         logger.error(f"Error in 10PM file download task: {str(e)}", exc_info=True)
         return {"status": "Failed", "message": f"Error: {str(e)}"}

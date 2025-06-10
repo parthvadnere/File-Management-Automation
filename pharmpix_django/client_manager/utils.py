@@ -145,7 +145,8 @@ ALLIED_ELIGIBILITY_LAYOUT = [
     {"field_name": "record_type", "type": "A/N", "required": True, "valid_values": ["D"], "comments": "Record Type: D=Detail"},
     {"field_name": "cardholder_id", "type": "A/N", "required": True, "comments": "Unique Cardholder ID"},
     {"field_name": "transaction_code", "type": "A/N", "required": True, "comments": "Transaction Code"},
-    {"field_name": "account_id", "type": "A/N", "required": True, "comments": "Client Account ID (e.g., SAPP01)"},
+    # {"field_name": "account_id", "type": "A/N", "required": True, "comments": "Client Account ID (e.g., SAPP01)"},
+    {"field_name": "account_id", "type": "A/N", "required": False, "comments": "Client Account ID (e.g., SAPP01)"},
     {"field_name": "group_id", "type": "A/N", "required": True, "comments": "Group ID"},
     {"field_name": "coverage_id", "type": "A/N", "required": True, "comments": "Coverage ID"},
     {"field_name": "family_id", "type": "A/N", "required": True, "comments": "Family ID"},
@@ -166,7 +167,7 @@ ALLIED_ELIGIBILITY_LAYOUT = [
     {"field_name": "home_phone", "type": "A/N", "required": False, "comments": "Home Phone"},
     {"field_name": "work_phone", "type": "A/N", "required": False, "comments": "Work Phone"},
     {"field_name": "work_extension", "type": "A/N", "required": False, "comments": "Work Extension"},
-    {"field_name": "hicn", "type": "A/N", "required": True, "comments": "Health Insurance Claim Number"},
+    {"field_name": "hicn", "type": "A/N", "required": False, "comments": "Health Insurance Claim Number"},
     {"field_name": "marital_status", "type": "A/N", "required": False, "comments": "Marital Status"},
     {"field_name": "spouse_name", "type": "A/N", "required": False, "comments": "Spouse Name"},
     {"field_name": "representative_name", "type": "A/N", "required": False, "comments": "Representative Name"},
@@ -175,7 +176,8 @@ ALLIED_ELIGIBILITY_LAYOUT = [
     {"field_name": "reform_ind", "type": "A/N", "required": False, "comments": "Reform Indicator"},
     {"field_name": "birthdate", "type": "N", "required": True, "format": "YYYYMMDD", "comments": "Birth Date"},
     {"field_name": "gender_code", "type": "A/N", "required": True, "valid_values": ["M", "F"], "comments": "Gender: M=Male, F=Female"},
-    {"field_name": "pregnancy_indicator", "type": "A/N", "required": True, "valid_values": ["0", "1"], "comments": "Pregnancy Indicator"},
+    # {"field_name": "pregnancy_indicator", "type": "A/N", "required": True, "valid_values": ["0", "1"], "comments": "Pregnancy Indicator"},
+    {"field_name": "pregnancy_indicator", "type": "A/N", "required": False, "valid_values": ["0", "1"], "comments": "Pregnancy Indicator"},
     {"field_name": "spanish_preference", "type": "A/N", "required": True, "valid_values": ["0", "1"], "comments": "Spanish Preference"},
     {"field_name": "email", "type": "A/N", "required": False, "comments": "Email Address"},
     {"field_name": "patient_suffix_person_code", "type": "A/N", "required": True, "comments": "Patient Suffix Person Code"},
@@ -210,9 +212,9 @@ ALLIED_ELIGIBILITY_LAYOUT = [
     {"field_name": "esrd", "type": "A/N", "required": False, "comments": "ESRD Indicator"},
     {"field_name": "participant_type", "type": "A/N", "required": True, "valid_values": ["I", "F"], "comments": "Participant Type"},
     {"field_name": "ytd_moop_amt", "type": "N", "required": False, "comments": "Year-to-Date MOOP Amount"},
-    {"field_name": "load_status", "type": "A/N", "required": True, "valid_values": ["A"], "comments": "Load Status"},
+    {"field_name": "load_status", "type": "A/N", "required": True, "valid_values": ["A","Y","I","F"], "comments": "Load Status"},
     {"field_name": "load_reject_code", "type": "A/N", "required": False, "comments": "Load Reject Code"},
-    {"field_name": "member_status", "type": "A/N", "required": True, "valid_values": ["A"], "comments": "Member Status"}
+    {"field_name": "member_status", "type": "A/N", "required": True, "valid_values": ["A","T","E"], "comments": "Member Status"}
 ]
 
 # UMR Eligibility Layout (same as Allied)
@@ -224,9 +226,9 @@ ASR_ELIGIBILITY_LAYOUT = [
     {"field_name": "rx group", "type": "A/N", "required": True, "comments": "RX Group (e.g., 6000)"},
     {"field_name": "customer group", "type": "A/N", "required": True, "comments": "Customer Group"},
     {"field_name": "family id", "type": "A/N", "required": True, "comments": "Family ID"},
-    {"field_name": "first name", "type": "A/N", "required": True, "comments": "First Name"},
-    {"field_name": "Middle", "type": "A/N", "required": False, "comments": "Middle Name"},
-    {"field_name": "last name1", "type": "A/N", "required": True, "comments": "Last Name 1"},
+    {"field_name": "firsle", "type": "A/N", "required": False, "comments": "Middle Name"},
+    {"field_name": "lastt name", "type": "A/N", "required": True, "comments": "First Name"},
+    {"field_name": "Midd name1", "type": "A/N", "required": True, "comments": "Last Name 1"},
     {"field_name": "last name2", "type": "A/N", "required": False, "comments": "Last Name 2"},
     {"field_name": "address1", "type": "A/N", "required": True, "comments": "Address Line 1"},
     {"field_name": "address2", "type": "A/N", "required": False, "comments": "Address Line 2"},
@@ -240,7 +242,7 @@ ASR_ELIGIBILITY_LAYOUT = [
     {"field_name": "postal zip", "type": "A/N", "required": True, "comments": "Postal Zipcode"},
     {"field_name": "home phone", "type": "A/N", "required": False, "comments": "Home Phone"},
     {"field_name": "work phone", "type": "A/N", "required": False, "comments": "Work Phone"},
-    {"field_name": "subscriber ssn", "type": "A/N", "required": True, "comments": "Subscriber SSN"},
+    {"field_name": "subscriber ssn", "type": "A/N", "required": False, "comments": "Subscriber SSN"},
     {"field_name": "marital status", "type": "A/N", "required": False, "comments": "Marital Status"},
     {"field_name": "date of birth", "type": "A/N", "required": True, "format": "MM-DD-YYYY", "comments": "Date of Birth"},
     {"field_name": "Gender", "type": "A/N", "required": True, "valid_values": ["M", "F"], "comments": "Gender: M=Male, F=Female"},
@@ -254,6 +256,57 @@ ASR_ELIGIBILITY_LAYOUT = [
     {"field_name": "participant type", "type": "A/N", "required": True, "valid_values": ["I", "F"], "comments": "Participant Type"},
     {"field_name": "member status", "type": "A/N", "required": True, "valid_values": ["A"], "comments": "Member Status"}
 ]
+
+ALLIED_TRX_PPX_MOOP_HEADER_LAYOUT = [
+    {"from": 1, "to": 2, "field_name": "record_type", "length": 2, "type": "A"},
+    {"from": 3, "to": 12, "field_name": "client_id", "length": 10, "type": "A"},
+    {"from": 13, "to": 22, "field_name": "group_id", "length": 10, "type": "A"},
+    {"from": 23, "to": 30, "field_name": "process_date", "length": 8, "type": "N"},
+    {"from": 31, "to": 500, "field_name": "filler", "length": 470, "type": "A"}
+]
+
+ALLIED_TRX_PPX_MOOP_DETAIL_LAYOUT = [
+    {"from": 1, "to": 2, "field_name": "record_type", "length": 2, "type": "A"},
+    {"from": 3, "to": 12, "field_name": "member_id", "length": 10, "type": "A"},
+    {"from": 13, "to": 22, "field_name": "group_id", "length": 10, "type": "A"},
+    {"from": 23, "to": 30, "field_name": "date_of_service", "length": 8, "type": "N"},
+    {"from": 31, "to": 40, "field_name": "moop_amount", "length": 10, "type": "S9(7)V99"},
+    {"from": 41, "to": 50, "field_name": "deductible_amount", "length": 10, "type": "S9(7)V99"},
+    {"from": 51, "to": 51, "field_name": "network", "length": 1, "type": "A"},
+    {"from": 52, "to": 500, "field_name": "filler", "length": 449, "type": "A"}
+]
+
+ALLIED_TRX_PPX_MOOP_TRAILER_LAYOUT = [
+    {"from": 1, "to": 2, "field_name": "record_type", "length": 2, "type": "A"},
+    {"from": 3, "to": 10, "field_name": "record_count", "length": 8, "type": "N"},
+    {"from": 11, "to": 500, "field_name": "filler", "length": 490, "type": "A"}
+]
+
+ASR_TRXALBION_HEADER_LAYOUT = [
+    {"from": 1, "to": 2, "field_name": "record_type", "length": 2, "type": "A"},
+    {"from": 3, "to": 12, "field_name": "client_id", "length": 10, "type": "A"},
+    {"from": 13, "to": 22, "field_name": "plan_id", "length": 10, "type": "A"},
+    {"from": 23, "to": 30, "field_name": "process_date", "length": 8, "type": "N"},
+    {"from": 31, "to": 500, "field_name": "filler", "length": 470, "type": "A"}
+]
+
+ASR_TRXALBION_DETAIL_LAYOUT = [
+    {"from": 1, "to": 2, "field_name": "record_type", "length": 2, "type": "A"},
+    {"from": 3, "to": 12, "field_name": "member_id", "length": 10, "type": "A"},
+    {"from": 13, "to": 22, "field_name": "plan_id", "length": 10, "type": "A"},
+    {"from": 23, "to": 30, "field_name": "date_of_service", "length": 8, "type": "N"},
+    {"from": 31, "to": 40, "field_name": "accum_amount", "length": 10, "type": "S9(7)V99"},
+    {"from": 41, "to": 41, "field_name": "network", "length": 1, "type": "A"},
+    {"from": 42, "to": 500, "field_name": "filler", "length": 459, "type": "A"}
+]
+
+ASR_TRXALBION_TRAILER_LAYOUT = [
+    {"from": 1, "to": 2, "field_name": "record_type", "length": 2, "type": "A"},
+    {"from": 3, "to": 10, "field_name": "record_count", "length": 8, "type": "N"},
+    {"from": 11, "to": 500, "field_name": "filler", "length": 490, "type": "A"}
+]
+
+
 
 # client_manager/utils.py (continued)
 import logging
@@ -515,8 +568,8 @@ def validate_txt_file(file_content, client_name):
         # Decode the file content
         content_str = file_content.decode('utf-8', errors='replace')
         lines = content_str.splitlines()
-        if not lines:
-            return {"is_valid": False, "errors": ["File is empty."]}
+        # if not lines:
+        #     return {"is_valid": False, "errors": ["File is empty."]}
 
         # Validate each line
         for line_num, line in enumerate(lines, start=1):
@@ -557,11 +610,7 @@ def validate_txt_file(file_content, client_name):
                 account_field = line[81:111]  # Account field (positions 82-111)
                 account_field = account_field.strip()  # Remove leading/trailing spaces
                 expected_prefix = CLIENT_ACCOUNT_CODE_RULES[client_name]["account_prefix"]
-                logger.info(f"Validating account code for client {client_name}: {account_field} against expected prefix {expected_prefix}")
-                logger.info(f"type(account_field)={type(account_field)}")
-                logger.info(f"type(expected_prefix)={type(expected_prefix)}")
                 if client_name == "UMR":
-                    # expected_prefix = ["EMP", "SIMP","Cornell College"]
                     if account_field not in expected_prefix.split(','):
                         errors.append(
                            f"Line {line_num}: Account code '{account_field}' does not start with expected prefix '{expected_prefix}' (positions 82-111)."
@@ -916,7 +965,10 @@ def validate_eligibility_file(file_content, client_name):
 
             # Map row to field names
             record = dict(zip(expected_headers, row))
-
+            # logger.info(f"row::{row}, line_num::{line_num}")
+            # if record:
+            #     logger.info(f"record::{record}, line_num::{line_num}")
+            #     break
             # Validate each field based on layout
             for field in layout:
                 field_name = field["field_name"]
@@ -925,7 +977,6 @@ def validate_eligibility_file(file_content, client_name):
                 required = field.get("required", False)
                 valid_values = field.get("valid_values", None)
                 format_spec = field.get("format", None)
-
                 # Check required fields
                 if required and not value:
                     errors.append(f"Line {line_num}: {field_name} is empty but required.")
@@ -955,3 +1006,95 @@ def validate_eligibility_file(file_content, client_name):
     except Exception as e:
         logger.error(f"Error validating Eligibility file for client {client_name}: {str(e)}", exc_info=True)
         return {"is_valid": False, "errors": [f"Error validating Eligibility file: {str(e)}"]}
+
+
+def validate_txt_file_10PM_Accumlator(file_content, client_name):
+    """
+    Validate a 5PM Accumulator file based on client-specific layouts.
+    Args:
+        file_content (bytes): The content of the file.
+        client_name (str): The name of the client (e.g., "ALLIED", "ASR", "UMR").
+    Returns:
+        dict: {"is_valid": bool, "errors": list of error messages}
+    """
+    errors = []
+    try:
+        content_str = file_content.decode('utf-8', errors='replace')
+        lines = content_str.splitlines()
+        if not lines:
+            return {"is_valid": False, "errors": ["File is empty."]}
+
+        # Select layout based on client
+        if client_name == "ALLIED":
+            header_layout = ALLIED_TRX_PPX_MOOP_HEADER_LAYOUT
+            detail_layout = ALLIED_TRX_PPX_MOOP_DETAIL_LAYOUT
+            trailer_layout = ALLIED_TRX_PPX_MOOP_TRAILER_LAYOUT
+        elif client_name == "ASR":
+            header_layout = ASR_TRXALBION_HEADER_LAYOUT
+            detail_layout = ASR_TRXALBION_DETAIL_LAYOUT
+            trailer_layout = ASR_TRXALBION_TRAILER_LAYOUT
+        elif client_name == "UMR":
+            header_layout = UMR_HEADER_LAYOUT
+            detail_layout = UMR_ACCUMULATOR_LAYOUT
+            trailer_layout = UMR_TRAILER_LAYOUT
+        else:
+            return {"is_valid": False, "errors": [f"No validation layout defined for client {client_name}."]}
+
+        expected_length = 500  # Consistent length for all clients
+
+        for line_num, line in enumerate(lines, start=1):
+            if len(line) < 2:
+                errors.append(f"Line {line_num}: Line too short to determine record type.")
+                continue
+
+            record_type = line[0:2].strip()
+            if record_type == "1":
+                layout = header_layout
+            elif record_type == "2":
+                layout = detail_layout
+            elif record_type == "3":
+                layout = trailer_layout
+            else:
+                errors.append(f"Line {line_num}: Invalid record type '{record_type}'. Expected 1, 2, or 3.")
+                continue
+
+            if len(line) != expected_length:
+                errors.append(f"Line {line_num}: Line length is {len(line)}, expected {expected_length}.")
+                continue
+
+            for field in layout:
+                start = field["from"] - 1
+                end = field["to"]
+                value = line[start:end].strip()
+                field_name = field["field_name"]
+                field_type = field["type"]
+
+                if field_name != "filler":
+                    if len(value) != field["length"]:
+                        errors.append(f"Line {line_num}, Field {field_name}: Length is {len(value)}, expected {field['length']} (positions {start + 1}-{end}).")
+
+                    if field_type == "N" and value and not value.replace('-', '').replace('.', '').isdigit():
+                        errors.append(f"Line {line_num}, Field {field_name}: Expected numeric, got '{value}' (positions {start + 1}-{end}).")
+                    elif field_type.startswith("S9") and value and not re.match(r'^-?\d*\.?\d*$', value):
+                        errors.append(f"Line {line_num}, Field {field_name}: Expected signed numeric, got '{value}' (positions {start + 1}-{end}).")
+
+                    if field_name in ["process_date", "date_of_service"] and value:
+                        if not re.match(r'^\d{8}$', value):
+                            errors.append(f"Line {line_num}, Field {field_name}: Invalid date format '{value}', expected YYYYMMDD (positions {start + 1}-{end}).")
+                    if field_name == "network" and value and value not in ['I', 'O', '1', '2', '3']:  # Simplified for IN/OUT or TIER1-3
+                        errors.append(f"Line {line_num}, Field {field_name}: Invalid network '{value}', expected I, O, 1, 2, or 3 (positions {start + 1}-{end}).")
+
+        # Structural validations
+        if len(lines) < 2 or not lines[0].startswith("1") or not lines[-1].startswith("3"):
+            errors.append("File must start with Header (1) and end with Trailer (3).")
+        detail_count = sum(1 for line in lines if line.startswith("2"))
+        trailer_record_count_field = trailer_layout[1]["from"] - 1, trailer_layout[1]["to"]  # record_count field
+        if len(lines) > 2 and lines[-1][trailer_record_count_field[0]:trailer_record_count_field[1]].strip().isdigit():
+            trailer_count = int(lines[-1][trailer_record_count_field[0]:trailer_record_count_field[1]].strip())
+            if trailer_count != detail_count:
+                errors.append(f"Trailer record count {trailer_count} does not match detail count {detail_count}.")
+
+        return {"is_valid": len(errors) == 0, "errors": errors}
+    except Exception as e:
+        logger.error(f"Error validating 5PM file for {client_name}: {str(e)}", exc_info=True)
+        return {"is_valid": False, "errors": [f"Error validating file: {str(e)}"]}

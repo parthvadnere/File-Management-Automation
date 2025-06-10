@@ -16,12 +16,10 @@ $(document).ready(function() {
             $(this).css('cursor', 'default');
         }
     );
-    // const clientId = $(this).data('client-id');
     // Download files with selected date
     $('#downloadFilesBtn').click(function() {
         const selectedDate = $('#dateFilter').val();
         console.log('Selected date:', selectedDate);
-        // const clientId = {{ client.id }};
         const clientId = $(this).data('client-id');
         console.log('Client ID:', clientId);
         if (selectedDate) {
@@ -38,7 +36,6 @@ $(document).ready(function() {
         $('#triggerDownload').click(function(e) {
             e.preventDefault();
             const selectedDate = $('#dateFilter').val();
-            // const clientId = {{ client.id }};
             const clientId = $(this).data('client-id');
             if (selectedDate) {
                 const url = window.downloadUrlBase.replace('placeholder', selectedDate);
@@ -48,7 +45,6 @@ $(document).ready(function() {
             }
         });
     }
-
 
     // File viewer modal
     const fileModal = $('#fileModal');
@@ -86,6 +82,7 @@ $(document).ready(function() {
         modalSendSftpBtn.hide();
         modalReplaceBtn.hide();
 
+        // Handle validation errors if they exist (for future use)
         if (errors) {
             errorSection.find('h4').text(`Validation Errors for ${currentFileName}`);
             errorContent.text(errors);
@@ -96,42 +93,67 @@ $(document).ready(function() {
         } else if (isValidated && !isSent) {
             modalSendSftpBtn.show();
         }
-
-        fetch(fileUrl, { method: 'HEAD' })
-            .then(response => {
-                console.log('HEAD response status:', response.status);
-                const contentDisposition = response.headers.get('Content-Disposition');
-                console.log('Content-Disposition:', contentDisposition);
-                if (contentDisposition && contentDisposition.includes('attachment')) {
-                    fileFrame.html(`
-                        <p>This file type cannot be viewed directly. <a href="${fileUrl}" download><i class="fas fa-download"></i></a></p>
-                    `);
+        console.log("fileName::",fileName);
+        // Check if the file is a .txt file based on the file name
+        const isTextFile = fileName.toLowerCase().endsWith('.txt');
+        console.log('Is text file:', isTextFile);
+        if (isTextFile) {
+            // For .txt files, fetch and display the content directly, ignoring Content-Disposition
+            fetch(fileUrl)
+                .then(resp => {
+                    if (!resp.ok) throw new Error(`HTTP error! status: ${resp.status}`);
+                    return resp.text();
+                })
+                .then(content => {
+                    fileFrame.text(content);
                     fileModal.show();
-                } else {
-                    fetch(fileUrl)
-                        .then(resp => {
-                            if (!resp.ok) throw new Error(`HTTP error! status: ${resp.status}`);
-                            return resp.text();
-                        })
-                        .then(content => {
-                            fileFrame.text(content);
-                            fileModal.show();
-                            if (isValidated && !isSent) {
-                                sendToSftp(fileId, clientId);
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error loading file content:', error);
-                            fileFrame.html('<p>Failed to load file content. <a href="${fileUrl}" download><i class="fas fa-download"></i></a></p>');
-                            fileModal.show();
-                        });
-                }
-            })
-            .catch(error => {
-                console.error('Error checking file type:', error);
-                fileFrame.html('<p>Failed to load file. <a href="${fileUrl}" download><i class="fas fa-download"></i></a></p>');
-                fileModal.show();
-            });
+                    if (isValidated && !isSent) {
+                        sendToSftp(fileId, clientId);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading file content:', error);
+                    fileFrame.html(`<p>Failed to load file content. <a href="${fileUrl}" download><i class="fas fa-download"></i> Download</a></p>`);
+                    fileModal.show();
+                });
+        } else {
+            // For non-.txt files, check Content-Disposition as before
+            fetch(fileUrl, { method: 'HEAD' })
+                .then(response => {
+                    console.log('HEAD response status:', response.status);
+                    const contentDisposition = response.headers.get('Content-Disposition');
+                    console.log('Content-Disposition:', contentDisposition);
+                    if (contentDisposition && contentDisposition.includes('attachment')) {
+                        fileFrame.html(`
+                            <p>This file type cannot be viewed directly. <a href="${fileUrl}" download><i class="fas fa-download"></i> Download</a></p>
+                        `);
+                        fileModal.show();
+                    } else {
+                        fetch(fileUrl)
+                            .then(resp => {
+                                if (!resp.ok) throw new Error(`HTTP error! status: ${resp.status}`);
+                                return resp.text();
+                            })
+                            .then(content => {
+                                fileFrame.text(content);
+                                fileModal.show();
+                                if (isValidated && !isSent) {
+                                    sendToSftp(fileId, clientId);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error loading file content:', error);
+                                fileFrame.html(`<p>Failed to load file content. <a href="${fileUrl}" download><i class="fas fa-download"></i> Download</a></p>`);
+                                fileModal.show();
+                            });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking file type:', error);
+                    fileFrame.html(`<p>Failed to load file. <a href="${fileUrl}" download><i class="fas fa-download"></i> Download</a></p>`);
+                    fileModal.show();
+                });
+        }
     });
 
     close.click(function() {
@@ -212,7 +234,6 @@ $(document).ready(function() {
             }
         });
     }
-
 
     $('.download-btn').click(function(e) {
         e.preventDefault();

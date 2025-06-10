@@ -65,7 +65,7 @@ class DownloadedFile(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='downloaded_files')
     file_content = models.BinaryField(null=True, default=b'')
     original_filename = models.CharField(max_length=255)
-    file_type = models.CharField(max_length=10)
+    file_type = models.CharField(max_length=100)
     downloaded_at = models.DateTimeField(auto_now_add=True)
     path = models.CharField(max_length=255)
     is_validated = models.BooleanField(default=False)

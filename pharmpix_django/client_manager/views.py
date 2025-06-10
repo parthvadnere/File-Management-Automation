@@ -132,7 +132,6 @@ def client_details(request, client_id):
     paths = Path.objects.filter(client=client)  # 5PM paths
     output_configs = OutputConfig.objects.filter(client=client)  # 5PM output configs
     file_configs = FileConfig.objects.filter(client=client)  # 10PM file configs
-    downloaded_files = DownloadedFile.objects.filter(client=client).order_by('-downloaded_at')
 
     # Handle 5PM download
     if request.method == 'POST' and 'download_5pm' in request.POST:
@@ -154,7 +153,8 @@ def client_details(request, client_id):
             logger.info(f"10PM form is valid, selected_date: {form_10pm.cleaned_data['selected_date']}")
             selected_date = form_10pm.cleaned_data['selected_date']
             selected_date_str = selected_date.strftime('%Y-%m-%d') if selected_date else None
-            download_10pm_files_task.delay(selected_date=selected_date_str)
+            # Pass client_id to the task
+            download_10pm_files_task.delay(client_id=client.id, selected_date=selected_date_str)
             messages.success(request, '10PM file download task has been triggered.')
             return redirect('client_details', client_id=client.id)
         else:
@@ -162,6 +162,8 @@ def client_details(request, client_id):
     else:
         form_10pm = DownloadForm(prefix='10pm')
 
+    downloaded_files = DownloadedFile.objects.filter(client=client).order_by('-downloaded_at')
+    
     return render(request, 'client_manager/client_details.html', {
         'client': client,
         'paths': paths,
