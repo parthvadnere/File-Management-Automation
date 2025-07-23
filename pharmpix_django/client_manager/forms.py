@@ -1,6 +1,6 @@
 # client_manager/forms.py
 from django import forms
-from .models import Client, Path, Task, OutputConfig, FileConfig
+from .models import Client, Path, Task, OutputConfig, FileConfig, UploadConfig
 
 class ClientForm(forms.ModelForm):
     class Meta:
@@ -27,7 +27,7 @@ class DownloadForm(forms.Form):
     selected_date = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date'}),
         required=False,
-        help_text="Select a date for downloading files (defaults to today if not specified)."
+        help_text="Select a date for downloading files (defaults to latest file/s if not specified)."
     )
 
 class TaskForm(forms.ModelForm):
@@ -47,6 +47,12 @@ class DownloadForm(forms.Form):
     selected_date = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date'}),
         required=False,
-        help_text="Select a date for downloading files (defaults to today if not specified)."
+        help_text="Select a date for downloading files (defaults to latest file/s if not specified)."
     )
     task_type = forms.ChoiceField(choices=[('5PM', '5PM'), ('10PM', '10PM')], required=True)
+
+
+class UploadConfigForm(forms.ModelForm):
+    class Meta:
+        model = UploadConfig
+        fields = ['upload_endpoint', 'token']

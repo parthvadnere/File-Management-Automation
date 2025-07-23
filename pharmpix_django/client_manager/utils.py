@@ -26,9 +26,11 @@ FILE_LAYOUT = [
     {"field_name": "gpi", "type": "A/N", "length": 14, "from": 242, "to": 255, "comments": "Drug GPI Number"},
     {"field_name": "drug_name", "type": "A/N", "length": 30, "from": 256, "to": 285, "comments": "Full Drug Label Name"},
     {"field_name": "manufacturer", "type": "A/N", "length": 10, "from": 286, "to": 295, "comments": "Drug manufacturer"},
-    {"field_name": "pack_size", "type": "N", "length": 11, "from": 296, "to": 306, "comments": "Drug package"},
+    # {"field_name": "pack_size", "type": "N", "length": 11, "from": 296, "to": 306, "comments": "Drug package"},
+    {"field_name": "pack_size", "type": "A/N", "length": 11, "from": 296, "to": 306, "comments": "Drug package"},
     {"field_name": "drug_strength", "type": "A/N", "length": 10, "from": 307, "to": 316, "comments": "Drug strength"},
-    {"field_name": "quantity_dispensed", "type": "N", "length": 12, "from": 317, "to": 328, "comments": "Drug Quantity Dispensed"},
+    # {"field_name": "quantity_dispensed", "type": "N", "length": 12, "from": 317, "to": 328, "comments": "Drug Quantity Dispensed"},
+    {"field_name": "quantity_dispensed", "type": "A/N", "length": 12, "from": 317, "to": 328, "comments": "Drug Quantity Dispensed"},
     {"field_name": "days_supply", "type": "N", "length": 4, "from": 329, "to": 332, "comments": "Days of Supply for Rx"},
     {"field_name": "daw", "type": "N", "length": 1, "from": 333, "to": 333, "comments": "Dispense as Written"},
     {"field_name": "pharmacy_nabp", "type": "A/N", "length": 12, "from": 334, "to": 345, "comments": "Pharmacy NABP Number"},
@@ -91,9 +93,12 @@ UMR_ACCUMULATOR_LAYOUT = [
     {"field_name": "gender", "type": "A/N", "length": 1, "from": 104, "to": 104, "comments": "Gender: M=Male, F=Female, U=Unspecified"},
     {"field_name": "relationship", "type": "A/N", "length": 2, "from": 105, "to": 106, "comments": "Relationship: EE=Employee, SP=Spouse, CH=Child, OT=Other"},
     {"field_name": "claim_number", "type": "A/N", "length": 11, "from": 107, "to": 117, "comments": "Sendor assigned claim number"},
-    {"field_name": "deductible", "type": "N", "length": 13, "from": 118, "to": 130, "comments": "Patient Deductible Applied Amount. Format: S9(9)v99"},
-    {"field_name": "out_of_pocket", "type": "N", "length": 13, "from": 131, "to": 143, "comments": "Patient Out of Pocket Applied Amount. Format: S9(9)v99"},
-    {"field_name": "plan_payment", "type": "N", "length": 13, "from": 144, "to": 156, "comments": "Plan Payment applying to a Maximum. Format: S9(9)v99"},
+    # {"field_name": "deductible", "type": "N", "length": 13, "from": 118, "to": 130, "comments": "Patient Deductible Applied Amount. Format: S9(9)v99"},
+    # {"field_name": "out_of_pocket", "type": "N", "length": 13, "from": 131, "to": 143, "comments": "Patient Out of Pocket Applied Amount. Format: S9(9)v99"},
+    # {"field_name": "plan_payment", "type": "N", "length": 13, "from": 144, "to": 156, "comments": "Plan Payment applying to a Maximum. Format: S9(9)v99"},
+    {"field_name": "deductible", "type": "A/N", "length": 13, "from": 118, "to": 130, "comments": "Patient Deductible Applied Amount. Format: S9(9)v99"},
+    {"field_name": "out_of_pocket", "type": "A/N", "length": 13, "from": 131, "to": 143, "comments": "Patient Out of Pocket Applied Amount. Format: S9(9)v99"},
+    {"field_name": "plan_payment", "type": "A/N", "length": 13, "from": 144, "to": 156, "comments": "Plan Payment applying to a Maximum. Format: S9(9)v99"},
     {"field_name": "date_of_service", "type": "N", "length": 8, "from": 157, "to": 164, "comments": "Date of Service. Format CCYYMMDD"},
     {"field_name": "benefit_period_begin_date", "type": "A/N", "length": 8, "from": 165, "to": 172, "comments": "Benefit Period Begin Date. Format CCYYMMDD"},
     {"field_name": "benefit_period_end_date", "type": "A/N", "length": 8, "from": 173, "to": 180, "comments": "Benefit Period End Date. Format CCYYMMDD"},
@@ -104,9 +109,12 @@ UMR_ACCUMULATOR_LAYOUT = [
     {"field_name": "vendor_defined3", "type": "A/N", "length": 20, "from": 237, "to": 256, "comments": "Vendor-specific data"},
     {"field_name": "vendor_defined4", "type": "A/N", "length": 20, "from": 257, "to": 276, "comments": "Vendor-specific data"},
     {"field_name": "vendor_defined5", "type": "A/N", "length": 20, "from": 277, "to": 296, "comments": "Vendor-specific data"},
-    {"field_name": "coinsurance_out_of_pocket", "type": "N", "length": 13, "from": 297, "to": 309, "comments": "Patient Coinsurance Out of Pocket. Format: S9(9)v99"},
-    {"field_name": "copay_out_of_pocket", "type": "N", "length": 13, "from": 310, "to": 322, "comments": "Patient Copay Out of Pocket. Format: S9(9)v99"},
-    {"field_name": "inpatient_deductible", "type": "N", "length": 13, "from": 323, "to": 335, "comments": "Patient Inpatient Deductible. Format: S9(9)v99"},
+    # {"field_name": "coinsurance_out_of_pocket", "type": "N", "length": 13, "from": 297, "to": 309, "comments": "Patient Coinsurance Out of Pocket. Format: S9(9)v99"},
+    # {"field_name": "copay_out_of_pocket", "type": "N", "length": 13, "from": 310, "to": 322, "comments": "Patient Copay Out of Pocket. Format: S9(9)v99"},
+    # {"field_name": "inpatient_deductible", "type": "N", "length": 13, "from": 323, "to": 335, "comments": "Patient Inpatient Deductible. Format: S9(9)v99"},
+    {"field_name": "coinsurance_out_of_pocket", "type": "A/N", "length": 13, "from": 297, "to": 309, "comments": "Patient Coinsurance Out of Pocket. Format: S9(9)v99"},
+    {"field_name": "copay_out_of_pocket", "type": "A/N", "length": 13, "from": 310, "to": 322, "comments": "Patient Copay Out of Pocket. Format: S9(9)v99"},
+    {"field_name": "inpatient_deductible", "type": "A/N", "length": 13, "from": 323, "to": 335, "comments": "Patient Inpatient Deductible. Format: S9(9)v99"},
     {"field_name": "deductible_indicator", "type": "A/N", "length": 1, "from": 336, "to": 336, "comments": "Deductible Applied: Y/N"},
     {"field_name": "out_of_pocket_indicator", "type": "A/N", "length": 1, "from": 337, "to": 337, "comments": "Out of Pocket Applied: Y/N"},
     {"field_name": "infertility_indicator", "type": "A/N", "length": 1, "from": 338, "to": 338, "comments": "Infertility Applied: Y/N"},
@@ -133,10 +141,39 @@ UMR_TRAILER_LAYOUT = [
     {"field_name": "filler", "type": "A/N", "length": 411, "from": 90, "to": 500, "comments": "Filler - Spaces"},
 ]
 
+UMR_HEADER_LAYOUT_Accum_10PM = [
+    {"field_name": "record_type", "from": 1, "to": 2, "length": 2, "type": "A"},  # '1' for header
+    # {"field_name": "filename", "from": 3, "to": 32, "length": 30, "type": "A"},  # Starts with 'UMR_ACCUM_YYYYMMDD'
+    {"field_name": "process_date", "from": 33, "to": 40, "length": 8, "type": "N"},  # YYYYMMDD
+    # {"field_name": "filler", "from": 41, "to": 500, "length": 460, "type": "A"},
+]
+
+UMR_ACCUMULATOR_LAYOUT_10PM = [
+    # {"field_name": "record_type", "from": 1, "to": 2, "length": 2, "type": "A"},  # '2' for detail
+    # {"field_name": "member_id", "from": 3, "to": 22, "length": 20, "type": "A"},
+    # {"field_name": "process_date", "from": 23, "to": 30, "length": 8, "type": "N"},  # YYYYMMDD
+    # {"field_name": "date_of_service", "from": 31, "to": 38, "length": 8, "type": "N"},  # YYYYMMDD
+    # {"field_name": "birth_date", "from": 39, "to": 46, "length": 8, "type": "N"},  # YYYYMMDD
+    # {"field_name": "benefit_period_start_date", "from": 47, "to": 54, "length": 8, "type": "N"},  # YYYYMMDD
+    # {"field_name": "benefit_period_end_date", "from": 55, "to": 62, "length": 8, "type": "N"},  # YYYYMMDD
+    # {"field_name": "network", "from": 63, "to": 63, "length": 1, "type": "A"},  # I, O, 1, 2, 3
+    # {"field_name": "accum_amount", "from": 64, "to": 73, "length": 10, "type": "S9"},  # Signed numeric
+    # {"field_name": "filler", "from": 74, "to": 500, "length": 427, "type": "A"},
+]
+
+UMR_TRAILER_LAYOUT_Accum_10PM = [
+    {"field_name": "record_type", "from": 1, "to": 2, "length": 2, "type": "A"},  # '3' for trailer
+    # {"field_name": "control_record_count", "from": 3, "to": 12, "length": 10, "type": "N"},  # Detail record count
+    # {"field_name": "filename", "from": 13, "to": 42, "length": 30, "type": "A"},  # Starts with 'UMR_ACCUM_YYYYMMDD'
+    {"field_name": "process_date", "from": 33, "to": 40, "length": 8, "type": "N"},  # YYYYMMDD
+    # {"field_name": "filler", "from": 51, "to": 500, "length": 450, "type": "A"},
+]
+
 # client_manager/utils.py
 CLIENT_ACCOUNT_CODE_RULES = {
     "ALLIED": {"account_prefix": "SAPP", "eligibility_filename_pattern": "Sapp_MEM_TRX"},
     "ASR": {"account_prefix": "6000", "eligibility_filename_pattern": "TRXALBION_PPX_ELIG"},
+    "LUCENT": {"account_prefix": "LUCENT", "eligibility_filename_pattern": "BML_MEM_TRX"},
     "UMR": {"account_prefix": "EMP,SIMP,Cornell College", "eligibility_filename_pattern": "EMP_MEM_TRX_UMR"},
 }
 
@@ -145,8 +182,7 @@ ALLIED_ELIGIBILITY_LAYOUT = [
     {"field_name": "record_type", "type": "A/N", "required": True, "valid_values": ["D"], "comments": "Record Type: D=Detail"},
     {"field_name": "cardholder_id", "type": "A/N", "required": True, "comments": "Unique Cardholder ID"},
     {"field_name": "transaction_code", "type": "A/N", "required": True, "comments": "Transaction Code"},
-    # {"field_name": "account_id", "type": "A/N", "required": True, "comments": "Client Account ID (e.g., SAPP01)"},
-    {"field_name": "account_id", "type": "A/N", "required": False, "comments": "Client Account ID (e.g., SAPP01)"},
+    {"field_name": "account_id", "type": "A/N", "required": True, "comments": "Client Account ID (e.g., SAPP01)"},
     {"field_name": "group_id", "type": "A/N", "required": True, "comments": "Group ID"},
     {"field_name": "coverage_id", "type": "A/N", "required": True, "comments": "Coverage ID"},
     {"field_name": "family_id", "type": "A/N", "required": True, "comments": "Family ID"},
@@ -167,7 +203,7 @@ ALLIED_ELIGIBILITY_LAYOUT = [
     {"field_name": "home_phone", "type": "A/N", "required": False, "comments": "Home Phone"},
     {"field_name": "work_phone", "type": "A/N", "required": False, "comments": "Work Phone"},
     {"field_name": "work_extension", "type": "A/N", "required": False, "comments": "Work Extension"},
-    {"field_name": "hicn", "type": "A/N", "required": False, "comments": "Health Insurance Claim Number"},
+    {"field_name": "hicn", "type": "A/N", "required": True, "comments": "Health Insurance Claim Number"},
     {"field_name": "marital_status", "type": "A/N", "required": False, "comments": "Marital Status"},
     {"field_name": "spouse_name", "type": "A/N", "required": False, "comments": "Spouse Name"},
     {"field_name": "representative_name", "type": "A/N", "required": False, "comments": "Representative Name"},
@@ -176,8 +212,7 @@ ALLIED_ELIGIBILITY_LAYOUT = [
     {"field_name": "reform_ind", "type": "A/N", "required": False, "comments": "Reform Indicator"},
     {"field_name": "birthdate", "type": "N", "required": True, "format": "YYYYMMDD", "comments": "Birth Date"},
     {"field_name": "gender_code", "type": "A/N", "required": True, "valid_values": ["M", "F"], "comments": "Gender: M=Male, F=Female"},
-    # {"field_name": "pregnancy_indicator", "type": "A/N", "required": True, "valid_values": ["0", "1"], "comments": "Pregnancy Indicator"},
-    {"field_name": "pregnancy_indicator", "type": "A/N", "required": False, "valid_values": ["0", "1"], "comments": "Pregnancy Indicator"},
+    {"field_name": "pregnancy_indicator", "type": "A/N", "required": True, "valid_values": ["0", "1"], "comments": "Pregnancy Indicator"},
     {"field_name": "spanish_preference", "type": "A/N", "required": True, "valid_values": ["0", "1"], "comments": "Spanish Preference"},
     {"field_name": "email", "type": "A/N", "required": False, "comments": "Email Address"},
     {"field_name": "patient_suffix_person_code", "type": "A/N", "required": True, "comments": "Patient Suffix Person Code"},
@@ -212,11 +247,10 @@ ALLIED_ELIGIBILITY_LAYOUT = [
     {"field_name": "esrd", "type": "A/N", "required": False, "comments": "ESRD Indicator"},
     {"field_name": "participant_type", "type": "A/N", "required": True, "valid_values": ["I", "F"], "comments": "Participant Type"},
     {"field_name": "ytd_moop_amt", "type": "N", "required": False, "comments": "Year-to-Date MOOP Amount"},
-    {"field_name": "load_status", "type": "A/N", "required": True, "valid_values": ["A","Y","I","F"], "comments": "Load Status"},
+    {"field_name": "load_status", "type": "A/N", "required": True, "valid_values": ["A"], "comments": "Load Status"},
     {"field_name": "load_reject_code", "type": "A/N", "required": False, "comments": "Load Reject Code"},
-    {"field_name": "member_status", "type": "A/N", "required": True, "valid_values": ["A","T","E"], "comments": "Member Status"}
+    {"field_name": "member_status", "type": "A/N", "required": True, "valid_values": ["A"], "comments": "Member Status"}
 ]
-
 # UMR Eligibility Layout (same as Allied)
 UMR_ELIGIBILITY_LAYOUT = ALLIED_ELIGIBILITY_LAYOUT
 
@@ -226,9 +260,9 @@ ASR_ELIGIBILITY_LAYOUT = [
     {"field_name": "rx group", "type": "A/N", "required": True, "comments": "RX Group (e.g., 6000)"},
     {"field_name": "customer group", "type": "A/N", "required": True, "comments": "Customer Group"},
     {"field_name": "family id", "type": "A/N", "required": True, "comments": "Family ID"},
-    {"field_name": "firsle", "type": "A/N", "required": False, "comments": "Middle Name"},
-    {"field_name": "lastt name", "type": "A/N", "required": True, "comments": "First Name"},
-    {"field_name": "Midd name1", "type": "A/N", "required": True, "comments": "Last Name 1"},
+    {"field_name": "first name", "type": "A/N", "required": True, "comments": "First Name"},
+    {"field_name": "Middle", "type": "A/N", "required": False, "comments": "Middle Name"},
+    {"field_name": "last name1", "type": "A/N", "required": True, "comments": "Last Name 1"},
     {"field_name": "last name2", "type": "A/N", "required": False, "comments": "Last Name 2"},
     {"field_name": "address1", "type": "A/N", "required": True, "comments": "Address Line 1"},
     {"field_name": "address2", "type": "A/N", "required": False, "comments": "Address Line 2"},
@@ -242,7 +276,7 @@ ASR_ELIGIBILITY_LAYOUT = [
     {"field_name": "postal zip", "type": "A/N", "required": True, "comments": "Postal Zipcode"},
     {"field_name": "home phone", "type": "A/N", "required": False, "comments": "Home Phone"},
     {"field_name": "work phone", "type": "A/N", "required": False, "comments": "Work Phone"},
-    {"field_name": "subscriber ssn", "type": "A/N", "required": False, "comments": "Subscriber SSN"},
+    {"field_name": "subscriber ssn", "type": "A/N", "required": True, "comments": "Subscriber SSN"},
     {"field_name": "marital status", "type": "A/N", "required": False, "comments": "Marital Status"},
     {"field_name": "date of birth", "type": "A/N", "required": True, "format": "MM-DD-YYYY", "comments": "Date of Birth"},
     {"field_name": "Gender", "type": "A/N", "required": True, "valid_values": ["M", "F"], "comments": "Gender: M=Male, F=Female"},
@@ -257,30 +291,33 @@ ASR_ELIGIBILITY_LAYOUT = [
     {"field_name": "member status", "type": "A/N", "required": True, "valid_values": ["A"], "comments": "Member Status"}
 ]
 
-ALLIED_TRX_PPX_MOOP_HEADER_LAYOUT = [
-    {"from": 1, "to": 2, "field_name": "record_type", "length": 2, "type": "A"},
-    {"from": 3, "to": 12, "field_name": "client_id", "length": 10, "type": "A"},
-    {"from": 13, "to": 22, "field_name": "group_id", "length": 10, "type": "A"},
-    {"from": 23, "to": 30, "field_name": "process_date", "length": 8, "type": "N"},
-    {"from": 31, "to": 500, "field_name": "filler", "length": 470, "type": "A"}
-]
-
 ALLIED_TRX_PPX_MOOP_DETAIL_LAYOUT = [
-    {"from": 1, "to": 2, "field_name": "record_type", "length": 2, "type": "A"},
-    {"from": 3, "to": 12, "field_name": "member_id", "length": 10, "type": "A"},
-    {"from": 13, "to": 22, "field_name": "group_id", "length": 10, "type": "A"},
-    {"from": 23, "to": 30, "field_name": "date_of_service", "length": 8, "type": "N"},
-    {"from": 31, "to": 40, "field_name": "moop_amount", "length": 10, "type": "S9(7)V99"},
-    {"from": 41, "to": 50, "field_name": "deductible_amount", "length": 10, "type": "S9(7)V99"},
-    {"from": 51, "to": 51, "field_name": "network", "length": 1, "type": "A"},
-    {"from": 52, "to": 500, "field_name": "filler", "length": 449, "type": "A"}
+    {"field_name": "record_id", "from": 1, "to": 4, "length": 4, "type": "A"},  # 'TRX'
+    {"field_name": "filler_1", "from": 5, "to": 9, "length": 5, "type": "A"},  # Spaces
+    {"field_name": "client_id", "from": 10, "to": 16, "length": 7, "type": "A"},  # 'SAPP01' or 'SAPP02'
+    {"field_name": "filler_2", "from": 17, "to": 25, "length": 9, "type": "A"},  # Spaces
+    {"field_name": "group_code", "from": 26, "to": 28, "length": 3, "type": "A"},  # e.g., '002'
+    {"field_name": "filler_3", "from": 29, "to": 40, "length": 12, "type": "A"},  # Spaces
+    {"field_name": "member_id", "from": 41, "to": 51, "length": 11, "type": "A"},  # e.g., 'ZZ851923700'
+    {"field_name": "filler_4", "from": 52, "to": 68, "length": 17, "type": "A"},  # Spaces
+    {"field_name": "process_date", "from": 68, "to": 76, "length": 9, "type": "N"},  # '20250609'
+    # {"field_name": "filler_5", "from": 79, "to": 97, "length": 19, "type": "A"},  # Spaces
+    # {"field_name": "accum_amount", "from": 98, "to": 106, "length": 9, "type": "N"},  # e.g., '000003500'
+    # {"field_name": "network", "from": 107, "to": 107, "length": 1, "type": "A"},  # e.g., 'M'
+    # {"field_name": "timestamp_1", "from": 108, "to": 130, "length": 23, "type": "A"},  # e.g., '2025-06-09-17.47.11010'
+    # {"field_name": "filler_6", "from": 131, "to": 135, "length": 5, "type": "A"},  # Spaces
+    # {"field_name": "sequence_number", "from": 136, "to": 140, "length": 5, "type": "N"},  # e.g., '00001'
+    # {"field_name": "filler_7", "from": 141, "to": 189, "length": 49, "type": "A"},  # Spaces
+    # {"field_name": "source_id", "from": 190, "to": 197, "length": 8, "type": "A"},  # 'BCALLIED'
+    # {"field_name": "filler_8", "from": 198, "to": 210, "length": 13, "type": "A"},  # Spaces
+    # {"field_name": "client_name", "from": 211, "to": 216, "length": 6, "type": "A"},  # 'ALLIED'
+    # {"field_name": "filler_9", "from": 217, "to": 247, "length": 31, "type": "A"},  # Spaces
+    # {"field_name": "timestamp_2", "from": 248, "to": 260, "length": 13, "type": "A"},  # e.g., '2025-06-09-17.47'
 ]
 
-ALLIED_TRX_PPX_MOOP_TRAILER_LAYOUT = [
-    {"from": 1, "to": 2, "field_name": "record_type", "length": 2, "type": "A"},
-    {"from": 3, "to": 10, "field_name": "record_count", "length": 8, "type": "N"},
-    {"from": 11, "to": 500, "field_name": "filler", "length": 490, "type": "A"}
-]
+# Define empty header and trailer layouts (in case other files use them)
+ALLIED_TRX_PPX_MOOP_HEADER_LAYOUT = []
+ALLIED_TRX_PPX_MOOP_TRAILER_LAYOUT = []
 
 ASR_TRXALBION_HEADER_LAYOUT = [
     {"from": 1, "to": 2, "field_name": "record_type", "length": 2, "type": "A"},
@@ -306,6 +343,17 @@ ASR_TRXALBION_TRAILER_LAYOUT = [
     {"from": 11, "to": 500, "field_name": "filler", "length": 490, "type": "A"}
 ]
 
+ASR_TRXALBION_PPX_ACCUM_LAYOUT = [
+    {"from": 1, "to": 3, "field_name": "client_id", "length": 3, "type": "A"},  # e.g., "ASR"
+    {"from": 10, "to": 11, "field_name": "record_type", "length": 2, "type": "N"},  # e.g., "01"
+    {"from": 25, "to": 28, "field_name": "account", "length": 4, "type": "A"},  # e.g., "6000"
+    # {"from": 12, "to": 23, "field_name": "group_id", "length": 12, "type": "A"},  # e.g., "P045951001"
+    {"from": 68, "to": 76, "field_name": "process_date", "length": 9, "type": "N"},  # e.g., "20250609"
+    # {"from": 32, "to": 56, "field_name": "timestamp", "length": 25, "type": "A"},  # e.g., "D2025-06-09-04.15.03.959"
+    # {"from": 57, "to": 74, "field_name": "record_key", "length": 18, "type": "N"},  # e.g., "000011101736730"
+    # {"from": 75, "to": 77, "field_name": "filler1", "length": 3, "type": "A"},  # e.g., "BM"
+    # {"from": 78, "to": 104, "field_name": "filler2", "length": 27, "type": "A"}  # Spaces
+]
 
 
 # client_manager/utils.py (continued)
@@ -313,6 +361,7 @@ import logging
 import re
 import os
 import csv
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -769,9 +818,8 @@ def validate_PBLXV_file_with_auto_date(file_content, client_name, filename=None,
     return validate_PBLXV_file(file_content, client_name, expected_date)
 
 def validate_and_correct_RxEOB_umr_accumulator_file(file_content, client_name, output_file_path=None):
-    """
-    Validate and correct a UMR accumulator .txt file content against the UMR accumulator layout.
-    Replace special characters in member_id with '0'.
+    """ Validate and correct a UMR accumulator .txt file content against the UMR accumulator layout.
+    Replace special characters ('-', '--', '_') with '0', especially in member_id.
     Optionally write the corrected content to an output file.
     Args:
         file_content (bytes): The content of the file.
@@ -782,7 +830,7 @@ def validate_and_correct_RxEOB_umr_accumulator_file(file_content, client_name, o
     """
     errors = []
     corrected_lines = []
-    
+
     try:
         # Decode the file content
         content_str = file_content.decode('utf-8', errors='replace')
@@ -797,18 +845,17 @@ def validate_and_correct_RxEOB_umr_accumulator_file(file_content, client_name, o
                 continue
 
             # Get record type
-            record_type = line[0:2].strip()
-            if record_type != "2":  # Only process detail records (type 2) based on provided file
-                errors.append(f"Line {line_num}: Expected detail record (type 2), got '{record_type}'.")
-                corrected_lines.append(line)  # Preserve non-detail records unchanged
-                continue
+            # record_type = line[0:2].strip()
+            # if record_type != "2":  # Only process detail records (type 2) based on provided file
+            #     errors.append(f"Line {line_num}: Expected detail record (type 2), got '{record_type}'.")
+            #     corrected_lines.append(line)  # Preserve non-detail records unchanged
+            #     continue
 
             # Validate line length
-            expected_length = 500
-            if len(line) != expected_length:
-                errors.append(f"Line {line_num}: Line length is {len(line)}, expected {expected_length}.")
-                # Attempt to pad or truncate to continue validation
-                line = pad_or_truncate(line, expected_length)
+            # expected_length = 500
+            # if len(line) != expected_length:
+            #     errors.append(f"Line {line_num}: Line length is {len(line)}, expected {expected_length}.")
+            #     line = pad_or_truncate(line, expected_length)
 
             # Parse and validate fields
             corrected_fields = []
@@ -820,12 +867,12 @@ def validate_and_correct_RxEOB_umr_accumulator_file(file_content, client_name, o
                 actual_content = line[start:end] if len(line) >= end else line[start:] + ' ' * (end - len(line))
                 actual_length = len(actual_content)
 
-                # Check length
-                if actual_length != expected_length:
-                    errors.append(
-                        f"Line {line_num}, Field {field_name}: Length is {actual_length}, expected {expected_length} (positions {start + 1}-{end})."
-                    )
-                    actual_content = pad_or_truncate(actual_content, expected_length)
+                # # Check length
+                # if actual_length != expected_length:
+                #     errors.append(
+                #         f"Line {line_num}, Field {field_name}: Length is {actual_length}, expected {expected_length} (positions {start + 1}-{end})."
+                #     )
+                #     actual_content = pad_or_truncate(actual_content, expected_length)
 
                 # Type validation
                 field_type = field["type"]
@@ -863,10 +910,19 @@ def validate_and_correct_RxEOB_umr_accumulator_file(file_content, client_name, o
                         f"Line {line_num}, Field {field_name}: Invalid indicator value '{actual_content}'. Expected Y or N (positions {start + 1}-{end})."
                     )
 
-                # Special character replacement for member_id
-                if field_name == "member_id":
-                    actual_content = replace_special_chars(actual_content)
-                    actual_content = pad_or_truncate(actual_content, expected_length)
+                # Special character replacement for member_id and other fields
+                if any(char in actual_content for char in ['-', '_']) or '--' in actual_content:
+                    if field_name == "member_id":
+                        actual_content = replace_special_chars(actual_content)
+                        actual_content = pad_or_truncate(actual_content, expected_length)
+                    else:
+                        # Log warning for other fields but preserve original content
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Contains special characters ('-', '_', or '--'), replaced with '0' where applicable (positions {start + 1}-{end})."
+                        )
+                        if field_name != "member_id":  # Avoid double replacement
+                            actual_content = replace_special_chars(actual_content)
+                            actual_content = pad_or_truncate(actual_content, expected_length)
 
                 corrected_fields.append(actual_content)
 
@@ -913,12 +969,15 @@ def validate_file(file_path):
     return validation_result
 
 
-def validate_eligibility_file(file_content, client_name):
+def validate_eligibility_file(file_content, client_name, selected_date=None):
     """
-    Validate an Eligibility file based on the client-specific layout.
+    Validate an eligibility file (EDI 834 or tab-delimited) for a specific client.
+    
     Args:
-        file_content (bytes): The content of the Eligibility file.
-        client_name (str): The name of the client (e.g., 'Allied', 'ASR', 'UMR').
+        file_content (bytes): The content of the file.
+        client_name (str): The name of the client (e.g., "ALLIED", "ASR", "UMR").
+        selected_date (str, optional): The selected date in YYYYMMDD format.
+    
     Returns:
         dict: {"is_valid": bool, "errors": list of error messages}
     """
@@ -927,174 +986,436 @@ def validate_eligibility_file(file_content, client_name):
         # Decode file content
         content_str = file_content.decode('utf-8', errors='replace')
         lines = content_str.splitlines()
-
         if not lines:
             return {"is_valid": False, "errors": ["File is empty."]}
 
-        # Select layout based on client
-        if client_name not in CLIENT_ACCOUNT_CODE_RULES:
-            return {"is_valid": False, "errors": [f"Unknown client: {client_name}"]}
+        # Determine file format: EDI 834 or tab-delimited
+        is_edi_834 = lines[0].strip().startswith("ISA")
 
-        if client_name == "ALLIED":
-            layout = ALLIED_ELIGIBILITY_LAYOUT
-        elif client_name == "ASR":
-            layout = ASR_ELIGIBILITY_LAYOUT
-        elif client_name == "UMR":
-            layout = UMR_ELIGIBILITY_LAYOUT
+        if is_edi_834:
+            # EDI 834 validation
+            return validate_edi_834_file(content_str, client_name, errors)
         else:
-            return {"is_valid": False, "errors": [f"No eligibility layout defined for client: {client_name}"]}
-
-        expected_headers = [field["field_name"] for field in layout]
-        headers = lines[0].split('\t')
-
-        # Validate headers
-        if headers != expected_headers:
-            errors.append(f"Invalid headers. Expected: {expected_headers}, Got: {headers}")
-            return {"is_valid": False, "errors": errors}
-
-        # Get client-specific rules
-        account_prefix = CLIENT_ACCOUNT_CODE_RULES[client_name]["account_prefix"]
-        date_format = "MM-DD-YYYY" if client_name == "ASR" else "YYYYMMDD"
-
-        # Parse file as tab-delimited
-        reader = csv.reader(lines[1:], delimiter='\t')
-        for line_num, row in enumerate(reader, start=2):
-            if len(row) != len(expected_headers):
-                errors.append(f"Line {line_num}: Incorrect number of fields. Expected {len(expected_headers)}, Got {len(row)}")
-                continue
-
-            # Map row to field names
-            record = dict(zip(expected_headers, row))
-            # logger.info(f"row::{row}, line_num::{line_num}")
-            # if record:
-            #     logger.info(f"record::{record}, line_num::{line_num}")
-            #     break
-            # Validate each field based on layout
-            for field in layout:
-                field_name = field["field_name"]
-                value = record[field_name].strip()
-                field_type = field["type"]
-                required = field.get("required", False)
-                valid_values = field.get("valid_values", None)
-                format_spec = field.get("format", None)
-                # Check required fields
-                if required and not value:
-                    errors.append(f"Line {line_num}: {field_name} is empty but required.")
-
-                # Validate specific fields
-                if field_name in ["account_id", "rx group"] and value:
-                    if not value.startswith(account_prefix):
-                        errors.append(f"Line {line_num}: {field_name} '{value}' does not start with expected prefix '{account_prefix}'.")
-
-                # Validate date fields
-                if format_spec and value:
-                    if format_spec == "YYYYMMDD" and not re.match(r'^\d{8}$', value):
-                        errors.append(f"Line {line_num}: Invalid {field_name} format '{value}'. Expected YYYYMMDD.")
-                    elif format_spec == "MM-DD-YYYY" and not re.match(r'^\d{2}-\d{2}-\d{4}$', value):
-                        errors.append(f"Line {line_num}: Invalid {field_name} format '{value}'. Expected MM-DD-YYYY.")
-
-                # Validate valid_values
-                if valid_values and value and value not in valid_values:
-                    errors.append(f"Line {line_num}: Invalid {field_name} '{value}'. Expected one of {valid_values}.")
-
-                # Validate numeric fields
-                if field_type == "N" and value and not re.match(r'^-?\d*\.?\d*$', value):
-                    errors.append(f"Line {line_num}: Invalid {field_name} '{value}'. Expected numeric value.")
-
-        return {"is_valid": len(errors) == 0, "errors": errors}
+            # Tab-delimited validation
+            return validate_tab_delimited_file(content_str, client_name, errors, selected_date)
 
     except Exception as e:
-        logger.error(f"Error validating Eligibility file for client {client_name}: {str(e)}", exc_info=True)
-        return {"is_valid": False, "errors": [f"Error validating Eligibility file: {str(e)}"]}
+        logger.error(f"Error validating eligibility file for {client_name}: {str(e)}", exc_info=True)
+        return {"is_valid": False, "errors": [f"Error validating file: {str(e)}"]}
 
-
-def validate_txt_file_10PM_Accumlator(file_content, client_name):
+def validate_edi_834_file(content_str, client_name, errors):
     """
-    Validate a 5PM Accumulator file based on client-specific layouts.
+    Validate an EDI 834 eligibility file.
+    
+    Args:
+        content_str (str): Decoded file content.
+        client_name (str): Client name.
+        errors (list): List to append error messages.
+    
+    Returns:
+        dict: Validation result.
+    """
+    segments = content_str.split('~')  # EDI 834 uses ~ as segment terminator
+    if not segments:
+        return {"is_valid": False, "errors": ["No segments found in EDI 834 file."]}
+
+    # Expected fields per client (simplified example)
+    client_field_requirements = {
+        "ALLIED": {
+            "required_segments": ["INS", "NM1", "DTP"],
+            "member_id_field": "NM1*IL*1*LASTNAME*FIRSTNAME****MI*MEMBERID",
+            "date_field": "DTP*348*D8*YYYYMMDD"  # Benefit begin date
+        },
+        "ASR": {
+            "required_segments": ["INS", "NM1", "DTP"],
+            "member_id_field": "NM1*IL*1*LASTNAME*FIRSTNAME****MI*MEMBERID",
+            "date_field": "DTP*348*D8*YYYYMMDD"
+        },
+        "UMR": {
+            "required_segments": ["INS", "NM1", "DTP"],
+            "member_id_field": "NM1*IL*1*LASTNAME*FIRSTNAME****MI*MEMBERID",
+            "date_field": "DTP*348*D8*YYYYMMDD"
+        }
+    }
+
+    if client_name not in client_field_requirements:
+        return {"is_valid": False, "errors": [f"No EDI 834 validation rules defined for {client_name}."]}
+
+    config = client_field_requirements[client_name]
+    member_count = 0
+    current_member_segments = []
+
+    for segment in segments:
+        segment = segment.strip()
+        if not segment:
+            continue
+
+        elements = segment.split('*')
+        segment_type = elements[0]
+
+        # Accumulate segments for each member (INS marks new member)
+        if segment_type == "INS":
+            if current_member_segments:
+                # Validate previous member
+                validate_member_segments(current_member_segments, config, errors, member_count + 1)
+                member_count += 1
+            current_member_segments = [segment]
+        else:
+            current_member_segments.append(segment)
+
+    # Validate the last member
+    if current_member_segments:
+        validate_member_segments(current_member_segments, config, errors, member_count + 1)
+        member_count += 1
+
+    if member_count == 0:
+        errors.append("No INS segments found in EDI 834 file.")
+
+    return {"is_valid": len(errors) == 0, "errors": errors}
+
+def validate_member_segments(segments, config, errors, member_num):
+    """
+    Validate segments for a single member in EDI 834 file.
+    
+    Args:
+        segments (list): List of segments for the member.
+        config (dict): Client-specific validation rules.
+        errors (list): List to append errors.
+        member_num (int): Member number for error reporting.
+    """
+    segment_types = {segment.split('*')[0] for segment in segments}
+    
+    # Check required segments
+    for required_segment in config["required_segments"]:
+        if required_segment not in segment_types:
+            errors.append(f"Member {member_num}: Missing required segment {required_segment}.")
+
+    # Validate member ID (NM1 segment)
+    member_id_found = False
+    for segment in segments:
+        if segment.startswith("NM1*IL*1"):
+            elements = segment.split('*')
+            if len(elements) > 8 and elements[8] == "MI":
+                member_id = elements[9].strip()
+                if not re.match(r'^\w+$', member_id):
+                    errors.append(f"Member {member_num}: Invalid member ID '{member_id}' in NM1 segment.")
+                member_id_found = True
+            break
+    if not member_id_found:
+        errors.append(f"Member {member_num}: Missing or invalid NM1*IL segment.")
+
+    # Validate coverage date (DTP segment)
+    date_found = False
+    for segment in segments:
+        if segment.startswith("DTP*348*D8"):
+            elements = segment.split('*')
+            if len(elements) > 3:
+                date_value = elements[3].strip()
+                if not re.match(r'^\d{8}$', date_value):
+                    errors.append(f"Member {member_num}: Invalid date format '{date_value}' in DTP*348 segment. Expected YYYYMMDD.")
+                date_found = True
+            break
+    if not date_found:
+        errors.append(f"Member {member_num}: Missing DTP*348 segment for benefit begin date.")
+
+def validate_tab_delimited_file(content_str, client_name, errors, selected_date):
+    """
+    Validate a tab-delimited eligibility file.
+    
+    Args:
+        content_str (str): Decoded file content.
+        client_name (str): Client name.
+        errors (list): List to append errors.
+        selected_date (str): Selected date in YYYYMMDD format.
+    
+    Returns:
+        dict: Validation result.
+    """
+    lines = content_str.splitlines()
+    if not lines:
+        return {"is_valid": False, "errors": ["File is empty."]}
+
+    # Define client-specific layouts (example placeholders)
+    eligibility_layouts = {
+        "ALLIED": ALLIED_ELIGIBILITY_LAYOUT,
+        "ASR": ASR_ELIGIBILITY_LAYOUT,
+        "UMR": UMR_ELIGIBILITY_LAYOUT
+    }
+
+    if client_name not in eligibility_layouts:
+        return {"is_valid": False, "errors": [f"No eligibility layout defined for {client_name}."]}
+
+    layout = eligibility_layouts[client_name]
+    expected_headers = [field["field_name"] for field in layout]
+    
+    # Parse as tab-delimited
+    try:
+        rows = [line.split('\t') for line in lines]
+        if not rows:
+            return {"is_valid": False, "errors": ["No data rows found."]}
+
+        headers = rows[0]
+        if headers != expected_headers:
+            errors.append(f"Header mismatch. Expected: {expected_headers}, Got: {headers}")
+            return {"is_valid": False, "errors": errors}
+
+        for row_num, row in enumerate(rows[1:], start=2):
+            if len(row) != len(layout):
+                errors.append(f"Line {row_num}: Expected {len(layout)} columns, got {len(row)}.")
+                continue
+
+            for field, value in zip(layout, row):
+                field_name = field["field_name"]
+                field_type = field["type"]
+                value = value.strip()
+
+                # Validate field type
+                if field_type == "N" and value and not value.replace('-', '').replace('.', '').isdigit():
+                    errors.append(f"Line {row_num}, Field {field_name}: Expected numeric, got '{value}'.")
+                elif field_type == "AN" and not value:
+                    errors.append(f"Line {row_num}, Field {field_name}: Required field is empty.")
+
+                # Date validation
+                if field_name.lower().endswith("date") and value:
+                    if client_name == "ASR":
+                        # ASR expects MM-DD-YYYY
+                        if not re.match(r'^\d{2}-\d{2}-\d{4}$', value):
+                            errors.append(f"Line {row_num}, Field {field_name}: Invalid date format '{value}'. Expected MM-DD-YYYY.")
+                        elif selected_date and value != selected_date:
+                            errors.append(f"Line {row_num}, Field {field_name}: Date '{value}' does not match selected date '{selected_date}'.")
+                    else:
+                        # Others expect YYYYMMDD
+                        if not re.match(r'^\d{8}$', value):
+                            errors.append(f"Line {row_num}, Field {field_name}: Invalid date format '{value}'. Expected YYYYMMDD.")
+                        elif selected_date and value != selected_date:
+                            errors.append(f"Line {row_num}, Field {field_name}: Date '{value}' does not match selected date '{selected_date}'.")
+                    
+
+    except Exception as e:
+        errors.append(f"Error parsing tab-delimited file: {str(e)}")
+        return {"is_valid": False, "errors": errors}
+
+    return {"is_valid": len(errors) == 0, "errors": errors}
+
+
+def validate_txt_file_10PM_Accumlator(file_content, client_name, filename=None, selected_date=None):
+    """
+    Validate a 10PM Accumulator or Eligibility file based on client-specific layouts.
+    For eligibility files, validate the date in the first line (characters 70-75) in YYMMDD format.
+    
     Args:
         file_content (bytes): The content of the file.
         client_name (str): The name of the client (e.g., "ALLIED", "ASR", "UMR").
+        filename (str, optional): The filename to extract date or determine file type.
+        selected_date (str, optional): The selected date in YYYYMMDD format.
+    
     Returns:
         dict: {"is_valid": bool, "errors": list of error messages}
     """
     errors = []
     try:
+        # Decode file content
         content_str = file_content.decode('utf-8', errors='replace')
         lines = content_str.splitlines()
         if not lines:
             return {"is_valid": False, "errors": ["File is empty."]}
 
-        # Select layout based on client
+        # Determine file type based on filename or content
+        is_eligibility_file = False
+        if filename:
+            filename = filename.upper()
+            is_eligibility_file = (
+                "ELIG" in filename or
+                "MEM_TRX_UMR" in filename or
+                "TRXALBION_PPX_ELIG" in filename or
+                "SAPP_PPX_ELIGIBILITY_" in filename
+            )
+        else:
+            # Fallback: Check if first line looks like an EDI 834 file (starts with ISA)
+            first_line = lines[0].strip()
+            is_eligibility_file = first_line.startswith("ISA")
+
+        # Determine expected date
+        expected_date = selected_date
+        if not expected_date:
+            expected_date = datetime.now().strftime('%Y%m%d')
+
+        # Handle eligibility file validation
+        if is_eligibility_file:
+            # Validate EDI 834 format for eligibility files
+            first_line = lines[0].strip()
+            if not first_line.startswith("ISA"):
+                errors.append("Line 1: Expected ISA segment for eligibility file.")
+                return {"is_valid": False, "errors": errors}
+
+            # Validate date in characters 70-75 (YYMMDD)
+            if len(first_line) < 75:
+                errors.append("Line 1: Line too short to contain ISA date (positions 70-75).")
+            else:
+                isa_date = first_line[70:76].strip()
+                if not re.match(r'^\d{6}$', isa_date):
+                    errors.append(f"Line 1: Invalid ISA date format '{isa_date}' (positions 70-76). Expected YYMMDD.")
+                else:
+                    # Optionally, compare with expected date (convert YYMMDD to YYYYMMDD for comparison)
+                    try:
+                        # Convert YYMMDD to YYYYMMDD
+                        year_prefix = "20" if int(isa_date[:2]) <= int(expected_date[2:4]) else "19"
+                        full_isa_date = f"{year_prefix}{isa_date}"
+                        if full_isa_date != expected_date:
+                            errors.append(
+                                f"Line 1: ISA date '{full_isa_date}' (from {isa_date}) does not match expected date '{expected_date}'."
+                            )
+                    except ValueError:
+                        errors.append(f"Line 1: Invalid ISA date '{isa_date}' cannot be converted to YYYYMMDD.")
+
+            # # Delegate to existing validate_eligibility_file for additional validation if tab-delimited
+            # if client_name in ["ALLIED", "ASR", "UMR"]:
+            #     eligibility_validation = validate_eligibility_file(file_content, client_name)
+            #     errors.extend(eligibility_validation["errors"])
+            #     if not eligibility_validation["is_valid"]:
+            #         return {"is_valid": False, "errors": errors}
+            # else:
+            #     errors.append(f"No eligibility layout defined for client {client_name}.")
+
+            return {"is_valid": len(errors) == 0, "errors": errors}
+
+        # Handle accumulator file validation
+        # Select layout and configuration based on client
         if client_name == "ALLIED":
             header_layout = ALLIED_TRX_PPX_MOOP_HEADER_LAYOUT
             detail_layout = ALLIED_TRX_PPX_MOOP_DETAIL_LAYOUT
             trailer_layout = ALLIED_TRX_PPX_MOOP_TRAILER_LAYOUT
+            expected_length = 260
+            expected_account_prefixes = ["SAPP01", "SAPP02"]
+            has_header_trailer = False
         elif client_name == "ASR":
-            header_layout = ASR_TRXALBION_HEADER_LAYOUT
-            detail_layout = ASR_TRXALBION_DETAIL_LAYOUT
-            trailer_layout = ASR_TRXALBION_TRAILER_LAYOUT
+            header_layout = []
+            detail_layout = ASR_TRXALBION_PPX_ACCUM_LAYOUT
+            trailer_layout = []
+            expected_length = 104
+            expected_account_prefix = "6000"
+            has_header_trailer = False
         elif client_name == "UMR":
-            header_layout = UMR_HEADER_LAYOUT
-            detail_layout = UMR_ACCUMULATOR_LAYOUT
-            trailer_layout = UMR_TRAILER_LAYOUT
+            header_layout = UMR_HEADER_LAYOUT_Accum_10PM
+            detail_layout = UMR_ACCUMULATOR_LAYOUT_10PM
+            trailer_layout = UMR_TRAILER_LAYOUT_Accum_10PM
+            expected_length = 500
+            expected_filename_prefix = "UMR_ACCUM_"
+            has_header_trailer = True
         else:
-            return {"is_valid": False, "errors": [f"No validation layout defined for client {client_name}."]}
+            return {"is_valid": False, "errors": [f"No validation layout defined for {client_name}."]}
 
-        expected_length = 500  # Consistent length for all clients
-
+        # Validate accumulator file lines
         for line_num, line in enumerate(lines, start=1):
-            if len(line) < 2:
-                errors.append(f"Line {line_num}: Line too short to determine record type.")
-                continue
+            # Check line length (optional, as some layouts may vary)
+            # if len(line) != expected_length:
+            #     errors.append(f"Line {line_num}: Line length is {len(line)}, expected {expected_length}.")
 
-            record_type = line[0:2].strip()
-            if record_type == "1":
-                layout = header_layout
-            elif record_type == "2":
-                layout = detail_layout
-            elif record_type == "3":
-                layout = trailer_layout
+            # Select layout based on whether file has header/trailer
+            if has_header_trailer:
+                # UMR validation
+                record_type = line[0:2].strip() if len(line) >= 2 else ""
+                if line_num == 1 and record_type != "1":
+                    errors.append(f"Line {line_num}: First line must be a header record (record type 1), got '{record_type}'.")
+                elif line_num == len(lines) and record_type != "3":
+                    errors.append(f"Line {line_num}: Last line must be a trailer record (record type 3), got '{record_type}'.")
+                elif record_type not in ["1", "2", "3"]:
+                    errors.append(f"Line {line_num}: Invalid record type '{record_type}'. Expected 1, 2, or 3.")
+                    continue
+
+                current_layout = (
+                    header_layout if record_type == "1" else
+                    trailer_layout if record_type == "3" else
+                    detail_layout
+                )
             else:
-                errors.append(f"Line {line_num}: Invalid record type '{record_type}'. Expected 1, 2, or 3.")
-                continue
+                # Allied and ASR: all lines use detail layout
+                current_layout = detail_layout
 
-            if len(line) != expected_length:
-                errors.append(f"Line {line_num}: Line length is {len(line)}, expected {expected_length}.")
-                continue
-
-            for field in layout:
+            # Validate fields
+            for field in current_layout:
                 start = field["from"] - 1
                 end = field["to"]
-                value = line[start:end].strip()
+                value = line[start:end].strip() if start < len(line) else ""
                 field_name = field["field_name"]
                 field_type = field["type"]
+                expected_field_length = field["length"]
 
-                if field_name != "filler":
-                    if len(value) != field["length"]:
-                        errors.append(f"Line {line_num}, Field {field_name}: Length is {len(value)}, expected {field['length']} (positions {start + 1}-{end}).")
+                # Check field length
+                if len(line[start:end]) != expected_field_length:
+                    errors.append(
+                        f"Line {line_num}, Field {field_name}: Length is {len(line[start:end])}, expected {expected_field_length} (positions {start + 1}-{end})."
+                    )
 
-                    if field_type == "N" and value and not value.replace('-', '').replace('.', '').isdigit():
-                        errors.append(f"Line {line_num}, Field {field_name}: Expected numeric, got '{value}' (positions {start + 1}-{end}).")
-                    elif field_type.startswith("S9") and value and not re.match(r'^-?\d*\.?\d*$', value):
-                        errors.append(f"Line {line_num}, Field {field_name}: Expected signed numeric, got '{value}' (positions {start + 1}-{end}).")
+                # Validate field type
+                if field_type == "N" and value and not value.replace('-', '').replace('.', '').isdigit():
+                    errors.append(
+                        f"Line {line_num}, Field {field_name}: Expected numeric, got '{value}' (positions {start + 1}-{end})."
+                    )
+                elif field_type.startswith("S9") and value and not re.match(r'^-?\d*\.?\d*$', value):
+                    errors.append(
+                        f"Line {line_num}, Field {field_name}: Expected signed numeric, got '{value}' (positions {start + 1}-{end})."
+                    )
 
-                    if field_name in ["process_date", "date_of_service"] and value:
-                        if not re.match(r'^\d{8}$', value):
-                            errors.append(f"Line {line_num}, Field {field_name}: Invalid date format '{value}', expected YYYYMMDD (positions {start + 1}-{end}).")
-                    if field_name == "network" and value and value not in ['I', 'O', '1', '2', '3']:  # Simplified for IN/OUT or TIER1-3
-                        errors.append(f"Line {line_num}, Field {field_name}: Invalid network '{value}', expected I, O, 1, 2, or 3 (positions {start + 1}-{end}).")
+                # Client-specific validations
+                if client_name == "ALLIED":
+                    if field_name == "record_id" and value != "TRX":
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Expected 'TRX', got '{value}' (positions {start + 1}-{end})."
+                        )
+                    if field_name == "client_id" and value not in expected_account_prefixes:
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Expected client_id '{', '.join(expected_account_prefixes)}', got '{value}' (positions {start + 1}-{end})."
+                        )
+                    if field_name == "process_date" and value and not re.match(r'^\d{8}$', value):
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Invalid date format '{value}', expected YYYYMMDD (positions {start + 1}-{end})."
+                        )
+                    if field_name == "network" and value and value not in ['I', 'O', '1', '2', '3', 'M']:
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Invalid network '{value}', expected I, O, 1, 2, 3, or M (positions {start + 1}-{end})."
+                        )
 
-        # Structural validations
-        if len(lines) < 2 or not lines[0].startswith("1") or not lines[-1].startswith("3"):
-            errors.append("File must start with Header (1) and end with Trailer (3).")
-        detail_count = sum(1 for line in lines if line.startswith("2"))
-        trailer_record_count_field = trailer_layout[1]["from"] - 1, trailer_layout[1]["to"]  # record_count field
-        if len(lines) > 2 and lines[-1][trailer_record_count_field[0]:trailer_record_count_field[1]].strip().isdigit():
-            trailer_count = int(lines[-1][trailer_record_count_field[0]:trailer_record_count_field[1]].strip())
-            if trailer_count != detail_count:
-                errors.append(f"Trailer record count {trailer_count} does not match detail count {detail_count}.")
+                elif client_name == "ASR":
+                    if field_name == "account" and value != expected_account_prefix:
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Expected account code '{expected_account_prefix}', got '{value}' (positions {start + 1}-{end})."
+                        )
+                    if field_name == "process_date" and value and not re.match(r'^\d{8}$', value):
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Invalid date format '{value}', expected YYYYMMDD (positions {start + 1}-{end})."
+                        )
+
+                elif client_name == "UMR" and has_header_trailer:
+                    if field_name in ["process_date", "date_of_service", "birth_date", "benefit_period_start_date", "benefit_period_end_date"] and value and not re.match(r'^\d{8}$', value):
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Invalid date format '{value}', expected YYYYMMDD (positions {start + 1}-{end})."
+                        )
+                    if field_name == "network" and record_type == "2" and value and value not in ['I', 'O', '1', '2', '3']:
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Invalid network '{value}', expected I, O, 1, 2, or 3 (positions {start + 1}-{end})."
+                        )
+                    if field_name == "filename" and record_type in ["1", "3"]:
+                        if not value.startswith(expected_filename_prefix):
+                            errors.append(
+                                f"Line {line_num} ({'Header' if record_type == '1' else 'Trailer'}): Filename '{value}' does not start with '{expected_filename_prefix}'."
+                            )
+                        date_part = value[10:18] if len(value) >= 18 else ""
+                        if date_part and not re.match(r'^\d{8}$', date_part):
+                            errors.append(
+                                f"Line {line_num} ({'Header' if record_type == '1' else 'Trailer'}): Invalid date '{date_part}' in filename, expected YYYYMMDD."
+                            )
+
+        # UMR trailer record count validation for accumulator files
+        if client_name == "UMR" and has_header_trailer and lines:
+            detail_count = sum(1 for line in lines if line.startswith("2"))
+            trailer_record_count_field = trailer_layout[1]["from"] - 1, trailer_layout[1]["to"]
+            if lines[-1].startswith("3") and lines[-1][trailer_record_count_field[0]:trailer_record_count_field[1]].strip().isdigit():
+                trailer_count = int(lines[-1][trailer_record_count_field[0]:trailer_record_count_field[1]].strip())
+                if trailer_count != detail_count:
+                    errors.append(f"Trailer record count {trailer_count} does not match detail count {detail_count}.")
 
         return {"is_valid": len(errors) == 0, "errors": errors}
     except Exception as e:
-        logger.error(f"Error validating 5PM file for {client_name}: {str(e)}", exc_info=True)
+        logger.error(f"Error validating 10PM file for {client_name}: {str(e)}", exc_info=True)
         return {"is_valid": False, "errors": [f"Error validating file: {str(e)}"]}

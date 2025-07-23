@@ -1,6 +1,6 @@
 # client_manager/tasks.py
 from celery import shared_task
-from client_manager.models import Client, DownloadedFile, FileConfig
+from client_manager.models import Client, DownloadedFile, FileConfig, UploadConfig
 from core.api_client import PharmpixApiClient
 import logging
 from config.client_config import get_client_config
@@ -8,9 +8,10 @@ from core.file_processor import process_client
 import os
 from django.core.files import File
 import paramiko
-from client_manager.utils import validate_txt_file, validate_file, validate_umr_accumulator_file, validate_PBLXV_file_with_auto_date, validate_and_correct_RxEOB_umr_accumulator_file, validate_eligibility_file
+from client_manager.utils import validate_txt_file, validate_file, validate_umr_accumulator_file, validate_PBLXV_file_with_auto_date, validate_and_correct_RxEOB_umr_accumulator_file, validate_eligibility_file, validate_txt_file_10PM_Accumlator
 from datetime import datetime
 from core.sftp_client import SFTPClient
+import requests
 
 logger = logging.getLogger(__name__)
 
@@ -205,6 +206,12 @@ def download_10pm_files_task(client_id, selected_date=None):
         if not (client.sftp_host and client.sftp_username and client.sftp_password):
             logger.warning(f"SFTP credentials missing for client {client.name}. Skipping.")
             return {"status": "Failed", "message": f"SFTP credentials missing for client {client.name}"}
+        
+        # Get the upload configuration for this client
+        upload_config = UploadConfig.objects.filter(client=client, is_active=True).first()
+        if not upload_config:
+            logger.warning(f"No upload configuration found for client {client.name}. Skipping upload.")
+            return {"status": "Failed", "message": f"No upload configuration for client {client.name}"}
 
         # Initialize SFTP client
         sftp_client = SFTPClient(
@@ -241,35 +248,108 @@ def download_10pm_files_task(client_id, selected_date=None):
                     logger.warning(f"No {file_config.file_type} file downloaded for {client.name}")
                     continue
 
-                # Skip validation as per request
-                # validation_result = validate_file(local_file_path)
-                # logger.info(f"Validation result for {local_file_path}: {validation_result}")
-
                 # Store the file details in the database
                 logger.info(f"File downloaded successfully: {local_file_path}")
                 with open(local_file_path, 'rb') as f:
                     file_content = f.read()
                 logger.info(f"File content read successfully for {local_file_path}")
-                logger.info(f"File content length: {len(file_content)} bytes :::: {file_content[:50]}...")
+                logger.info(f"File content length: {len(file_content)} bytes :::: {file_content[:70]}...")
                 file_name = os.path.basename(local_file_path)
+                logger.info(f"File name extracted::::::::::::::: {file_name}")
+                
+                validation_result = validate_txt_file_10PM_Accumlator(
+                    file_content,
+                    client.name,
+                    filename=file_name,
+                    selected_date=date_obj.strftime('%Y%m%d') if selected_date else None
+                )
+
+                # Validate accumulator files
+                # if "ACCUM" in file_config.file_type.upper() or "TRXALBION" in file_name or "ACCUM_UMR" in file_name:
+                #     logger.info(f"Validating accumulator file: {file_name}")
+                #     validation_result = validate_txt_file_10PM_Accumlator(file_content, client.name)
+                # Add eligibility validation here later when sample is provided
+                # elif "eligibility" in file_config.file_type.upper():
+                #     logger.info(f"Validating eligibility file: {file_name}")
+                #     validation_result = validate_eligibility_file(file_content, client.name)
+
+
+                # logger.info(f"Validation result for {file_name}: {validation_result}")
+
+                # Store the file details in the database
                 downloaded_file = DownloadedFile(
                     client=client,
                     file_content=file_content,
                     original_filename=file_name,
                     file_type=file_config.file_type,
                     path=file_config.local_path,
-                    is_validated=True,  # Temporarily set to True since validation is on hold
-                    validation_errors=None,  # No errors since validation is skipped
+                    is_validated=validation_result["is_valid"],
+                    validation_errors="\n".join(validation_result["errors"]) if validation_result["errors"] else None,
                     downloaded_at=datetime.now()
                 )
                 downloaded_file.save()
                 logger.info(f"Saved file to database: {file_name}")
 
-                client_results.append(local_file_path)
+                if validation_result["is_valid"]:
+                    client_results.append(local_file_path)
+                    # Upload the file
+                    upload_result = upload_file_to_pharmpix(
+                        local_file_path,
+                        upload_config.upload_endpoint,
+                        upload_config.token,
+                        client.name
+                    )
+                    if upload_result["success"]:
+                        downloaded_file.is_uploaded = True
+                        downloaded_file.save()
+                        logger.info(f"File {file_name} uploaded successfully to {upload_config.upload_endpoint}")
+                    else:
+                        downloaded_file.upload_errors = "\n".join(upload_result["errors"])
+                        downloaded_file.save()
+                        logger.error(f"Upload failed for {file_name}: {upload_result['errors']}")
+                else:
+                    logger.warning(f"File {file_name} validation failed: {validation_result['errors']}")
 
-            return {"status": "Completed", "message": f"10PM task completed successfully for {client.name}: {client_results}"}
+            return {"status": "Completed", "message": f"10PM task completed for {client.name}: {client_results}"}
         finally:
             sftp_client.disconnect()
     except Exception as e:
         logger.error(f"Error in 10PM file download task: {str(e)}", exc_info=True)
         return {"status": "Failed", "message": f"Error: {str(e)}"}
+
+def upload_file_to_pharmpix(file_path, upload_endpoint, token, client_name):
+    headers = {
+        "Accept": "text/plain, */*; q=0.01",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Cache-Control": "no-cache",
+        "Connection": "keep-alive",
+        "Content-Type": "text/plain",
+        "X-CSRF-TOKEN": token,
+        "X-Jument-Version": "v1.2.0 build 1",
+        "X-Requested-With": "XMLHttpRequest",
+        "sec-ch-ua": "\"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "Cookie": f"token={token}; savedpath=/{upload_endpoint},https",
+        "Referer": f"https://eft.pharmpix.com/?token={token}",
+        "Origin": "https://eft.pharmpix.com"
+    }
+    file_name = os.path.basename(file_path)
+
+    with open(file_path, 'rb') as f:
+        files = {
+            'file': (file_name, f, 'text/plain', {'Content-Disposition': f'attachment; filename="{file_name}"'})
+        }
+        try:
+            response = requests.post(
+                f"https://eft.pharmpix.com{upload_endpoint}",
+                headers=headers,
+                files=files,
+                timeout=30
+            )
+            response.raise_for_status()
+            logger.info(f"Upload response for {file_name}: {response.status_code} - {response.text}")
+            return {"success": True, "errors": []}
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Upload failed for {file_name}: {str(e)}")
+            return {"success": False, "errors": [str(e)]}

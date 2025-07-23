@@ -127,7 +127,7 @@
                     {% empty %}
                     <tr>
                         <td colspan="7">No file configurations found.</td>
-                    </tr>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>
@@ -171,7 +171,14 @@
                         <td>{{ file.path }}</td>
                         <td>{{ file.downloaded_at|date:"Y-m-d H:i:s" }}</td>
                         <td>
-                            <button class="btn btn-info action-btn view-file-btn" data-file-id="{{ file.id }}" data-file-url="{% url 'view_file' file.id %}" data-errors="{{ file.validation_errors|default:''|escape }}" data-validated="{{ file.is_validated|yesno:'true,false' }}" data-sent="{{ file.sent_to_sftp|yesno:'true,false' }}" data-client-id="{{ client.id }}"><i class="fas fa-eye"></i></button>
+                            <button class="btn btn-info action-btn view-file-btn" 
+                                    data-file-id="{{ file.id }}" 
+                                    data-file-url="{% url 'view_file' file.id %}" 
+                                    data-errors="{{ file.validation_errors|default:''|escape }}" 
+                                    data-validated="{{ file.is_validated|yesno:'true,false' }}" 
+                                    data-sent="{{ file.sent_to_sftp|yesno:'true,false' }}" 
+                                    data-client-id="{{ client.id }}"
+                                    data-file-type="{{ file.file_type|default:'txt' }}"><i class="fas fa-eye"></i></button>
                             <a href="{% url 'view_file' file.id %}" class="btn btn-secondary action-btn" download><i class="fas fa-download"></i></a>
                             <a href="{% url 'replace_file' file.id %}" class="btn btn-warning action-btn"><i class="fas fa-upload"></i></a>
                             <a href="{% url 'delete_file' file.id %}" class="btn btn-danger action-btn delete-btn"><i class="fas fa-trash"></i></a>
@@ -222,7 +229,6 @@
     </div>
     <script type="text/javascript">
         window.replaceUrlBase = "{% url 'replace_file' 0 %}";
-        // Define the base URL template for download_files_with_date
         window.downloadUrlBase = "{% url 'download_files_with_date' client.id 'placeholder' %}";
     </script>
 {% endblock %}

@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from client_manager.models import Client, Path, Task, OutputConfig, DownloadedFile, FileConfig
-from client_manager.forms import ClientForm, PathForm, TaskForm, OutputConfigForm, DownloadForm, FileConfigForm
+from client_manager.forms import ClientForm, PathForm, TaskForm, OutputConfigForm, DownloadForm, FileConfigForm, UploadConfigForm
 from client_manager.tasks import download_files_task, download_10pm_files_task
 from celery.result import AsyncResult
 from datetime import datetime
@@ -566,3 +566,17 @@ def send_to_sftp(request):
         except:
             pass
         return JsonResponse({"status": "error", "message": f"Error: {str(e)}"}, status=500)
+    
+def upload_config_view(request, client_id):
+    client = Client.objects.get(id=client_id)
+    if request.method == "POST":
+        form = UploadConfigForm(request.POST)
+        if form.is_valid():
+            upload_config = form.save(commit=False)
+            upload_config.client = client
+            upload_config.save()
+            messages.success(request, "Upload configuration saved successfully.")
+            return redirect('client_detail', client_id=client_id)
+    else:
+        form = UploadConfigForm(initial={'client': client})
+    return render(request, 'upload_config.html', {'form': form, 'client': client})

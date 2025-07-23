@@ -2,7 +2,7 @@
 import logging
 import time
 from utils.helpers import extract_file_info
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 
 logger = logging.getLogger(__name__)
@@ -33,6 +33,7 @@ def process_client(client_name, client_config, client_obj, download_files=True, 
         
         for file_type in file_types:
             response = client_obj.get_files(path, file_type=file_type, file_pattern=file_pattern)
+            logger.info(f"file_pattern:{file_pattern}")
             
             if response and isinstance(response, dict) and 'rows' in response:
                 files = extract_file_info(response)
@@ -44,25 +45,38 @@ def process_client(client_name, client_config, client_obj, download_files=True, 
                 
                 # Filter files by selected date
                 if selected_date:
+                    logger.info(f"Filtering files by selected date::::::::: {selected_date}")
                     filtered_files = []
                     try:
                         selected_date_obj = datetime.strptime(selected_date, '%Y-%m-%d').date()
+                        # Calculate the next day
+                        next_date_obj = selected_date_obj + timedelta(days=1)
                     except ValueError:
                         logger.error(f"Invalid format for selected_date: {selected_date}")
                         selected_date_obj = None
+                        next_date_obj = None
 
-                    if selected_date_obj:
+                    if selected_date_obj and next_date_obj:
                         for file_info in files:
                             file_date_str = file_info['Date'].split()[0]  # e.g., "2025-04-29"
                             try:
                                 file_date = datetime.strptime(file_date_str, '%Y-%m-%d').date()
-                                if file_date == selected_date_obj:
+                                # Check if file_date is within the range [selected_date, next_date]
+                                if file_date == next_date_obj and "Eligibility" not in path:
+                                    logger.info(f"File date {file_date} is within range {selected_date_obj} to {next_date_obj}")
+                                    logger.info(f"file_info: {file_info}")
+                                    filtered_files.append(file_info)
+                                if selected_date_obj == file_date and "Eligibility" in path:
+                                    logger.info(f"File date {file_date} is equal to selected date {selected_date_obj}")
+                                    logger.info(f"file_info: {file_info}")
                                     filtered_files.append(file_info)
                             except ValueError:
                                 logger.warning(f"Invalid date format for file {file_info['Filename']}: {file_date_str}")
                                 continue
                         files = filtered_files
-                        logger.info(f"After date filter ({selected_date}), {len(files)} {file_type} files remain")
+                        logger.info(f"After date filter (from {selected_date} to {next_date_obj}), {len(files)} {file_type} files remain")
+                else:
+                    logger.info(f"No selected_date provided, keeping all {len(files)} {file_type} files")
                 
                 if not files:
                     logger.info(f"No files match the selected date for {path} with file type {file_type}")

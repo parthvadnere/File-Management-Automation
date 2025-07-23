@@ -5,7 +5,7 @@ import time
 import logging
 import requests
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from urllib.parse import urljoin, quote
 from client_manager.models import OutputConfig
 
@@ -383,6 +383,16 @@ class PharmpixApiClient:
         Fetch output configurations from the database.
         """
         # Normalize file_type
+        logger.info(f"path: {path}, file_type: {file_type}, file_date: {file_date}")
+        try:
+            if "Eligibility" not in path and "UMR_ACCUM" not in filename and "trx_UMR_RxEOB" not in filename: 
+                file_date_obj = datetime.strptime(file_date, '%Y-%m-%d')
+                file_date_obj -= timedelta(days=1)
+                file_date = file_date_obj.strftime('%Y-%m-%d')
+            else:
+                logger.info("Eligibility path detected, skipping date adjustment")
+        except ValueError:
+            pass
         file_type = file_type.lower().strip('.')
 
         # Format date for naming conventions
@@ -433,6 +443,9 @@ class PharmpixApiClient:
             file_type = ext if ext else '.unknown'
             
         file_date = file_info['Date'].split()[0]
+        logger.info("**********************")
+        logger.info(f"file_date: {file_date}, file_type: {file_type}")
+        logger.info("**********************")
         output_configs = self._get_output_configs(client_name, path, filename, file_type, file_date)
 
         if not output_configs:

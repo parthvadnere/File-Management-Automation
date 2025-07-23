@@ -71,6 +71,21 @@ class DownloadedFile(models.Model):
     is_validated = models.BooleanField(default=False)
     validation_errors = models.TextField(blank=True, null=True)  # Store errors as a string
     sent_to_sftp = models.BooleanField(default=False)
+    is_uploaded = models.BooleanField(default=False)
+    upload_errors = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.original_filename} - {self.client.name}"
+
+    class Meta:
+        verbose_name = "Downloaded File"
+        verbose_name_plural = "Downloaded Files"
+
+class UploadConfig(models.Model):
+    client = models.ForeignKey('Client', on_delete=models.CASCADE, related_name='upload_configs')
+    upload_endpoint = models.CharField(max_length=255, help_text="e.g., /To_Pharmpix/ALLIED/Accumulators/")
+    token = models.CharField(max_length=255, help_text="CSRF token for authentication")
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.client.name} - {self.upload_endpoint}"
