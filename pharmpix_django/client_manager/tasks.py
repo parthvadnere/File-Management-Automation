@@ -66,7 +66,6 @@ def download_files_task(client_id, username="it@transparentrx.com", password="_4
             if not isinstance(file_paths_list, list):
                 logger.error(f"Expected file_paths_list to be a list, got {type(file_paths_list)}: {file_paths_list}")
                 continue
-
             # Iterate over the list of file paths
             for file_path in file_paths_list:
                 if not isinstance(file_path, str):
@@ -145,6 +144,35 @@ def download_files_task(client_id, username="it@transparentrx.com", password="_4
                 saved_files.append(downloaded_file.original_filename)
                 logger.info(f"Saved file to database: {file_name}")
 
+                # if validation_result["is_valid"]:
+                #     if client.sftp_host and client.sftp_username and client.sftp_password:
+                #         try:
+                #             logger.info(f"------------------------------------")
+                #             logger.info(f"file_path: {file_path}, file_name: {file_name}, client_name: {client_name}")
+                #             transport = paramiko.Transport((client.sftp_host, client.sftp_port or 22))
+                #             transport.connect(username=client.sftp_username, password=client.sftp_password)
+                #             sftp = paramiko.SFTPClient.from_transport(transport)
+
+                #             remote_path = f"/{client_name}/{file_name}"
+                #             if "RxEOB" not in file_path:
+                #                 with open(file_path, 'rb') as local_file:
+                #                     sftp.putfo(local_file, remote_path)
+                #                 logger.info(f"File {file_name} sent to SFTP server at {remote_path}")
+
+                #                 downloaded_file.sent_to_sftp = True
+                #                 downloaded_file.save()
+
+                #                 sftp.close()
+                #                 transport.close()
+                #             else:
+                #                 logger.info(f"Skipping SFTP transfer for RxEOB file: {file_name}")
+                #         except Exception as e:
+                #             logger.error(f"Failed to send {file_name} to SFTP for client {client_name}: {str(e)}")
+                #             downloaded_file.validation_errors = f"SFTP transfer failed: {str(e)}"
+                #             downloaded_file.save()
+                #     else:
+                #         logger.warning(f"No SFTP credentials for client {client_name}. File not sent.")
+    
                 if validation_result["is_valid"]:
                     if client.sftp_host and client.sftp_username and client.sftp_password:
                         try:
@@ -152,14 +180,38 @@ def download_files_task(client_id, username="it@transparentrx.com", password="_4
                             transport.connect(username=client.sftp_username, password=client.sftp_password)
                             sftp = paramiko.SFTPClient.from_transport(transport)
 
-                            remote_path = f"/{client_name}/{file_name}"
-                            with open(file_path, 'rb') as local_file:
-                                sftp.putfo(local_file, remote_path)
-                            logger.info(f"File {file_name} sent to SFTP server at {remote_path}")
+                            # Determine remote directory based on client_name and file type
+                            if file_type.lower() in ['txt', 'xlsx'] and not any(acc in file_path for acc in ["Accum", "ACCUM"]):
+                                if client_name == "ALLIED":
+                                    logger.info(f"file_path: {file_path}, path: {path}")
+                                    remote_dir = "/home/AHB/Test"
+                                elif client_name == "ASR":
+                                    remote_dir = "/home/ASR/Test"
+                                elif client_name == "UMR":
+                                    remote_dir = "/in/transparentrx.com"
+                                else:
+                                    pass
+                                remote_path = f"{remote_dir}/{file_name}"
+                                # remote_path = f"/{client_name}/{file_name}"
+                                
+                                # Ensure remote directory exists
+                                try:
+                                    sftp.stat(remote_dir)
+                                except FileNotFoundError:
+                                    # sftp.mkdir(remote_dir)
+                                    logger.info(f"Exception to Creating remote directory: {remote_dir}")
+                                if "RxEOB" not in file_path:
+                                    logger.info(f"-------------------------------------")
+                                    logger.info(f"file_path: {file_path}, file_name: {file_name}, remote_path: {remote_path}")
+                                    with open(file_path, 'rb') as local_file:
+                                        sftp.putfo(local_file, remote_path)
+                                    logger.info(f"File {file_name} sent to SFTP server at {remote_path}")
 
-                            downloaded_file.sent_to_sftp = True
-                            downloaded_file.save()
-
+                                    downloaded_file.sent_to_sftp = True
+                                    downloaded_file.save()
+                                    # add notification logic here if needed
+                                else:
+                                    logger.info(f"Skipping SFTP transfer for RxEOB file: {file_name}")
                             sftp.close()
                             transport.close()
                         except Exception as e:
@@ -168,6 +220,7 @@ def download_files_task(client_id, username="it@transparentrx.com", password="_4
                             downloaded_file.save()
                     else:
                         logger.warning(f"No SFTP credentials for client {client_name}. File not sent.")
+
 
                 os.remove(file_path)
                 logger.info(f"Deleted local file: {file_path}")

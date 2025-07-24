@@ -1174,7 +1174,18 @@ def validate_tab_delimited_file(content_str, client_name, errors, selected_date)
                     errors.append(f"Line {row_num}, Field {field_name}: Expected numeric, got '{value}'.")
                 elif field_type == "AN" and not value:
                     errors.append(f"Line {row_num}, Field {field_name}: Required field is empty.")
-
+                # Client-specific coverage_id validation
+                if field_name.lower().endswith("coverage_id") and value:
+                    if client_name == "ALLIED":
+                        if value not in ["SAPP01", "SAPP02"]:
+                            errors.append(f"Line {row_num}, Field {field_name}: Invalid coverage_id '{value}'. Expected one of ['SAPP01', 'SAPP02'].")
+                    elif client_name == "ASR":
+                        if "6000" not in value:
+                            errors.append(f"Line {row_num}, Field {field_name}: coverage_id '{value}' must contain '6000'.")
+                    elif client_name == "UMR":
+                        valid_umr = any(prefix in value for prefix in ["EMP", "SIMP", "Cornell College"])
+                        if not valid_umr:
+                            errors.append(f"Line {row_num}, Field {field_name}: coverage_id '{value}' must contain one of ['EMP', 'SIMP', 'Cornell College'].")
                 # Date validation
                 if field_name.lower().endswith("date") and value:
                     if client_name == "ASR":
