@@ -1,4 +1,3 @@
-<!-- client_manager/templates/client_manager/client_details.html -->
 {% extends 'client_manager/base.html' %}
 
 {% block content %}
@@ -227,8 +226,54 @@
             <p>Please replace or edit the file to correct these issues.</p>
         </div>
     </div>
-    <script type="text/javascript">
-        window.replaceUrlBase = "{% url 'replace_file' 0 %}";
-        window.downloadUrlBase = "{% url 'download_files_with_date' client.id 'placeholder' %}";
+
+    {% if task_id %}
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let alertShown = false;
+        const pollTaskStatus = function(taskId) {
+            $.ajax({
+                url: '{% url 'get_task_status' %}',
+                data: { task_id: taskId },
+                success: function(response) {
+                    if (!alertShown) {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'In Progress',
+                            text: '{{ alert_message }}',
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                            timerProgressBar: true,
+                        });
+                        alertShown = true;
+                    }
+                    if (response.status === 'In Progress' || response.status === 'STARTED') {
+                        setTimeout(() => pollTaskStatus(taskId), 2000); // Poll every 2 seconds
+                    } else {
+                        Swal.fire({
+                            icon: response.status.toLowerCase() === 'success' ? 'success' : 'error',
+                            title: response.status,
+                            text: response.message,
+                            confirmButtonText: 'OK',
+                            timer: 5000,
+                            timerProgressBar: true,
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Failed to check task status.',
+                        confirmButtonText: 'OK',
+                        timer: 5000,
+                        timerProgressBar: true,
+                    });
+                }
+            });
+        };
+        pollTaskStatus('{{ task_id }}');
+    });
     </script>
+    {% endif %}
 {% endblock %}

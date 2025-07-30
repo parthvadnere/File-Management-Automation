@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, FileResponse
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -26,10 +25,13 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            messages.success(request, 'Account created successfully.')
             return redirect('dashboard')
         else:
-            messages.error(request, 'Please correct the errors below.')
+            return render(request, 'client_manager/signup.html', {
+                'form': form,
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = CustomUserCreationForm()
     return render(request, 'client_manager/signup.html', {'form': form})
@@ -40,17 +42,19 @@ def user_login(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            # messages.success(request, 'Logged in successfully.')
             return redirect('dashboard')
         else:
-            messages.error(request, 'Invalid username or password.')
+            return render(request, 'client_manager/login.html', {
+                'form': form,
+                'alert_message': 'Invalid username or password.',
+                'alert_type': 'error'
+            })
     else:
         form = AuthenticationForm()
     return render(request, 'client_manager/login.html', {'form': form})
 
 def user_logout(request):
     logout(request)
-    # messages.success(request, 'Logged out successfully.')
     return redirect('login')
 
 # Dashboard View
@@ -95,7 +99,8 @@ def download_status(request, client_id):
         return render(request, 'client_manager/download_status.html', {
             'client': client,
             'task_id': None,
-            'error': "No task ID found. Please try again."
+            'alert_message': 'No task ID found. Please try again.',
+            'alert_type': 'error'
         })
     
     logger.info(f"Checking status for task_id: {task_id}")
@@ -140,8 +145,14 @@ def add_client(request):
         form = ClientForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Client created successfully.')
             return redirect('manage_clients')
+        else:
+            return render(request, 'client_manager/client_form.html', {
+                'form': form,
+                'title': 'Add Client',
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = ClientForm()
     return render(request, 'client_manager/client_form.html', {'form': form, 'title': 'Add Client'})
@@ -153,8 +164,14 @@ def edit_client(request, client_id):
         form = ClientForm(request.POST, instance=client)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Client updated successfully.')
             return redirect('client_details', client_id=client.id)
+        else:
+            return render(request, 'client_manager/client_form.html', {
+                'form': form,
+                'title': 'Edit Client',
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = ClientForm(instance=client)
     return render(request, 'client_manager/client_form.html', {'form': form, 'title': 'Edit Client'})
@@ -164,7 +181,6 @@ def delete_client(request, client_id):
     client = get_object_or_404(Client, pk=client_id)
     if request.method == 'POST':
         client.delete()
-        messages.success(request, 'Client deleted successfully.')
         return redirect('manage_clients')
     return render(request, 'client_manager/client_confirm_delete.html', {'client': client})
 
@@ -174,34 +190,43 @@ def client_details(request, client_id):
     paths = Path.objects.filter(client=client)
     output_configs = OutputConfig.objects.filter(client=client)
     file_configs = FileConfig.objects.filter(client=client)
+    
+    form_5pm = DownloadForm(prefix='5pm')
+    form_10pm = DownloadForm(prefix='10pm')
+    alert_message = request.session.pop('alert_message', None)  # Retrieve and clear session alert
+    alert_type = request.session.pop('alert_type', None)  # Retrieve and clear session alert type
+    task_id = request.session.pop('task_id', None)  # Retrieve and clear task_id
 
     if request.method == 'POST' and 'download_5pm' in request.POST:
         form_5pm = DownloadForm(request.POST, prefix='5pm')
         if form_5pm.is_valid():
             selected_date = form_5pm.cleaned_data['selected_date']
             selected_date_str = selected_date.strftime('%Y-%m-%d') if selected_date else None
-            download_files_task.delay(client_id=client.id, selected_date=selected_date_str)
-            messages.success(request, '5PM file download task has been triggered.')
+            task = download_files_task.delay(client_id=client.id, selected_date=selected_date_str)
+            request.session['task_id'] = task.id
+            request.session['alert_message'] = '5PM file download task is in progress...'
+            request.session['alert_type'] = 'info'
             return redirect('client_details', client_id=client.id)
-    else:
-        form_5pm = DownloadForm(prefix='5pm')
+        else:
+            alert_message = '5PM form validation failed. Please check the input.'
+            alert_type = 'error'
 
-    # Handle 10PM download
-    if request.method == 'POST' and 'download_10pm' in request.POST:
+    elif request.method == 'POST' and 'download_10pm' in request.POST:
         logger.info(f"10PM download request received for client_id: {client_id}, POST data: {request.POST}")
         form_10pm = DownloadForm(request.POST, prefix='10pm')
         if form_10pm.is_valid():
             logger.info(f"10PM form is valid, selected_date: {form_10pm.cleaned_data['selected_date']}")
             selected_date = form_10pm.cleaned_data['selected_date']
             selected_date_str = selected_date.strftime('%Y-%m-%d') if selected_date else None
-            # Pass client_id to the task
-            download_10pm_files_task.delay(client_id=client.id, selected_date=selected_date_str)
-            messages.success(request, '10PM file download task has been triggered.')
+            task = download_10pm_files_task.delay(client_id=client.id, selected_date=selected_date_str)
+            request.session['task_id'] = task.id
+            request.session['alert_message'] = '10PM file download task is in progress...'
+            request.session['alert_type'] = 'info'
             return redirect('client_details', client_id=client.id)
         else:
             logger.error(f"10PM form validation failed: {form_10pm.errors}")
-    else:
-        form_10pm = DownloadForm(prefix='10pm')
+            alert_message = '10PM form validation failed. Please check the input.'
+            alert_type = 'error'
 
     downloaded_files = DownloadedFile.objects.filter(client=client).order_by('-downloaded_at')
     
@@ -213,6 +238,9 @@ def client_details(request, client_id):
         'downloaded_files': downloaded_files,
         'form_5pm': form_5pm,
         'form_10pm': form_10pm,
+        'alert_message': alert_message,
+        'alert_type': alert_type,
+        'task_id': task_id,
     })
 
 @login_required
@@ -224,8 +252,15 @@ def add_file_config(request, client_id):
             file_config = form.save(commit=False)
             file_config.client = client
             file_config.save()
-            messages.success(request, 'File configuration added successfully.')
             return redirect('client_details', client_id=client.id)
+        else:
+            return render(request, 'client_manager/file_config_form.html', {
+                'form': form,
+                'client': client,
+                'title': 'Add File Configuration',
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = FileConfigForm()
     return render(request, 'client_manager/file_config_form.html', {'form': form, 'client': client, 'title': 'Add File Configuration'})
@@ -237,8 +272,15 @@ def edit_file_config(request, config_id):
         form = FileConfigForm(request.POST, instance=file_config)
         if form.is_valid():
             form.save()
-            messages.success(request, 'File configuration updated successfully.')
             return redirect('client_details', client_id=file_config.client.id)
+        else:
+            return render(request, 'client_manager/file_config_form.html', {
+                'form': form,
+                'client': file_config.client,
+                'title': 'Edit File Configuration',
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = FileConfigForm(instance=file_config)
     return render(request, 'client_manager/file_config_form.html', {'form': form, 'client': file_config.client, 'title': 'Edit File Configuration'})
@@ -249,7 +291,6 @@ def delete_file_config(request, config_id):
     if request.method == 'POST':
         client_id = file_config.client.id
         file_config.delete()
-        messages.success(request, 'File configuration deleted successfully.')
         return redirect('client_details', client_id=client_id)
     return render(request, 'client_manager/file_config_confirm_delete.html', {'file_config': file_config})
 
@@ -269,8 +310,15 @@ def add_path(request, client_id):
             path = form.save(commit=False)
             path.client = client
             path.save()
-            messages.success(request, 'Path added successfully.')
             return redirect('client_details', client_id=client.id)
+        else:
+            return render(request, 'client_manager/path_form.html', {
+                'form': form,
+                'client': client,
+                'title': 'Add Path',
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = PathForm()
     return render(request, 'client_manager/path_form.html', {'form': form, 'client': client, 'title': 'Add Path'})
@@ -282,8 +330,15 @@ def edit_path(request, client_id, path_id):
         form = PathForm(request.POST, instance=path)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Path updated successfully.')
             return redirect('client_details', client_id=client_id)
+        else:
+            return render(request, 'client_manager/path_form.html', {
+                'form': form,
+                'client': path.client,
+                'title': 'Edit Path',
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = PathForm(instance=path)
     return render(request, 'client_manager/path_form.html', {'form': form, 'client': path.client, 'title': 'Edit Path'})
@@ -293,7 +348,6 @@ def delete_path(request, client_id, path_id):
     path = get_object_or_404(Path, pk=path_id, client_id=client_id)
     if request.method == 'POST':
         path.delete()
-        messages.success(request, 'Path deleted successfully.')
         return redirect('client_details', client_id=client_id)
     return render(request, 'client_manager/path_confirm_delete.html', {'path': path})
 
@@ -308,10 +362,14 @@ def add_task(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Task added successfully.")
             return redirect('manage_tasks')
         else:
-            messages.error(request, "Please correct the errors below.")
+            return render(request, 'client_manager/task_form.html', {
+                'form': form,
+                'action': 'Add',
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = TaskForm()
     return render(request, 'client_manager/task_form.html', {'form': form, 'action': 'Add'})
@@ -323,10 +381,14 @@ def edit_task(request, task_id):
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            messages.success(request, "Task updated successfully.")
             return redirect('manage_tasks')
         else:
-            messages.error(request, "Please correct the errors below.")
+            return render(request, 'client_manager/task_form.html', {
+                'form': form,
+                'action': 'Edit',
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = TaskForm(instance=task)
     return render(request, 'client_manager/task_form.html', {'form': form, 'action': 'Edit'})
@@ -336,7 +398,6 @@ def delete_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     if request.method == 'POST':
         task.delete()
-        messages.success(request, "Task deleted successfully.")
         return redirect('manage_tasks')
     return render(request, 'client_manager/confirm_delete.html', {'object': task, 'type': 'Task'})
 
@@ -355,8 +416,15 @@ def add_output_config(request, client_id):
             config = form.save(commit=False)
             config.client = client
             config.save()
-            messages.success(request, 'Output configuration added successfully.')
             return redirect('client_details', client_id=client.id)
+        else:
+            return render(request, 'client_manager/output_config_form.html', {
+                'form': form,
+                'client': client,
+                'title': 'Add Output Config',
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = OutputConfigForm()
     return render(request, 'client_manager/output_config_form.html', {'form': form, 'client': client, 'title': 'Add Output Config'})
@@ -368,8 +436,15 @@ def edit_output_config(request, client_id, config_id):
         form = OutputConfigForm(request.POST, instance=config)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Output configuration updated successfully.')
             return redirect('client_details', client_id=client_id)
+        else:
+            return render(request, 'client_manager/output_config_form.html', {
+                'form': form,
+                'client': config.client,
+                'title': 'Edit Output Config',
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = OutputConfigForm(instance=config)
     return render(request, 'client_manager/output_config_form.html', {'form': form, 'client': config.client, 'title': 'Edit Output Config'})
@@ -379,7 +454,6 @@ def delete_output_config(request, client_id, config_id):
     config = get_object_or_404(OutputConfig, pk=config_id, client_id=client_id)
     if request.method == 'POST':
         config.delete()
-        messages.success(request, 'Output configuration deleted successfully.')
         return redirect('client_details', client_id=client_id)
     return render(request, 'client_manager/output_config_confirm_delete.html', {'config': config})
 
@@ -389,8 +463,14 @@ def client_create(request):
         form = ClientForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Client created successfully.')
             return redirect('client_list')
+        else:
+            return render(request, 'client_manager/client_form.html', {
+                'form': form,
+                'title': 'Create Client',
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = ClientForm()
     return render(request, 'client_manager/client_form.html', {'form': form, 'title': 'Create Client'})
@@ -402,8 +482,14 @@ def client_update(request, pk):
         form = ClientForm(request.POST, instance=client)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Client updated successfully.')
             return redirect('client_list')
+        else:
+            return render(request, 'client_manager/client_form.html', {
+                'form': form,
+                'title': 'Update Client',
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = ClientForm(instance=client)
     return render(request, 'client_manager/client_form.html', {'form': form, 'title': 'Update Client'})
@@ -413,7 +499,6 @@ def client_delete(request, pk):
     client = get_object_or_404(Client, pk=pk)
     if request.method == 'POST':
         client.delete()
-        messages.success(request, 'Client deleted successfully.')
         return redirect('client_list')
     return render(request, 'client_manager/client_confirm_delete.html', {'client': client})
 
@@ -432,8 +517,15 @@ def file_config_create(request, client_id):
             file_config = form.save(commit=False)
             file_config.client = client
             file_config.save()
-            messages.success(request, 'File configuration created successfully.')
             return redirect('file_config_list', client_id=client.id)
+        else:
+            return render(request, 'client_manager/file_config_form.html', {
+                'form': form,
+                'client': client,
+                'title': 'Create File Configuration',
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = FileConfigForm()
     return render(request, 'client_manager/file_config_form.html', {'form': form, 'client': client, 'title': 'Create File Configuration'})
@@ -445,8 +537,15 @@ def file_config_update(request, pk):
         form = FileConfigForm(request.POST, instance=file_config)
         if form.is_valid():
             form.save()
-            messages.success(request, 'File configuration updated successfully.')
             return redirect('file_config_list', client_id=file_config.client.id)
+        else:
+            return render(request, 'client_manager/file_config_form.html', {
+                'form': form,
+                'client': file_config.client,
+                'title': 'Update File Configuration',
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = FileConfigForm(instance=file_config)
     return render(request, 'client_manager/file_config_form.html', {'form': form, 'client': file_config.client, 'title': 'Update File Configuration'})
@@ -457,7 +556,6 @@ def file_config_delete(request, pk):
     if request.method == 'POST':
         client_id = file_config.client.id
         file_config.delete()
-        messages.success(request, 'File configuration deleted successfully.')
         return redirect('file_config_list', client_id=client_id)
     return render(request, 'client_manager/file_config_confirm_delete.html', {'file_config': file_config})
 
@@ -469,8 +567,13 @@ def download_10pm_files(request):
             selected_date = form.cleaned_data['selected_date']
             selected_date_str = selected_date.strftime('%Y-%m-%d') if selected_date else None
             download_10pm_files_task.delay(selected_date=selected_date_str)
-            messages.success(request, '10PM file download task has been triggered.')
             return redirect('downloaded_files')
+        else:
+            return render(request, 'client_manager/download_10pm.html', {
+                'form': form,
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = DownloadForm()
     return render(request, 'client_manager/download_10pm.html', {'form': form})
@@ -520,10 +623,13 @@ def replace_file(request, file_id):
             downloaded_file.original_filename = new_file.name
             downloaded_file.file_type = os.path.splitext(new_file.name)[1].lstrip('.')
             downloaded_file.save()
-            messages.success(request, "File replaced successfully.")
+            return redirect('client_details', client_id=downloaded_file.client.id)
         else:
-            messages.error(request, "No file uploaded.")
-        return redirect('client_details', client_id=downloaded_file.client.id)
+            return render(request, 'client_manager/replace_file.html', {
+                'downloaded_file': downloaded_file,
+                'alert_message': 'No file uploaded.',
+                'alert_type': 'error'
+            })
     return render(request, 'client_manager/replace_file.html', {'downloaded_file': downloaded_file})
 
 @login_required
@@ -532,7 +638,6 @@ def delete_file(request, file_id):
     client_id = downloaded_file.client.id
     if request.method == 'POST':
         downloaded_file.delete()
-        messages.success(request, "File deleted successfully.")
         return redirect('client_details', client_id=client_id)
     return render(request, 'client_manager/confirm_delete.html', {
         'object': downloaded_file,
@@ -607,8 +712,14 @@ def upload_config_view(request, client_id):
             upload_config = form.save(commit=False)
             upload_config.client = client
             upload_config.save()
-            messages.success(request, "Upload configuration saved successfully.")
-            return redirect('client_detail', client_id=client_id)
+            return redirect('client_details', client_id=client_id)
+        else:
+            return render(request, 'client_manager/upload_config.html', {
+                'form': form,
+                'client': client,
+                'alert_message': 'Please correct the errors below.',
+                'alert_type': 'error'
+            })
     else:
         form = UploadConfigForm(initial={'client': client})
     return render(request, 'client_manager/upload_config.html', {'form': form, 'client': client})
