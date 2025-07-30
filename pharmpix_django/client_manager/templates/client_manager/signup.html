@@ -1,0 +1,209 @@
+{% extends "client_manager/base.html" %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-5 shadow-lg" style="width: 100%; max-width: 500px; border: 1px solid #e0e0e0; border-radius: 15px;">
+        <h2 class="text-center mb-4 text-primary fw-bold">Create Your Account</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags|yesno:'success,danger' }} alert-dismissible fade show mb-4" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <form method="post" novalidate id="signupForm">
+            {% csrf_token %}
+            <div class="mb-4 position-relative">
+                <label for="{{ form.email.id_for_label }}" class="form-label fw-medium d-flex justify-content-between align-items-center">
+                    Email
+                    <i class="fas fa-info-circle text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ form.email.help_text }}"></i>
+                </label>
+                <div class="input-group">
+                    <input type="email" name="email" id="{{ form.email.id_for_label }}" class="form-control {% if form.email.errors %}is-invalid{% endif %}" value="{{ form.email.value|default:'' }}" placeholder="Enter your email (e.g., user@example.com)" autocomplete="off">
+                    <span class="input-group-text validation-icon" id="emailValidationIcon"></span>
+                </div>
+                {% if form.email.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.email.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-4 position-relative">
+                <label for="{{ form.password1.id_for_label }}" class="form-label fw-medium d-flex justify-content-between align-items-center">
+                    Password
+                    <i class="fas fa-info-circle text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ form.password1.help_text }}"></i>
+                </label>
+                <div class="input-group">
+                    <input type="password" name="password1" id="{{ form.password1.id_for_label }}" class="form-control {% if form.password1.errors %}is-invalid{% endif %}" value="{{ form.password1.value|default:'' }}" placeholder="Enter password" autocomplete="new-password">
+                    <button type="button" class="btn btn-outline-secondary toggle-password" data-target="#{{ form.password1.id_for_label }}"><i class="fas fa-eye"></i></button>
+                    <span class="input-group-text validation-icon" id="password1ValidationIcon"></span>
+                </div>
+                {% if form.password1.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.password1.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="mb-4 position-relative">
+                <label for="{{ form.password2.id_for_label }}" class="form-label fw-medium d-flex justify-content-between align-items-center">
+                    Confirm Password
+                    <i class="fas fa-info-circle text-info" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ form.password2.help_text }}"></i>
+                </label>
+                <div class="input-group">
+                    <input type="password" name="password2" id="{{ form.password2.id_for_label }}" class="form-control {% if form.password2.errors %}is-invalid{% endif %}" value="{{ form.password2.value|default:'' }}" placeholder="Confirm password" autocomplete="new-password">
+                    <button type="button" class="btn btn-outline-secondary toggle-password" data-target="#{{ form.password2.id_for_label }}"><i class="fas fa-eye"></i></button>
+                    <span class="input-group-text validation-icon" id="password2ValidationIcon"></span>
+                </div>
+                {% if form.password2.errors %}
+                    <div class="invalid-feedback d-block">
+                        {% for error in form.password2.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2 mb-3" style="font-size: 1.1em;">Sign Up</button>
+            <p class="text-center text-muted">Already have an account? <a href="{% url 'login' %}" class="text-decoration-none text-primary fw-medium">Login</a></p>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block extra_head %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f0f2f5;
+        }
+        .card {
+            border-radius: 15px;
+            background-color: #ffffff;
+            transition: box-shadow 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .form-label {
+            font-size: 1.05em;
+        }
+        .fw-medium { font-weight: 500; }
+        .fw-bold { font-weight: 600; }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .input-group-text.validation-icon {
+            width: 2.5em;
+            background-color: #fff;
+            border-left: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+        .validation-icon.valid { color: #28a745; }
+        .validation-icon.invalid { color: #dc3545; }
+        .invalid-feedback {
+            font-size: 0.9em;
+            margin-top: 0.25em;
+        }
+        .position-relative .form-label i {
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+        .position-relative .form-label i:hover {
+            color: #0056b3;
+        }
+        .toggle-password {
+            border-left: none;
+            background-color: #e9ecef;
+            transition: background-color 0.3s ease;
+        }
+        .toggle-password:hover {
+            background-color: #dee2e6;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle password visibility
+            document.querySelectorAll('.toggle-password').forEach(button => {
+                button.addEventListener('click', function() {
+                    const target = document.querySelector(this.getAttribute('data-target'));
+                    const type = target.getAttribute('type') === 'password' ? 'text' : 'password';
+                    target.setAttribute('type', type);
+                    this.querySelector('i').classList.toggle('fa-eye');
+                    this.querySelector('i').classList.toggle('fa-eye-slash');
+                });
+            });
+
+            // Prevent copying from password1 to password2
+            const password1 = document.getElementById('{{ form.password1.id_for_label }}');
+            const password2 = document.getElementById('{{ form.password2.id_for_label }}');
+            password2.addEventListener('paste', function(e) {
+                const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+                if (pastedText === password1.value) {
+                    e.preventDefault();
+                    alert('Copying from password to confirm password is not allowed. Please type manually.');
+                }
+            });
+
+            // Real-time validation
+            const emailInput = document.getElementById('{{ form.email.id_for_label }}');
+            const password1Input = document.getElementById('{{ form.password1.id_for_label }}');
+            const password2Input = document.getElementById('{{ form.password2.id_for_label }}');
+            const emailIcon = document.getElementById('emailValidationIcon');
+            const password1Icon = document.getElementById('password1ValidationIcon');
+            const password2Icon = document.getElementById('password2ValidationIcon');
+
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            function validatePassword(password) {
+                return (password.length >= 8 &&
+                        /[A-Z]/.test(password) &&
+                        /[a-z]/.test(password) &&
+                        /[0-9]/.test(password) &&
+                        /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?`]/.test(password));
+            }
+
+            function updateValidationIcon(input, icon, validator) {
+                const isValid = validator(input.value);
+                icon.className = 'input-group-text validation-icon ' + (isValid ? 'valid' : 'invalid');
+                icon.innerHTML = isValid ? '✔' : '✖';
+                if (!input.value) icon.innerHTML = ''; // Clear icon if empty
+            }
+
+            emailInput.addEventListener('input', function() {
+                updateValidationIcon(this, emailIcon, validateEmail);
+            });
+
+            password1Input.addEventListener('input', function() {
+                updateValidationIcon(this, password1Icon, validatePassword);
+                if (password2.value) updateValidationIcon(password2, password2Icon, () => validatePassword(password2.value) && password2.value === password1.value);
+            });
+
+            password2Input.addEventListener('input', function() {
+                updateValidationIcon(this, password2Icon, () => validatePassword(this.value) && this.value === password1.value);
+            });
+
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+{% endblock %}

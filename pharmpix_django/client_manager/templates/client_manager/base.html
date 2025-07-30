@@ -25,6 +25,9 @@
                         <li><a href="{% url 'client_details' client.id %}" class="active"><i class="fas fa-user"></i> Client Details</a></li>
                     {% endif %}
                     <li><a href="{% url 'manage_tasks' %}" class="{% if request.resolver_match.url_name == 'manage_tasks' %}active{% endif %}"><i class="fas fa-tasks"></i> Manage Tasks</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>

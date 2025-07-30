@@ -142,3 +142,12 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 CELERY_IGNORE_RESULT = False  # Ensure results are stored
 CELERY_TRACK_STARTED = True  # Track task state
+
+# Authentication settings
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+# Authentication settings
+LOGIN_URL = '/login/'  # Redirect to login page if user is not authenticated
+LOGIN_REDIRECT_URL = '/dashboard/'  # Redirect after successful login
+LOGOUT_REDIRECT_URL = '/login/'  # Redirect after logout

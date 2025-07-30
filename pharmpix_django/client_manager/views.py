@@ -1,12 +1,13 @@
-# client_manager/views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, FileResponse
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from client_manager.models import Client, Path, Task, OutputConfig, DownloadedFile, FileConfig
-from client_manager.forms import ClientForm, PathForm, TaskForm, OutputConfigForm, DownloadForm, FileConfigForm, UploadConfigForm
+from client_manager.forms import ClientForm, PathForm, TaskForm, OutputConfigForm, DownloadForm, FileConfigForm, UploadConfigForm, CustomUserCreationForm
 from client_manager.tasks import download_files_task, download_10pm_files_task
 from celery.result import AsyncResult
 from datetime import datetime
@@ -18,7 +19,42 @@ from io import BytesIO
 
 logger = logging.getLogger(__name__)
 
+# Authentication Views
+def signup(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, 'Account created successfully.')
+            return redirect('dashboard')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'client_manager/signup.html', {'form': form})
+
+def user_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            # messages.success(request, 'Logged in successfully.')
+            return redirect('dashboard')
+        else:
+            messages.error(request, 'Invalid username or password.')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'client_manager/login.html', {'form': form})
+
+def user_logout(request):
+    logout(request)
+    # messages.success(request, 'Logged out successfully.')
+    return redirect('login')
+
 # Dashboard View
+@login_required
 def dashboard(request):
     clients_count = Client.objects.count()
     tasks_count = Task.objects.count()
@@ -31,11 +67,13 @@ def dashboard(request):
         'configs_count': configs_count,
     })
 
-# Existing Views (Updated for Messages and Context)
+# Existing Views with login_required decorator
+@login_required
 def client_list(request):
     clients = Client.objects.all()
     return render(request, 'client_manager/client_list.html', {'clients': clients})
 
+@login_required
 def download_files(request, client_id, date_filter=None):
     if date_filter:
         try:
@@ -45,10 +83,10 @@ def download_files(request, client_id, date_filter=None):
     else:
         selected_date = None
 
-    # Trigger the Celery task with the selected date
     task = download_files_task.delay(client_id, selected_date=selected_date)
     return redirect(reverse('download_status', args=[client_id]) + f'?task_id={task.id}')
 
+@login_required
 def download_status(request, client_id):
     client = get_object_or_404(Client, id=client_id)
     task_id = request.session.get('task_id')
@@ -66,6 +104,7 @@ def download_status(request, client_id):
         'task_id': task_id,
     })
 
+@login_required
 def get_task_status(request):
     task_id = request.GET.get('task_id')
     if not task_id:
@@ -90,11 +129,12 @@ def get_task_status(request):
     logger.info(f"Task status response: {response}")
     return JsonResponse(response)
 
-# Client CRUD Views
+@login_required
 def manage_clients(request):
     clients = Client.objects.all()
     return render(request, 'client_manager/manage_clients.html', {'clients': clients})
 
+@login_required
 def add_client(request):
     if request.method == 'POST':
         form = ClientForm(request.POST)
@@ -106,6 +146,7 @@ def add_client(request):
         form = ClientForm()
     return render(request, 'client_manager/client_form.html', {'form': form, 'title': 'Add Client'})
 
+@login_required
 def edit_client(request, client_id):
     client = get_object_or_404(Client, pk=client_id)
     if request.method == 'POST':
@@ -118,6 +159,7 @@ def edit_client(request, client_id):
         form = ClientForm(instance=client)
     return render(request, 'client_manager/client_form.html', {'form': form, 'title': 'Edit Client'})
 
+@login_required
 def delete_client(request, client_id):
     client = get_object_or_404(Client, pk=client_id)
     if request.method == 'POST':
@@ -126,14 +168,13 @@ def delete_client(request, client_id):
         return redirect('manage_clients')
     return render(request, 'client_manager/client_confirm_delete.html', {'client': client})
 
-
+@login_required
 def client_details(request, client_id):
     client = get_object_or_404(Client, pk=client_id)
-    paths = Path.objects.filter(client=client)  # 5PM paths
-    output_configs = OutputConfig.objects.filter(client=client)  # 5PM output configs
-    file_configs = FileConfig.objects.filter(client=client)  # 10PM file configs
+    paths = Path.objects.filter(client=client)
+    output_configs = OutputConfig.objects.filter(client=client)
+    file_configs = FileConfig.objects.filter(client=client)
 
-    # Handle 5PM download
     if request.method == 'POST' and 'download_5pm' in request.POST:
         form_5pm = DownloadForm(request.POST, prefix='5pm')
         if form_5pm.is_valid():
@@ -174,6 +215,7 @@ def client_details(request, client_id):
         'form_10pm': form_10pm,
     })
 
+@login_required
 def add_file_config(request, client_id):
     client = get_object_or_404(Client, pk=client_id)
     if request.method == 'POST':
@@ -188,6 +230,7 @@ def add_file_config(request, client_id):
         form = FileConfigForm()
     return render(request, 'client_manager/file_config_form.html', {'form': form, 'client': client, 'title': 'Add File Configuration'})
 
+@login_required
 def edit_file_config(request, config_id):
     file_config = get_object_or_404(FileConfig, pk=config_id)
     if request.method == 'POST':
@@ -200,6 +243,7 @@ def edit_file_config(request, config_id):
         form = FileConfigForm(instance=file_config)
     return render(request, 'client_manager/file_config_form.html', {'form': form, 'client': file_config.client, 'title': 'Edit File Configuration'})
 
+@login_required
 def delete_file_config(request, config_id):
     file_config = get_object_or_404(FileConfig, pk=config_id)
     if request.method == 'POST':
@@ -209,13 +253,14 @@ def delete_file_config(request, config_id):
         return redirect('client_details', client_id=client_id)
     return render(request, 'client_manager/file_config_confirm_delete.html', {'file_config': file_config})
 
-# Path CRUD Views (Updated for Nested Structure)
+@login_required
 def manage_paths(request, client_id):
     client = get_object_or_404(Client, id=client_id)
     paths = Path.objects.filter(client=client)
     logger.info(f"manage_paths - client_id: {client_id}, client: {client.name}, paths: {paths}")
     return render(request, 'client_manager/manage_paths.html', {'client': client, 'paths': paths})
 
+@login_required
 def add_path(request, client_id):
     client = get_object_or_404(Client, pk=client_id)
     if request.method == 'POST':
@@ -230,6 +275,7 @@ def add_path(request, client_id):
         form = PathForm()
     return render(request, 'client_manager/path_form.html', {'form': form, 'client': client, 'title': 'Add Path'})
 
+@login_required
 def edit_path(request, client_id, path_id):
     path = get_object_or_404(Path, pk=path_id, client_id=client_id)
     if request.method == 'POST':
@@ -242,6 +288,7 @@ def edit_path(request, client_id, path_id):
         form = PathForm(instance=path)
     return render(request, 'client_manager/path_form.html', {'form': form, 'client': path.client, 'title': 'Edit Path'})
 
+@login_required
 def delete_path(request, client_id, path_id):
     path = get_object_or_404(Path, pk=path_id, client_id=client_id)
     if request.method == 'POST':
@@ -250,11 +297,12 @@ def delete_path(request, client_id, path_id):
         return redirect('client_details', client_id=client_id)
     return render(request, 'client_manager/path_confirm_delete.html', {'path': path})
 
-# Task CRUD Views
+@login_required
 def manage_tasks(request):
     tasks = Task.objects.all()
     return render(request, 'client_manager/manage_tasks.html', {'tasks': tasks})
 
+@login_required
 def add_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -268,6 +316,7 @@ def add_task(request):
         form = TaskForm()
     return render(request, 'client_manager/task_form.html', {'form': form, 'action': 'Add'})
 
+@login_required
 def edit_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     if request.method == 'POST':
@@ -282,6 +331,7 @@ def edit_task(request, task_id):
         form = TaskForm(instance=task)
     return render(request, 'client_manager/task_form.html', {'form': form, 'action': 'Edit'})
 
+@login_required
 def delete_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     if request.method == 'POST':
@@ -290,12 +340,13 @@ def delete_task(request, task_id):
         return redirect('manage_tasks')
     return render(request, 'client_manager/confirm_delete.html', {'object': task, 'type': 'Task'})
 
-# OutputConfig CRUD Views (Updated for Nested Structure)
+@login_required
 def manage_output_configs(request, client_id):
     client = get_object_or_404(Client, id=client_id)
     configs = OutputConfig.objects.filter(client=client)
     return render(request, 'client_manager/manage_output_configs.html', {'client': client, 'configs': configs})
 
+@login_required
 def add_output_config(request, client_id):
     client = get_object_or_404(Client, pk=client_id)
     if request.method == 'POST':
@@ -310,6 +361,7 @@ def add_output_config(request, client_id):
         form = OutputConfigForm()
     return render(request, 'client_manager/output_config_form.html', {'form': form, 'client': client, 'title': 'Add Output Config'})
 
+@login_required
 def edit_output_config(request, client_id, config_id):
     config = get_object_or_404(OutputConfig, pk=config_id, client_id=client_id)
     if request.method == 'POST':
@@ -322,6 +374,7 @@ def edit_output_config(request, client_id, config_id):
         form = OutputConfigForm(instance=config)
     return render(request, 'client_manager/output_config_form.html', {'form': form, 'client': config.client, 'title': 'Edit Output Config'})
 
+@login_required
 def delete_output_config(request, client_id, config_id):
     config = get_object_or_404(OutputConfig, pk=config_id, client_id=client_id)
     if request.method == 'POST':
@@ -330,6 +383,7 @@ def delete_output_config(request, client_id, config_id):
         return redirect('client_details', client_id=client_id)
     return render(request, 'client_manager/output_config_confirm_delete.html', {'config': config})
 
+@login_required
 def client_create(request):
     if request.method == 'POST':
         form = ClientForm(request.POST)
@@ -341,6 +395,7 @@ def client_create(request):
         form = ClientForm()
     return render(request, 'client_manager/client_form.html', {'form': form, 'title': 'Create Client'})
 
+@login_required
 def client_update(request, pk):
     client = get_object_or_404(Client, pk=pk)
     if request.method == 'POST':
@@ -353,7 +408,7 @@ def client_update(request, pk):
         form = ClientForm(instance=client)
     return render(request, 'client_manager/client_form.html', {'form': form, 'title': 'Update Client'})
 
-
+@login_required
 def client_delete(request, pk):
     client = get_object_or_404(Client, pk=pk)
     if request.method == 'POST':
@@ -362,13 +417,13 @@ def client_delete(request, pk):
         return redirect('client_list')
     return render(request, 'client_manager/client_confirm_delete.html', {'client': client})
 
-
+@login_required
 def file_config_list(request, client_id):
     client = get_object_or_404(Client, pk=client_id)
     file_configs = FileConfig.objects.filter(client=client)
     return render(request, 'client_manager/file_config_list.html', {'client': client, 'file_configs': file_configs})
 
-
+@login_required
 def file_config_create(request, client_id):
     client = get_object_or_404(Client, pk=client_id)
     if request.method == 'POST':
@@ -383,7 +438,7 @@ def file_config_create(request, client_id):
         form = FileConfigForm()
     return render(request, 'client_manager/file_config_form.html', {'form': form, 'client': client, 'title': 'Create File Configuration'})
 
-
+@login_required
 def file_config_update(request, pk):
     file_config = get_object_or_404(FileConfig, pk=pk)
     if request.method == 'POST':
@@ -396,7 +451,7 @@ def file_config_update(request, pk):
         form = FileConfigForm(instance=file_config)
     return render(request, 'client_manager/file_config_form.html', {'form': form, 'client': file_config.client, 'title': 'Update File Configuration'})
 
-
+@login_required
 def file_config_delete(request, pk):
     file_config = get_object_or_404(FileConfig, pk=pk)
     if request.method == 'POST':
@@ -406,14 +461,13 @@ def file_config_delete(request, pk):
         return redirect('file_config_list', client_id=client_id)
     return render(request, 'client_manager/file_config_confirm_delete.html', {'file_config': file_config})
 
-
+@login_required
 def download_10pm_files(request):
     if request.method == 'POST':
         form = DownloadForm(request.POST)
         if form.is_valid():
             selected_date = form.cleaned_data['selected_date']
             selected_date_str = selected_date.strftime('%Y-%m-%d') if selected_date else None
-            # Trigger the Celery task
             download_10pm_files_task.delay(selected_date=selected_date_str)
             messages.success(request, '10PM file download task has been triggered.')
             return redirect('downloaded_files')
@@ -421,33 +475,12 @@ def download_10pm_files(request):
         form = DownloadForm()
     return render(request, 'client_manager/download_10pm.html', {'form': form})
 
+@login_required
 def downloaded_files(request):
     downloaded_files = DownloadedFile.objects.all().order_by('-downloaded_at')
     return render(request, 'client_manager/downloaded_files.html', {'downloaded_files': downloaded_files})
 
-# def view_file(request, file_id):
-#     downloaded_file = get_object_or_404(DownloadedFile, id=file_id)
-#     logger.info(f"view_file - file_id: {file_id}, filename: {downloaded_file.original_filename}")
-#     content_type, _ = mimetypes.guess_type(downloaded_file.original_filename)
-#     logger.info(f"Guessed content type: {content_type}")
-#     if not content_type:
-#         content_type = 'application/octet-stream'
-
-#     # Check if the file type is renderable in an iframe
-#     renderable_types = ('text/plain', 'application/pdf', 'image/jpeg', 'image/png', 'image/gif')
-#     if content_type not in renderable_types:
-#         response = HttpResponse("This file type cannot be viewed in the browser. Please download it.")
-#         response['Content-Disposition'] = f'attachment; filename="{downloaded_file.original_filename}"'
-#         response.write(downloaded_file.file_content)
-#         return response
-
-#     # Create a file-like object from the binary content
-#     file_content = BytesIO(downloaded_file.file_content)
-    
-#     response = FileResponse(file_content, content_type=content_type)
-#     response['Content-Disposition'] = f'inline; filename="{downloaded_file.original_filename}"'
-#     return response
-
+@login_required
 def view_file(request, file_id):
     downloaded_file = get_object_or_404(DownloadedFile, id=file_id)
     content_type, _ = mimetypes.guess_type(downloaded_file.original_filename)
@@ -462,24 +495,21 @@ def view_file(request, file_id):
 
     logger.info(f"Viewing file {downloaded_file.original_filename} with Content-Type: {content_type}")
 
-    # Handle different file types
     if content_type == 'text/plain':
-        # Serve text files inline for viewing
         file_content = BytesIO(downloaded_file.file_content)
         response = FileResponse(file_content, content_type=content_type)
         response['Content-Disposition'] = f'inline; filename="{downloaded_file.original_filename}"'
         return response
     elif content_type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-        # Serve Excel files as attachment for download
         response = HttpResponse(downloaded_file.file_content, content_type=content_type)
         response['Content-Disposition'] = f'attachment; filename="{downloaded_file.original_filename}"'
         return response
     else:
-        # Default to attachment for other types
         response = HttpResponse(downloaded_file.file_content, content_type=content_type)
         response['Content-Disposition'] = f'attachment; filename="{downloaded_file.original_filename}"'
         return response
 
+@login_required
 def replace_file(request, file_id):
     downloaded_file = get_object_or_404(DownloadedFile, id=file_id)
     if request.method == 'POST':
@@ -496,6 +526,7 @@ def replace_file(request, file_id):
         return redirect('client_details', client_id=downloaded_file.client.id)
     return render(request, 'client_manager/replace_file.html', {'downloaded_file': downloaded_file})
 
+@login_required
 def delete_file(request, file_id):
     downloaded_file = get_object_or_404(DownloadedFile, id=file_id)
     client_id = downloaded_file.client.id
@@ -509,8 +540,8 @@ def delete_file(request, file_id):
         'client': downloaded_file.client
     })
 
-
 @csrf_exempt
+@login_required
 def send_to_sftp(request):
     if request.method != 'POST':
         return JsonResponse({"status": "error", "message": "Invalid request method."}, status=400)
@@ -566,7 +597,8 @@ def send_to_sftp(request):
         except:
             pass
         return JsonResponse({"status": "error", "message": f"Error: {str(e)}"}, status=500)
-    
+
+@login_required
 def upload_config_view(request, client_id):
     client = Client.objects.get(id=client_id)
     if request.method == "POST":
@@ -579,4 +611,4 @@ def upload_config_view(request, client_id):
             return redirect('client_detail', client_id=client_id)
     else:
         form = UploadConfigForm(initial={'client': client})
-    return render(request, 'upload_config.html', {'form': form, 'client': client})
+    return render(request, 'client_manager/upload_config.html', {'form': form, 'client': client})
