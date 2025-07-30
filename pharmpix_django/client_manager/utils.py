@@ -169,6 +169,32 @@ UMR_TRAILER_LAYOUT_Accum_10PM = [
     # {"field_name": "filler", "from": 51, "to": 500, "length": 450, "type": "A"},
 ]
 
+LUCENT_ACCUMULATOR_LAYOUT = [
+    {"field_name": "record_type", "from": 1, "to": 4, "length": 4, "type": "A"},  # e.g., 'N001', 'N002', 'N003', 'N004'
+    {"field_name": "filler_1", "from": 6, "to": 6, "length": 1, "type": "A"},  # Space
+    {"field_name": "plan_code", "from": 11, "to": 17, "length": 7, "type": "A"},  # e.g., 'ASKSPPO', 'ASPPO', 'ASKSHSA', 'ASHSA'
+    # {"field_name": "filler_2", "from": 15, "to": 15, "length": 1, "type": "A"},  # Space
+    {"field_name": "group_name", "from": 23, "to": 41, "length": 19, "type": "A"},  # e.g., 'ATLAS AEROSPACE LLC'
+    # {"field_name": "filler_3", "from": 46, "to": 46, "length": 1, "type": "A"},  # Space
+    # {"field_name": "group_number", "from": 47, "to": 55, "length": 9, "type": "A"},  # e.g., 'C0374801'
+    # {"field_name": "filler_4", "from": 56, "to": 56, "length": 1, "type": "A"},  # Space
+    # {"field_name": "member_id", "from": 57, "to": 67, "length": 11, "type": "A"},  # e.g., '00378000100'
+    # {"field_name": "last_name", "from": 68, "to": 97, "length": 30, "type": "A"},  # e.g., 'THERIAULT'
+    # {"field_name": "filler_5", "from": 98, "to": 98, "length": 1, "type": "A"},  # Space
+    # {"field_name": "first_name", "from": 99, "to": 114, "length": 16, "type": "A"},  # e.g., 'RYAN'
+    # {"field_name": "filler_6", "from": 115, "to": 115, "length": 1, "type": "A"},  # Space
+    # {"field_name": "date_of_birth", "from": 116, "to": 123, "length": 8, "type": "N"},  # e.g., '19870923'
+    # {"field_name": "gender", "from": 124, "to": 124, "length": 1, "type": "A"},  # e.g., 'M' or 'F'
+    # {"field_name": "effective_date", "from": 125, "to": 132, "length": 8, "type": "N"},  # e.g., '20250101'
+    # {"field_name": "accumulator_1", "from": 133, "to": 172, "length": 40, "type": "N"},  # e.g., '0000000000000000000000000000000000000000'
+    # {"field_name": "coverage_type", "from": 173, "to": 175, "length": 3, "type": "A"},  # e.g., 'M/P'
+    # {"field_name": "accumulator_2", "from": 176, "to": 215, "length": 40, "type": "N"},  # e.g., '0000000000000000000000000000000000000000'
+    # {"field_name": "relationship_code", "from": 216, "to": 218, "length": 3, "type": "A"},  # e.g., 'EE', 'SS', 'CH'
+]
+
+LUCENT_ACCUMULATOR_HEADER_LAYOUT = []
+LUCENT_ACCUMULATOR_TRAILER_LAYOUT = []
+
 # client_manager/utils.py
 CLIENT_ACCOUNT_CODE_RULES = {
     "ALLIED": {"account_prefix": "SAPP", "eligibility_filename_pattern": "Sapp_MEM_TRX"},
@@ -1239,7 +1265,8 @@ def validate_txt_file_10PM_Accumlator(file_content, client_name, filename=None, 
                 "ELIG" in filename or
                 "MEM_TRX_UMR" in filename or
                 "TRXALBION_PPX_ELIG" in filename or
-                "SAPP_PPX_ELIGIBILITY_" in filename
+                "SAPP_PPX_ELIGIBILITY_" in filename or
+                "BML_MEM_TRX_" in filename
             )
         else:
             # Fallback: Check if first line looks like an EDI 834 file (starts with ISA)
@@ -1313,6 +1340,16 @@ def validate_txt_file_10PM_Accumlator(file_content, client_name, filename=None, 
             expected_length = 500
             expected_filename_prefix = "UMR_ACCUM_"
             has_header_trailer = True
+        elif client_name == "Lucent Health":
+            header_layout = LUCENT_ACCUMULATOR_HEADER_LAYOUT
+            detail_layout = LUCENT_ACCUMULATOR_LAYOUT
+            trailer_layout = LUCENT_ACCUMULATOR_TRAILER_LAYOUT
+            expected_length = 218
+            expected_plan_codes = ["ASKSPPO", "ASPPO", "ASKSHSA", "ASHSA"]
+            expected_record_types = ["N001", "N002", "N003", "N004", "001C"]
+            expected_gender_codes = ["M", "F"]
+            expected_relationship_codes = ["EE", "SS", "CH"]
+            has_header_trailer = False
         else:
             return {"is_valid": False, "errors": [f"No validation layout defined for {client_name}."]}
 
@@ -1416,7 +1453,31 @@ def validate_txt_file_10PM_Accumlator(file_content, client_name, filename=None, 
                             errors.append(
                                 f"Line {line_num} ({'Header' if record_type == '1' else 'Trailer'}): Invalid date '{date_part}' in filename, expected YYYYMMDD."
                             )
-
+                elif client_name == "Lucent Health":
+                    if field_name == "record_type" and value not in expected_record_types:
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Expected one of {', '.join(expected_record_types)}, got '{value}' (positions {start + 1}-{end})."
+                        )
+                    if field_name == "plan_code" and value not in expected_plan_codes:
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Expected one of {', '.join(expected_plan_codes)}, got '{value}' (positions {start + 1}-{end})."
+                        )
+                    if field_name in ["date_of_birth", "effective_date"] and value and not re.match(r'^\d{8}$', value):
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Invalid date format '{value}', expected YYYYMMDD (positions {start + 1}-{end})."
+                        )
+                    if field_name == "gender" and value and value not in expected_gender_codes:
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Expected one of {', '.join(expected_gender_codes)}, got '{value}' (positions {start + 1}-{end})."
+                        )
+                    if field_name == "relationship_code" and value and value not in expected_relationship_codes:
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Expected one of {', '.join(expected_relationship_codes)}, got '{value}' (positions {start + 1}-{end})."
+                        )
+                    if field_name == "coverage_type" and value and value != "M/P":
+                        errors.append(
+                            f"Line {line_num}, Field {field_name}: Expected 'M/P', got '{value}' (positions {start + 1}-{end})."
+                        )
         # UMR trailer record count validation for accumulator files
         if client_name == "UMR" and has_header_trailer and lines:
             detail_count = sum(1 for line in lines if line.startswith("2"))
