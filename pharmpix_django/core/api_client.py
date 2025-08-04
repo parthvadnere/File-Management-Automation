@@ -5,11 +5,38 @@ import time
 import logging
 import requests
 import json
+import ssl
+import urllib3
 from datetime import datetime, timedelta
 from urllib.parse import urljoin, quote
+from urllib3.poolmanager import PoolManager
+from requests.adapters import HTTPAdapter
 from client_manager.models import OutputConfig
 
 logger = logging.getLogger(__name__)
+
+class TLSAdapter(HTTPAdapter):
+    def __init__(self, ssl_options=None):
+        self.ssl_options = ssl_options
+        super(TLSAdapter, self).__init__()
+        
+    def init_poolmanager(self, connections, maxsize, block=False):
+        ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
+        
+        # Apply custom SSL options if provided
+        if self.ssl_options:
+            for opt, value in self.ssl_options.items():
+                setattr(ctx, opt, value)
+        
+        # Set cipher configurations to be more compatible with older servers
+        ctx.set_ciphers('DEFAULT@SECLEVEL=1')
+        
+        self.poolmanager = PoolManager(
+            num_pools=connections,
+            maxsize=maxsize,
+            block=block,
+            ssl_context=ctx
+        )
 
 class PharmpixApiClient:
     def __init__(self, base_url="https://eft.pharmpix.com", download_dir="pharmpix_downloads"):
@@ -24,54 +51,65 @@ class PharmpixApiClient:
         self.session = requests.Session()
         self.session.allow_redirects = True
         self.download_dir = download_dir
+        self.csrf_token = None
+        self.websessionid = None
+        self.ssl_adapter = None  # Store the working SSL adapter
+        
+        # Suppress InsecureRequestWarning globally
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
         
         # Create the download directory if it doesn't exist
         if not os.path.exists(self.download_dir):
             os.makedirs(self.download_dir)
             logger.info(f"Created download directory: {self.download_dir}")
         
-    # def login(self, username, password):
-    #     """
-    #     Authenticate with the PharmpPix EFT system and store session cookies
+    def _get_ssl_configurations(self):
+        """
+        Get different SSL configurations to try for compatibility
         
-    #     Args:
-    #         username (str): Username for authentication
-    #         password (str): Password for authentication
-            
-    #     Returns:
-    #         bool: True if login successful, False otherwise
-    #     """
-    #     login_url = urljoin(self.base_url, "/EFTClient/Account/Login.htm")
-    #     logger.info(f"Login URL: {login_url}")
-    #     payload = {
-    #         'username': username,
-    #         'password': password
-    #     }
+        Returns:
+            list: List of SSL configuration dictionaries
+        """
+        return [
+            {
+                "check_hostname": False,
+                "verify_mode": ssl.CERT_NONE
+            },
+            {
+                "check_hostname": False,
+                "verify_mode": ssl.CERT_NONE,
+                "options": ssl.OP_NO_SSLv2 | ssl.OP_NO_SSLv3 | ssl.OP_NO_TLSv1_1 | ssl.OP_NO_TLSv1_2 | ssl.OP_NO_TLSv1_3
+            },
+            {
+                "check_hostname": False,
+                "verify_mode": ssl.CERT_NONE,
+                "options": ssl.OP_NO_SSLv2 | ssl.OP_NO_SSLv3 | ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_2 | ssl.OP_NO_TLSv1_3
+            },
+            {
+                "check_hostname": False,
+                "verify_mode": ssl.CERT_NONE,
+                "options": ssl.OP_NO_SSLv2 | ssl.OP_NO_SSLv3 | ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_1 | ssl.OP_NO_TLSv1_3
+            }
+        ]
+    
+    def _setup_session_with_ssl(self, ssl_config):
+        """
+        Setup a session with specific SSL configuration
         
-    #     headers = {
-    #         'Content-Type': 'application/x-www-form-urlencoded',
-    #         'Accept': 'application/json, text/html'
-    #     }
-    #     logger.info(f"login_url: {login_url}")
-    #     logger.info(f"Payload: {payload}")
-    #     logger.info(f"Logging in as {username}...")
-    #     try:
-    #         response = self.session.post(login_url, data=payload, headers=headers, verify=False)
+        Args:
+            ssl_config (dict): SSL configuration dictionary
             
-    #         if response.status_code == 200:
-    #             logger.info("Login successful!")
-    #             logger.debug(f"Cookies received: {self.session.cookies.get_dict()}")
-    #             return True
-    #         else:
-    #             logger.error(f"Login failed with status code: {response.status_code}")
-    #             return False
-    #     except requests.exceptions.RequestException as e:
-    #         logger.error(f"Login request failed: {e}")
-    #         return False
+        Returns:
+            requests.Session: Configured session
+        """
+        session = requests.Session()
+        adapter = TLSAdapter(ssl_options=ssl_config)
+        session.mount('https://', adapter)
+        return session, adapter
     
     def login(self, username, password):
         """
-        Authenticate with the PharmpPix EFT system and store session cookies
+        Authenticate with the PharmpPix EFT system and store session cookies and CSRF token
         
         Args:
             username (str): Username for authentication
@@ -94,85 +132,48 @@ class PharmpixApiClient:
         logger.info(f"Logging in as {username}...")
         
         try:
-            # Create multiple adapters with different SSL configurations to try
-            import ssl
-            import urllib3
-            from urllib3.poolmanager import PoolManager
-            from requests.adapters import HTTPAdapter
-            
-            # Suppress InsecureRequestWarning
-            urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-            
-            class TLSAdapter(HTTPAdapter):
-                def __init__(self, ssl_options=None):
-                    self.ssl_options = ssl_options
-                    super(TLSAdapter, self).__init__()
-                    
-                def init_poolmanager(self, connections, maxsize, block=False):
-                    ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
-                    
-                    # Apply custom SSL options if provided
-                    if self.ssl_options:
-                        for opt, value in self.ssl_options.items():
-                            setattr(ctx, opt, value)
-                    
-                    # Set cipher configurations to be more compatible with older servers
-                    # Use a more permissive cipher list
-                    ctx.set_ciphers('DEFAULT@SECLEVEL=1')
-                    
-                    self.poolmanager = PoolManager(
-                        num_pools=connections,
-                        maxsize=maxsize,
-                        block=block,
-                        ssl_context=ctx
-                    )
-            
-            # Try different SSL configurations
-            ssl_configurations = [
-                # Configuration 1: Default with relaxed security
-                {
-                    "check_hostname": False,
-                    "verify_mode": ssl.CERT_NONE
-                },
-                # Configuration 2: TLS v1 only
-                {
-                    "check_hostname": False,
-                    "verify_mode": ssl.CERT_NONE,
-                    "options": ssl.OP_NO_SSLv2 | ssl.OP_NO_SSLv3 | ssl.OP_NO_TLSv1_1 | ssl.OP_NO_TLSv1_2 | ssl.OP_NO_TLSv1_3
-                },
-                # Configuration 3: TLS v1.1 only
-                {
-                    "check_hostname": False,
-                    "verify_mode": ssl.CERT_NONE,
-                    "options": ssl.OP_NO_SSLv2 | ssl.OP_NO_SSLv3 | ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_2 | ssl.OP_NO_TLSv1_3
-                },
-                # Configuration 4: TLS v1.2 only
-                {
-                    "check_hostname": False,
-                    "verify_mode": ssl.CERT_NONE,
-                    "options": ssl.OP_NO_SSLv2 | ssl.OP_NO_SSLv3 | ssl.OP_NO_TLSv1 | ssl.OP_NO_TLSv1_1 | ssl.OP_NO_TLSv1_3
-                }
-            ]
-            
-            # Try each configuration until one works
+            # Try each SSL configuration until one works
+            ssl_configurations = self._get_ssl_configurations()
             last_exception = None
+            
             for config in ssl_configurations:
                 try:
                     logger.info(f"Trying SSL configuration: {config}")
-                    session = requests.Session()
-                    adapter = TLSAdapter(ssl_options=config)
-                    session.mount('https://', adapter)
+                    session, adapter = self._setup_session_with_ssl(config)
                     
                     response = session.post(login_url, data=payload, headers=headers)
                     
                     if response.status_code == 200:
                         logger.info("Login successful!")
-                        # Copy cookies to the original session
-                        self.session.cookies.update(session.cookies)
+                        # Store the working session and adapter
+                        self.session = session
+                        self.ssl_adapter = adapter
+                        
                         logger.debug(f"Cookies received: {self.session.cookies.get_dict()}")
                         
-                        # Update our session with the working adapter
-                        self.session = session
+                        # Extract websessionid from cookies
+                        self.websessionid = self.session.cookies.get('websessionid')
+                        logger.debug(f"Extracted websessionid: {self.websessionid}")
+                        
+                        # Extract X-CSRF-TOKEN from response headers
+                        self.csrf_token = response.headers.get('X-CSRF-TOKEN')
+                        if not self.csrf_token:
+                            # If not in headers, try to extract from response body or subsequent request
+                            try:
+                                # Make a GET request to the main page to get the token
+                                main_page_response = session.get(
+                                    urljoin(self.base_url, "/?token="),
+                                    headers={'Accept': 'text/html'}
+                                )
+                                if main_page_response.status_code == 200:
+                                    # Search for token in response body (e.g., in JavaScript or meta tag)
+                                    token_match = re.search(r'token=([A-F0-9\-]+)', main_page_response.text)
+                                    if token_match:
+                                        self.csrf_token = token_match.group(1)
+                                        logger.debug(f"Extracted csrf_token from response body: {self.csrf_token}")
+                            except Exception as e:
+                                logger.warning(f"Failed to extract CSRF token from main page: {e}")
+                        
                         return True
                     else:
                         logger.warning(f"Login attempt failed with status code: {response.status_code}")
@@ -190,6 +191,126 @@ class PharmpixApiClient:
         except Exception as e:
             logger.error(f"Login request failed: {e}")
             return False
+
+    def upload_file(self, file_path, upload_endpoint, max_retries=3):
+        """
+        Upload a file to the specified endpoint on the Pharmpix server with retry logic.
+        
+        Args:
+            file_path (str): Local path to the file to upload.
+            upload_endpoint (str): API endpoint for upload (e.g., '/To_Pharmpix/AUTOMATION_TEST/').
+            max_retries (int): Maximum number of retry attempts.
+            
+        Returns:
+            dict: {'success': bool, 'errors': list} indicating upload status and any errors.
+        """
+        if not os.path.exists(file_path):
+            logger.error(f"File not found: {file_path}")
+            return {"success": False, "errors": [f"File not found: {file_path}"]}
+
+        file_name = os.path.basename(file_path)
+        upload_url = urljoin(self.base_url, upload_endpoint)
+        
+        headers = {
+            "Accept": "text/plain, */*; q=0.01",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-CSRF-TOKEN": self.csrf_token or "AF9AAE7F-6935-11f0-813E-005056BDF0C9",
+            "X-Jument-Version": "v1.2.0 build 1",
+            "X-Requested-With": "XMLHttpRequest",
+            "X-DIRECTION": "UPLOAD",
+            "sec-ch-ua": "\"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"138\", \"Google Chrome\";v=\"138\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "Cookie": f"websessionid={self.websessionid or 'FF25A81A9F13950D9E3740B91E9B299650E3D5B50AA0C5F030FED0F5CE63CE43'}; savedpath={upload_endpoint},https; fileListSort=%7B%22property%22%3A%22date%22%2C%22sortAsc%22%3Afalse%7D; fileListThumbnail=false; i18next=en",
+            "Referer": f"{self.base_url}/?token={self.csrf_token or 'AF9AAE7F-6935-11f0-813E-005056BDF0C9'}",
+            "Origin": self.base_url
+        }
+
+        # Try with existing session first, then try different SSL configurations if needed
+        sessions_to_try = [self.session]
+        
+        # If the main session fails, try creating new sessions with different SSL configs
+        if self.ssl_adapter:
+            ssl_configurations = self._get_ssl_configurations()
+            for config in ssl_configurations:
+                try:
+                    session, adapter = self._setup_session_with_ssl(config)
+                    # Copy cookies from the main session
+                    session.cookies.update(self.session.cookies)
+                    sessions_to_try.append(session)
+                except Exception as e:
+                    logger.warning(f"Failed to create session with SSL config {config}: {e}")
+
+        last_error = None
+        
+        for attempt in range(max_retries):
+            for session_idx, session in enumerate(sessions_to_try):
+                try:
+                    logger.info(f"Upload attempt {attempt + 1}/{max_retries} for {file_name} using session {session_idx}")
+                    logger.debug(f"Upload URL: {upload_url}")
+                    logger.debug(f"Session cookies: {session.cookies.get_dict()}")
+                    
+                    with open(file_path, 'rb') as f:
+                        files = {
+                            'file': (file_name, f, 'text/plain', {
+                                'Content-Disposition': f'attachment; filename="{file_name}"'
+                            })
+                        }
+                        
+                        # Set longer timeouts for upload
+                        response = session.post(
+                            upload_url,
+                            headers=headers,
+                            files=files,
+                            timeout=(30, 120),  # (connect_timeout, read_timeout)
+                            verify=False  # Explicitly disable SSL verification
+                        )
+                        
+                        response.raise_for_status()
+                        logger.info(f"Upload successful for {file_name}: {response.status_code} - {response.text}")
+                        
+                        # Update main session if a different session was successful
+                        if session_idx > 0:
+                            self.session = session
+                            logger.info(f"Updated main session to use successful SSL configuration")
+                        
+                        return {"success": True, "errors": []}
+                        
+                except (requests.exceptions.SSLError, 
+                        requests.exceptions.ConnectionError,
+                        ssl.SSLEOFError) as e:
+                    logger.warning(f"SSL/Connection error on attempt {attempt + 1} with session {session_idx}: {str(e)}")
+                    last_error = str(e)
+                    # Continue to next session configuration
+                    continue
+                    
+                except requests.exceptions.RequestException as e:
+                    logger.warning(f"Request error on attempt {attempt + 1} with session {session_idx}: {str(e)}")
+                    last_error = str(e)
+                    if 'response' in locals():
+                        logger.debug(f"Response status: {response.status_code}")
+                        logger.debug(f"Response headers: {response.headers}")
+                        logger.debug(f"Response text: {response.text[:1000]}...")
+                    # Continue to next session configuration
+                    continue
+                    
+                except Exception as e:
+                    logger.error(f"Unexpected error on attempt {attempt + 1} with session {session_idx}: {str(e)}")
+                    last_error = str(e)
+                    # Continue to next session configuration
+                    continue
+            
+            # If we've tried all sessions and still failed, wait before next attempt
+            if attempt < max_retries - 1:
+                wait_time = (attempt + 1) * 2  # Exponential backoff: 2, 4, 6 seconds
+                logger.info(f"All sessions failed for attempt {attempt + 1}. Waiting {wait_time} seconds before retry...")
+                time.sleep(wait_time)
+
+        # All attempts failed
+        logger.error(f"Upload failed for {file_name} after {max_retries} attempts. Last error: {last_error}")
+        return {"success": False, "errors": [last_error or "Upload failed after all retry attempts"]}
 
     def get_path_components(self, path):
         """
@@ -245,7 +366,9 @@ class PharmpixApiClient:
         full_url = urljoin(self.base_url, url)
         print("Full URL:", full_url)
         headers = {
-            'Accept': 'application/json, text/html'
+            'Accept': 'application/json, text/html',
+            'X-CSRF-TOKEN': self.csrf_token or '',
+            'Cookie': f'websessionid={self.websessionid or ""}; savedpath=/{formatted_path},https'
         }
 
         logger.info(f"Fetching data from: {full_url}")
@@ -466,7 +589,11 @@ class PharmpixApiClient:
         logger.info(f"Downloading file from: {full_url}")
         
         try:
-            response = self.session.get(full_url, timeout=60)
+            headers = {
+                'X-CSRF-TOKEN': self.csrf_token or '',
+                'Cookie': f'websessionid={self.websessionid or ""}; savedpath=/{url_formatted_path},https'
+            }
+            response = self.session.get(full_url, headers=headers, timeout=60)
             if response.status_code == 200:
                 output_paths = []
                 for config in output_configs:

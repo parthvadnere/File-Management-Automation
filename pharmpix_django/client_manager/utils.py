@@ -1479,13 +1479,13 @@ def validate_txt_file_10PM_Accumlator(file_content, client_name, filename=None, 
                             f"Line {line_num}, Field {field_name}: Expected 'M/P', got '{value}' (positions {start + 1}-{end})."
                         )
         # UMR trailer record count validation for accumulator files
-        if client_name == "UMR" and has_header_trailer and lines:
-            detail_count = sum(1 for line in lines if line.startswith("2"))
-            trailer_record_count_field = trailer_layout[1]["from"] - 1, trailer_layout[1]["to"]
-            if lines[-1].startswith("3") and lines[-1][trailer_record_count_field[0]:trailer_record_count_field[1]].strip().isdigit():
-                trailer_count = int(lines[-1][trailer_record_count_field[0]:trailer_record_count_field[1]].strip())
-                if trailer_count != detail_count:
-                    errors.append(f"Trailer record count {trailer_count} does not match detail count {detail_count}.")
+        # if client_name == "UMR" and has_header_trailer and lines:
+        #     detail_count = sum(1 for line in lines if line.startswith("2"))
+        #     trailer_record_count_field = trailer_layout[1]["from"] - 1, trailer_layout[1]["to"]
+        #     if lines[-1].startswith("3") and lines[-1][trailer_record_count_field[0]:trailer_record_count_field[1]].strip().isdigit():
+        #         trailer_count = int(lines[-1][trailer_record_count_field[0]:trailer_record_count_field[1]].strip())
+        #         if trailer_count != detail_count:
+        #             errors.append(f"Trailer record count {trailer_count} does not match detail count {detail_count}.")
 
         return {"is_valid": len(errors) == 0, "errors": errors}
     except Exception as e:

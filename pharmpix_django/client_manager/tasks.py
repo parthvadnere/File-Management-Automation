@@ -12,6 +12,8 @@ from client_manager.utils import validate_txt_file, validate_file, validate_umr_
 from datetime import datetime
 from core.sftp_client import SFTPClient
 import requests
+import ssl
+import urllib3
 
 logger = logging.getLogger(__name__)
 
@@ -144,35 +146,6 @@ def download_files_task(client_id, username="it@transparentrx.com", password="_4
                 saved_files.append(downloaded_file.original_filename)
                 logger.info(f"Saved file to database: {file_name}")
 
-                # if validation_result["is_valid"]:
-                #     if client.sftp_host and client.sftp_username and client.sftp_password:
-                #         try:
-                #             logger.info(f"------------------------------------")
-                #             logger.info(f"file_path: {file_path}, file_name: {file_name}, client_name: {client_name}")
-                #             transport = paramiko.Transport((client.sftp_host, client.sftp_port or 22))
-                #             transport.connect(username=client.sftp_username, password=client.sftp_password)
-                #             sftp = paramiko.SFTPClient.from_transport(transport)
-
-                #             remote_path = f"/{client_name}/{file_name}"
-                #             if "RxEOB" not in file_path:
-                #                 with open(file_path, 'rb') as local_file:
-                #                     sftp.putfo(local_file, remote_path)
-                #                 logger.info(f"File {file_name} sent to SFTP server at {remote_path}")
-
-                #                 downloaded_file.sent_to_sftp = True
-                #                 downloaded_file.save()
-
-                #                 sftp.close()
-                #                 transport.close()
-                #             else:
-                #                 logger.info(f"Skipping SFTP transfer for RxEOB file: {file_name}")
-                #         except Exception as e:
-                #             logger.error(f"Failed to send {file_name} to SFTP for client {client_name}: {str(e)}")
-                #             downloaded_file.validation_errors = f"SFTP transfer failed: {str(e)}"
-                #             downloaded_file.save()
-                #     else:
-                #         logger.warning(f"No SFTP credentials for client {client_name}. File not sent.")
-    
                 if validation_result["is_valid"]:
                     if client.sftp_host and client.sftp_username and client.sftp_password:
                         try:
@@ -201,7 +174,6 @@ def download_files_task(client_id, username="it@transparentrx.com", password="_4
                                     # sftp.mkdir(remote_dir)
                                     logger.info(f"Exception to Creating remote directory: {remote_dir}")
                                 if "RxEOB" not in file_path:
-                                    logger.info(f"-------------------------------------")
                                     logger.info(f"file_path: {file_path}, file_name: {file_name}, remote_path: {remote_path}")
                                     with open(file_path, 'rb') as local_file:
                                         sftp.putfo(local_file, remote_path)
@@ -221,7 +193,6 @@ def download_files_task(client_id, username="it@transparentrx.com", password="_4
                     else:
                         logger.warning(f"No SFTP credentials for client {client_name}. File not sent.")
 
-
                 os.remove(file_path)
                 logger.info(f"Deleted local file: {file_path}")
 
@@ -231,9 +202,10 @@ def download_files_task(client_id, username="it@transparentrx.com", password="_4
         return {"status": "Failed", "message": f"Error: {str(e)}"}
 
 @shared_task
-def download_10pm_files_task(client_id, selected_date=None):
+def download_10pm_files_task(client_id, username="it@transparentrx.com", password="_4ajPc,Owjkc", selected_date=None):
     """
-    Task to download Accumulator and Eligibility files from SFTP server for a specific client.
+    Task to download Accumulator and Eligibility files from SFTP server for a specific client,
+    validate them, and upload to Pharmpix API's AUTOMATION_TEST folder.
     Args:
         client_id (int): ID of the client to process.
         selected_date (str): Date in YYYY-MM-DD format. Defaults to today if None.
@@ -245,7 +217,6 @@ def download_10pm_files_task(client_id, selected_date=None):
             date_obj = datetime.strptime(selected_date, '%Y-%m-%d')
         else:
             date_obj = datetime.now()
-        # date_str = date_obj.strftime('%Y%m%d')
 
         # Get the specific client
         try:
@@ -259,12 +230,13 @@ def download_10pm_files_task(client_id, selected_date=None):
         if not (client.sftp_host and client.sftp_username and client.sftp_password):
             logger.warning(f"SFTP credentials missing for client {client.name}. Skipping.")
             return {"status": "Failed", "message": f"SFTP credentials missing for client {client.name}"}
-        
-        # Get the upload configuration for this client
-        upload_config = UploadConfig.objects.filter(client=client, is_active=True).first()
-        if not upload_config:
-            logger.warning(f"No upload configuration found for client {client.name}. Skipping upload.")
-            return {"status": "Failed", "message": f"No upload configuration for client {client.name}"}
+
+        # Initialize PharmpixApiClient for uploading
+        logger.info("Initializing PharmpixApiClient for upload")
+        api_client = PharmpixApiClient(download_dir="10PM-Work")
+        if not api_client.login(username, password):
+            logger.error("Pharmpix API login failed. Cannot proceed with uploads.")
+            return {"status": "Failed", "message": "Failed to log in to Pharmpix API."}
 
         # Initialize SFTP client
         sftp_client = SFTPClient(
@@ -283,7 +255,8 @@ def download_10pm_files_task(client_id, selected_date=None):
             # Get file configurations for this client
             file_configs = FileConfig.objects.filter(client=client, is_active=True)
             client_results = []
-            logger.info("into try stmt::::: file_configs:::" + str(file_configs))
+            logger.info(f"File configurations found: {file_configs}")
+
             for file_config in file_configs:
                 logger.info(f"Processing {file_config.file_type} file for {client.name}")
             
@@ -293,7 +266,6 @@ def download_10pm_files_task(client_id, selected_date=None):
                     file_pattern=file_config.file_pattern,
                     local_path=file_config.local_path,
                     renamed_pattern=file_config.renamed_pattern,
-                    # date_str=date_str,
                     date_obj=date_obj
                 )
 
@@ -316,18 +288,7 @@ def download_10pm_files_task(client_id, selected_date=None):
                     filename=file_name,
                     selected_date=date_obj.strftime('%Y%m%d') if selected_date else None
                 )
-
-                # Validate accumulator files
-                # if "ACCUM" in file_config.file_type.upper() or "TRXALBION" in file_name or "ACCUM_UMR" in file_name:
-                #     logger.info(f"Validating accumulator file: {file_name}")
-                #     validation_result = validate_txt_file_10PM_Accumlator(file_content, client.name)
-                # Add eligibility validation here later when sample is provided
-                # elif "eligibility" in file_config.file_type.upper():
-                #     logger.info(f"Validating eligibility file: {file_name}")
-                #     validation_result = validate_eligibility_file(file_content, client.name)
-
-
-                # logger.info(f"Validation result for {file_name}: {validation_result}")
+                logger.info(f"Validation result for {file_name}: {validation_result}")
 
                 # Store the file details in the database
                 downloaded_file = DownloadedFile(
@@ -343,25 +304,42 @@ def download_10pm_files_task(client_id, selected_date=None):
                 downloaded_file.save()
                 logger.info(f"Saved file to database: {file_name}")
 
+                # If valid, upload to Pharmpix API with client-specific folder structure
                 if validation_result["is_valid"]:
-                    client_results.append(local_file_path)
-                    # Upload the file
-                    upload_result = upload_file_to_pharmpix(
-                        local_file_path,
-                        upload_config.upload_endpoint,
-                        upload_config.token,
-                        client.name
+                    # Determine upload endpoint based on client and file type
+                    if client.name == "ALLIED":
+                        upload_endpoint = "/To_Pharmpix/ALLIED/Accumulators" if file_config.file_type.lower() == "accumulator" else "/To_Pharmpix/ALLIED/Eligibility"
+                    elif client.name == "ASR":
+                        upload_endpoint = "/To_Pharmpix/ASR/Accumulators" if file_config.file_type.lower() == "accumulator" else "/To_Pharmpix/ASR/Eligibility"
+                    elif client.name == "UMR":
+                        upload_endpoint = "/To_Pharmpix/UMR/IOA/Accumulators" if file_config.file_type.lower() == "accumulator" else "/To_Pharmpix/UMR/IOA/Eligibility"
+                    else:
+                        upload_endpoint = "/To_Pharmpix/AUTOMATION_TEST/"  # Default fallback
+                        logger.warning(f"No specific upload endpoint defined for client {client.name}, using default: {upload_endpoint}")
+                    # upload_endpoint="/To_Pharmpix/AUTOMATION_TEST/"
+                    upload_result = api_client.upload_file(
+                        file_path=local_file_path,
+                        upload_endpoint=upload_endpoint
                     )
+                    
                     if upload_result["success"]:
                         downloaded_file.is_uploaded = True
                         downloaded_file.save()
-                        logger.info(f"File {file_name} uploaded successfully to {upload_config.upload_endpoint}")
+                        client_results.append(local_file_path)
+                        logger.info(f"***********************")
                     else:
-                        downloaded_file.upload_errors = "\n".join(upload_result["errors"])
-                        downloaded_file.save()
                         logger.error(f"Upload failed for {file_name}: {upload_result['errors']}")
+                        downloaded_file.upload_errors = "; ".join(upload_result["errors"])
+                        downloaded_file.save()
                 else:
                     logger.warning(f"File {file_name} validation failed: {validation_result['errors']}")
+
+                # Clean up local file
+                try:
+                    # os.remove(local_file_path)
+                    logger.info(f"Deleted local file: {local_file_path}")
+                except OSError as e:
+                    logger.warning(f"Failed to delete local file {local_file_path}: {e}")
 
             return {"status": "Completed", "message": f"10PM task completed for {client.name}: {client_results}"}
         finally:
@@ -371,38 +349,17 @@ def download_10pm_files_task(client_id, selected_date=None):
         return {"status": "Failed", "message": f"Error: {str(e)}"}
 
 def upload_file_to_pharmpix(file_path, upload_endpoint, token, client_name):
-    headers = {
-        "Accept": "text/plain, */*; q=0.01",
-        "Accept-Language": "en-US,en;q=0.9",
-        "Cache-Control": "no-cache",
-        "Connection": "keep-alive",
-        "Content-Type": "text/plain",
-        "X-CSRF-TOKEN": token,
-        "X-Jument-Version": "v1.2.0 build 1",
-        "X-Requested-With": "XMLHttpRequest",
-        "sec-ch-ua": "\"Google Chrome\";v=\"137\", \"Chromium\";v=\"137\", \"Not/A)Brand\";v=\"24\"",
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": "\"Windows\"",
-        "Cookie": f"token={token}; savedpath=/{upload_endpoint},https",
-        "Referer": f"https://eft.pharmpix.com/?token={token}",
-        "Origin": "https://eft.pharmpix.com"
-    }
-    file_name = os.path.basename(file_path)
+    """
+    Legacy upload function - now uses PharmpixApiClient for better SSL handling
+    """
+    logger.info(f"Using legacy upload function for {file_path}")
+    
+    # Use PharmpixApiClient for better SSL handling
+    api_client = PharmpixApiClient()
+    if not api_client.login("it@transparentrx.com", "_4ajPc,Owjkc"):
+        logger.error("Login failed in upload_file_to_pharmpix")
+        return {"success": False, "errors": ["Login failed"]}
 
-    with open(file_path, 'rb') as f:
-        files = {
-            'file': (file_name, f, 'text/plain', {'Content-Disposition': f'attachment; filename="{file_name}"'})
-        }
-        try:
-            response = requests.post(
-                f"https://eft.pharmpix.com{upload_endpoint}",
-                headers=headers,
-                files=files,
-                timeout=30
-            )
-            response.raise_for_status()
-            logger.info(f"Upload response for {file_name}: {response.status_code} - {response.text}")
-            return {"success": True, "errors": []}
-        except requests.exceptions.RequestException as e:
-            logger.error(f"Upload failed for {file_name}: {str(e)}")
-            return {"success": False, "errors": [str(e)]}
+    # Use the improved upload method
+    result = api_client.upload_file(file_path, upload_endpoint)
+    return result

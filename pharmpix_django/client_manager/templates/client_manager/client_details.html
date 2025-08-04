@@ -181,7 +181,7 @@
                             <a href="{% url 'view_file' file.id %}" class="btn btn-secondary action-btn" download><i class="fas fa-download"></i></a>
                             <a href="{% url 'replace_file' file.id %}" class="btn btn-warning action-btn"><i class="fas fa-upload"></i></a>
                             <a href="{% url 'delete_file' file.id %}" class="btn btn-danger action-btn delete-btn"><i class="fas fa-trash"></i></a>
-                            {% if file.sent_to_sftp %}
+                            {% if file.sent_to_sftp or file.is_uploaded %}
                                 <span class="btn btn-success action-btn disabled"><i class="fas fa-check"></i></span>
                             {% elif file.is_validated %}
                                 <button class="btn btn-primary action-btn send-sftp-btn" data-file-id="{{ file.id }}" data-client-id="{{ client.id }}"><i class="fas fa-upload"></i></button>
