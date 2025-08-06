@@ -20,29 +20,13 @@
             <i class="fas fa-folder"></i>
             <h3>Paths</h3>
             <p>{{ paths_count }}</p>
-            <a href="{% url 'manage_clients' %}" class="btn btn-primary">View in Clients</a>
+            <a href="{% url 'manage_paths' %}" class="btn btn-primary">View in Paths</a>
         </div>
         <div class="dashboard-card">
             <i class="fas fa-cog"></i>
-            <h3>Output Configs</h3>
+            <h3>All Configs</h3>
             <p>{{ configs_count }}</p>
-            <a href="{% url 'manage_clients' %}" class="btn btn-primary">View in Clients</a>
+            <a href="{% url 'manage_all_configs' %}" class="btn btn-primary">View in Configs</a>
         </div>
-    </div>
-    <div class="date-filter" style="margin-bottom: 20px;">
-        <label for="dateFilter">Select Date to Download:</label>
-        <input type="date" id="dateFilter" name="dateFilter" max="{% now 'Y-m-d' %}">
-    </div>
-    <div class="client-list">
-        {% for client in clients %}
-            <div class="client-card">
-                <h3>{{ client.name }}</h3>
-                <p>{{ client.description|default:"No description" }}</p>
-                <a href="{% url 'download_files' client.id %}" class="btn btn-primary download-btn" data-client-id="{{ client.id }}"><i class="fas fa-download"></i> Download Files</a>
-                <a href="{% url 'client_details' client.id %}" class="btn btn-info"><i class="fas fa-info-circle"></i> Details</a>
-            </div>
-        {% empty %}
-            <p>No clients found.</p>
-        {% endfor %}
     </div>
 {% endblock %}

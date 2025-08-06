@@ -1,44 +1,56 @@
-<!-- client_manager/templates/client_manager/manage_paths.html -->
 {% extends 'client_manager/base.html' %}
 
 {% block content %}
-    <h2>Manage Paths for {{ client.name }}</h2>
-    <div class="details-section">
-        <h3>Paths</h3>
-        <a href="{% url 'add_path' client.id %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Path</a>
-        <div class="table-container">
-            <table class="client-table">
-                <thead>
-                    <tr>
-                        <th>Client</th>
-                        <th>Path</th>
-                        <th>File Types</th>
-                        <th>Max Files</th>
-                        <th>File Pattern</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for path in paths %}
+<div class="container-fluid px-4 min-vh-100 d-flex flex-column">
+    <h2 class="text-center mb-4">Manage Paths for All Clients</h2>
+
+    <div class="card shadow mb-4 details-section flex-grow-1">
+        <div class="card-body">
+            <h4 class="card-title mb-3">Paths</h4>
+            <div class="table-container">
+                <table class="client-table table table-bordered table-striped align-middle mb-0">
+                    <thead class="table-primary text-center">
                         <tr>
-                            <td>{{ path.client.name }}</td>
-                            <td>{{ path.path }}</td>
-                            <td>{{ path.file_types }}</td>
-                            <td>{{ path.max_files }}</td>
-                            <td>{{ path.file_pattern|default:"-" }}</td>
-                            <td>
-                                <a href="{% url 'edit_path' client.id path.id %}" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="{% url 'delete_path' client.id path.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Delete</a>
-                            </td>
+                            <th>Client</th>
+                            <th>Path</th>
+                            <th>File Types</th>
+                            <th>Max Files</th>
+                            <th>File Pattern</th>
+                            <th>Actions</th>
                         </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="6">No paths found.</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for path in paths %}
+                            <tr>
+                                <td class="text-nowrap">{{ path.client.name }}</td>
+                                <td class="text-nowrap">{{ path.path }}</td>
+                                <td>
+                                    {% for file_type in path.file_types %}
+                                        <span class="badge bg-info text-dark me-1">{{ file_type }}</span>
+                                    {% empty %}
+                                        <span class="text-muted">-</span>
+                                    {% endfor %}
+                                </td>
+                                <td class="text-center">{{ path.max_files }}</td>
+                                <td class="text-nowrap">{{ path.file_pattern|default:"-" }}</td>
+                                <td class="text-center">
+                                    <a href="{% url 'edit_path' path.client.id path.id %}" class="btn btn-warning btn-sm me-1">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <a href="{% url 'delete_path' path.client.id path.id %}" class="btn btn-danger btn-sm delete-btn">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">No paths found.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <a href="{% url 'client_details' client.id %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Client Details</a>
     </div>
+</div>
 {% endblock %}

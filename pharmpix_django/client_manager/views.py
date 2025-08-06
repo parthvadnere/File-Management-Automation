@@ -5,6 +5,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.core.paginator import Paginator
+from django.template.loader import render_to_string
 from client_manager.models import Client, Path, Task, OutputConfig, DownloadedFile, FileConfig
 from client_manager.forms import ClientForm, PathForm, TaskForm, OutputConfigForm, DownloadForm, FileConfigForm, UploadConfigForm, CustomUserCreationForm
 from client_manager.tasks import download_files_task, download_10pm_files_task
@@ -295,11 +297,9 @@ def delete_file_config(request, config_id):
     return render(request, 'client_manager/file_config_confirm_delete.html', {'file_config': file_config})
 
 @login_required
-def manage_paths(request, client_id):
-    client = get_object_or_404(Client, id=client_id)
-    paths = Path.objects.filter(client=client)
-    logger.info(f"manage_paths - client_id: {client_id}, client: {client.name}, paths: {paths}")
-    return render(request, 'client_manager/manage_paths.html', {'client': client, 'paths': paths})
+def manage_paths(request):
+    paths = Path.objects.select_related('client').all()
+    return render(request, 'client_manager/manage_paths.html', {'paths': paths})
 
 @login_required
 def add_path(request, client_id):
@@ -402,10 +402,103 @@ def delete_task(request, task_id):
     return render(request, 'client_manager/confirm_delete.html', {'object': task, 'type': 'Task'})
 
 @login_required
-def manage_output_configs(request, client_id):
-    client = get_object_or_404(Client, id=client_id)
-    configs = OutputConfig.objects.filter(client=client)
-    return render(request, 'client_manager/manage_output_configs.html', {'client': client, 'configs': configs})
+def manage_all_configs(request):
+    # Regular page load
+    input_configs = FileConfig.objects.select_related('client').all()
+    output_configs = OutputConfig.objects.select_related('client', 'path', 'task').all()
+    
+    # Pagination logic
+    paginator_input = Paginator(input_configs, 5)
+    paginator_output = Paginator(output_configs, 5)
+    page_number_input = request.GET.get('page_input', 1)
+    page_number_output = request.GET.get('page_output', 1)
+    
+    try:
+        input_configs_paginated = paginator_input.get_page(page_number_input)
+        output_configs_paginated = paginator_output.get_page(page_number_output)
+    except Exception as e:
+        # Handle invalid page numbers or other errors
+        return render(request, 'client_manager/manage_all_configs.html', {
+            'input_configs': [],
+            'output_configs': [],
+            'error': f'Pagination error: {str(e)}'
+        })
+    
+    # Check if it's an AJAX request
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return handle_ajax_pagination(request)
+    
+    return render(request, 'client_manager/manage_all_configs.html', {
+        'input_configs': input_configs_paginated,
+        'output_configs': output_configs_paginated
+    })
+
+def handle_ajax_pagination(request):
+    """Handle AJAX requests for pagination"""
+    section = request.GET.get('section')
+    
+    if section == 'input':
+        input_configs = FileConfig.objects.select_related('client').all()
+        paginator_input = Paginator(input_configs, 5)
+        page_number_input = request.GET.get('page_input', 1)
+        try:
+            input_configs_paginated = paginator_input.get_page(page_number_input)
+        except Exception as e:
+            return JsonResponse({
+                'success': False,
+                'error': f'Invalid page number for input section: {str(e)}'
+            })
+        
+        table_html = render_to_string(
+            'client_manager/partials/input_table.html',
+            {'input_configs': input_configs_paginated},
+            request=request
+        )
+        pagination_html = render_to_string(
+            'client_manager/partials/input_pagination.html',
+            {'input_configs': input_configs_paginated},
+            request=request
+        )
+        
+        return JsonResponse({
+            'success': True,
+            'table_html': table_html,
+            'pagination_html': pagination_html
+        })
+    
+    elif section == 'output':
+        output_configs = OutputConfig.objects.select_related('client', 'path', 'task').all()
+        paginator_output = Paginator(output_configs, 5)
+        page_number_output = request.GET.get('page_output', 1)
+        try:
+            output_configs_paginated = paginator_output.get_page(page_number_output)
+        except Exception as e:
+            return JsonResponse({
+                'success': False,
+                'error': f'Invalid page number for output section: {str(e)}'
+            })
+        
+        table_html = render_to_string(
+            'client_manager/partials/output_table.html',
+            {'output_configs': output_configs_paginated},
+            request=request
+        )
+        pagination_html = render_to_string(
+            'client_manager/partials/output_pagination.html',
+            {'output_configs': output_configs_paginated},
+            request=request
+        )
+        
+        return JsonResponse({
+            'success': True,
+            'table_html': table_html,
+            'pagination_html': pagination_html
+        })
+    
+    return JsonResponse({
+        'success': False,
+        'error': 'Invalid section'
+    })
 
 @login_required
 def add_output_config(request, client_id):
@@ -581,7 +674,33 @@ def download_10pm_files(request):
 @login_required
 def downloaded_files(request):
     downloaded_files = DownloadedFile.objects.all().order_by('-downloaded_at')
-    return render(request, 'client_manager/downloaded_files.html', {'downloaded_files': downloaded_files})
+    paginator = Paginator(downloaded_files, 5)  # 5 items per page
+    page_number = request.GET.get('page_downloaded', 1)  # Use 'page_downloaded' to match AJAX query
+    downloaded_files_paginated = paginator.get_page(page_number)
+
+    # Check if the request is AJAX
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        # Render partial templates for table and pagination
+        table_html = render_to_string(
+            'client_manager/partials/downloaded_table.html',
+            {'downloaded_files': downloaded_files_paginated},
+            request=request
+        )
+        pagination_html = render_to_string(
+            'client_manager/partials/downloaded_pagination.html',
+            {'downloaded_files': downloaded_files_paginated},
+            request=request
+        )
+        return JsonResponse({
+            'success': True,
+            'table_html': table_html,
+            'pagination_html': pagination_html
+        })
+
+    # For non-AJAX requests, render the full template
+    return render(request, 'client_manager/downloaded_files.html', {
+        'downloaded_files': downloaded_files_paginated
+    })
 
 @login_required
 def view_file(request, file_id):

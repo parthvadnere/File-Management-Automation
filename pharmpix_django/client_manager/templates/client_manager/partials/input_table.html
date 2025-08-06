@@ -1,0 +1,15 @@
+{% for config in input_configs %}
+<tr>
+    <td>{{ config.client.name|default:"N/A" }}</td>
+    <td>{{ config.file_type|default:"N/A" }}</td>
+    <td>{{ config.remote_path|default:"N/A" }}</td>
+    <td class="pattern-col">{{ config.file_pattern|default:"N/A" }}</td>
+    <td>{{ config.local_path|default:"N/A" }}</td>
+    <td>{{ config.renamed_pattern|default:"N/A" }}</td>
+    <td>{{ config.is_active|default:"N/A" }}</td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan="7">No input configurations found.</td>
+</tr>
+{% endfor %}

@@ -1,0 +1,27 @@
+{% if downloaded_files.has_other_pages %}
+<ul class="pagination pagination-inline justify-content-center mt-3">
+    {% if downloaded_files.has_previous %}
+        <li class="page-item">
+            <a class="page-link pagination-link" href="#" data-section="downloaded" data-page="{{ downloaded_files.previous_page_number }}">Previous</a>
+        </li>
+    {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Previous</span>
+        </li>
+    {% endif %}
+    {% for num in downloaded_files.paginator.page_range %}
+        <li class="page-item {% if downloaded_files.number == num %}active{% endif %}">
+            <a class="page-link pagination-link" href="#" data-section="downloaded" data-page="{{ num }}">{{ num }}</a>
+        </li>
+    {% endfor %}
+    {% if downloaded_files.has_next %}
+        <li class="page-item">
+            <a class="page-link pagination-link" href="#" data-section="downloaded" data-page="{{ downloaded_files.next_page_number }}">Next</a>
+        </li>
+    {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Next</span>
+        </li>
+    {% endif %}
+</ul>
+{% endif %}

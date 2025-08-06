@@ -1,0 +1,15 @@
+{% for file in downloaded_files %}
+<tr>
+    <td>{{ file.client.name }}</td>
+    <td>{{ file.original_filename }}</td>
+    <td>{{ file.file_type }}</td>
+    <td>{{ file.path }}</td>
+    <td>{{ file.is_validated|yesno:"Yes,No" }}</td>
+    <td>{{ file.validation_errors|default:"None" }}</td>
+    <td>{{ file.downloaded_at }}</td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan="7">No downloaded files found.</td>
+</tr>
+{% endfor %}

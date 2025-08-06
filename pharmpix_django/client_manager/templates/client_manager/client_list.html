@@ -23,9 +23,9 @@
             <td>{{ client.sftp_host }}</td>
             <td>{{ client.is_active|yesno:"Yes,No" }}</td>
             <td>
-                <a href="{% url 'file_config_list' client_id=client.id %}" class="btn btn-sm btn-info">File Configs</a>
+                <!-- <a href="{% url 'file_config_list' client_id=client.id %}" class="btn btn-sm btn-info">File Configs</a>
                 <a href="{% url 'client_update' pk=client.id %}" class="btn btn-sm btn-warning">Edit</a>
-                <a href="{% url 'client_delete' pk=client.id %}" class="btn btn-sm btn-danger">Delete</a>
+                <a href="{% url 'client_delete' pk=client.id %}" class="btn btn-sm btn-danger">Delete</a> -->
             </td>
         </tr>
         {% empty %}

@@ -1,0 +1,27 @@
+{% if output_configs.has_other_pages %}
+<ul class="pagination pagination-inline justify-content-center mt-3">
+    {% if output_configs.has_previous %}
+        <li class="page-item">
+            <a class="page-link pagination-link" href="#" data-section="output" data-page="{{ output_configs.previous_page_number }}">Previous</a>
+        </li>
+    {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Previous</span>
+        </li>
+    {% endif %}
+    {% for num in output_configs.paginator.page_range %}
+        <li class="page-item {% if output_configs.number == num %}active{% endif %}">
+            <a class="page-link pagination-link" href="#" data-section="output" data-page="{{ num }}">{{ num }}</a>
+        </li>
+    {% endfor %}
+    {% if output_configs.has_next %}
+        <li class="page-item">
+            <a class="page-link pagination-link" href="#" data-section="output" data-page="{{ output_configs.next_page_number }}">Next</a>
+        </li>
+    {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Next</span>
+        </li>
+    {% endif %}
+</ul>
+{% endif %}

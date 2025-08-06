@@ -2,20 +2,22 @@
 
 {% block content %}
 <div class="config-management-container">
-    <h2 class="page-title">Downloaded Files</h2>
-    <a href="{% url 'manage_clients' %}" class="btn btn-secondary">Back to Clients</a>
+    <h2 class="page-title">Manage All Configurations</h2>
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
 
-    <!-- Downloaded Files Section -->
-    <div class="config-section output-section">
+    <!-- Input Configurations Section -->
+    <div class="config-section input-section">
         <div class="section-header">
-            <h3><i class="fas fa-file-download"></i> Downloaded Files</h3>
-            <button class="refresh-btn" data-section="downloaded" title="Refresh Data">
+            <h3><i class="fas fa-file-import"></i> File Configuration for SFTP to EFTP</h3>
+            <button class="refresh-btn" data-section="input" title="Refresh Data">
                 <i class="fas fa-sync"></i> Refresh
             </button>
         </div>
         <div class="section-content">
-            <div class="table-container" id="downloaded-table-container">
-                <div class="loading-overlay hidden" id="downloaded-loading">
+            <div class="table-container" id="input-table-container">
+                <div class="loading-overlay hidden" id="input-loading">
                     <div class="loading-spinner">
                         <i class="fas fa-spinner fa-spin"></i>
                         <span>Loading...</span>
@@ -25,62 +27,63 @@
                     <thead>
                         <tr>
                             <th>Client</th>
-                            <th>Original Filename</th>
                             <th>File Type</th>
-                            <th>Path</th>
-                            <th>Validated</th>
-                            <th>Errors</th>
-                            <th>Downloaded At</th>
+                            <th>Remote Path</th>
+                            <th class="pattern-col">File Pattern</th>
+                            <th>Local Path</th>
+                            <th>Renamed Pattern</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody id="downloaded-table-body">
-                        {% for file in downloaded_files %}
-                        <tr>
-                            <td>{{ file.client.name }}</td>
-                            <td>{{ file.original_filename }}</td>
-                            <td>{{ file.file_type }}</td>
-                            <td>{{ file.path }}</td>
-                            <td>{{ file.is_validated|yesno:"Yes,No" }}</td>
-                            <td>{{ file.validation_errors|default:"None" }}</td>
-                            <td>{{ file.downloaded_at }}</td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="7">No downloaded files found.</td>
-                        </tr>
-                        {% endfor %}
+                    <tbody id="input-table-body">
+                        {% include 'client_manager/partials/input_table.html' %}
                     </tbody>
                 </table>
-                <!-- Pagination for Downloaded Files -->
-                <div class="pagination-container" id="downloaded-pagination-container">
-                    <div class="pagination" id="downloaded-pagination">
-                        {% if downloaded_files.has_other_pages %}
-                            <ul class="pagination pagination-inline justify-content-center mt-3">
-                                {% if downloaded_files.has_previous %}
-                                    <li class="page-item">
-                                        <a class="page-link pagination-link" href="#" data-section="downloaded" data-page="{{ downloaded_files.previous_page_number }}">Previous</a>
-                                    </li>
-                                {% else %}
-                                    <li class="page-item disabled">
-                                        <span class="page-link">Previous</span>
-                                    </li>
-                                {% endif %}
-                                {% for num in downloaded_files.paginator.page_range %}
-                                    <li class="page-item {% if downloaded_files.number == num %}active{% endif %}">
-                                        <a class="page-link pagination-link" href="#" data-section="downloaded" data-page="{{ num }}">{{ num }}</a>
-                                    </li>
-                                {% endfor %}
-                                {% if downloaded_files.has_next %}
-                                    <li class="page-item">
-                                        <a class="page-link pagination-link" href="#" data-section="downloaded" data-page="{{ downloaded_files.next_page_number }}">Next</a>
-                                    </li>
-                                {% else %}
-                                    <li class="page-item disabled">
-                                        <span class="page-link">Next</span>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        {% endif %}
+                <!-- Pagination for Input Configurations -->
+                <div class="pagination-container" id="input-pagination-container">
+                    <div class="pagination" id="input-pagination">
+                        {% include 'client_manager/partials/input_pagination.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Output Configurations Section -->
+    <div class="config-section output-section">
+        <div class="section-header">
+            <h3><i class="fas fa-file-export"></i> File Configuration for EFTP to SFTP</h3>
+            <button class="refresh-btn" data-section="output" title="Refresh Data">
+                <i class="fas fa-sync"></i> Refresh
+            </button>
+        </div>
+        <div class="section-content">
+            <div class="table-container" id="output-table-container">
+                <div class="loading-overlay hidden" id="output-loading">
+                    <div class="loading-spinner">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <span>Loading...</span>
+                    </div>
+                </div>
+                <table class="config-table">
+                    <thead>
+                        <tr>
+                            <th>Client</th>
+                            <th>Path</th>
+                            <th>Task</th>
+                            <th>File Type</th>
+                            <th>Output Dir</th>
+                            <th>Filename Template</th>
+                        </tr>
+                    </thead>
+                    <tbody id="output-table-body">
+                        {% include 'client_manager/partials/output_table.html' %}
+                    </tbody>
+                </table>
+                <!-- Pagination for Output Configurations -->
+                <div class="pagination-container" id="output-pagination-container">
+                    <div class="pagination" id="output-pagination">
+                        {% include 'client_manager/partials/output_pagination.html' %}
                     </div>
                 </div>
             </div>
@@ -93,14 +96,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to handle AJAX pagination
     function loadPage(section, page) {
         const loadingElement = document.getElementById(section + '-loading');
-        const url = '{% url "downloaded_files" %}';
+        const url = '{% url "manage_all_configs" %}?section=' + section + '&page_' + section + '=' + page;
         
         // Show loading spinner
         loadingElement.classList.remove('hidden');
         
         // Create AJAX request
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', url + '?section=' + section + '&page_' + section + '=' + page, true);
+        xhr.open('GET', url, true);
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         
         xhr.onreadystatechange = function() {
@@ -111,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (xhr.status === 200) {
                     try {
                         const response = JSON.parse(xhr.responseText);
+                        console.log('Response for section ' + section + ':', response); // Debug log
                         
                         if (response.success) {
                             // Update table content
@@ -119,9 +123,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             // Update pagination
                             document.getElementById(section + '-pagination').innerHTML = response.pagination_html;
                             
-                            // Re-bind pagination events for the updated content
+                            // Re-bind pagination events
                             bindPaginationEvents();
                         } else {
+                            console.error('Error in response:', response.error); // Debug log
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Error',
@@ -129,13 +134,15 @@ document.addEventListener('DOMContentLoaded', function() {
                             });
                         }
                     } catch (e) {
+                        console.error('Parse error:', e); // Debug log
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'Failed to parse response'
+                            text: 'Failed to parse response: ' + e.message
                         });
                     }
                 } else {
+                    console.error('HTTP error:', xhr.status); // Debug log
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
@@ -150,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to bind pagination events
     function bindPaginationEvents() {
-        // Remove any existing event listeners to prevent duplicates
+        // Remove existing event listeners to prevent duplicates
         document.querySelectorAll('.pagination-link').forEach(function(link) {
             link.replaceWith(link.cloneNode(true));
         });
@@ -165,6 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.preventDefault();
                 const section = this.dataset.section;
                 const page = this.dataset.page;
+                console.log('Pagination click:', section, page); // Debug log
                 loadPage(section, page);
             });
         });
@@ -174,9 +182,9 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 const section = this.dataset.section;
-                // Get current page number
                 const activeLink = document.querySelector('#' + section + '-pagination .page-item.active .pagination-link');
                 const currentPage = activeLink ? activeLink.dataset.page : 1;
+                console.log('Refresh click:', section, currentPage); // Debug log
                 loadPage(section, currentPage);
             });
         });

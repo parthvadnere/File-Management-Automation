@@ -1,0 +1,14 @@
+{% for config in output_configs %}
+<tr>
+    <td>{{ config.client.name|default:"N/A" }}</td>
+    <td>{{ config.path|default:"N/A" }}</td>
+    <td>{{ config.task|default:"N/A" }}</td>
+    <td>{{ config.file_type|default:"N/A" }}</td>
+    <td>{{ config.output_dir|default:"N/A" }}</td>
+    <td>{{ config.filename_template|default:"N/A" }}</td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan="6">No output configurations found.</td>
+</tr>
+{% endfor %}

@@ -670,3 +670,323 @@ cursor: pointer;
 }
 
 /* end of the css */
+
+/* Existing styles */
+.card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-container {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+/* New Button Styling */
+.refresh-btn {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    color: #000;
+    transition: all 0.3s ease;
+}
+
+.refresh-btn:hover {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+    color: #000;
+}
+
+.refresh-btn:active,
+.refresh-btn:focus {
+    background-color: #dfe4ea;
+    border-color: #c6ccd3;
+    box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0.5);
+}
+
+.refresh-btn i {
+    font-size: 1rem;
+}
+
+/* Pagination Styling */
+.pagination,
+.pagination-inline {
+    margin-top: 1rem;
+    list-style-type: none; /* Remove bullets */
+    padding-left: 0; /* Remove default padding */
+}
+
+.pagination-inline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.page-link {
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.page-link:hover,
+.page-link:focus {
+    color: #0056b3;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-item.active .page-link {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    z-index: 1;
+}
+
+.page-item.active .page-link:hover {
+    color: #fff;
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d;
+    background-color: #fff;
+    border-color: #dee2e6;
+    cursor: not-allowed;
+}
+
+.page-item.disabled .page-link:hover {
+    color: #6c757d;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+
+
+
+/* ------------------------------------- */
+
+/* Configuration Management Styles */
+.config-management-container {
+    padding: 20px;
+    max-width: 100%;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 2em;
+}
+
+.config-section {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.section-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-section .section-header {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+}
+
+.output-section .section-header {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+}
+
+.section-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.refresh-btn {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.refresh-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-1px);
+}
+
+.section-content {
+    padding: 0;
+}
+
+.table-container {
+    position: relative;
+    overflow-x: auto;
+}
+
+.config-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.config-table th,
+.config-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.config-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+}
+
+.config-table tbody tr:hover {
+    background: #f5f5f5;
+}
+
+.pattern-col {
+    width: 20%;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.status-active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-inactive {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-overlay.hidden {
+    display: none;
+}
+
+.loading-spinner {
+    text-align: center;
+    color: #007bff;
+}
+
+.loading-spinner i {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.pagination-container {
+    padding: 20px;
+    text-align: center;
+    background: #f8f9fa;
+}
+
+.pagination {
+    display: inline-flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 5px;
+}
+
+.page-item {
+    display: inline-block;
+}
+
+.page-link {
+    display: block;
+    padding: 8px 12px;
+    color: #007bff;
+    text-decoration: none;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.page-link:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.page-item.active .page-link {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    background: #fff;
+    border-color: #dee2e6;
+}
+
+.no-data {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .config-management-container {
+        padding: 10px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .config-table {
+        font-size: 0.9em;
+    }
+    
+    .config-table th,
+    .config-table td {
+        padding: 8px 10px;
+    }
+}

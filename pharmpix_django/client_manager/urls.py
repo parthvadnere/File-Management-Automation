@@ -27,7 +27,7 @@ urlpatterns = [
     path('manage/clients/<int:client_id>/details/', views.client_details, name='client_details'),  # New: Client details page
 
     # Path Management (Nested under Client)
-    path('manage/clients/<int:client_id>/paths/', views.manage_paths, name='manage_paths'),
+    path('manage/clients/paths/', views.manage_paths, name='manage_paths'),
     path('manage/clients/<int:client_id>/paths/add/', views.add_path, name='add_path'),
     path('manage/clients/<int:client_id>/paths/edit/<int:path_id>/', views.edit_path, name='edit_path'),
     path('manage/clients/<int:client_id>/paths/delete/<int:path_id>/', views.delete_path, name='delete_path'),
@@ -39,12 +39,13 @@ urlpatterns = [
     path('manage/tasks/delete/<int:task_id>/', views.delete_task, name='delete_task'),
 
     # OutputConfig Management (Nested under Client)
-    path('manage/clients/<int:client_id>/output-configs/', views.manage_output_configs, name='manage_output_configs'),
+    # path('manage/clients/output-configs/', views.manage_output_configs, name='manage_output_configs'),
     path('manage/clients/<int:client_id>/output-configs/add/', views.add_output_config, name='add_output_config'),
     path('manage/clients/<int:client_id>/output-configs/edit/<int:config_id>/', views.edit_output_config, name='edit_output_config'),
     path('manage/clients/<int:client_id>/output-configs/delete/<int:config_id>/', views.delete_output_config, name='delete_output_config'),
 
     # FileConfig Management (Nested under Client)
+    path('manage/all-configs/', views.manage_all_configs, name='manage_all_configs'),
     path('<int:client_id>/file-configs/add/', views.add_file_config, name='add_file_config'),
     path('file-configs/edit/<int:config_id>/', views.edit_file_config, name='edit_file_config'),
     path('file-configs/delete/<int:config_id>/', views.delete_file_config, name='delete_file_config'),
@@ -67,5 +68,5 @@ urlpatterns = [
     # path('file-configs/<int:pk>/update/', views.file_config_update, name='file_config_update'),
     # path('file-configs/<int:pk>/delete/', views.file_config_delete, name='file_config_delete'),
     # path('download-10pm/', views.download_10pm_files, name='download_10pm_files'),
-    # path('downloaded-files/', views.downloaded_files, name='downloaded_files'),
+    path('downloaded-files/', views.downloaded_files, name='downloaded_files'),
 ]

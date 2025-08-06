@@ -20,7 +20,7 @@
             <nav>
                 <ul class="nav-links">
                     <li><a href="{% url 'dashboard' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                    <li><a href="{% url 'client_list' %}" class="{% if request.resolver_match.url_name == 'client_list' %}active{% endif %}"><i class="fas fa-download"></i> Download Files</a></li>
+                    <li><a href="{% url 'downloaded_files' %}" class="{% if request.resolver_match.url_name == 'client_list' %}active{% endif %}"><i class="fas fa-download"></i> Download Files</a></li>
                     <li><a href="{% url 'manage_clients' %}" class="{% if request.resolver_match.url_name == 'manage_clients' %}active{% endif %}"><i class="fas fa-users"></i> Manage Clients</a></li>
                     {% if 'client_details' in request.resolver_match.url_name %}
                         <li><a href="{% url 'client_details' client.id %}" class="active"><i class="fas fa-user"></i> Client Details</a></li>
