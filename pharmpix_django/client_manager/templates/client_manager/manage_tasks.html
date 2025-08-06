@@ -1,34 +1,44 @@
-<!-- client_manager/templates/client_manager/manage_tasks.html -->
 {% extends 'client_manager/base.html' %}
 
 {% block content %}
-    <h2>Manage Tasks</h2>
-    <a href="{% url 'add_task' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add New Task</a>
-    <div class="table-container">
-        <table class="client-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for task in tasks %}
-                    <tr>
-                        <td>{{ task.name }}</td>
-                        <td>{{ task.description|default:"-" }}</td>
-                        <td>
-                            <a href="{% url 'edit_task' task.id %}" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
-                            <a href="{% url 'delete_task' task.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Delete</a>
-                        </td>
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="3">No tasks found.</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<div class="config-management-container">
+    <!-- <h2 class="page-title">Manage Tasks</h2> -->
+    <div class="config-section">
+        <div class="section-header">
+            <h3><i class="fas fa-tasks"></i> Task List</h3>
+            <a href="{% url 'add_task' %}" class="refresh-btn" title="Add New Task">
+                <i class="fas fa-plus"></i> Add New Task
+            </a>
+        </div>
+        <div class="section-content">
+            <div class="table-container">
+                <table class="config-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in tasks %}
+                            <tr>
+                                <td>{{ task.name }}</td>
+                                <td>{{ task.description|default:"-" }}</td>
+                                <td class="action-buttons">
+                                    <a href="{% url 'edit_task' task.id %}" class="refresh-btn"><i class="fas fa-edit"></i> Edit</a>
+                                    <a href="{% url 'delete_task' task.id %}" class="refresh-btn delete-btn"><i class="fas fa-trash"></i> Delete</a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3" class="no-data">No tasks found.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+</div>
 {% endblock %}

@@ -1,37 +1,47 @@
-<!-- client_manager/templates/client_manager/manage_clients.html -->
 {% extends 'client_manager/base.html' %}
 
 {% block content %}
-    <h2>Manage Clients/TPAs</h2>
-    <a href="{% url 'add_client' %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add New Client</a>
-    <div class="table-container">
-        <table class="client-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>SFTP Host</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for client in clients %}
-                    <tr>
-                        <td>{{ client.name }}</td>
-                        <td>{{ client.description|default:"-" }}</td>
-                        <td>{{ client.sftp_host|default:"-" }}</td>
-                        <td>
-                            <a href="{% url 'client_details' client.id %}" class="btn btn-info"><i class="fas fa-info-circle"></i> Details</a>
-                            <a href="{% url 'edit_client' client.id %}" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
-                            <a href="{% url 'delete_client' client.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Delete</a>
-                        </td>
-                    </tr>
-                {% empty %}
-                    <tr>
-                        <td colspan="4">No clients found.</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<div class="config-management-container">
+    <!-- <h2 class="page-title">Manage Clients/TPAs</h2> -->
+    <div class="config-section">
+        <div class="section-header">
+            <h3><i class="fas fa-users"></i> Client List</h3>
+            <a href="{% url 'add_client' %}" class="refresh-btn" title="Add New Client">
+                <i class="fas fa-plus"></i> Add New Client
+            </a>
+        </div>
+        <div class="section-content">
+            <div class="table-container">
+                <table class="config-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>SFTP Host</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for client in clients %}
+                            <tr>
+                                <td>{{ client.name }}</td>
+                                <td>{{ client.description|default:"-" }}</td>
+                                <td>{{ client.sftp_host|default:"-" }}</td>
+                                <td class="action-buttons">
+                                    <a href="{% url 'client_details' client.id %}" class="refresh-btn"><i class="fas fa-info-circle"></i> Details</a>
+                                    <a href="{% url 'edit_client' client.id %}" class="refresh-btn"><i class="fas fa-edit"></i> Edit</a>
+                                    <a href="{% url 'delete_client' client.id %}" class="refresh-btn delete-btn"><i class="fas fa-trash"></i> Delete</a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4" class="no-data">No clients found.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+</div>
 {% endblock %}

@@ -1,218 +1,271 @@
 {% extends 'client_manager/base.html' %}
 
 {% block content %}
-    <h2>Client Details: {{ client.name }}</h2>
-    <div class="details-card">
-        <h3>Client Information</h3>
-        <p><strong>Name:</strong> {{ client.name }}</p>
-        <p><strong>Description:</strong> {{ client.description|default:"-" }}</p>
-        <p><strong>SFTP Host:</strong> {{ client.sftp_host|default:"-" }}</p>
-        <p><strong>SFTP Username:</strong> {{ client.sftp_username|default:"-" }}</p>
-        <p><strong>SFTP Port:</strong> {{ client.sftp_port|default:"-" }}</p>
-        <div class="action-buttons">
-            <a href="{% url 'edit_client' client.id %}" class="btn btn-warning"><i class="fas fa-edit"></i> Edit Client</a>
-            <a href="{% url 'delete_client' client.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i> Delete Client</a>
-            <a href="{% url 'manage_clients' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Clients</a>
+<div class="config-management-container">
+    <h2 class="page-title">Client Details: {{ client.name }}</h2>
+    
+    <!-- Client Information -->
+    <div class="config-section">
+        <div class="section-header">
+            <h3><i class="fas fa-user"></i> Client Information</h3>
+        </div>
+        <div class="section-content">
+            <div class="details-card">
+                <p><strong>Name:</strong> {{ client.name }}</p>
+                <p><strong>Description:</strong> {{ client.description|default:"-" }}</p>
+                <p><strong>SFTP Host:</strong> {{ client.sftp_host|default:"-" }}</p>
+                <p><strong>SFTP Username:</strong> {{ client.sftp_username|default:"-" }}</p>
+                <p><strong>SFTP Port:</strong> {{ client.sftp_port|default:"-" }}</p>
+                <div class="action-buttons">
+                    <a href="{% url 'edit_client' client.id %}" class="refresh-btn"><i class="fas fa-edit"></i> Edit Client</a>
+                    <a href="{% url 'delete_client' client.id %}" class="refresh-btn delete-btn"><i class="fas fa-trash"></i> Delete Client</a>
+                    <a href="{% url 'manage_clients' %}" class="refresh-btn"><i class="fas fa-arrow-left"></i> Back to Clients</a>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- 5PM Paths -->
-    <div class="details-section">
-        <h3>5PM Paths</h3>
-        <a href="{% url 'add_path' client.id %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Path</a>
-        <div class="table-container">
-            <table class="client-table">
-                <thead>
-                    <tr>
-                        <th>Path</th>
-                        <th>File Types</th>
-                        <th>Max Files</th>
-                        <th>File Pattern</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for path in paths %}
+    <div class="config-section">
+        <div class="section-header">
+            <h3><i class="fas fa-folder"></i> 5PM Folder Path for Download from EFTP</h3>
+            <a href="{% url 'add_path' client.id %}" class="refresh-btn" title="Add Path">
+                <i class="fas fa-plus"></i> Add Path
+            </a>
+        </div>
+        <div class="section-content">
+            <div class="table-container">
+                <table class="config-table">
+                    <thead>
                         <tr>
-                            <td>{{ path.path }}</td>
-                            <td>{{ path.file_types }}</td>
-                            <td>{{ path.max_files }}</td>
-                            <td>{{ path.file_pattern|default:"-" }}</td>
-                            <td>
-                                <a href="{% url 'edit_path' client.id path.id %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                <a href="{% url 'delete_path' client.id path.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i></a>
-                            </td>
+                            <th>Path</th>
+                            <th>File Types</th>
+                            <th>Max Files</th>
+                            <th>File Pattern</th>
+                            <th>Actions</th>
                         </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="5">No paths found.</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for path in paths %}
+                            <tr>
+                                <td>{{ path.path }}</td>
+                                <td>
+                                    {% for file_type in path.file_types %}
+                                        <span class="status-badge status-active">{{ file_type }}</span>
+                                    {% empty %}
+                                        <span class="text-muted">-</span>
+                                    {% endfor %}
+                                </td>
+                                <td>{{ path.max_files }}</td>
+                                <td>{{ path.file_pattern|default:"-" }}</td>
+                                <td class="action-buttons">
+                                    <a href="{% url 'edit_path' client.id path.id %}" class="refresh-btn"><i class="fas fa-edit"></i></a>
+                                    <a href="{% url 'delete_path' client.id path.id %}" class="refresh-btn delete-btn"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="5" class="no-data">No paths found.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
     <!-- 5PM Output Configurations -->
-    <div class="details-section">
-        <h3>5PM Output Configurations</h3>
-        <a href="{% url 'add_output_config' client.id %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add Output Config</a>
-        <div class="table-container">
-            <table class="client-table">
-                <thead>
-                    <tr>
-                        <th>Path</th>
-                        <th>Task</th>
-                        <th>File Type</th>
-                        <th>Output Dir</th>
-                        <th>Filename Template</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for config in output_configs %}
+    <div class="config-section output-section">
+        <div class="section-header">
+            <h3><i class="fas fa-file-export"></i> 5PM EFTP to SFTP Configuration</h3>
+            <a href="{% url 'add_output_config' client.id %}" class="refresh-btn" title="Add Output Config">
+                <i class="fas fa-plus"></i> Add Output Config
+            </a>
+        </div>
+        <div class="section-content">
+            <div class="table-container">
+                <table class="config-table">
+                    <thead>
                         <tr>
-                            <td>{{ config.path.path }}</td>
-                            <td>{{ config.task.name }}</td>
-                            <td>{{ config.file_type }}</td>
-                            <td>{{ config.output_dir }}</td>
-                            <td>{{ config.filename_template }}</td>
-                            <td>
-                                <a href="{% url 'edit_output_config' client.id config.id %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                                <a href="{% url 'delete_output_config' client.id config.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i></a>
-                            </td>
+                            <th>Path</th>
+                            <th>Task</th>
+                            <th>File Type</th>
+                            <th>Output Dir</th>
+                            <th>Filename Template</th>
+                            <th>Actions</th>
                         </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="6">No output configurations found.</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for config in output_configs %}
+                            <tr>
+                                <td>{{ config.path.path }}</td>
+                                <td>{{ config.task.name }}</td>
+                                <td>{{ config.file_type }}</td>
+                                <td>{{ config.output_dir }}</td>
+                                <td>{{ config.filename_template }}</td>
+                                <td class="action-buttons">
+                                    <a href="{% url 'edit_output_config' client.id config.id %}" class="refresh-btn"><i class="fas fa-edit"></i></a>
+                                    <a href="{% url 'delete_output_config' client.id config.id %}" class="refresh-btn delete-btn"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="6" class="no-data">No output configurations found.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
     <!-- 10PM File Configurations -->
-    <div class="details-section">
-        <h3>10PM File Configurations</h3>
-        <a href="{% url 'add_file_config' client.id %}" class="btn btn-primary"><i class="fas fa-plus"></i> Add File Config</a>
-        <div class="table-container">
-            <table class="client-table">
-                <thead>
-                    <tr>
-                        <th>File Type</th>
-                        <th>Remote Path</th>
-                        <th>File Pattern</th>
-                        <th>Local Path</th>
-                        <th>Renamed Pattern</th>
-                        <th>Active</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for config in file_configs %}
-                    <tr>
-                        <td>{{ config.get_file_type_display }}</td>
-                        <td>{{ config.remote_path }}</td>
-                        <td>{{ config.file_pattern }}</td>
-                        <td>{{ config.local_path }}</td>
-                        <td>{{ config.renamed_pattern }}</td>
-                        <td>{{ config.is_active|yesno:"Yes,No" }}</td>
-                        <td>
-                            <a href="{% url 'edit_file_config' config.id %}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
-                            <a href="{% url 'delete_file_config' config.id %}" class="btn btn-danger delete-btn"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="7">No file configurations found.</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+    <div class="config-section input-section">
+        <div class="section-header">
+            <h3><i class="fas fa-file-import"></i> 10PM File Configurations</h3>
+            <a href="{% url 'add_file_config' client.id %}" class="refresh-btn" title="Add File Config">
+                <i class="fas fa-plus"></i> Add File Config
+            </a>
         </div>
-    </div>
-
-    <div class="details-section">
-        <h3>Downloaded Files</h3>
-        <div class="download-buttons">
-            <!-- 5PM Download -->
-            <form method="post" style="display: inline;">
-                {% csrf_token %}
-                <input type="hidden" name="download_5pm" value="1">
-                {{ form_5pm.as_p }}
-                <button type="submit" class="btn btn-primary">Download 5PM Files</button>
-            </form>
-            <!-- 10PM Download -->
-            <form method="post" style="display: inline;">
-                {% csrf_token %}
-                <input type="hidden" name="download_10pm" value="1">
-                {{ form_10pm.as_p }}
-                <button type="submit" class="btn btn-primary">Download 10PM Files</button>
-            </form>
-        </div>
-        <div class="table-container">
-            <table class="client-table">
-                <thead>
-                    <tr>
-                        <th><a href="?sort=filename">Filename</a></th>
-                        <th><a href="?sort=file_type">File Type</a></th>
-                        <th><a href="?sort=path">Path</a></th>
-                        <th><a href="?sort=downloaded_at">Downloaded At</a></th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for file in downloaded_files %}
-                    <tr>
-                        <td>{{ file.original_filename }}</td>
-                        <td>{{ file.file_type }}</td>
-                        <td>{{ file.path }}</td>
-                        <td>{{ file.downloaded_at|date:"Y-m-d H:i:s" }}</td>
-                        <td>
-                            <button class="btn btn-info action-btn view-file-btn" 
-                                    data-file-id="{{ file.id }}" 
-                                    data-file-url="{% url 'view_file' file.id %}" 
-                                    data-errors="{{ file.validation_errors|default:''|escape }}" 
-                                    data-validated="{{ file.is_validated|yesno:'true,false' }}" 
-                                    data-sent="{{ file.sent_to_sftp|yesno:'true,false' }}" 
-                                    data-client-id="{{ client.id }}"
-                                    data-file-type="{{ file.file_type|default:'txt' }}"><i class="fas fa-eye"></i></button>
-                            <a href="{% url 'view_file' file.id %}" class="btn btn-secondary action-btn" download><i class="fas fa-download"></i></a>
-                            <a href="{% url 'replace_file' file.id %}" class="btn btn-warning action-btn"><i class="fas fa-upload"></i></a>
-                            <a href="{% url 'delete_file' file.id %}" class="btn btn-danger action-btn delete-btn"><i class="fas fa-trash"></i></a>
-                            {% if file.sent_to_sftp or file.is_uploaded %}
-                                <span class="btn btn-success action-btn disabled"><i class="fas fa-check"></i></span>
-                            {% elif file.is_validated %}
-                                <button class="btn btn-primary action-btn send-sftp-btn" data-file-id="{{ file.id }}" data-client-id="{{ client.id }}"><i class="fas fa-upload"></i></button>
-                            {% else %}
-                                <button class="btn btn-danger action-btn view-errors-btn" data-errors="{{ file.validation_errors|escape }}"><i class="fas fa-exclamation-circle"></i></button>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% empty %}
+        <div class="section-content">
+            <div class="table-container">
+                <table class="config-table">
+                    <thead>
                         <tr>
-                            <td colspan="5">No downloaded files found. <a href="{% url 'download_files' client.id %}" class="btn btn-primary btn-sm">Download Now</a></td>
+                            <th>File Type</th>
+                            <th>Remote Path</th>
+                            <th>File Pattern</th>
+                            <th>Local Path</th>
+                            <th>Renamed Pattern</th>
+                            <th>Active</th>
+                            <th>Actions</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for config in file_configs %}
+                            <tr>
+                                <td>{{ config.get_file_type_display }}</td>
+                                <td>{{ config.remote_path }}</td>
+                                <td>{{ config.file_pattern }}</td>
+                                <td>{{ config.local_path }}</td>
+                                <td>{{ config.renamed_pattern }}</td>
+                                <td>
+                                    <span class="status-badge {% if config.is_active %}status-active{% else %}status-inactive{% endif %}">
+                                        {{ config.is_active|yesno:"Yes,No" }}
+                                    </span>
+                                </td>
+                                <td class="action-buttons">
+                                    <a href="{% url 'edit_file_config' config.id %}" class="refresh-btn"><i class="fas fa-edit"></i></a>
+                                    <a href="{% url 'delete_file_config' config.id %}" class="refresh-btn delete-btn"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="7" class="no-data">No file configurations found.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
-    <!-- Modal for Viewing Files -->
+    <!-- Downloaded Files -->
+    <div class="config-section">
+        <div class="section-header">
+            <h3><i class="fas fa-download"></i> Downloaded Files</h3>
+            <div class="download-form-container">
+                <form method="post" class="download-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="download_5pm" value="1">
+                    <div class="form-group">
+                        {{ form_5pm.as_p }}
+                        <button type="submit" class="refresh-btn"><i class="fas fa-download"></i> 5PM</button>
+                    </div>
+                </form>
+                <form method="post" class="download-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="download_10pm" value="1">
+                    <div class="form-group">
+                        {{ form_10pm.as_p }}
+                        <button type="submit" class="refresh-btn"><i class="fas fa-download"></i> 10PM</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="section-content">
+            <div class="table-container">
+                <table class="config-table">
+                    <thead>
+                        <tr>
+                            <th><a href="?sort=filename" class="page-link">Filename</a></th>
+                            <th><a href="?sort=file_type" class="page-link">File Type</a></th>
+                            <th><a href="?sort=path" class="page-link">Path</a></th>
+                            <th><a href="?sort=downloaded_at" class="page-link">Downloaded At</a></th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fileTableBody">
+                        {% for file in downloaded_files %}
+                            <tr>
+                                <td>{{ file.original_filename }}</td>
+                                <td>{{ file.file_type }}</td>
+                                <td>{{ file.path }}</td>
+                                <td>{{ file.downloaded_at|date:"Y-m-d H:i:s" }}</td>
+                                <td class="action-buttons">
+                                    <button class="refresh-btn view-file-btn" 
+                                            data-file-id="{{ file.id }}" 
+                                            data-file-url="{% url 'view_file' file.id %}" 
+                                            data-errors="{{ file.validation_errors|default:''|escape }}" 
+                                            data-validated="{{ file.is_validated|yesno:'true,false' }}" 
+                                            data-sent="{{ file.sent_to_sftp|yesno:'true,false' }}" 
+                                            data-client-id="{{ client.id }}"
+                                            data-file-type="{{ file.file_type|default:'txt' }}"><i class="fas fa-eye"></i></button>
+                                    <a href="{% url 'view_file' file.id %}" class="refresh-btn" download><i class="fas fa-download"></i></a>
+                                    <a href="{% url 'replace_file' file.id %}" class="refresh-btn"><i class="fas fa-upload"></i></a>
+                                    <a href="{% url 'delete_file' file.id %}" class="refresh-btn delete-btn"><i class="fas fa-trash"></i></a>
+                                    {% if file.sent_to_sftp or file.is_uploaded %}
+                                        <span class="refresh-btn disabled"><i class="fas fa-check"></i></span>
+                                    {% elif file.is_validated %}
+                                        <button class="refresh-btn send-sftp-btn" data-file-id="{{ file.id }}" data-client-id="{{ client.id }}"><i class="fas fa-upload"></i></button>
+                                    {% else %}
+                                        <button class="refresh-btn view-errors-btn" data-errors="{{ file.validation_errors|escape }}"><i class="fas fa-exclamation-circle"></i></button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="5" class="no-data" id="downloadPrompt">
+                                    No downloaded files found.
+                                    <a href="{% url 'download_files' client.id %}" class="refresh-btn"><i class="fas fa-download"></i> Download Now</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- File Viewer Modal -->
     <div id="fileModal" class="modal">
         <div class="modal-content">
-            <span class="close">×</span>
-            <h3>File Viewer</h3>
-            <div id="fileFrame"></div>
-            <div id="errorSection" class="hidden">
-                <h4>Validation Errors for {{ downloaded_files.0.original_filename|default:'File' }}</h4>
-                <pre id="errorContent"></pre>
-            </div>
-            <div class="modal-actions">
-                <button id="modalSendSftpBtn" class="btn btn-primary" style="display: none;"><i class="fas fa-upload"></i></button>
-                <a id="modalReplaceBtn" href="#" class="btn btn-warning" style="display: none;"><i class="fas fa-upload"></i></a>
+            <div class="config-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-file"></i> File Viewer</h3>
+                    <span class="close"><i class="fas fa-times"></i></span>
+                </div>
+                <div class="section-content">
+                    <div id="fileFrame" class="file-frame"></div>
+                    <div id="errorSection" class="status-error hidden">
+                        <h4>Validation Errors for {{ downloaded_files.0.original_filename|default:'File' }}</h4>
+                        <pre id="errorContent"></pre>
+                    </div>
+                    <div class="modal-actions">
+                        <button id="modalSendSftpBtn" class="refresh-btn" style="display: none;"><i class="fas fa-upload"></i> Send to SFTP</button>
+                        <a id="modalReplaceBtn" href="#" class="refresh-btn" style="display: none;"><i class="fas fa-upload"></i> Replace</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -220,60 +273,67 @@
     <!-- Modal for Viewing Validation Errors (standalone) -->
     <div id="errorModal" class="error-modal">
         <div class="error-modal-content">
-            <span class="close-error">×</span>
-            <h3>Validation Errors</h3>
-            <pre id="standaloneErrorContent"></pre>
-            <p>Please replace or edit the file to correct these issues.</p>
+            <div class="config-section">
+                <div class="section-header">
+                    <h3><i class="fas fa-exclamation-circle"></i> Validation Errors</h3>
+                    <span class="close-error"><i class="fas fa-times"></i></span>
+                </div>
+                <div class="section-content">
+                    <pre id="standaloneErrorContent"></pre>
+                    <p>Please replace or edit the file to correct these issues.</p>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
-    {% if task_id %}
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        let alertShown = false;
-        const pollTaskStatus = function(taskId) {
-            $.ajax({
-                url: '{% url 'get_task_status' %}',
-                data: { task_id: taskId },
-                success: function(response) {
-                    if (!alertShown) {
-                        Swal.fire({
-                            icon: 'info',
-                            title: 'In Progress',
-                            text: '{{ alert_message }}',
-                            showConfirmButton: false,
-                            allowOutsideClick: false,
-                            timerProgressBar: true,
-                        });
-                        alertShown = true;
-                    }
-                    if (response.status === 'In Progress' || response.status === 'STARTED') {
-                        setTimeout(() => pollTaskStatus(taskId), 2000); // Poll every 2 seconds
-                    } else {
-                        Swal.fire({
-                            icon: response.status.toLowerCase() === 'success' ? 'success' : 'error',
-                            title: response.status,
-                            text: response.message,
-                            confirmButtonText: 'OK',
-                            timer: 5000,
-                            timerProgressBar: true,
-                        });
-                    }
-                },
-                error: function() {
+{% if task_id %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let alertShown = false;
+    const pollTaskStatus = function(taskId) {
+        $.ajax({
+            url: "{% url 'get_task_status' %}",
+            data: { task_id: taskId },
+            success: function(response) {
+                if (!alertShown) {
                     Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Failed to check task status.',
+                        icon: 'info',
+                        title: 'In Progress',
+                        text: '{{ alert_message }}',
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                        timerProgressBar: true,
+                    });
+                    alertShown = true;
+                }
+                if (response.status === 'In Progress' || response.status === 'STARTED') {
+                    setTimeout(() => pollTaskStatus(taskId), 2000);
+                } else {
+                    Swal.fire({
+                        icon: response.status.toLowerCase() === 'completed' ? 'success' : 'error',
+                        title: response.status,
+                        text: response.message,
                         confirmButtonText: 'OK',
                         timer: 5000,
                         timerProgressBar: true,
                     });
                 }
-            });
-        };
-        pollTaskStatus('{{ task_id }}');
-    });
-    </script>
-    {% endif %}
+            },
+            error: function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Failed to check task status.',
+                    confirmButtonText: 'OK',
+                    timer: 5000,
+                    timerProgressBar: true,
+                });
+            }
+        });
+    };
+    pollTaskStatus('{{ task_id }}');
+});
+</script>
+{% endif %}
 {% endblock %}

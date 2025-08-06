@@ -59,7 +59,7 @@ def download_files_task(client_id, username="it@transparentrx.com", password="_4
         # Check if any files were downloaded
         if not results:
             logger.warning(f"No files downloaded for {client_name}")
-            return {"status": "Completed", "message": f"No files found to download for {client_name}."}
+            return {"status": "Not found", "message": f"No files found to download for {client_name}."}
 
         # Save downloaded files to the database
         saved_files = []

@@ -1,32 +1,47 @@
-<!-- client_manager/templates/client_manager/dashboard.html -->
 {% extends 'client_manager/base.html' %}
 
 {% block content %}
-    <h2>Dashboard</h2>
-    <div class="dashboard-grid">
-        <div class="dashboard-card">
-            <i class="fas fa-users"></i>
-            <h3>Clients</h3>
-            <p>{{ clients_count }}</p>
-            <a href="{% url 'manage_clients' %}" class="btn btn-primary">Manage Clients</a>
+<div class="config-management-container">
+    <!-- <h2 class="page-title">Dashboard</h2> -->
+    <div class="config-section">
+        <div class="section-header">
+            <h3><i class="fas fa-tachometer-alt"></i> Overview</h3>
         </div>
-        <div class="dashboard-card">
-            <i class="fas fa-tasks"></i>
-            <h3>Tasks</h3>
-            <p>{{ tasks_count }}</p>
-            <a href="{% url 'manage_tasks' %}" class="btn btn-primary">Manage Tasks</a>
-        </div>
-        <div class="dashboard-card">
-            <i class="fas fa-folder"></i>
-            <h3>Paths</h3>
-            <p>{{ paths_count }}</p>
-            <a href="{% url 'manage_paths' %}" class="btn btn-primary">View in Paths</a>
-        </div>
-        <div class="dashboard-card">
-            <i class="fas fa-cog"></i>
-            <h3>All Configs</h3>
-            <p>{{ configs_count }}</p>
-            <a href="{% url 'manage_all_configs' %}" class="btn btn-primary">View in Configs</a>
+        <div class="section-content">
+            <div class="table-container">
+                <table class="config-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Count</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Clients</td>
+                            <td>{{ clients_count }}</td>
+                            <td><a href="{% url 'manage_clients' %}" class="refresh-btn"><i class="fas fa-users"></i> Manage Clients</a></td>
+                        </tr>
+                        <tr>
+                            <td>Tasks</td>
+                            <td>{{ tasks_count }}</td>
+                            <td><a href="{% url 'manage_tasks' %}" class="refresh-btn"><i class="fas fa-tasks"></i> Manage Tasks</a></td>
+                        </tr>
+                        <tr>
+                            <td>Paths</td>
+                            <td>{{ paths_count }}</td>
+                            <td><a href="{% url 'manage_paths' %}" class="refresh-btn"><i class="fas fa-folder"></i> View in Paths</a></td>
+                        </tr>
+                        <tr>
+                            <td>All Configs</td>
+                            <td>{{ configs_count }}</td>
+                            <td><a href="{% url 'manage_all_configs' %}" class="refresh-btn"><i class="fas fa-cog"></i> View in Configs</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
+</div>
 {% endblock %}

@@ -1,14 +1,26 @@
-// static/js/scripts.js
 $(document).ready(function() {
     // Delete confirmation
     $('.delete-btn').click(function(e) {
-        if (!confirm('Are you sure you want to delete this item? This action cannot be undone.')) {
-            e.preventDefault();
-        }
+        e.preventDefault();
+        const href = $(this).attr('href');
+        Swal.fire({
+            icon: 'warning',
+            title: 'Are you sure?',
+            text: 'This action cannot be undone.',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#dc3545',
+            cancelButtonColor: '#6c757d',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = href;
+            }
+        });
     });
 
     // Table row hover effect
-    $('.client-table tr').hover(
+    $('.config-table tr').hover(
         function() {
             $(this).css('cursor', 'pointer');
         },
@@ -16,23 +28,29 @@ $(document).ready(function() {
             $(this).css('cursor', 'default');
         }
     );
+
     // Download files with selected date
     $('#downloadFilesBtn').click(function() {
         const selectedDate = $('#dateFilter').val();
-        console.log('Selected date:', selectedDate);
         const clientId = $(this).data('client-id');
-        console.log('Client ID:', clientId);
         if (selectedDate) {
             const url = window.downloadUrlBase.replace('placeholder', selectedDate);
             window.location.href = url;
         } else {
-            alert('Please select a date to download files.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Please select a date to download files.',
+                confirmButtonText: 'OK',
+                timer: 5000,
+                timerProgressBar: true,
+            });
         }
     });
 
     // Update download prompt when no files are found
-    if ($('#fileTableBody tr').length === 1 && $('#fileTableBody td[colspan="5"]').length) {
-        $('#downloadPrompt').html('<a href="#" id="triggerDownload" class="btn btn-primary btn-sm"><i class="fas fa-download"></i> Download Now</a>');
+    if ($('#fileTableBody tr').length === 1 && $('#fileTableBody td.no-data').length) {
+        $('#downloadPrompt').html('<a href="#" id="triggerDownload" class="refresh-btn"><i class="fas fa-download"></i> Download Now</a>');
         $('#triggerDownload').click(function(e) {
             e.preventDefault();
             const selectedDate = $('#dateFilter').val();
@@ -41,7 +59,14 @@ $(document).ready(function() {
                 const url = window.downloadUrlBase.replace('placeholder', selectedDate);
                 window.location.href = url;
             } else {
-                alert('Please select a date to download files.');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Please select a date to download files.',
+                    confirmButtonText: 'OK',
+                    timer: 5000,
+                    timerProgressBar: true,
+                });
             }
         });
     }
@@ -75,30 +100,29 @@ $(document).ready(function() {
         currentClientId = clientId;
         currentFileName = fileName;
 
-        console.log('Fetching file:', fileUrl);
-
         errorSection.addClass('hidden');
         errorContent.text('');
         modalSendSftpBtn.hide();
         modalReplaceBtn.hide();
 
-        // Handle validation errors if they exist (for future use)
         if (errors) {
             errorSection.find('h4').text(`Validation Errors for ${currentFileName}`);
             errorContent.text(errors);
             errorSection.removeClass('hidden');
-            const replaceUrl = window.replaceUrlBase.replace('0', fileId);
-            modalReplaceBtn.attr('href', replaceUrl);
-            modalReplaceBtn.show();
+            if (window.replaceUrlBase) {
+                const replaceUrl = window.replaceUrlBase.replace('0', fileId);
+                modalReplaceBtn.attr('href', replaceUrl);
+                modalReplaceBtn.show();
+            } else {
+                console.error('window.replaceUrlBase is undefined.');
+                modalReplaceBtn.hide();
+            }
         } else if (isValidated && !isSent) {
             modalSendSftpBtn.show();
         }
-        console.log("fileName::",fileName);
-        // Check if the file is a .txt file based on the file name
+
         const isTextFile = fileName.toLowerCase().endsWith('.txt');
-        console.log('Is text file:', isTextFile);
         if (isTextFile) {
-            // For .txt files, fetch and display the content directly, ignoring Content-Disposition
             fetch(fileUrl)
                 .then(resp => {
                     if (!resp.ok) throw new Error(`HTTP error! status: ${resp.status}`);
@@ -117,12 +141,9 @@ $(document).ready(function() {
                     fileModal.show();
                 });
         } else {
-            // For non-.txt files, check Content-Disposition as before
             fetch(fileUrl, { method: 'HEAD' })
                 .then(response => {
-                    console.log('HEAD response status:', response.status);
                     const contentDisposition = response.headers.get('Content-Disposition');
-                    console.log('Content-Disposition:', contentDisposition);
                     if (contentDisposition && contentDisposition.includes('attachment')) {
                         fileFrame.html(`
                             <p>This file type cannot be viewed directly. <a href="${fileUrl}" download><i class="fas fa-download"></i> Download</a></p>
@@ -186,21 +207,18 @@ $(document).ready(function() {
         }
     });
 
-    // Send to SFTP from modal
     modalSendSftpBtn.click(function() {
         if (currentFileId && currentClientId) {
             sendToSftp(currentFileId, currentClientId);
         }
     });
 
-    // Send to SFTP from table
     $('.send-sftp-btn').click(function() {
         const fileId = $(this).data('file-id');
         const clientId = $(this).data('client-id');
         sendToSftp(fileId, clientId);
     });
 
-    // Error modal handling
     $('.view-errors-btn').click(function() {
         const errors = $(this).data('errors');
         standaloneErrorContent.text(errors);
@@ -222,15 +240,28 @@ $(document).ready(function() {
                 csrfmiddlewaretoken: '{{ csrf_token }}'
             },
             success: function(response) {
-                if (response.status === 'success') {
-                    alert('File sent to SFTP successfully.');
-                    location.reload();
-                } else {
-                    alert('Failed to send file to SFTP: ' + response.message);
-                }
+                Swal.fire({
+                    icon: response.status === 'success' ? 'success' : 'error',
+                    title: response.status === 'success' ? 'Success' : 'Error',
+                    text: response.status === 'success' ? 'File sent to SFTP successfully.' : 'Failed to send file to SFTP: ' + response.message,
+                    confirmButtonText: 'OK',
+                    timer: 5000,
+                    timerProgressBar: true,
+                }).then(() => {
+                    if (response.status === 'success') {
+                        location.reload();
+                    }
+                });
             },
             error: function() {
-                alert('Error sending file to SFTP. Please try again.');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Error sending file to SFTP. Please try again.',
+                    confirmButtonText: 'OK',
+                    timer: 5000,
+                    timerProgressBar: true,
+                });
             }
         });
     }
@@ -243,7 +274,14 @@ $(document).ready(function() {
             const url = downloadUrlBase.replace('placeholder', selectedDate);
             window.location.href = url;
         } else {
-            alert('Please select a date to download files.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Please select a date to download files.',
+                confirmButtonText: 'OK',
+                timer: 5000,
+                timerProgressBar: true,
+            });
         }
     });
 });
