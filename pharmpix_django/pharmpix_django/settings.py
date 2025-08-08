@@ -160,3 +160,6 @@ SESSION_SAVE_EVERY_REQUEST = True  # Reset session expiration on each request
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'login'
+
+# Message framework settings
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
