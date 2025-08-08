@@ -959,3 +959,7 @@ h2 {
 }
 
 /* end download form style */
+
+.downloaded-files-table{
+    width: 1174px;
+}

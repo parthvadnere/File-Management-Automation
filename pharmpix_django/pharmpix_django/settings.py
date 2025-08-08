@@ -147,7 +147,16 @@ CELERY_TRACK_STARTED = True  # Track task state
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
-# Authentication settings
-LOGIN_URL = '/login/'  # Redirect to login page if user is not authenticated
-LOGIN_REDIRECT_URL = '/dashboard/'  # Redirect after successful login
-LOGOUT_REDIRECT_URL = '/login/'  # Redirect after logout
+
+# Session settings
+SESSION_COOKIE_AGE = 1209600  # 2 weeks in seconds
+SESSION_COOKIE_SECURE = True  # Use True in production with HTTPS
+SESSION_COOKIE_HTTPONLY = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Persist session after browser close
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Use database-backed sessions
+SESSION_SAVE_EVERY_REQUEST = True  # Reset session expiration on each request
+
+# Security settings for authentication
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'login'

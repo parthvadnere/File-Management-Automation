@@ -48,6 +48,10 @@
                     </div>
                 {% endif %}
             </div>
+            <div class="mb-4 form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe" name="remember_me">
+                <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
             <button type="submit" class="btn btn-primary w-100 py-2 mb-3" style="font-size: 1.1em;">Login</button>
             <p class="text-center text-muted">Don't have an account? <a href="{% url 'signup' %}" class="text-decoration-none text-primary fw-medium">Sign up</a></p>
         </form>

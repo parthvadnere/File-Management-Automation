@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib import messages
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from client_manager.models import Client, Path, Task, OutputConfig, DownloadedFile, FileConfig
@@ -26,14 +27,11 @@ def signup(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            messages.success(request, 'Account created successfully! You are now logged in.')
             return redirect('dashboard')
         else:
-            return render(request, 'client_manager/signup.html', {
-                'form': form,
-                'alert_message': 'Please correct the errors below.',
-                'alert_type': 'error'
-            })
+            messages.error(request, 'Please correct the errors below.')
     else:
         form = CustomUserCreationForm()
     return render(request, 'client_manager/signup.html', {'form': form})
@@ -43,20 +41,23 @@ def user_login(request):
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            # Check for "remember me" checkbox
+            if request.POST.get('remember_me'):
+                request.session.set_expiry(1209600)  # 2 weeks
+            else:
+                request.session.set_expiry(1800)  # 30 minutes for non-persistent sessions
+            messages.success(request, 'You have successfully logged in!')
             return redirect('dashboard')
         else:
-            return render(request, 'client_manager/login.html', {
-                'form': form,
-                'alert_message': 'Invalid username or password.',
-                'alert_type': 'error'
-            })
+            messages.error(request, 'Invalid username or password.')
     else:
         form = AuthenticationForm()
     return render(request, 'client_manager/login.html', {'form': form})
 
 def user_logout(request):
     logout(request)
+    messages.success(request, 'You have been logged out.')
     return redirect('login')
 
 # Dashboard View

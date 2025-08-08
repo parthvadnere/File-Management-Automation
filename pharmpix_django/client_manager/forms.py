@@ -91,7 +91,7 @@ class DownloadForm(forms.Form):
     selected_date = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date'}),
         required=False,
-        help_text="Select a date for downloading files (defaults to latest file/s if not specified)."
+        # help_text="Select a date for downloading files (defaults to latest file/s if not specified)."
     )
 
 class TaskForm(forms.ModelForm):
@@ -111,7 +111,7 @@ class DownloadForm(forms.Form):
     selected_date = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date'}),
         required=False,
-        help_text="Select a date for downloading files (defaults to latest file/s if not specified)."
+        # help_text="Select a date for downloading files (defaults to latest file/s if not specified)."
     )
 
 
