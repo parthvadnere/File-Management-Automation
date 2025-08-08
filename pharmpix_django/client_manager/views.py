@@ -10,7 +10,7 @@ from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from client_manager.models import Client, Path, Task, OutputConfig, DownloadedFile, FileConfig
 from client_manager.forms import ClientForm, PathForm, TaskForm, OutputConfigForm, DownloadForm, FileConfigForm, UploadConfigForm, CustomUserCreationForm
-from client_manager.tasks import download_files_task, download_10pm_files_task
+from client_manager.tasks import download_5pm_files_task, download_10pm_files_task
 from celery.result import AsyncResult
 from datetime import datetime
 import logging
@@ -29,7 +29,7 @@ def signup(request):
             user = form.save()
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             messages.success(request, 'Account created successfully! You are now logged in.')
-            return redirect('dashboard')
+            return redirect('login')
         else:
             messages.error(request, 'Please correct the errors below.')
     else:
@@ -57,7 +57,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    messages.success(request, 'You have been logged out.')
+    messages.success(request, 'You have successfully logged out.')
     return redirect('login')
 
 # Dashboard View
@@ -90,7 +90,7 @@ def download_files(request, client_id, date_filter=None):
     else:
         selected_date = None
 
-    task = download_files_task.delay(client_id, selected_date=selected_date)
+    task = download_5pm_files_task.delay(client_id, selected_date=selected_date)
     return redirect(reverse('download_status', args=[client_id]) + f'?task_id={task.id}')
 
 @login_required
@@ -205,7 +205,7 @@ def client_details(request, client_id):
         if form_5pm.is_valid():
             selected_date = form_5pm.cleaned_data['selected_date']
             selected_date_str = selected_date.strftime('%Y-%m-%d') if selected_date else None
-            task = download_files_task.delay(client_id=client.id, selected_date=selected_date_str)
+            task = download_5pm_files_task.delay(client_id=client.id, selected_date=selected_date_str)
             request.session['task_id'] = task.id
             request.session['alert_message'] = '5PM file download task is in progress...'
             request.session['alert_type'] = 'info'

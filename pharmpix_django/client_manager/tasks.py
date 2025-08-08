@@ -23,8 +23,8 @@ def test_task():
     return "Test task completed"
 
 @shared_task
-def download_files_task(client_id, username="it@transparentrx.com", password="_4ajPc,Owjkc", download_dir="5PM-Work", selected_date=None):
-    logger.info(f"Starting download_files_task for client_id: {client_id}")
+def download_5pm_files_task(client_id, username="it@transparentrx.com", password="_4ajPc,Owjkc", download_dir="5PM-Work", selected_date=None):
+    logger.info(f"Starting download_5pm_files_task for client_id: {client_id}")
     
     try:
         logger.info("Fetching client from database")
